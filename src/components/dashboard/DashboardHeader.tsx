@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import  ConnectWalletButton  from '../connect-wallet-button';
 
 const DashboardHeader: React.FC = () => {
   const pathname = usePathname();
@@ -60,7 +60,19 @@ const DashboardHeader: React.FC = () => {
         
         {/* User Actions */}
         <div className="flex items-center space-x-4">
-          <ConnectWalletButton />
+          <Link
+            href="/account"
+            className="flex items-center px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
+          >
+            <Image 
+              src="/assests/icons/account_circle.svg" 
+              alt="Account" 
+              width={20} 
+              height={20} 
+              className="mr-2" 
+            />
+            My Account
+          </Link>
         </div>
       </div>
     </header>

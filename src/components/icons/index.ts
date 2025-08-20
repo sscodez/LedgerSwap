@@ -3,6 +3,7 @@ export type IconName =
   | 'AccountBalanceWallet'
   | 'AccountCircle'
   | 'BookRibbon'
+  | 'BookAddress'
   | 'History2'
   | 'Repeat'
   | 'VerticalAlignBottom'
@@ -15,6 +16,7 @@ export * from './crypto';
 import AccountBalanceWalletIcon from './AccountBalanceWalletIcon';
 import AccountCircleIcon from './AccountCircleIcon';
 import BookRibbonIcon from './BookRibbonIcon';
+import BookAddressIcon from './BookAddressIcon';
 import History2Icon from './History2Icon';
 import RepeatIcon from './RepeatIcon';
 import VerticalAlignBottomIcon from './VerticalAlignBottomIcon';
@@ -27,6 +29,7 @@ export { default as Icon } from './Icon';
 export { default as AccountBalanceWalletIcon } from './AccountBalanceWalletIcon';
 export { default as AccountCircleIcon } from './AccountCircleIcon';
 export { default as BookRibbonIcon } from './BookRibbonIcon';
+export { default as BookAddressIcon } from './BookAddressIcon';
 export { default as History2Icon } from './History2Icon';
 export { default as RepeatIcon } from './RepeatIcon';
 export { default as VerticalAlignBottomIcon } from './VerticalAlignBottomIcon';
@@ -40,6 +43,7 @@ export const iconMap = {
   'AccountBalanceWallet': AccountBalanceWalletIcon,
   'AccountCircle': AccountCircleIcon,
   'BookRibbon': BookRibbonIcon,
+  'BookAddress': BookAddressIcon,
   'History2': History2Icon,
   'Repeat': RepeatIcon,
   'VerticalAlignBottom': VerticalAlignBottomIcon,

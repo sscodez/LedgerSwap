@@ -37,7 +37,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative grid grid-cols-1 lg:grid-cols-[256px_1fr] p-0 sm:p-4 md:p-8 lg:p-12" style={{backgroundColor: 'white'}}>
+    <div className=" min-h-screen bg-gray-50 relative grid grid-cols-1 lg:grid-cols-[256px_1fr] p-0 sm:p-4 md:p-8 lg:p-12" >
       {/* Overlay when sidebar is open on mobile */}
       {isSidebarOpen && isMobile && (
         <div 
@@ -56,7 +56,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </div>
       
       {/* Main Content Area */}
-      <div className="w-full lg:col-start-2 lg:col-end-3 grid grid-rows-[auto_1fr] bg-white">
+      <div className="w-full lg:col-start-2 lg:col-end-3 grid grid-rows-[auto_1fr] ">
         {/* Mobile header with menu button */}
         <header className="lg:hidden p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between">
@@ -73,7 +73,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         </header>
         
         {/* Main Content */}
-        <main className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto w-full overflow-x-hidden bg-white">
+        <main className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto w-full overflow-x-hidden ">
           <div className="grid gap-2 sm:gap-4 md:gap-6">
             {children}
           </div>

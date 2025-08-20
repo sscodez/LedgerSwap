@@ -43,24 +43,24 @@ const AdminFlaggedUsersPage: React.FC = () => {
       </div>
       
       {/* Desktop Table View (hidden on small screens) */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hidden md:block">
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hidden md:block p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 table-auto">
             <thead className="p-2 sm:p-3 text-black text-xs sm:text-[13px]">
               <tr>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Wallet address
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Reason
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Total swaps
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Flagged date
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Actions
                 </th>
               </tr>
@@ -68,7 +68,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {users.map((user) => (
                 <tr key={user.id} className="hover:bg-gray-50">
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <span className="text-xs sm:text-sm font-medium text-gray-900 mr-2">
                         {formatWalletAddress(user.walletAddress)}
@@ -78,16 +78,16 @@ const AdminFlaggedUsersPage: React.FC = () => {
                       </button>
                     </div>
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                     {user.reason}
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                     {user.totalSwaps}
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                     {user.flaggedDate}
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
                     <button 
                       onClick={() => handleReview(user)}
                       className="text-blue-600 text-xs bg-blue-100 p-1 rounded-md hover:text-blue-900 mr-3"

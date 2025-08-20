@@ -102,22 +102,25 @@ const Header: React.FC = () => {
           ))}
         </nav>
 
-        {/* Authentication - Desktop */}
+        {/* My Account Button - Desktop */}
         <div className="hidden lg:flex nav:flex items-center space-x-2 xl:space-x-3">
-          <Link href="/login" className="px-2 md:px-3 py-1 text-xs md:text-sm hover:underline">
-            Log in
-          </Link>
           <Link
-            href="/signup"
-            className={`px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${
+            href="/account"
+            className={`flex items-center px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${
               isAdminOrDashboard
                 ? "bg-black text-white hover:bg-gray-800"
                 : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
           >
-            Get an Account
+            <Image 
+              src="/assests/icons/account_circle.svg" 
+              alt="Account" 
+              width={20} 
+              height={20} 
+              className="mr-2" 
+            />
+            My Account
           </Link>
-          {/* <ConnectWalletButton /> */}
         </div>
       </div>
 
@@ -136,27 +139,24 @@ const Header: React.FC = () => {
               </Link>
             ))}
             <div className="border-t border-gray-700 pt-3 mt-3 flex flex-col space-y-3">
-              <Link 
-                href="/login" 
-                className="block text-sm py-2 hover:text-blue-500"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Log in
-              </Link>
               <Link
-                href="/signup"
-                className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${
+                href="/account"
+                className={`flex items-center justify-center px-4 py-2 rounded-md text-sm transition-colors ${
                   isAdminOrDashboard
                     ? "bg-black text-white hover:bg-gray-800"
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Get an Account
+                <Image 
+                  src="/assests/icons/account_circle.svg" 
+                  alt="Account" 
+                  width={20} 
+                  height={20} 
+                  className="mr-2" 
+                />
+                My Account
               </Link>
-              {/* <div className="py-2">
-                <ConnectWalletButton />
-              </div> */}
             </div>
           </div>
         </div>

@@ -63,24 +63,24 @@ const AdminTokenChainManagementPage: React.FC = () => {
       </div>
       
       {/* Desktop Table View (hidden on small screens) */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hidden md:block">
+      <div className="bg-white rounded-lg  overflow-hidden hidden md:block p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="text-[13px]">
               <tr>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left text-xs font-medium text-gray-500">
                   Token
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Symbol
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   24h volume
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Status
                 </th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Actions
                 </th>
               </tr>
@@ -88,26 +88,26 @@ const AdminTokenChainManagementPage: React.FC = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {tokens.map((token) => (
                 <tr key={token.id} className="hover:bg-gray-50">
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <TokenIcon type={token.icon} />
                       <span className="text-sm font-medium text-gray-900">{token.name}</span>
                     </div>
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm text-gray-500">
                     {token.symbol}
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm text-gray-500">
                     {token.volume24h}
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                       ${token.status === 'Active' ? ' text-blue-600' : ' text-red-600'}
                     `}>
                       {token.status}
                     </span>
                   </td>
-                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm font-medium">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm font-medium">
                     <button 
                       onClick={() => toggleTokenStatus(token.id)}
                       className={`px-4 py-1 rounded-md text-xs font-medium transition-colors

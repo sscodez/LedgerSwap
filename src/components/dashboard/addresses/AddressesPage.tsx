@@ -110,9 +110,9 @@ const AddressesPage: React.FC = () => {
         <h1 className="text-xl sm:text-2xl text-[#021735] font-medium">My Addresses</h1>
         <Link 
           href="/dashboard/addresses/new"
-          className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-full sm:w-auto justify-center sm:justify-start"
+          className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-full sm:w-auto justify-center sm:justify-start"
         >
-         <Image src="/assests/icons/contact_page.png" alt="Add" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+         <Image src="/assests/icons/contact_page.png" alt="Add" width={10} height={14}  />
           Add a new address
         </Link>
       </div>

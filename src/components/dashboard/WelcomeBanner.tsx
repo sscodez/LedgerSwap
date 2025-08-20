@@ -29,8 +29,8 @@ const RewardsBanner = () => {
           <h3 className="text-base sm:text-xl md:text-2xl lg:text-4xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
             cashback on your first swap
           </h3>
-          <button className="group transition-all duration-300 bg-white/10 hover:bg-white/20 text-white px-3 sm:px-5 md:px-6 py-1.5 sm:py-2.5 md:py-3 rounded-lg flex items-center font-semibold text-xs sm:text-base">
-            Claim Rewards
+          <button className="group transition-all duration-300  text-white px-3 sm:px-5 md:px-6 py-1.5 sm:py-2.5 md:py-3 rounded-lg flex items-center font-semibold text-xs sm:text-base">
+            Explore
             <span className="inline-flex ml-1.5 sm:ml-2 transition-transform group-hover:translate-x-1 text-base sm:text-lg">
               →
             </span>

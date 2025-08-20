@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 interface Dispute {
@@ -36,9 +37,7 @@ const AdminDisputeResolutionPage: React.FC = () => {
         <div className="bg-blue-50   rounded-lg p-4 mb-6">
         <div className="flex items-start">
           <div className="flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
+          <Image src='/assests/icons/warning2.svg' alt='guide' width={20} height= {20} />
           </div>
           <div className="ml-3">
             <h3 className="text-sm font-medium text-black">Fiat Dispute Coordination</h3>
@@ -48,11 +47,9 @@ const AdminDisputeResolutionPage: React.FC = () => {
           </div>
         </div>
       </div>
-          <div className="flex flex-col text-center items-center">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
-              </svg>
+          <div className="flex flex-col justify-center h-[30vh] text-center items-center">
+            <div className="flex items-center justify-center mb-4">
+            <Image src='/assests/icons/warning.svg' alt='guide' width={50} height= {50} />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">No active disputes at this time</h3>
             {/* <p className="text-gray-500 mb-6 max-w-sm">

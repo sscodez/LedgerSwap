@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UsdtSwitchBanner from '../dashboard/UsdtSwitchBanner';
-import { RepeatIcon } from '../icons';
+import { RepeatIcon, ViewComfyAltIcon } from '../icons';
 import Image from 'next/image';
 
 interface AdminSidebarProps {
@@ -25,9 +25,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       name: 'Overview',
       href: '/admin',
       icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-        </svg>
+        <ViewComfyAltIcon size={20} />
       )
     },
     {
@@ -88,11 +86,10 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       {/* Sidebar content */}
       <aside 
         id="admin-sidebar"
-        className="h-full w-full bg-white shadow-lg lg:shadow-none">
+        className="h-full w-64 bg-white rounded-lg lg:shadow-none">
       {/* Logo Area */}
-      <div className="px-4 py-5 flex items-center justify-center lg:justify-start">
+    
 
-      </div>
       
       {/* Close button for mobile */}
       <div className="absolute top-4 right-4 lg:hidden">
@@ -107,8 +104,12 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
         </button>
       </div>
 
+      <div className="px-4 py-2 mt-5 lg:hidden">
+        <span className="text-xl font-bold text-blue-600">LedgerSwap</span>
+      </div>
+
       {/* Navigation */}
-      <nav className="py-3 sm:py-4 px-3 sm:px-4 mt-1 sm:mt-2 lg:mt-0">
+      <nav className=" sm:py-4 px-3 sm:px-4  ">
         <ul className="space-y-0.5 sm:space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -118,13 +119,13 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
                 <Link 
                   href={item.href}
                   onClick={handleNavClick} /* Close sidebar on navigation */
-                  className={`flex items-center px-2 sm:px-3 py-2.5 sm:py-3 md:py-2.5 text-xs sm:text-sm font-medium rounded-lg ${
+                  className={`flex items-center px-2 sm:px-3 py-2.5    font-medium rounded-lg ${
                     isActive 
-                      ? 'bg-blue-50 text-blue-700' 
+                      ? ' text-blue-700' 
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  <span className={`mr-2 sm:mr-3 ${isActive ? 'text-blue-700' : 'text-gray-500'}`}>
+                  <span className={`mr-2 bg-gray-50 rounded-lg p-2 sm:mr-3 ${isActive ? 'text-blue-700' : 'text-gray-500'}`}>
                     {item.icon}
                   </span>
                   {item.name}

@@ -115,23 +115,23 @@ const AdminTradesPage: React.FC = () => {
       </div>
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-        <div className="overflow-x-auto -mx-3 sm:mx-0">
+        <div className="overflow-x-auto -mx-3 sm:mx-0 p-4">
           <table className="min-w-full divide-y divide-gray-200 table-auto text-left">
           <thead className="text-xs sm:text-[13px]">
             <tr>
-              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                 Wallet address
               </th>
-              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                 Swap details
               </th>
-              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                 Network
               </th>
-              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                 Status
               </th>
-              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                 Time
               </th>
             </tr>
@@ -139,13 +139,13 @@ const AdminTradesPage: React.FC = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {mockSwapData.map((swap) => (
               <tr key={swap.id} className="hover:bg-gray-50">
-                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
                   <div className="flex items-center">
                     <span className="mr-1 truncate max-w-[80px] sm:max-w-full">{formatWalletAddress(swap.walletAddress)}</span>
                     <Image src='/assests/icons/file_copy.svg' alt="copy" width={15} height={15} className="cursor-pointer flex-shrink-0" />
                   </div>
                 </td>
-                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                   <div className="flex items-center flex-wrap gap-1 sm:gap-0">
                     <span className="mr-1 sm:mr-2">{swap.amount}</span>
                     <span className="inline-flex items-center px-1.5 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -160,10 +160,10 @@ const AdminTradesPage: React.FC = () => {
                     </span>
                   </div>
                 </td>
-                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                   <NetworkIcon network={swap.network} />
                 </td>
-                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                   <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                     ${swap.status === 'Pending' ? ' text-yellow-800' : ''}
                     ${swap.status === 'Finished' ? ' text-green-800' : ''}
@@ -172,7 +172,7 @@ const AdminTradesPage: React.FC = () => {
                     {swap.status}
                   </span>
                 </td>
-                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                   {swap.time}
                 </td>
               </tr>

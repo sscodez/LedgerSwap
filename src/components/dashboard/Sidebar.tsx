@@ -7,7 +7,7 @@ import {
   ViewComfyAltIcon, 
   History2Icon, 
   AccountBalanceWalletIcon, 
-  BookRibbonIcon 
+  BookAddressIcon 
 } from '../icons';
 
 interface SidebarProps {
@@ -44,7 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
       name: 'My addresses',
       href: '/dashboard/addresses',
       icon: (
-        <BookRibbonIcon size={20} />
+        <BookAddressIcon size={20} />
       )
     }
   ];
@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
   };
 
   return (
-    <aside className="w-64 h-full flex flex-col bg-white">
+    <aside className="w-64 h-screen mb-5 flex flex-col bg-white rounded-lg">
       {/* Mobile close button */}
       {onCloseMobile && (
         <div className="flex justify-end p-4 lg:hidden">

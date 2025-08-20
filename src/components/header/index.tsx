@@ -135,12 +135,20 @@ const Header: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+       
+       { !isAdminOrDashboard &&   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link href="/login" className="px-2 md:px-3 py-1 text-xs md:text-sm hover:underline">
               Log in
             </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          </motion.div> }
+
+
+
+       
+
+
+
+       { !isAdminOrDashboard ?  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
               href="/signup"
               className={`px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${
@@ -152,8 +160,36 @@ const Header: React.FC = () => {
               Get an Account
             </Link>
           </motion.div>
-          {/* <ConnectWalletButton /> */}
-        </motion.div>
+          
+              :
+          <div className="  flex flex-col space-y-3">
+              <Link
+                href="/account"
+                className={`flex items-center justify-center px-4 py-2 rounded-md text-sm text-black transition-colors ${
+                  isAdminOrDashboard
+                    ? "bg-[#F1F5F9] text-white hover:bg-gray-800"
+                    : "bg-[#F1F5F9] text-white hover:bg-blue-700"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Image 
+                  src="/assests/icons/account_circle.svg" 
+                  alt="Account" 
+                  width={20} 
+                  height={20} 
+                  className="mr-2" 
+                />
+            <p className="text-black">My Account</p>
+              </Link>
+            </div> }
+       
+        </motion.div> 
+        
+     
+        
+        
+        
+
       </div>
 
       {/* Mobile Menu */}
