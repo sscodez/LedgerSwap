@@ -50,7 +50,7 @@ const MediaPartners = () => {
   };
 
   return (
-    <section className="py-12 md:py-16 bg-white">
+    <section className="py-12 md:py-16 bg-white mb-24 md:mb-16">
       <div className="container mx-auto px-4">
         <div className="mb-8 md:mb-12 text-left">
           <p className="text-gray-400 font-medium mb-1 text-sm">Publications</p>
@@ -130,6 +130,7 @@ const MediaPartners = () => {
           ))}
         </div>
       </div>
+      <br/>
       <br/>
     </section>
   );

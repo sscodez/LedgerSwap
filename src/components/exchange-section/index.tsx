@@ -63,13 +63,14 @@ const ExchangeSection = () => {
   };
 
   return (
-    <section className="py-6 md:py-10 bg-white text-black">
-      <div className="container mx-auto px-3 md:px-4">
-        <div className="max-w-6xl border border-gray-100 shadow-sm bg-gray-50 p-3 md:p-4 rounded-lg mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-2">
+    <div className="relative">
+      {/* Overlapping Exchange Card */}
+      <div className="absolute left-0 right-0 mx-auto max-w-7xl px-4 z-10" style={{ bottom: '-80px' }}>
+        <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-5 md:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-11 gap-4 md:gap-6">
             {/* You Send */}
-            <div className="col-span-1 md:col-span-5">
-              <div className="border border-gray-100 rounded-lg flex items-center overflow-hidden h-14">
+            <div className="col-span-1 md:col-span-4">
+              <div className="border border-gray-200 rounded-lg flex items-center overflow-hidden h-14 bg-white">
                 <div className="p-2 flex items-center flex-1">
                   <div className="text-sm font-semibold text-gray-500 mr-4 min-w-[70px]">You send</div>
                   <input
@@ -80,7 +81,7 @@ const ExchangeSection = () => {
                     placeholder="0.00"
                   />
                 </div>
-                <div className="bg-[#E5E7EB] p-2 flex items-center justify-between h-full">
+                <div className="bg-[#F3F4F6] p-2 flex items-center justify-between h-full">
                   <DropdownMenu.Root>
                     <DropdownMenu.Trigger asChild>
                       <button className="flex items-center outline-none">
@@ -103,7 +104,7 @@ const ExchangeSection = () => {
                             className="flex items-center p-2 hover:bg-gray-100 rounded cursor-pointer"
                           >
                             <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
-                            <span className="font-medium   text-black mr-2">{crypto.name}</span>
+                            <span className="font-medium text-black mr-2">{crypto.name}</span>
                             <span className="text-black text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ backgroundColor: crypto.color }}>{crypto.fullName}</span>
                           </DropdownMenu.Item>
                         ))}
@@ -116,7 +117,7 @@ const ExchangeSection = () => {
 
             {/* Swap Button */}
             <div className="col-span-1 md:col-span-1 flex justify-center items-center">
-              <button className="bg-blue-600 hover:bg-blue-700 transition-colors w-10 h-10 rounded-lg flex items-center justify-center shadow-lg">
+              <button className="bg-blue-600 hover:bg-blue-700 transition-colors w-10 h-10 rounded-lg flex items-center justify-center shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
@@ -124,8 +125,8 @@ const ExchangeSection = () => {
             </div>
 
             {/* You Receive */}
-            <div className="col-span-1 md:col-span-5">
-              <div className="border border-gray-100 rounded-lg flex items-center overflow-hidden h-14">
+            <div className="col-span-1 md:col-span-4">
+              <div className="border border-gray-200 rounded-lg flex items-center overflow-hidden h-14 bg-white">
                 <div className="p-2 flex items-center flex-1">
                   <div className="text-sm font-semibold text-gray-500 mr-4 min-w-[80px]">You receive</div>
                   <input
@@ -136,7 +137,7 @@ const ExchangeSection = () => {
                     placeholder="0.00"
                   />
                 </div>
-                <div className="bg-[#E5E7EB] p-2 flex items-center justify-between h-full">
+                <div className="bg-[#F3F4F6] p-2 flex items-center justify-between h-full">
                   <DropdownMenu.Root>
                     <DropdownMenu.Trigger asChild>
                       <button className="flex items-center outline-none">
@@ -170,19 +171,22 @@ const ExchangeSection = () => {
               </div>
             </div>
 
-            {/* Exchange Button */}
-            <div className="col-span-1 md:col-span-1 flex items-center">
+            {/* Exchange Button - In same row */}
+            <div className="col-span-1 md:col-span-2 flex items-center">
               <button 
                 onClick={handleExchange}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors text-sm"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors text-sm md:text-base"
               >
-                Exchange
+                Exchange Now
               </button>
             </div>
           </div>
         </div>
       </div>
-    </section>
+      
+      {/* Main Content Section - This pushes the footer down */}
+    
+    </div>
   );
 };
 

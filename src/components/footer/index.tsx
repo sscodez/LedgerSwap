@@ -1,14 +1,17 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const pathname = usePathname();
+  const isLandingPage = pathname === '/';
   return (
     <footer className="bg-[#001233] text-white">
-      <div className="container mx-auto px-4 py-12">
+      <div className={`container mx-auto px-4 ${isLandingPage ? 'pt-32 pb-12' : 'py-12'}`}>
         {/* Top Section with App Downloads and Language */}
         <div className="flex flex-col lg:flex-row justify-between border-b pb-5 border-gray-300/50 items-start lg:items-center mb-12">
           {/* App Download Buttons */}
@@ -105,7 +108,7 @@ const Footer = () => {
         </div>
 
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12 ${isLandingPage ? 'mt-16' : ''}`}>
           {/* Company & Team */}
           <div>
             <h3 className="text-sm font-poppins font-medium text-gray-400 mb-4">Company & Team</h3>
@@ -187,7 +190,7 @@ const Footer = () => {
       </div>
     
       {/* Copyright and Social Icons */}
-      <div className=" md:px-8  w-full bg-[#101828] mt-6 flex flex-col md:flex-row items-center justify-between">
+      <div className={`md:px-8 w-full bg-[#101828] ${isLandingPage ? 'mt-12' : 'mt-6'} flex flex-col md:flex-row items-center justify-between`}>
           <div className="mb-4 text-sm md:mb-0">
             <p>© {new Date().getFullYear()} LedgerSwap</p>
           </div>
