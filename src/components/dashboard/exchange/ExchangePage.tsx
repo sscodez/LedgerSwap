@@ -1,0 +1,158 @@
+
+'use client'
+import React, { useState } from 'react';
+import SwapSteps from './SwapSteps';
+import SecurityCheck from './SecurityCheck';
+import CurrencyInput from './CurrencyInput';
+import SwapControls from './SwapControls';
+import WalletAddressInput from './WalletAddressInput';
+import Image from 'next/image';
+
+// Mock data
+const currencies = {
+  eth: {
+    symbol: 'ETH',
+    name: 'Ethereum',
+    tag: 'ETH',
+    iconUrl: ''
+  },
+  btc: {
+    symbol: 'BTC',
+    name: 'Bitcoin',
+    tag: 'BTC',
+    iconUrl: ''
+  }
+};
+
+const ExchangePage: React.FC = () => {
+  const [currentStep, setCurrentStep] = useState(2);
+  const [fromCurrency, setFromCurrency] = useState(currencies.eth);
+  const [toCurrency, setToCurrency] = useState(currencies.btc);
+  const [fromAmount, setFromAmount] = useState('0.1');
+  const [toAmount, setToAmount] = useState('≈ $12,954.89');
+  const [walletAddress, setWalletAddress] = useState('');
+  const [cashback, setCashback] = useState('4.78 USDT');
+
+  const handleCreateExchange = () => {
+    // Logic to create exchange would go here
+    setCurrentStep(3);
+  };
+
+  return (
+    <div>
+      <div className="max-w-[90%] mx-auto ">
+        {/* Steps indicator */}
+        <div className='bg-white border border-gray-200 rounded-lg my-5'>
+        <SwapSteps currentStep={currentStep} />
+        
+        {/* Security check */}
+        <SecurityCheck />
+        </div>
+        {/* Exchange details section */}
+        <div className="bg-white rounded-lg p-6   border border-gray-200 shadow-sm mb-6">
+          <h2 className="text-xl text-center text-black my-8 font-semibold ">Add exchange details</h2>
+          <div className='border border-gray-200 w-full my-5'></div>
+             {/* Exchange Widget */}
+                   <div className="p-3 sm:p-4 md:p-6">
+                     {/* You Send */}
+                     <div className="mb-6">
+                       <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
+                         <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
+                           <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
+                             <div className="text-[11px] font-[600] text-gray-500 mb-1">You send</div>
+                             <div className="flex items-center">
+                               <div className="text-black font-semibold">≈ $12,954.89</div>
+                             </div>
+                           </div>
+                           <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0">
+                             <button className="flex items-center w-full justify-between">
+                               <div className="flex items-center">
+                                 <Image src="/assests/cryptocurrency/eth.png" alt="Ethereum" width={24} height={24} className="mr-2" />
+                                 <span className="font-medium mr-2">ETH</span>
+                                 <span className="bg-[#74D4FF] text-white text-[11px] px-2 py-1 rounded-full">ETH</span>
+                               </div>
+                               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                               </svg>
+                             </button>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+         
+                     {/* Swap Button */}
+                     <div className="flex justify-center relative z-10" style={{ marginTop: '-20px', marginBottom: '-10px' }}>
+                       <button className="bg-blue-600 hover:bg-blue-700 transition-colors w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center shadow-lg">
+                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                         </svg>
+                       </button>
+                     </div>
+         
+                     {/* You Receive */}
+                     <div className="mb-6">
+                       <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
+                         <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
+                           <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
+                             <div className="text-[11px] font-[600] text-gray-500 mb-1">You receive</div>
+                             <div className="flex items-center">
+                               <div className="text-black font-semibold">≈ $12,954.89</div>
+                             </div>
+                           </div>
+                           <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0">
+                             <button className="flex items-center w-full justify-between">
+                               <div className="flex items-center">
+                                 <Image src="/assests/cryptocurrency/btc.png" alt="Bitcoin" width={24} height={24} className="mr-2" />
+                                 <span className="font-medium mr-2">BTC</span>
+                                 <span className="bg-[#FF8904] text-white text-[11px] px-2 py-1 rounded-full">BTC</span>
+                               </div>
+                               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                               </svg>
+                             </button>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+         
+                     {/* Sign-up Callout */}
+              
+         
+               
+                   </div>
+          
+          {/* Cashback info */}
+          <div className="mt-4 mb-4 text-sm text-gray-600">
+            Estimated cashback - <span className="font-medium">{cashback}</span>
+          </div>
+          
+          {/* Wallet address input */}
+          <WalletAddressInput 
+            value={walletAddress}
+            onChange={setWalletAddress}
+            placeholder='The recipient’s Ethereum address'
+          />
+          
+          {/* Create exchange button */}
+          <div className="mt-6">
+            <button 
+              onClick={handleCreateExchange}
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Create an exchange
+            </button>
+            
+            <div className="text-center text-xs text-gray-500 my-5">
+              By clicking Create an exchange, I agree to the{' '}
+              <a href="#" className="text-blue-600 hover:underline">Privacy Policy</a>{' '}
+              and{' '}
+              <a href="#" className="text-blue-600 hover:underline">Terms of Service</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ExchangePage;

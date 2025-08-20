@@ -1,0 +1,20 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4B6EFF" stop-opacity="0.8"/>
+      <stop offset="0.5" stop-color="#7B5CFF" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#CF9FFF" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="filter0_f" x="0" y="0" width="180" height="180" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="5" result="effect1_foregroundBlur"/>
+    </filter>
+  </defs>
+  <g filter="url(#filter0_f)">
+    <path d="M90 30L140 60V120L90 150L40 120V60L90 30Z" stroke="url(#paint0_linear)" stroke-width="2" stroke-opacity="0.8" fill="url(#paint0_linear)" fill-opacity="0.2" />
+    <path d="M90 30L90 150" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+    <path d="M40 60L90 90L140 60" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+    <path d="M40 120L90 90L140 120" stroke="white" stroke-width="1" stroke-opacity="0.4" />
+  </g>
+</svg>
