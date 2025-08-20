@@ -37,11 +37,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 relative grid grid-cols-1 lg:grid-cols-[256px_1fr] p-0 sm:p-4 md:p-8 lg:p-12">
+    <div className="min-h-screen bg-white relative grid grid-cols-1 lg:grid-cols-[256px_1fr] p-0 sm:p-4 md:p-8 lg:p-12" style={{backgroundColor: 'white'}}>
       {/* Overlay when sidebar is open on mobile */}
       {isSidebarOpen && isMobile && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden" 
+          className="fixed inset-0  bg-opacity-50 z-20 lg:hidden" 
           onClick={toggleSidebar}
         />
       )}
@@ -56,16 +56,16 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </div>
       
       {/* Main Content Area */}
-      <div className="w-full lg:col-start-2 lg:col-end-3 grid grid-rows-[auto_1fr]">
+      <div className="w-full lg:col-start-2 lg:col-end-3 grid grid-rows-[auto_1fr] bg-white">
         {/* Mobile header with menu button */}
         <header className="lg:hidden p-4 sticky top-0 z-10">
           <div className="flex items-center justify-between">
             <button 
               onClick={toggleSidebar}
-              className="p-2 rounded-md bg-gray-200 hover:bg-gray-300"
+              className="p-2 rounded-md bg-black hover:bg-gray-300"
               aria-label="Toggle sidebar"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-3 h-3">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
@@ -73,7 +73,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         </header>
         
         {/* Main Content */}
-        <main className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto w-full overflow-x-hidden">
+        <main className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto w-full overflow-x-hidden bg-white">
           <div className="grid gap-2 sm:gap-4 md:gap-6">
             {children}
           </div>
