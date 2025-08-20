@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 
-interface DateRange {
+export interface DateRange {
   startDate: string;
   endDate: string;
 }
@@ -14,6 +17,9 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
   onFilterChange,
   onClearFilters
 }) => {
+  const [activeFilters, setActiveFilters] = useState<{
+    dateRange?: DateRange;
+  }>({});
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-2 mb-4 sm:mb-6">
       <div className="flex flex-nowrap overflow-x-auto pb-2 sm:pb-0 gap-2 w-full sm:w-auto">
@@ -51,20 +57,34 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
             <span className="whitespace-nowrap">Date:</span>
             <div className="ml-2 flex items-center">
               <input 
-                type="text" 
+                type="date" 
                 className="w-[70px] sm:w-28 outline-none text-gray-600 text-xs sm:text-sm"
                 placeholder="01.01.24"
                 onChange={(e) => {
-                  // Date range logic would go here
+                  const startDate = e.target.value;
+                  onFilterChange({
+                    type: 'dateRange',
+                    value: { 
+                      startDate, 
+                      endDate: activeFilters?.dateRange?.endDate || '' 
+                    }
+                  });
                 }}
               />
               <span className="mx-1">-</span>
               <input 
-                type="text" 
+                type="date" 
                 className="w-[70px] sm:w-28 outline-none text-gray-600 text-xs sm:text-sm"
                 placeholder="30.10.25"
                 onChange={(e) => {
-                  // Date range logic would go here
+                  const endDate = e.target.value;
+                  onFilterChange({
+                    type: 'dateRange',
+                    value: { 
+                      startDate: activeFilters?.dateRange?.startDate || '', 
+                      endDate 
+                    }
+                  });
                 }}
               />
               <button className="ml-1 sm:ml-2 text-gray-500 hover:text-gray-700">
@@ -78,15 +98,47 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
 
         {/* Status dropdown */}
         <div className="relative">
-          <button 
-            className="flex items-center px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md text-gray-700 bg-white text-xs sm:text-sm min-w-[80px] sm:min-w-28"
-          >
-            <span>Status</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </button>
-          {/* Status dropdown menu would go here */}
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button 
+                className="flex items-center px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md text-gray-700 bg-white text-xs sm:text-sm min-w-[80px] sm:min-w-28"
+              >
+                <span>Status</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </DropdownMenu.Trigger>
+            <DropdownMenu.Portal>
+              <StyledContent 
+                className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                sideOffset={5}
+                align="center"
+                forceMount
+              >
+                <div className="py-1">
+                  <DropdownMenu.Item 
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                    onClick={() => onFilterChange({ type: 'status', value: 'Pending' })}
+                  >
+                    <span>Pending</span>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item 
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                    onClick={() => onFilterChange({ type: 'status', value: 'Finished' })}
+                  >
+                    <span>Finished</span>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item 
+                    className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                    onClick={() => onFilterChange({ type: 'status', value: '' })}
+                  >
+                    <span>All</span>
+                  </DropdownMenu.Item>
+                </div>
+              </StyledContent>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
         </div>
 
         {/* Clear button */}
@@ -110,5 +162,43 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
     </div>
   );
 };
+
+// Animation keyframes
+const slideDownAndFade = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const slideUpAndFade = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+`;
+
+// Styled components for animations
+const StyledContent = styled(DropdownMenu.Content)`
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  
+  &[data-state="open"] {
+    animation-name: ${slideDownAndFade};
+  }
+  
+  &[data-state="closed"] {
+    animation-name: ${slideUpAndFade};
+  }
+`;
 
 export default PayoutFilters;

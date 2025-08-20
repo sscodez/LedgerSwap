@@ -45,7 +45,7 @@ const SwapSteps: React.FC<SwapStepsProps> = ({ currentStep }) => {
                 </div>
                 
                 {/* Step title */}
-                <span className={`ml-2 text-xs sm:text-sm ${step.isActive || step.isCompleted ? 'font-medium' : 'text-gray-500'}`}>
+                <span className={`ml-2 text-xs text-black sm:text-sm ${step.isActive || step.isCompleted ? 'font-medium' : 'text-gray-500'}`}>
                   {step.title}
                 </span>
               </div>

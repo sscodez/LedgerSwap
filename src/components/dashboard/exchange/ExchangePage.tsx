@@ -7,6 +7,30 @@ import CurrencyInput from './CurrencyInput';
 import SwapControls from './SwapControls';
 import WalletAddressInput from './WalletAddressInput';
 import Image from 'next/image';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+
+// Animation for dropdown menu
+const slideDownAndFade = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// Styled component for dropdown content
+const StyledContent = styled(DropdownMenu.Content)`
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards;
+  animation-name: ${slideDownAndFade};
+  will-change: transform, opacity;
+`;
 
 // Mock data
 const currencies = {
@@ -14,13 +38,25 @@ const currencies = {
     symbol: 'ETH',
     name: 'Ethereum',
     tag: 'ETH',
-    iconUrl: ''
+    iconUrl: '/assests/cryptocurrency/eth.png'
   },
   btc: {
     symbol: 'BTC',
     name: 'Bitcoin',
     tag: 'BTC',
-    iconUrl: ''
+    iconUrl: '/assests/cryptocurrency/btc.png'
+  },
+  usdt: {
+    symbol: 'USDT',
+    name: 'Tether',
+    tag: 'USDT',
+    iconUrl: '/assests/cryptocurrency/usdt.png'
+  },
+  usdc: {
+    symbol: 'USDC',
+    name: 'USD Coin',
+    tag: 'USDC',
+    iconUrl: '/assests/cryptocurrency/usdc.png'
   }
 };
 
@@ -64,20 +100,69 @@ const ExchangePage: React.FC = () => {
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
                     <div className="text-[10px] sm:text-[11px] font-[600] text-gray-500 mb-0 sm:mb-1">You send</div>
                     <div className="flex items-center">
-                      <div className="text-black font-semibold text-xs sm:text-sm">≈ $12,954.89</div>
+                      <input 
+                        type="text" 
+                        value={fromAmount}
+                        onChange={(e) => setFromAmount(e.target.value)}
+                        className="text-black font-semibold text-xs sm:text-sm text-right w-full bg-transparent outline-none"
+                        placeholder="0.00"
+                      />
                     </div>
                   </div>
                   <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-1.5 sm:p-2 md:p-3 items-center mt-2 sm:mt-0">
-                    <button className="flex items-center w-full justify-between">
-                      <div className="flex items-center">
-                        <Image src="/assests/cryptocurrency/eth.png" alt="Ethereum" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
-                        <span className="font-medium mr-1 sm:mr-2 text-xs sm:text-sm">ETH</span>
-                        <span className="bg-[#74D4FF] text-white text-[9px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">ETH</span>
-                      </div>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+                    <DropdownMenu.Root>
+                      <DropdownMenu.Trigger asChild>
+                        <button className="flex items-center w-full justify-between">
+                          <div className="flex items-center">
+                            <Image src={fromCurrency.iconUrl || "/assests/cryptocurrency/eth.png"} alt={fromCurrency.name} width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                            <span className="font-medium mr-1 sm:mr-2 text-xs sm:text-sm">{fromCurrency.symbol}</span>
+                            <span className="bg-[#74D4FF] text-white text-[9px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">{fromCurrency.tag}</span>
+                          </div>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+                      </DropdownMenu.Trigger>
+                      <DropdownMenu.Portal>
+                        <StyledContent 
+                          className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                          sideOffset={5}
+                          align="center"
+                          forceMount
+                        >
+                          <div className="py-1">
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.eth)}
+                            >
+                              <Image src="/assests/cryptocurrency/eth.png" alt="Ethereum" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>ETH</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.btc)}
+                            >
+                              <Image src="/assests/cryptocurrency/btc.png" alt="Bitcoin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>BTC</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.usdt)}
+                            >
+                              <Image src="/assests/cryptocurrency/usdt.png" alt="Tether" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>USDT</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.usdc)}
+                            >
+                              <Image src="/assests/cryptocurrency/usdc.png" alt="USD Coin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>USDC</span>
+                            </DropdownMenu.Item>
+                          </div>
+                        </StyledContent>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Root>
                   </div>
                 </div>
               </div>
@@ -99,20 +184,69 @@ const ExchangePage: React.FC = () => {
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
                     <div className="text-[10px] sm:text-[11px] font-[600] text-gray-500 mb-0 sm:mb-1">You receive</div>
                     <div className="flex items-center">
-                      <div className="text-black font-semibold text-xs sm:text-sm">≈ $12,954.89</div>
+                      <input 
+                        type="text" 
+                        value={toAmount}
+                        onChange={(e) => setToAmount(e.target.value)}
+                        className="text-black font-semibold text-xs sm:text-sm text-right w-full bg-transparent outline-none"
+                        placeholder="0.00"
+                      />
                     </div>
                   </div>
                   <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-1.5 sm:p-2 md:p-3 items-center mt-2 sm:mt-0">
-                    <button className="flex items-center w-full justify-between">
-                      <div className="flex items-center">
-                        <Image src="/assests/cryptocurrency/btc.png" alt="Bitcoin" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
-                        <span className="font-medium mr-1 sm:mr-2 text-xs sm:text-sm">BTC</span>
-                        <span className="bg-[#FF8904] text-white text-[9px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">BTC</span>
-                      </div>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
+                    <DropdownMenu.Root>
+                      <DropdownMenu.Trigger asChild>
+                        <button className="flex items-center w-full justify-between">
+                          <div className="flex items-center">
+                            <Image src={toCurrency.iconUrl || "/assests/cryptocurrency/btc.png"} alt={toCurrency.name} width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                            <span className="font-medium mr-1 sm:mr-2 text-xs sm:text-sm">{toCurrency.symbol}</span>
+                            <span className="bg-[#FF8904] text-white text-[9px] sm:text-[11px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">{toCurrency.tag}</span>
+                          </div>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </button>
+                      </DropdownMenu.Trigger>
+                      <DropdownMenu.Portal>
+                        <StyledContent 
+                          className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                          sideOffset={5}
+                          align="center"
+                          forceMount
+                        >
+                          <div className="py-1">
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.eth)}
+                            >
+                              <Image src="/assests/cryptocurrency/eth.png" alt="Ethereum" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>ETH</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.btc)}
+                            >
+                              <Image src="/assests/cryptocurrency/btc.png" alt="Bitcoin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>BTC</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.usdt)}
+                            >
+                              <Image src="/assests/cryptocurrency/usdt.png" alt="Tether" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>USDT</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.usdc)}
+                            >
+                              <Image src="/assests/cryptocurrency/usdc.png" alt="USD Coin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>USDC</span>
+                            </DropdownMenu.Item>
+                          </div>
+                        </StyledContent>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Root>
                   </div>
                 </div>
               </div>

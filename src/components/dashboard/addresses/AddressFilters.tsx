@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
 
 interface AddressFiltersProps {
   onSearch: (query: string) => void;
@@ -6,61 +9,145 @@ interface AddressFiltersProps {
   onClearFilters: () => void;
 }
 
+interface DropdownOption {
+  value: string;
+  label: string;
+}
+
 const AddressFilters: React.FC<AddressFiltersProps> = ({ 
   onSearch,
   onFilterChange,
   onClearFilters
 }) => {
+  const [selectedCoin, setSelectedCoin] = useState<string>('');
+  const [selectedNetwork, setSelectedNetwork] = useState<string>('');
+
+  const coinOptions: DropdownOption[] = [
+    { value: 'ETH', label: 'Ethereum (ETH)' },
+    { value: 'BTC', label: 'Bitcoin (BTC)' },
+    { value: 'SOL', label: 'Solana (SOL)' },
+    { value: 'USDT', label: 'Tether (USDT)' }
+  ];
+
+  const networkOptions: DropdownOption[] = [
+    { value: 'Ethereum', label: 'Ethereum' },
+    { value: 'Bitcoin', label: 'Bitcoin' },
+    { value: 'Solana', label: 'Solana' },
+    { value: 'Tron', label: 'Tron' }
+  ];
+
+  const handleCoinSelect = (value: string) => {
+    setSelectedCoin(value);
+    onFilterChange({ type: 'coin', value });
+  };
+
+  const handleNetworkSelect = (value: string) => {
+    setSelectedNetwork(value);
+    onFilterChange({ type: 'network', value });
+  };
+
+  const handleClear = () => {
+    setSelectedCoin('');
+    setSelectedNetwork('');
+    onClearFilters();
+  };
+
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
       <div className="flex flex-nowrap overflow-x-auto gap-2 sm:gap-3 w-full sm:w-auto pb-2 sm:pb-0">
         {/* Coin dropdown */}
         <div className="relative flex-shrink-0">
-          <button 
-            className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between"
-          >
-            <span>Coin</span>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 
-              viewBox="0 0 20 20" 
-              fill="currentColor"
-            >
-              <path 
-                fillRule="evenodd" 
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
-                clipRule="evenodd" 
-              />
-            </svg>
-          </button>
-          {/* Dropdown menu would go here */}
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button 
+                className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between outline-none"
+              >
+                <span>{selectedCoin || 'Coin'}</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                >
+                  <path 
+                    fillRule="evenodd" 
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
+                    clipRule="evenodd" 
+                  />
+                </svg>
+              </button>
+            </DropdownMenu.Trigger>
+            
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content 
+                className="bg-white rounded-lg shadow-xl min-w-[200px] z-[999999]" 
+                sideOffset={5}
+                align="center"
+              >
+                <div className="py-1">
+                  {coinOptions.map((option) => (
+                    <DropdownMenu.Item 
+                      key={option.value}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => handleCoinSelect(option.value)}
+                    >
+                      <span>{option.label}</span>
+                    </DropdownMenu.Item>
+                  ))}
+                </div>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
         </div>
 
         {/* Network dropdown */}
         <div className="relative flex-shrink-0">
-          <button 
-            className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between"
-          >
-            <span>Network</span>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 
-              viewBox="0 0 20 20" 
-              fill="currentColor"
-            >
-              <path 
-                fillRule="evenodd" 
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
-                clipRule="evenodd" 
-              />
-            </svg>
-          </button>
-          {/* Dropdown menu would go here */}
+          <DropdownMenu.Root>
+            <DropdownMenu.Trigger asChild>
+              <button 
+                className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between outline-none"
+              >
+                <span>{selectedNetwork || 'Network'}</span>
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                >
+                  <path 
+                    fillRule="evenodd" 
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" 
+                    clipRule="evenodd" 
+                  />
+                </svg>
+              </button>
+            </DropdownMenu.Trigger>
+            
+            <DropdownMenu.Portal>
+              <DropdownMenu.Content 
+                className="bg-white rounded-lg shadow-xl min-w-[200px] z-[999999]" 
+                sideOffset={5}
+                align="center"
+              >
+                <div className="py-1">
+                  {networkOptions.map((option) => (
+                    <DropdownMenu.Item 
+                      key={option.value}
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => handleNetworkSelect(option.value)}
+                    >
+                      <span>{option.label}</span>
+                    </DropdownMenu.Item>
+                  ))}
+                </div>
+              </DropdownMenu.Content>
+            </DropdownMenu.Portal>
+          </DropdownMenu.Root>
         </div>
 
         {/* Clear button */}
         <button
-          onClick={onClearFilters}
+          onClick={handleClear}
           className="px-3 sm:px-5 py-2 sm:py-2.5 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 text-xs sm:text-sm flex-shrink-0"
         >
           Clear
@@ -72,7 +159,7 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
-            className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" 
+            className="h-4 w-4 text-gray-400" 
             fill="none" 
             viewBox="0 0 24 24" 
             stroke="currentColor"
@@ -95,5 +182,43 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
     </div>
   );
 };
+
+// Animation keyframes
+const slideDownAndFade = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const slideUpAndFade = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+`;
+
+// Styled components for animations
+const StyledContent = styled(DropdownMenu.Content)`
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  
+  &[data-state="open"] {
+    animation-name: ${slideDownAndFade};
+  }
+  
+  &[data-state="closed"] {
+    animation-name: ${slideUpAndFade};
+  }
+`;
 
 export default AddressFilters;

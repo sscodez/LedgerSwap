@@ -1,7 +1,31 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RewardsBanner from './WelcomeBanner';
 import Image from 'next/image';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { keyframes } from '@emotion/react';
+import styled from '@emotion/styled';
+
+// Animation for dropdown menu
+const slideDownAndFade = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// Styled component for dropdown content
+const StyledContent = styled(DropdownMenu.Content)`
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards;
+  animation-name: ${slideDownAndFade};
+  will-change: transform, opacity;
+`;
 interface ExchangeHistoryItem {
   id: string;
   status: 'Pending' | 'Finished';
@@ -59,10 +83,124 @@ const mockData: ExchangeHistoryItem[] = [
 ];
 
 const ExchangeHistory: React.FC = () => {
-  const [dateRange, setDateRange] = useState('01.01.2024 - 30.10.2025');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [hideUnfinished, setHideUnfinished] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
+  const [filteredData, setFilteredData] = useState(mockData);
+  const [selectedStatus, setSelectedStatus] = useState('');
+  const [fromCurrency, setFromCurrency] = useState('');
+  const [toCurrency, setToCurrency] = useState('');
+  
+  // Apply filters whenever filter values change
+  useEffect(() => {
+    applyFilters();
+  }, [hideUnfinished, searchTerm, activeFilter, selectedStatus, fromCurrency, toCurrency, startDate, endDate]);
+  
+  // Filter function
+  const applyFilters = () => {
+    let result = [...mockData];
+    
+    // Filter by status
+    if (selectedStatus) {
+      result = result.filter(item => item.status === selectedStatus);
+    }
+    
+    // Filter by period
+    if (activeFilter !== 'All') {
+      const today = new Date();
+      let periodStartDate: Date;
+      
+      switch(activeFilter) {
+        case 'Month':
+          periodStartDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+          break;
+        case 'Week':
+          periodStartDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+          break;
+        case 'Yesterday':
+          periodStartDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+          break;
+        default:
+          periodStartDate = new Date(0); // Beginning of time
+      }
+      
+      result = result.filter(item => {
+        const itemDate = parseExchangeDate(item.date, item.time);
+        return itemDate >= periodStartDate;
+      });
+    }
+    
+    // Filter by custom date range
+    if (startDate || endDate) {
+      result = result.filter(item => {
+        const itemDate = parseExchangeDate(item.date, item.time);
+        const start = startDate ? new Date(startDate) : new Date(0);
+        const end = endDate ? new Date(endDate) : new Date(8640000000000000); // Max date
+        
+        return itemDate >= start && itemDate <= end;
+      });
+    }
+    
+    // Filter by hide unfinished
+    if (hideUnfinished) {
+      result = result.filter(item => item.status === 'Finished');
+    }
+    
+    // Filter by search term
+    if (searchTerm) {
+      result = result.filter(item => 
+        item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.fromCurrency.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.toCurrency.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    
+    // Filter by from currency
+    if (fromCurrency) {
+      result = result.filter(item => item.fromCurrency === fromCurrency);
+    }
+    
+    // Filter by to currency
+    if (toCurrency) {
+      result = result.filter(item => item.toCurrency === toCurrency);
+    }
+    
+    setFilteredData(result);
+  };
+  
+  // Helper function to parse date strings
+  const parseExchangeDate = (dateStr: string, timeStr: string): Date => {
+    // Example format: "15 Aug 2025" and "10:05"
+    const [day, month, year] = dateStr.split(' ');
+    const [hour, minute] = timeStr.split(':');
+    
+    const monthMap: {[key: string]: number} = {
+      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    };
+    
+    return new Date(
+      parseInt(year),
+      monthMap[month],
+      parseInt(day),
+      parseInt(hour),
+      parseInt(minute)
+    );
+  };
+  
+  // Clear all filters
+  const clearFilters = () => {
+    setStartDate('');
+    setEndDate('');
+    setHideUnfinished(false);
+    setSearchTerm('');
+    setActiveFilter('All');
+    setSelectedStatus('');
+    setFromCurrency('');
+    setToCurrency('');
+  };
 
   return (
 
@@ -109,31 +247,73 @@ const ExchangeHistory: React.FC = () => {
             </button>
           </div>
           
-          <div className="flex items-center">
-            <span className="mr-2">Date:</span>
-            <div className="  relative">
+          <div className="flex items-center gap-2">
+            <span className="mr-1">From:</span>
+            <div className="relative">
               <input 
-                type="text" 
-                className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2 pr-8" 
-                value={dateRange}
-                onChange={(e) => setDateRange(e.target.value)}
+                type="date" 
+                className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2" 
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
               />
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+            </div>
+            <span className="mx-1">To:</span>
+            <div className="relative">
+              <input 
+                type="date" 
+                className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2" 
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </div>
           </div>
           
-          <div className="relative ml-auto">
-            <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
-              Status
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+          <div className="flex items-center ">
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
+                  {selectedStatus || 'Status'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <StyledContent 
+                  className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                  sideOffset={5}
+                  align="center"
+                  forceMount
+                >
+                  <div className="py-1">
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setSelectedStatus('Pending')}
+                    >
+                      <span>Pending</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setSelectedStatus('Finished')}
+                    >
+                      <span>Finished</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setSelectedStatus('')}
+                    >
+                      <span>All</span>
+                    </DropdownMenu.Item>
+                  </div>
+                </StyledContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
           </div>
           
-          <div className="flex items-center">
+       
+        
+        <div className="flex flex-wrap gap-2 md:gap-4">
+        <div className="flex items-center">
             <span className="mr-2">Hide unfinished</span>
             <label className="relative inline-flex items-center cursor-pointer">
               <input 
@@ -146,8 +326,6 @@ const ExchangeHistory: React.FC = () => {
             </label>
           </div>
         </div>
-        
-        <div className="flex flex-wrap gap-2 md:gap-4">
           <div className="relative flex-grow">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,25 +341,112 @@ const ExchangeHistory: React.FC = () => {
             />
           </div>
           
-          <div className="relative ">
-            <button className="border bg-[#F1F5F9]  border-gray-300 rounded-lg px-4 py-2 flex items-center">
-              From
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+          <div className="relative">
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
+                  {fromCurrency || 'From'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <StyledContent 
+                  className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                  sideOffset={5}
+                  align="center"
+                  forceMount
+                >
+                  <div className="py-1">
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setFromCurrency('USDT')}
+                    >
+                      <span>USDT</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setFromCurrency('ETH')}
+                    >
+                      <span>ETH</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setFromCurrency('BTC')}
+                    >
+                      <span>BTC</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setFromCurrency('')}
+                    >
+                      <span>All</span>
+                    </DropdownMenu.Item>
+                  </div>
+                </StyledContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
           </div>
           
-          <div className="relative ">
-            <button className="border border-gray-300 bg-[#F1F5F9]  rounded-lg px-4 py-2 flex items-center">
-              To
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+          <div className="relative">
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
+                  {toCurrency || 'To'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <StyledContent 
+                  className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
+                  sideOffset={5}
+                  align="center"
+                  forceMount
+                >
+                  <div className="py-1">
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setToCurrency('USDT')}
+                    >
+                      <span>USDT</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setToCurrency('ETH')}
+                    >
+                      <span>ETH</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setToCurrency('BTC')}
+                    >
+                      <span>BTC</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setToCurrency('USDC')}
+                    >
+                      <span>USDC</span>
+                    </DropdownMenu.Item>
+                    <DropdownMenu.Item 
+                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                      onClick={() => setToCurrency('')}
+                    >
+                      <span>All</span>
+                    </DropdownMenu.Item>
+                  </div>
+                </StyledContent>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
           </div>
           
-          <button className="border border-gray-300 rounded-lg px-4 py-2">
+          <button 
+            className="border border-gray-300 rounded-lg px-4 py-2"
+            onClick={clearFilters}
+          >
             Clear
           </button>
         </div>
@@ -209,7 +474,7 @@ const ExchangeHistory: React.FC = () => {
             </tr>
           </thead>
           <tbody className='text-[13px]'>
-            {mockData.map((item) => (
+            {filteredData.map((item) => (
               <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50">
                 <td className="py-4 px-4 text-[13px] text-blue-600 hover:underline cursor-pointer">
                   {item.id}
@@ -275,7 +540,7 @@ const ExchangeHistory: React.FC = () => {
 
       {/* Mobile card view */}
       <div className="md:hidden space-y-4">
-        {mockData.map((item) => (
+        {filteredData.map((item) => (
           <div key={item.id} className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
             <div className="flex justify-between items-start mb-3">
               <div className="text-[13px] text-blue-600 hover:underline cursor-pointer truncate max-w-[70%]">

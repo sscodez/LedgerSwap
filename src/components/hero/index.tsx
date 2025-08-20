@@ -82,7 +82,11 @@ const Hero = () => {
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
                     <div className="text-[11px] font-[600] text-gray-500 mb-1">You send</div>
                     <div className="flex items-center">
-                      <div className="text-black font-semibold">≈ $12,954.89</div>
+                      <input 
+                        type="text" 
+                        defaultValue="≈ $12,954.89" 
+                        className="text-black font-semibold bg-transparent outline-none w-full text-right" 
+                      />
                     </div>
                   </div>
                   <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0">
@@ -117,7 +121,11 @@ const Hero = () => {
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
                     <div className="text-[11px] font-[600] text-gray-500 mb-1">You receive</div>
                     <div className="flex items-center">
-                      <div className="text-black font-semibold">≈ $12,954.89</div>
+                      <input 
+                        type="text" 
+                        defaultValue="≈ $12,954.89" 
+                        className="text-black font-semibold bg-transparent outline-none w-full text-right" 
+                      />
                     </div>
                   </div>
                   <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0">

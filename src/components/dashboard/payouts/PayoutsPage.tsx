@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import WithdrawalSection from './WithdrawalSection';
-import PayoutFilters from './PayoutFilters';
+import PayoutFilters, { DateRange } from './PayoutFilters';
 import PayoutHistoryTable from './PayoutHistoryTable';
 import RewardsBanner from '../WelcomeBanner';
 
@@ -38,15 +38,87 @@ const mockPayoutHistory = [
 
 const PayoutsPage: React.FC = () => {
   const [payouts, setPayouts] = useState(mockPayoutHistory);
-  const [activeFilters, setActiveFilters] = useState({
+  interface Filters {
+    period: string;
+    status: string;
+    dateRange: DateRange | null;
+  }
+
+  const [activeFilters, setActiveFilters] = useState<Filters>({
     period: 'all',
     status: '',
     dateRange: null
   });
 
   const handleFilterChange = (filter: { type: string; value: string | any }) => {
-    setActiveFilters({ ...activeFilters, [filter.type]: filter.value });
-    // Filter logic would be implemented here
+    const newFilters = { ...activeFilters, [filter.type]: filter.value };
+    setActiveFilters(newFilters);
+    
+    // Apply filters to the data
+    let filteredPayouts = [...mockPayoutHistory];
+    
+    // Filter by status
+    if (newFilters.status) {
+      filteredPayouts = filteredPayouts.filter(payout => payout.status === newFilters.status);
+    }
+    
+    // Filter by period
+    if (newFilters.period && newFilters.period !== 'all') {
+      const today = new Date();
+      let startDate: Date;
+      
+      switch(newFilters.period) {
+        case 'month':
+          startDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+          break;
+        case 'week':
+          startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+          break;
+        case 'yesterday':
+          startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1);
+          break;
+        default:
+          startDate = new Date(0); // Beginning of time
+      }
+      
+      filteredPayouts = filteredPayouts.filter(payout => {
+        const payoutDate = parsePayoutDate(payout.date, payout.time);
+        return payoutDate >= startDate;
+      });
+    }
+    
+    // Filter by date range
+    if (newFilters.dateRange && newFilters.dateRange.startDate && newFilters.dateRange.endDate) {
+      const startDate = new Date(newFilters.dateRange.startDate);
+      const endDate = new Date(newFilters.dateRange.endDate);
+      
+      filteredPayouts = filteredPayouts.filter(payout => {
+        const payoutDate = parsePayoutDate(payout.date, payout.time);
+        return payoutDate >= startDate && payoutDate <= endDate;
+      });
+    }
+    
+    setPayouts(filteredPayouts);
+  };
+  
+  // Helper function to parse payout date strings
+  const parsePayoutDate = (dateStr: string, timeStr: string): Date => {
+    // Example format: "1 Aug 2025" and "10:05"
+    const [day, month, year] = dateStr.split(' ');
+    const [hour, minute] = timeStr.split(':');
+    
+    const monthMap: {[key: string]: number} = {
+      'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+      'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+    };
+    
+    return new Date(
+      parseInt(year),
+      monthMap[month],
+      parseInt(day),
+      parseInt(hour),
+      parseInt(minute)
+    );
   };
 
   const handleClearFilters = () => {
