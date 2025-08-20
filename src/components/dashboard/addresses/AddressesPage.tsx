@@ -105,20 +105,20 @@ const AddressesPage: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl text-[#021735] font-medium">My Addresses</h1>
+    <div className="px-4 sm:px-6 md:px-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl text-[#021735] font-medium">My Addresses</h1>
         <Link 
           href="/dashboard/addresses/new"
-          className="flex items-center gap-2 px-4 py-2 text-blue-600  rounded-md hover:bg-blue-700 transition-colors text-sm"
+          className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-full sm:w-auto justify-center sm:justify-start"
         >
-         <Image src="/assests/icons/contact_page.png" alt="Add" width={15} height={15} />
-          Add a new addresses
+         <Image src="/assests/icons/contact_page.png" alt="Add" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          Add a new address
         </Link>
       </div>
       
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-        <div className="p-4 md:p-6">
+        <div className="p-3 sm:p-4 md:p-6">
           <AddressFilters 
             onSearch={handleSearch}
             onFilterChange={handleFilterChange}

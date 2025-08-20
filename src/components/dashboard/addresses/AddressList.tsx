@@ -30,14 +30,14 @@ const CoinIcon: React.FC<{ type: CryptoSymbol; tag?: string; label: string }> = 
   
   return (
     <div className="flex items-center">
-      <CryptoIcon symbol={type} size={20} />
+      <CryptoIcon symbol={type} size={18} className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px]" />
 
-      <p className=" mx-2 font-bold whitespace-nowrap text-[13px] text-black">
+      <p className="mx-1.5 sm:mx-2 font-bold whitespace-nowrap text-[11px] sm:text-[13px] text-black">
         {label}
       </p>
       
       {tag && (
-        <span className={`ml-1 px-1.5 py-0.5 text-xs rounded-full ${getTagBgColor()} text-white`}>
+        <span className={`ml-1 px-1 sm:px-1.5 py-0.5 text-[10px] sm:text-xs rounded-full ${getTagBgColor()} text-white`}>
           {tag}
         </span>
       )}
@@ -58,14 +58,14 @@ const NetworkIcon: React.FC<{ network: string }> = ({ network }) => {
   
   if (cryptoSymbol) {
     return (
-      <div className="mr-2 flex items-center justify-center rounded-[5px] p-1 bg-gray-100">
-        <CryptoIcon symbol={cryptoSymbol} size={20} />
+      <div className="mr-1.5 sm:mr-2 flex items-center justify-center rounded-[4px] sm:rounded-[5px] p-0.5 sm:p-1 bg-gray-100">
+        <CryptoIcon symbol={cryptoSymbol} size={18} className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px]" />
       </div>
     );
   }
   
   // Fallback for unsupported networks
-  return <div className="w-5 h-5 mr-2 bg-gray-200 rounded-full"></div>;
+  return <div className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2 bg-gray-200 rounded-full"></div>;
 };
 
 interface AddressListProps {
@@ -85,10 +85,10 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
         <table className="min-w-full bg-white">
           <thead>
             <tr className="border-b border-black/20">
-              <th className="py-4 px-6 text-left text-[13px] font-medium text-gray-500">Coin</th>
-              <th className="py-4 px-6 text-left text-[13px] font-medium text-gray-500">Network</th>
-              <th className="py-4 px-6 text-left text-[13px] font-medium text-gray-500">Label</th>
-              <th className="py-4 px-6 text-left text-[13px] font-medium text-gray-500">Addresses</th>
+              <th className="py-3 sm:py-4 px-3 sm:px-6 text-left text-[12px] sm:text-[13px] font-medium text-gray-500">Coin</th>
+              <th className="py-3 sm:py-4 px-3 sm:px-6 text-left text-[12px] sm:text-[13px] font-medium text-gray-500">Network</th>
+              <th className="py-3 sm:py-4 px-3 sm:px-6 text-left text-[12px] sm:text-[13px] font-medium text-gray-500">Label</th>
+              <th className="py-3 sm:py-4 px-3 sm:px-6 text-left text-[12px] sm:text-[13px] font-medium text-gray-500">Addresses</th>
             </tr>
           </thead>
           <tbody>
@@ -97,29 +97,29 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
                 key={item.id} 
                 className="border-b border-black/20 hover:bg-gray-50 last:border-b-0"
               >
-                <td className="py-4 px-6 whitespace-nowrap">
+                <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap">
                   <div className="flex items-center">
                     <CoinIcon type={item.coin.iconType} tag={item.coin.tag} label={item.coin.symbol} />
                   </div>
                 </td>
-                <td className="py-4 px-6 whitespace-nowrap">
+                <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap">
                   <div className="flex items-center">
                     <NetworkIcon network={item.network} />
-                    <span className='text-black/90 text-[13px]'>{item.network}</span>
+                    <span className='text-black/90 text-[12px] sm:text-[13px]'>{item.network}</span>
                   </div>
                 </td>
-                <td className="py-4 px-6 whitespace-nowrap text-[13px] text-gray-700">
+                <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap text-[12px] sm:text-[13px] text-gray-700">
                   {item.label}
                 </td>
-                <td className="py-4 px-6 whitespace-nowrap text-[13px]">
+                <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap text-[12px] sm:text-[13px]">
                   <div className="flex items-center">
-                    <span className="text-gray-700 font-mono truncate max-w-[200px]">{item.address}</span>
+                    <span className="text-gray-700 font-mono truncate max-w-[150px] sm:max-w-[200px]">{item.address}</span>
                     <button
                       onClick={() => copyAddress(item.address)}
                       className="ml-2 text-blue-600 hover:text-blue-800"
                       aria-label="Copy address"
                     >
-                <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={15} height={15}   />
+                      <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 </td>
@@ -130,31 +130,31 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
       </div>
 
       {/* Mobile card view */}
-      <div className="md:hidden space-y-4">
+      <div className="md:hidden space-y-3">
         {addresses.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
-            <div className="flex items-center justify-between mb-3">
+          <div key={item.id} className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-100">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div className="flex items-center">
                 <CoinIcon type={item.coin.iconType} tag={item.coin.tag} label={item.coin.symbol} />
               </div>
-              <div className="text-[13px] text-gray-700 font-medium">
+              <div className="text-[11px] sm:text-[13px] text-gray-700 font-medium">
                 {item.label}
               </div>
             </div>
             
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <div>
-                <div className="text-gray-500 text-[13px] mb-1">Network</div>
+                <div className="text-gray-500 text-[11px] sm:text-[13px] mb-0.5 sm:mb-1">Network</div>
                 <div className="flex items-center">
                   <NetworkIcon network={item.network} />
-                  <span className='text-black/90 text-[13px]'>{item.network}</span>
+                  <span className='text-black/90 text-[11px] sm:text-[13px]'>{item.network}</span>
                 </div>
               </div>
               
               <div>
-                <div className="text-gray-500 text-[13px] mb-1">Address</div>
+                <div className="text-gray-500 text-[11px] sm:text-[13px] mb-0.5 sm:mb-1">Address</div>
                 <div className="flex items-center">
-                  <span className="text-gray-700 font-mono text-[13px] truncate block max-w-[80%]">
+                  <span className="text-gray-700 font-mono text-[10px] sm:text-[13px] truncate block max-w-[75%] sm:max-w-[80%]">
                     {item.address}
                   </span>
                   <button
@@ -162,7 +162,7 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
                     className="ml-2 text-blue-600 hover:text-blue-800"
                     aria-label="Copy address"
                   >
-                    <Icon name="AccountBalanceWallet" size={20} />
+                    <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </button>
                 </div>
               </div>

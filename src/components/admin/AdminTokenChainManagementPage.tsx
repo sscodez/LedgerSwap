@@ -54,32 +54,33 @@ const AdminTokenChainManagementPage: React.FC = () => {
   };
 
   return (
-    <div className="relative text-black">
-      <div className="flex justify-between items-center mb-6">
+    <div className="relative text-black px-1 sm:px-0">
+      <div className="flex justify-between items-center mb-4 sm:mb-6">
         <div>
-          <h1 className="text-2xl font-medium">Token & Chain Management</h1>
+          <h1 className="text-xl sm:text-2xl font-medium">Token & Chain Management</h1>
           <p className="text-gray-500 text-sm mt-1">Enable or disable specific tokens and blockchains</p>
         </div>
       </div>
       
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      {/* Desktop Table View (hidden on small screens) */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hidden md:block">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="text-[13px]">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 ">
+                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500">
                   Token
                 </th>
-                <th scope="col" className="px-6 py-3 text-left  font-medium text-gray-500 ">
+                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                   Symbol
                 </th>
-                <th scope="col" className="px-6 py-3 text-left  font-medium text-gray-500 ">
+                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                   24h volume
                 </th>
-                <th scope="col" className="px-6 py-3 text-left  font-medium text-gray-500 ">
+                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                   Status
                 </th>
-                <th scope="col" className="px-6 py-3 text-left t font-medium text-gray-500 ">
+                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                   Actions
                 </th>
               </tr>
@@ -87,26 +88,26 @@ const AdminTokenChainManagementPage: React.FC = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {tokens.map((token) => (
                 <tr key={token.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <TokenIcon type={token.icon} />
                       <span className="text-sm font-medium text-gray-900">{token.name}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm text-gray-500">
                     {token.symbol}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm text-gray-500">
                     {token.volume24h}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                       ${token.status === 'Active' ? ' text-blue-600' : ' text-red-600'}
                     `}>
                       {token.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-sm font-medium">
                     <button 
                       onClick={() => toggleTokenStatus(token.id)}
                       className={`px-4 py-1 rounded-md text-xs font-medium transition-colors
@@ -124,6 +125,50 @@ const AdminTokenChainManagementPage: React.FC = () => {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Mobile Card View (visible only on small screens) */}
+      <div className="md:hidden space-y-4">
+        {tokens.map((token) => (
+          <div key={token.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
+            <div className="flex justify-between items-center mb-3">
+              <div className="flex items-center">
+                <TokenIcon type={token.icon} />
+                <span className="text-sm font-medium text-gray-900">{token.name}</span>
+              </div>
+              <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                ${token.status === 'Active' ? ' text-blue-600' : ' text-red-600'}
+              `}>
+                {token.status}
+              </span>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+              <div>
+                <p className="text-gray-500">Symbol</p>
+                <p className="font-medium">{token.symbol}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">24h Volume</p>
+                <p className="font-medium">{token.volume24h}</p>
+              </div>
+            </div>
+            
+            <div className="flex justify-end">
+              <button 
+                onClick={() => toggleTokenStatus(token.id)}
+                className={`px-4 py-2 rounded-md text-xs font-medium transition-colors w-full sm:w-auto
+                  ${token.status === 'Active' 
+                    ? 'bg-red-100 text-red-700 hover:bg-red-200' 
+                    : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }
+                `}
+              >
+                {token.status === 'Active' ? 'Disable' : 'Enable'}
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -44,12 +44,12 @@ const AdminOverviewPage: React.FC = () => {
 
   return (
     <div className="relative">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl text-black font-semibold">Overview</h1>
+      <div className="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl text-black font-semibold">Overview</h1>
       </div>
 
       {/* Metrics Cards Grid */}
-      <div className="grid grid-cols-1 bg-white rounded-lg p-3 sm:p-5 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
+      <div className="grid grid-cols-1 bg-white rounded-lg p-3 sm:p-5 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6 overflow-hidden">
         {metrics.map((metric, index) => (
           <div
             key={index}
@@ -60,11 +60,12 @@ const AdminOverviewPage: React.FC = () => {
               <span className="text-sm font-semibold text-gray-500">{metric.title}</span>
             </div>
             <div className="flex items-center">
-              {metric.svgPath}
-              <span className="text-2xl  ml-2 font-semibold">{metric.value}</span>
-
+              <div className="flex-shrink-0">
+                {metric.svgPath}
+              </div>
+              <span className="text-xl sm:text-2xl ml-2 font-semibold">{metric.value}</span>
             </div>
-            <span className=" text-xs font-semibold mt-8 text-green-800">{metric.change}</span>
+            <span className="text-xs font-semibold mt-2 text-green-800 block">{metric.change}</span>
           </div>
         ))}
       </div>
@@ -79,7 +80,7 @@ const AdminOverviewPage: React.FC = () => {
           <div className="bg-white rounded-lg p-3 sm:p-6 mb-4 sm:mb-6">
 
             <div className="overflow-x-auto -mx-3 sm:mx-0">
-              <table className="min-w-full table-auto">
+              <table className="min-w-full table-auto text-left">
                 <thead>
                   <tr className="border-b border-black/20">
                     <th className="py-3 sm:py-4 px-3 sm:px-4 text-left text-xs sm:text-sm font-medium text-gray-500">Addresses</th>
@@ -92,8 +93,11 @@ const AdminOverviewPage: React.FC = () => {
                 <tbody>
                   {[...Array(5)].map((_, index) => (
                     <tr key={index} className={`${index === 4 ? '' : 'border-b border-black/10'} hover:bg-gray-50`}>
-                      <td className="py-2 sm:py-3 font-semibold px-3 sm:px-4 whitespace-nowrap text-gray-700 flex text-xs sm:text-sm">0x{Math.random().toString(16).substring(2, 10)}...{Math.random().toString(16).substring(2, 10)}
-                        <Image className=' mx-1' src="/assests/icons/file_copy.svg" alt="eye" width={15} height={15} />
+                      <td className="py-2 sm:py-3 font-semibold px-3 sm:px-4 whitespace-nowrap text-gray-700 text-xs sm:text-sm">
+                        <div className="flex items-center">
+                          <span className="truncate max-w-[80px] sm:max-w-[120px]">0x{Math.random().toString(16).substring(2, 10)}...{Math.random().toString(16).substring(2, 10)}</span>
+                          <Image className='mx-1 cursor-pointer' src="/assests/icons/file_copy.svg" alt="copy" width={15} height={15} />
+                        </div>
                       </td>
                       <td className="py-2 sm:py-3 px-3 sm:px-4 whitespace-nowrap text-gray-700 text-xs sm:text-sm">0.234134 {['ETH', 'BTC', 'SOL'][index % 3]}</td>
                       <td className="py-2 sm:py-3 px-3 sm:px-4 whitespace-nowrap text-gray-700 text-xs sm:text-sm">{['Ethereum', 'Solana', 'Tron'][index % 3]}</td>

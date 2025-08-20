@@ -59,14 +59,14 @@ const PayoutsPage: React.FC = () => {
   };
 
   return (
-    <div>
-       <RewardsBanner />
-      <div className="flex justify-between items-center mt-8 mb-6">
-        <h1 className="text-2xl text-black font-medium">Payouts</h1>
+    <div className="px-3 sm:px-4 md:px-6">
+      <RewardsBanner />
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 sm:mt-8 mb-4 sm:mb-6 gap-2">
+        <h1 className="text-xl sm:text-2xl text-black font-medium">Payouts</h1>
         
         {/* Guides dropdown */}
         <div className="relative group">
-      
+          {/* Placeholder for guides dropdown */}
         </div>
       </div>
       
@@ -83,12 +83,11 @@ const PayoutsPage: React.FC = () => {
       />
       
       {/* Payout History Section */}
-      <div className="   mb-5 ">
-          <h2 className="text-2xl text-black font-medium">Payout History</h2>
-        </div>
-      <div className="bg-white rounded-lg  border border-gray-200 overflow-hidden">
-
-        <div className="p-6">
+      <div className="mb-3 sm:mb-5">
+        <h2 className="text-xl sm:text-2xl text-black font-medium">Payout History</h2>
+      </div>
+      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <div className="p-3 sm:p-4 md:p-6">
           <PayoutFilters
             onFilterChange={handleFilterChange}
             onClearFilters={handleClearFilters}

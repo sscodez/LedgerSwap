@@ -73,30 +73,28 @@ const AdminTradesPage: React.FC = () => {
       case 'ethereum':
         return (
           <div className="flex items-center">
-            <div className="w-4 h-4 mr-2">
-            <Image src = '/assests/cryptocurrency/eth.png' alt="ethereum" width={20} height={20} />
+            <div className="w-4 h-4 mr-1 sm:mr-2 flex-shrink-0">
+              <Image src='/assests/cryptocurrency/eth.png' alt="ethereum" width={20} height={20} />
             </div>
-            <span>Ethereum</span>
+            <span className="text-xs sm:text-sm">Ethereum</span>
           </div>
         );
       case 'solana':
         return (
           <div className="flex items-center">
-            <div className="w-4 h-4 mr-2 ">
-            <Image src = '/assests/cryptocurrency/sol.png' alt="ethereum" width={20} height={20} />
-
+            <div className="w-4 h-4 mr-1 sm:mr-2 flex-shrink-0">
+              <Image src='/assests/cryptocurrency/sol.png' alt="solana" width={20} height={20} />
             </div>
-            <span>Solana</span>
+            <span className="text-xs sm:text-sm">Solana</span>
           </div>
         );
       case 'tron':
         return (
           <div className="flex items-center">
-            <div className="w-4 h-4 mr-2">
-            <Image src = '/assests/cryptocurrency/ltc.png' alt="ethereum" width={20} height={20} />
-
+            <div className="w-4 h-4 mr-1 sm:mr-2 flex-shrink-0">
+              <Image src='/assests/cryptocurrency/ltc.png' alt="tron" width={20} height={20} />
             </div>
-            <span>Tron</span>
+            <span className="text-xs sm:text-sm">Tron</span>
           </div>
         );
       default:
@@ -118,22 +116,22 @@ const AdminTradesPage: React.FC = () => {
 
       <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto -mx-3 sm:mx-0">
-          <table className="min-w-full divide-y divide-gray-200 table-auto">
+          <table className="min-w-full divide-y divide-gray-200 table-auto text-left">
           <thead className="text-xs sm:text-[13px]">
             <tr>
-              <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                 Wallet address
               </th>
-              <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                 Swap details
               </th>
-              <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                 Network
               </th>
-              <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                 Status
               </th>
-              <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
+              <th scope="col" className="px-2 sm:px-6 py-2 sm:py-3 text-left font-medium text-gray-500">
                 Time
               </th>
             </tr>
@@ -141,32 +139,32 @@ const AdminTradesPage: React.FC = () => {
           <tbody className="bg-white divide-y divide-gray-200">
             {mockSwapData.map((swap) => (
               <tr key={swap.id} className="hover:bg-gray-50">
-                <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
                   <div className="flex items-center">
-                    <span className="mr-1">{formatWalletAddress(swap.walletAddress)}</span>
-                  <Image src = '/assests/icons/file_copy.svg' alt="ethereum" width={15} height={15} />
+                    <span className="mr-1 truncate max-w-[80px] sm:max-w-full">{formatWalletAddress(swap.walletAddress)}</span>
+                    <Image src='/assests/icons/file_copy.svg' alt="copy" width={15} height={15} className="cursor-pointer flex-shrink-0" />
                   </div>
                 </td>
-                <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <span className="mr-2">{swap.amount}</span>
-                    <span className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                  <div className="flex items-center flex-wrap gap-1 sm:gap-0">
+                    <span className="mr-1 sm:mr-2">{swap.amount}</span>
+                    <span className="inline-flex items-center px-1.5 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                       {swap.fromCurrency}
                     </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mx-2" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 mx-1 sm:mx-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
-                    <span className="mr-2">{swap.toAmount}</span>
-                    <span className="inline-flex items-center px-2 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                    <span className="mr-1 sm:mr-2">{swap.toAmount}</span>
+                    <span className="inline-flex items-center px-1.5 sm:px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                       {swap.toCurrency}
                     </span>
                   </div>
                 </td>
-                <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                   <NetworkIcon network={swap.network} />
                 </td>
-                <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
-                  <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
+                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap">
+                  <span className={`px-1.5 sm:px-2 py-0.5 sm:py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                     ${swap.status === 'Pending' ? ' text-yellow-800' : ''}
                     ${swap.status === 'Finished' ? ' text-green-800' : ''}
                     ${swap.status === 'Failed' ? ' text-red-800' : ''}
@@ -174,7 +172,7 @@ const AdminTradesPage: React.FC = () => {
                     {swap.status}
                   </span>
                 </td>
-                <td className="px-3 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
+                <td className="px-2 sm:px-6 py-2 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
                   {swap.time}
                 </td>
               </tr>
