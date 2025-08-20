@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@web3icons/react": "^4.0.21",
     "cryptocurrency-icons": "^0.18.1",
     "framer-motion": "^12.23.12",
