@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const MediaPartners = () => {
@@ -22,7 +22,7 @@ const MediaPartners = () => {
     {
       id: 3,
       name: 'Bitfinex',
-      logo:  '/assests/landing-page/media-partners/bitfinex.png',
+      logo: '/assests/landing-page/media-partners/bitfinex.png',
       description: 'Crypto is sent directly to your wallet, we don\'t store it on our service.'
     }
   ];
@@ -37,77 +37,100 @@ const MediaPartners = () => {
     { id: 6, name: 'Bitfinex', logo: '/assests/landing-page/media-partners/bitfinex.png' },
   ];
 
-  const handlePrevSlide = () => {
-    setActiveSlide((prev) => (prev === 0 ? featuredPartners.length - 1 : prev - 1));
-  };
+  // Auto-rotate slides every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev === featuredPartners.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
-  const handleNextSlide = () => {
-    setActiveSlide((prev) => (prev === featuredPartners.length - 1 ? 0 : prev + 1));
+  const handleDotClick = (index: number) => {
+    setActiveSlide(index);
   };
 
   return (
-    <section className="py-8 sm:py-12 md:py-16 bg-gray-50">
+    <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="mb-6 sm:mb-8 md:mb-12">
-          <p className="text-gray-300 font-medium mb-1 sm:mb-2 text-sm sm:text-base">Publications</p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-poppins text-black font-semibold mb-4 sm:mb-6 md:mb-8">
+        <div className="mb-8 md:mb-12 text-left">
+          <p className="text-gray-400 font-medium mb-1 text-sm">Publications</p>
+          <h2 className="text-3xl md:text-4xl text-black font-semibold">
             Our Media <span className="text-blue-600">Partners</span>
           </h2>
         </div>
+        <br/>
 
         {/* Featured Partners Slider */}
-        <div className="mb-8 sm:mb-12 md:mb-16 max-w-4xl mx-auto w-full sm:w-[90%]">
-          <div className="overflow-x-auto pb-4 sm:pb-0 hide-scrollbar">
-            <div 
-              className="flex flex-nowrap gap-4 sm:gap-5"
-            >
-              {featuredPartners.map((partner) => (
-                <div key={partner.id} className="w-[280px] sm:w-[320px] md:w-[350px] border mx-2 sm:mx-3 md:mx-5 rounded-xl sm:rounded-2xl h-auto sm:h-60 border-gray-200 flex-shrink-0">
-                  <div className="flex flex-col items-start p-4 sm:p-6 md:p-8">
-                    <div className="w-full flex justify-center mb-4 sm:mb-6">
-                      <Image
-                        src={partner.logo}
-                        alt={partner.name}
-                        width={150}
-                        height={28}
-                        className="max-w-[120px] sm:max-w-[150px] md:max-w-[171px]"
-                      />
-                    </div>
-                    <div className="w-full mt-2 sm:mt-4 text-center">
-                      <p className="text-gray-700 text-sm sm:text-base">{partner.description}</p>
-                    </div>
+        <div className="mb-12 md:mb-16 relative my-8 max-w-5xl mx-auto">
+          <div className="overflow-hidden">
+            <div className="flex">
+              {featuredPartners.map((partner, index) => (
+                <div 
+                  key={partner.id} 
+                  className={`w-full transition-opacity duration-500 ${index === activeSlide ? 'block' : 'hidden'}`}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {featuredPartners.map((p, i) => {
+                      // Calculate relative index for carousel effect
+                      const relativeIndex = (i - activeSlide + featuredPartners.length) % featuredPartners.length;
+                      return (
+                        <div 
+                          key={p.id} 
+                          className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm"
+                        >
+                          <div className="flex justify-center mb-4">
+                            <Image
+                              src={p.logo}
+                              alt={p.name}
+                              width={150}
+                              height={40}
+                              className="h-8 object-contain"
+                            />
+                          </div>
+                          <p className="text-gray-700 text-center text-sm">{p.description}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
             </div>
           </div>
+          
+          {/* Dots navigation */}
+          <div className="flex justify-center mt-6 gap-2">
+            {featuredPartners.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleDotClick(index)}
+                className={`w-2 h-2 rounded-full ${index === activeSlide ? 'bg-blue-600' : 'bg-gray-300'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
 
+        <br/><br/>
+
         {/* Partners Logo Row */}
-        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3  my-5 md:grid-cols-6 gap-6">
           {allPartners.map((partner) => (
-            <div key={partner.id} className="w-[140px] sm:w-[180px] md:w-[200px] border rounded-lg border-gray-300 h-[80px] sm:h-[100px] md:h-[120px] flex items-center justify-center p-2 sm:p-3 md:p-4">
+            <div 
+              key={partner.id} 
+              className="flex border border-gray-200 p-4 rounded-lg items-center justify-center"
+            >
               <Image
                 src={partner.logo}
                 alt={partner.name}
-                width={100}
-                height={20}
-                className="max-w-full max-h-[40px] sm:max-h-[50px] md:max-h-[60px] object-contain"
+                width={120}
+                height={40}
+                className="max-h-12 object-contain"
               />
             </div>
           ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
+      <br/>
     </section>
   );
 };
