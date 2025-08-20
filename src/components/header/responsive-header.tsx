@@ -127,7 +127,7 @@ const Header: React.FC = () => {
       {/* Mobile/Tablet Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden nav:hidden">
-          <div className="px-4 py-3 space-y-3 bg-[#0A1E56] shadow-lg z-50 absolute w-full">
+          <div className="px-4 py-3 space-y-3 bg-[#0A1E56] shadow-lg text-white z-50 absolute w-full">
             {menuItems.map((item) => (
               <Link
                 key={item.href}
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
                 href="/account"
                 className={`flex items-center justify-center px-4 py-2 rounded-md text-sm transition-colors ${
                   isAdminOrDashboard
-                    ? "bg-black text-white hover:bg-gray-800"
+                    ? "bg-blue-600 text-white hover:bg-gray-800"
                     : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}

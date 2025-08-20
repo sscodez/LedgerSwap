@@ -203,7 +203,7 @@ const Header: React.FC = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <motion.div 
-              className="px-4 py-3 space-y-3 bg-[#0A1E56] shadow-lg z-50 absolute w-full"
+              className="px-4 py-3 space-y-3 bg-[#0A1E56] text-white shadow-lg z-50 absolute w-full"
               initial={{ y: -20 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.2, delay: 0.1 }}
@@ -237,16 +237,17 @@ const Header: React.FC = () => {
                 >
                   Log in
                 </Link>
-                <Link
+            
+               <Link
                   href="/signup"
                   className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${
                     isAdminOrDashboard
-                      ? "bg-black text-white hover:bg-gray-800"
+                      ? "bg-white text-black hover:bg-gray-800"
                       : "bg-blue-600 text-white hover:bg-blue-700"
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Get an Account
+             {!isAdminOrDashboard ?  'Get an Account' :' My Account' }
                 </Link>
                 {/* <div className="py-2">
                   <ConnectWalletButton />
