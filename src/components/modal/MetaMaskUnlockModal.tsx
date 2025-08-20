@@ -39,43 +39,43 @@ const MetaMaskUnlockModal: React.FC<MetaMaskUnlockModalProps> = ({
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      <motion.div 
+      <motion.div
         className="flex text-[13px] flex-col items-center py-4 sm:py-6 px-3 sm:px-4 space-y-4 sm:space-y-6"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
         {/* MetaMask Logo */}
-        <motion.div 
+        <motion.div
           variants={itemVariants}
           className="w-10 h-10 sm:w-12 sm:h-12"
         >
-          <Image src="/assests/modal/MetaMask.png" alt="MetaMask" width={48} height={48}/>
+          <Image src="/assests/modal/MetaMask.png" alt="MetaMask" width={48} height={48} />
         </motion.div>
-        
+
         {/* Title and Text */}
-        <motion.div 
+        <motion.div
           className="text-center space-y-1"
           variants={itemVariants}
         >
           <h2 className="text-[15px] sm:text-[16px] text-black font-bold">MetaMask</h2>
           <p className="text-gray-600 text-xs sm:text-sm">Connect to your MetaMask</p>
         </motion.div>
-        
+
         {/* Password Input */}
-        <motion.div 
+        <motion.div
           className="w-full"
           variants={itemVariants}
         >
-        <input
-  type="password"
-  value={password}
-  onChange={(e) => setPassword(e.target.value)}
-  placeholder="Enter your password"
-  className="w-full p-2 sm:p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm placeholder-black"
-/>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter your password"
+            className="w-full p-2 sm:p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm placeholder-black"
+          />
         </motion.div>
-        
+
         {/* Unlock Button */}
         <motion.button
           onClick={handleUnlock}
@@ -86,10 +86,10 @@ const MetaMaskUnlockModal: React.FC<MetaMaskUnlockModalProps> = ({
         >
           Unlock
         </motion.button>
-        
+
         {/* Forgot Password */}
-        <motion.a 
-          href="#" 
+        <motion.a
+          href="#"
           className="text-black hover:underline text-xs sm:text-sm"
           variants={itemVariants}
           whileHover={{ scale: 1.05 }}

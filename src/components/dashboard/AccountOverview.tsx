@@ -43,7 +43,7 @@ const AccountOverview: React.FC = () => {
           title="90-day transaction volume" 
           value="0 USDT"
           icon={(
-            <Image src="/assests/icons/logo 4.png" alt="USDT" width={20} height={20} />
+            <Image src="/assests/icons/logo4.png" alt="USDT" width={20} height={20} />
           )} 
         />
         
