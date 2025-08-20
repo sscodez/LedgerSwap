@@ -4,6 +4,7 @@ import RewardsBanner from "../components/rewards-banner";
 import FeatureGrid from "../components/feature-grid";
 import TradingPairs from "../components/trading-pairs";
 import WalletConnectionFlow from "../components/wallet-connection-flow-responsive";
+import ExchangeSection from "../components/exchange-section";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <WalletConnectionFlow />
 
       <MediaPartners />
+      <ExchangeSection />
     </div>
   );
 }
