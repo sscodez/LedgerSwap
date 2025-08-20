@@ -1,9 +1,11 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const Footer = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
   return (
     <footer className="bg-[#001233] text-white">
       <div className="container mx-auto px-4 py-12">
@@ -57,7 +59,7 @@ const Footer = () => {
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
                 <button className="flex bg-white/10 py-2 px-5 rounded-lg items-center hover:bg-white/20 transition-colors outline-none">
-                  <span className="text-sm mr-2">English</span>
+                  <span className="text-sm mr-2">{selectedLanguage}</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -68,16 +70,33 @@ const Footer = () => {
                 <DropdownMenu.Content 
                   className="min-w-[140px] bg-white rounded-md p-1 shadow-lg" 
                   sideOffset={5}
+
+
                   align="end"
                 >
-                  <DropdownMenu.Item className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none">
+                  <DropdownMenu.Item 
+                    className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none"
+                    onSelect={() => setSelectedLanguage('English')}
+                  >
                     English
                   </DropdownMenu.Item>
-                  <DropdownMenu.Item className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none">
+                  <DropdownMenu.Item 
+                    className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none"
+                    onSelect={() => setSelectedLanguage('Spanish')}
+                  >
                     Spanish
                   </DropdownMenu.Item>
-                  <DropdownMenu.Item className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none">
+                  <DropdownMenu.Item 
+                    className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none"
+                    onSelect={() => setSelectedLanguage('French')}
+                  >
                     French
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item 
+                    className="text-gray-800 text-sm px-3 py-2 rounded hover:bg-gray-100 cursor-pointer outline-none"
+                    onSelect={() => setSelectedLanguage('Other')}
+                  >
+                    Other
                   </DropdownMenu.Item>
                 </DropdownMenu.Content>
               </DropdownMenu.Portal>

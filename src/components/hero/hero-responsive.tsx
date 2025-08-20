@@ -1,19 +1,16 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import Portal from '../ui/Portal';
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('exchange');
   const [sendCurrency, setSendCurrency] = useState({ name: 'ETH', fullName: 'Ethereum', icon: '/assests/cryptocurrency/eth.png', color: '#74D4FF' });
   const [receiveCurrency, setReceiveCurrency] = useState({ name: 'BTC', fullName: 'Bitcoin', icon: '/assests/cryptocurrency/btc.png', color: '#FF8904' });
-  const [showSendDropdown, setShowSendDropdown] = useState(false);
-  const [showReceiveDropdown, setShowReceiveDropdown] = useState(false);
-  const sendDropdownRef = useRef<HTMLDivElement>(null);
-  const receiveDropdownRef = useRef<HTMLDivElement>(null);
-  const [sendDropdownPosition, setSendDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
-  const [receiveDropdownPosition, setReceiveDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+  const [sendAmount, setSendAmount] = useState('12,954.89');
+  const [receiveAmount, setReceiveAmount] = useState('12,954.89');
   
   const cryptocurrencies = [
     { name: 'BTC', fullName: 'Bitcoin', icon: '/assests/cryptocurrency/btc.png', color: '#FF8904' },
@@ -23,61 +20,18 @@ const Hero = () => {
     { name: 'USDC', fullName: 'USD Coin', icon: '/assests/cryptocurrency/usdc.png', color: '#2775CA' },
   ];
   
-  // Update dropdown positions and handle outside clicks
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (sendDropdownRef.current && !sendDropdownRef.current.contains(event.target as Node)) {
-        setShowSendDropdown(false);
-      }
-      if (receiveDropdownRef.current && !receiveDropdownRef.current.contains(event.target as Node)) {
-        setShowReceiveDropdown(false);
-      }
-    };
-    
-    const updateSendDropdownPosition = () => {
-      if (sendDropdownRef.current) {
-        const rect = sendDropdownRef.current.getBoundingClientRect();
-        setSendDropdownPosition({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX,
-          width: rect.width
-        });
-      }
-    };
-    
-    const updateReceiveDropdownPosition = () => {
-      if (receiveDropdownRef.current) {
-        const rect = receiveDropdownRef.current.getBoundingClientRect();
-        setReceiveDropdownPosition({
-          top: rect.bottom + window.scrollY,
-          left: rect.left + window.scrollX,
-          width: rect.width
-        });
-      }
-    };
-    
-    if (showSendDropdown) {
-      updateSendDropdownPosition();
-    }
-    
-    if (showReceiveDropdown) {
-      updateReceiveDropdownPosition();
-    }
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    window.addEventListener('resize', updateSendDropdownPosition);
-    window.addEventListener('resize', updateReceiveDropdownPosition);
-    window.addEventListener('scroll', updateSendDropdownPosition);
-    window.addEventListener('scroll', updateReceiveDropdownPosition);
-    
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      window.removeEventListener('resize', updateSendDropdownPosition);
-      window.removeEventListener('resize', updateReceiveDropdownPosition);
-      window.removeEventListener('scroll', updateSendDropdownPosition);
-      window.removeEventListener('scroll', updateReceiveDropdownPosition);
-    };
-  }, [showSendDropdown, showReceiveDropdown]);
+  // Handle input changes
+  const handleSendAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSendAmount(e.target.value);
+    // In a real app, you might want to calculate the receive amount based on exchange rates
+    // setReceiveAmount(e.target.value);
+  };
+
+  const handleReceiveAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setReceiveAmount(e.target.value);
+    // In a real app, you might want to calculate the send amount based on exchange rates
+    // setSendAmount(e.target.value);
+  };
 
   return (
     <div className="relative bg-[#001233] py-10 md:py-16 lg:py-20 overflow-hidden">
@@ -192,66 +146,59 @@ const Hero = () => {
               <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
                 <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
-                    <div className="text-[13px] font-[600] text-gray-500 mb-1">You send</div>
-                    <div className="flex items-center">
-                      <div className="text-black font-semibold">≈ $12,954.89</div>
+                  <div className="text-[13px]  font-[600] text-gray-500 mb-1">You send</div>
+                    <div className="flex items-center justify-end w-[40%]">
+
+                      <div className="text-black font-semibold flex items-center">
+                        {/* <span className="mr-1">≈ $</span> */}
+                        <input 
+                          type="text" 
+                          value={sendAmount} 
+                          onChange={handleSendAmountChange}
+                          className="bg-transparent border-none outline-none text-right font-semibold text-black w-[120px]" 
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0 relative" ref={sendDropdownRef} style={{ position: 'relative', zIndex: 9999 }}>
-                    <button 
-                      className="flex items-center w-full justify-between"
-                      onClick={() => setShowSendDropdown(!showSendDropdown)}
-                    >
-                      <div className="flex items-center">
-                        <Image src={sendCurrency.icon} alt={sendCurrency.fullName} width={24} height={24} className="mr-2" />
-                        <span className="font-medium mr-2">{sendCurrency.name}</span>
-                        <span className="bg-[#74D4FF]" style={{backgroundColor: sendCurrency.color, color: 'white', fontSize: '11px', padding: '0.25rem 0.5rem', borderRadius: '9999px'}}>{sendCurrency.name}</span>
-                      </div>
-                      <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-2 transition-transform duration-300 ${showSendDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    
-                    {/* Dropdown for Send Currency */}
-                    {/* <AnimatePresence>
-                      {showSendDropdown && (
-                        <Portal>
-                          <motion.div 
-                            className="bg-white rounded-lg shadow-xl"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
-                            style={{
-                              position: 'absolute',
-                              width: `${sendDropdownPosition.width}px`,
-                              maxHeight: '250px',
-                              overflowY: 'auto',
-                              top: `${sendDropdownPosition.top}px`,
-                              left: `${sendDropdownPosition.left}px`,
-                              zIndex: 999999
-                            }}
-                          >
-                            <div className="py-1">
-                              {cryptocurrencies.map((crypto) => (
-                                <button
-                                  key={crypto.name}
-                                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                  onClick={() => {
-                                    setSendCurrency(crypto);
-                                    setShowSendDropdown(false);
-                                  }}
-                                >
-                                  <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
-                                  <span>{crypto.name}</span>
-                                  <span className="ml-2 text-xs text-gray-500">{crypto.fullName}</span>
-                                </button>
-                              ))}
-                            </div>
-                          </motion.div>
-                        </Portal>
-                      )}
-                    </AnimatePresence> */}
+                  <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0 relative" style={{ position: 'relative', zIndex: 9999 }}>
+                    <DropdownMenu.Root>
+                      <DropdownMenu.Trigger asChild>
+                        <button className="flex items-center w-full justify-between outline-none px-1">
+                          <div className="flex items-center mr-2">
+                            <Image src={sendCurrency.icon} alt={sendCurrency.fullName} width={20} height={20} className="mr-1.5 flex-shrink-0" />
+                            <span className="font-medium text-sm mr-1.5 flex-shrink-0">{sendCurrency.name}</span>
+                            <span className="flex-shrink-0 text-[9px] px-1 py-0.5 rounded-full text-white" style={{backgroundColor: sendCurrency.color}}>{sendCurrency.name}</span>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </button>
+                      </DropdownMenu.Trigger>
+
+                      <DropdownMenu.Portal>
+                        <DropdownMenu.Content 
+                          className="bg-white rounded-lg shadow-xl min-w-[200px] z-[999999] animate-fadeIn" 
+                          sideOffset={5}
+                          align="start"
+                        >
+                          <div className="py-1">
+                            {cryptocurrencies.map((crypto) => (
+                              <DropdownMenu.Item 
+                                key={crypto.name}
+                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                                onSelect={() => setSendCurrency(crypto)}
+                              >
+                                <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
+                                <span>{crypto.name}</span>
+                                <span className="ml-2 text-xs text-gray-500">{crypto.fullName}</span>
+                              </DropdownMenu.Item>
+                            ))}
+                          </div>
+                        </DropdownMenu.Content>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Root>
                   </div>
                 </div>
               </div>
@@ -284,66 +231,58 @@ const Hero = () => {
               <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
                 <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
-                    <div className="text-[13px] font-[600] text-gray-500 mb-1">You receive</div>
-                    <div className="flex items-center">
-                      <div className="text-black font-semibold">≈ $12,954.89</div>
+                    <div className="text-[13px]  font-[600] text-gray-500 mb-1">You receive</div>
+                    <div className="flex items-center justify-end w-[40%]">
+                      <div className="text-black font-semibold flex items-center">
+                        {/* <span className="mr-1">≈ $</span> */}
+                        <input 
+                          type="text" 
+                          value={receiveAmount} 
+                          onChange={handleReceiveAmountChange}
+                          className="bg-transparent border-none outline-none text-right font-semibold text-black w-[120px]" 
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0 relative" ref={receiveDropdownRef} style={{ position: 'relative', zIndex: 9999 }}>
-                    <button 
-                      className="flex items-center w-full justify-between"
-                      onClick={() => setShowReceiveDropdown(!showReceiveDropdown)}
-                    >
-                      <div className="flex items-center">
-                        <Image src={receiveCurrency.icon} alt={receiveCurrency.fullName} width={24} height={24} className="mr-2" />
-                        <span className="font-medium mr-2">{receiveCurrency.name}</span>
-                        <span className="bg-[#FF8904]" style={{backgroundColor: receiveCurrency.color, color: 'white', fontSize: '11px', padding: '0.25rem 0.5rem', borderRadius: '9999px'}}>{receiveCurrency.name}</span>
-                      </div>
-                      <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-2 transition-transform duration-300 ${showReceiveDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                      </svg>
-                    </button>
-                    
-                    {/* Dropdown for Receive Currency */}
-                    <AnimatePresence>
-                      {showReceiveDropdown && (
-                        <Portal>
-                          <motion.div 
-                            className="bg-white rounded-lg shadow-xl"
-                            initial={{ opacity: 0, y: -10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.2 }}
-                            style={{
-                              position: 'absolute',
-                              width: `${receiveDropdownPosition.width}px`,
-                              maxHeight: '250px',
-                              overflowY: 'auto',
-                              top: `${receiveDropdownPosition.top}px`,
-                              left: `${receiveDropdownPosition.left}px`,
-                              zIndex: 999999
-                            }}
-                          >
-                            <div className="py-1">
-                              {cryptocurrencies.map((crypto) => (
-                                <button
-                                  key={crypto.name}
-                                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                                  onClick={() => {
-                                    setReceiveCurrency(crypto);
-                                    setShowReceiveDropdown(false);
-                                  }}
-                                >
-                                  <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
-                                  <span>{crypto.name}</span>
-                                  <span className="ml-2 text-xs text-gray-500">{crypto.fullName}</span>
-                                </button>
-                              ))}
-                            </div>
-                          </motion.div>
-                        </Portal>
-                      )}
-                    </AnimatePresence>
+                  <div className="flex text-black w-full sm:w-[35%] bg-[#E5E7EB] rounded-lg sm:rounded-none sm:rounded-r-lg p-2 sm:p-3 items-center mt-2 sm:mt-0 relative" style={{ position: 'relative', zIndex: 9999 }}>
+                    <DropdownMenu.Root>
+                      <DropdownMenu.Trigger asChild>
+                        <button className="flex items-center w-full justify-between outline-none px-1">
+                          <div className="flex items-center mr-2">
+                            <Image src={receiveCurrency.icon} alt={receiveCurrency.fullName} width={20} height={20} className="mr-1.5 flex-shrink-0" />
+                            <span className="font-medium text-sm mr-1.5 flex-shrink-0">{receiveCurrency.name}</span>
+                            <span className="flex-shrink-0 text-[9px] px-1 py-0.5 rounded-full text-white" style={{backgroundColor: receiveCurrency.color}}>{receiveCurrency.name}</span>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </button>
+                      </DropdownMenu.Trigger>
+
+                      <DropdownMenu.Portal>
+                        <DropdownMenu.Content 
+                          className="bg-white rounded-lg shadow-xl min-w-[200px] z-[999999] animate-fadeIn" 
+                          sideOffset={5}
+                          align="start"
+                        >
+                          <div className="py-1">
+                            {cryptocurrencies.map((crypto) => (
+                              <DropdownMenu.Item 
+                                key={crypto.name}
+                                className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                                onSelect={() => setReceiveCurrency(crypto)}
+                              >
+                                <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
+                                <span>{crypto.name}</span>
+                                <span className="ml-2 text-xs text-gray-500">{crypto.fullName}</span>
+                              </DropdownMenu.Item>
+                            ))}
+                          </div>
+                        </DropdownMenu.Content>
+                      </DropdownMenu.Portal>
+                    </DropdownMenu.Root>
                   </div>
                 </div>
               </div>

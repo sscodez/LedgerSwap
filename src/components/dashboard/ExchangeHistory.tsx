@@ -218,62 +218,88 @@ const ExchangeHistory: React.FC = () => {
     
 
       {/* Filters */}
-      <div className="text-black text-[13px] rounded-lg p-2 md:p-4 mb-6 overflow-x-auto">
-        <div className="flex flex-wrap gap-2 md:gap-4 mb-4">
-          <div className="flex bg-[#F1F5F9] p-1 rounded-lg">
-            <button 
-              className={`px-4 py-2 rounded-l-lg ${activeFilter === 'All' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-              onClick={() => setActiveFilter('All')}
-            >
-              All
-            </button>
-            <button 
-              className={`px-4 py-2 ${activeFilter === 'Month' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-              onClick={() => setActiveFilter('Month')}
-            >
-              Month
-            </button>
-            <button 
-              className={`px-4 py-2 ${activeFilter === 'Week' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-              onClick={() => setActiveFilter('Week')}
-            >
-              Week
-            </button>
-            <button 
-              className={`px-4 py-2 rounded-r-lg ${activeFilter === 'Yesterday' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-              onClick={() => setActiveFilter('Yesterday')}
-            >
-              Yesterday
-            </button>
-          </div>
-          
-          <div className="flex items-center gap-2">
-            <span className="mr-1">From:</span>
-            <div className="relative">
-              <input 
-                type="date" 
-                className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2" 
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </div>
-            <span className="mx-1">To:</span>
-            <div className="relative">
-              <input 
-                type="date" 
-                className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2" 
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
+      <div className="text-black text-[13px] rounded-lg p-2 md:p-4 mb-6">
+        {/* Filter sections - reorganized for better mobile layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-4">
+          {/* Time period filter - full width on mobile */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-2">
+            <div className="flex overflow-x-auto bg-[#F1F5F9] p-1 rounded-lg w-full">
+              <button 
+                className={`px-3 py-2 rounded-l-lg whitespace-nowrap ${activeFilter === 'All' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                onClick={() => setActiveFilter('All')}
+              >
+                All
+              </button>
+              <button 
+                className={`px-3 py-2 whitespace-nowrap ${activeFilter === 'Month' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                onClick={() => setActiveFilter('Month')}
+              >
+                Month
+              </button>
+              <button 
+                className={`px-3 py-2 whitespace-nowrap ${activeFilter === 'Week' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                onClick={() => setActiveFilter('Week')}
+              >
+                Week
+              </button>
+              <button 
+                className={`px-3 py-2 rounded-r-lg whitespace-nowrap ${activeFilter === 'Yesterday' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                onClick={() => setActiveFilter('Yesterday')}
+              >
+                Yesterday
+              </button>
             </div>
           </div>
-          
-          <div className="flex items-center ">
+
+          {/* Search field - full width on mobile */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-2">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <input 
+                type="text" 
+                className="bg-white border bg-[#F1F5F9] border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5" 
+                placeholder="Search by ID or currency" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Date range filters - stack on mobile */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1">
+                <span className="text-gray-500 mb-1 sm:mb-0 sm:mr-2">From:</span>
+                <input 
+                  type="date" 
+                  className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2 w-full" 
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1">
+                <span className="text-gray-500 mb-1 sm:mb-0 sm:mr-2">To:</span>
+                <input 
+                  type="date" 
+                  className="border border-gray-300 bg-[#F1F5F9] rounded-lg px-3 py-2 w-full" 
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Status dropdown */}
+          <div className="col-span-1">
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
-                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
-                  {selectedStatus || 'Status'}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center justify-between w-full">
+                  <span className="truncate">{selectedStatus || 'Status'}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -282,7 +308,7 @@ const ExchangeHistory: React.FC = () => {
                 <StyledContent 
                   className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
                   sideOffset={5}
-                  align="center"
+                  align="start"
                   forceMount
                 >
                   <div className="py-1">
@@ -309,44 +335,14 @@ const ExchangeHistory: React.FC = () => {
               </DropdownMenu.Portal>
             </DropdownMenu.Root>
           </div>
-          
-       
-        
-        <div className="flex flex-wrap gap-2 md:gap-4">
-        <div className="flex items-center">
-            <span className="mr-2">Hide unfinished</span>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input 
-                type="checkbox" 
-                className="sr-only peer" 
-                checked={hideUnfinished}
-                onChange={() => setHideUnfinished(!hideUnfinished)}
-              />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-        </div>
-          <div className="relative flex-grow">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input 
-              type="text" 
-              className="bg-white border bg-[#F1F5F9] border-gray-300 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5" 
-              placeholder="Search" 
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          
-          <div className="relative">
+
+          {/* From currency dropdown */}
+          <div className="col-span-1">
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
-                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
-                  {fromCurrency || 'From'}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center justify-between w-full">
+                  <span className="truncate">{fromCurrency || 'From'}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -355,7 +351,7 @@ const ExchangeHistory: React.FC = () => {
                 <StyledContent 
                   className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
                   sideOffset={5}
-                  align="center"
+                  align="start"
                   forceMount
                 >
                   <div className="py-1">
@@ -388,13 +384,14 @@ const ExchangeHistory: React.FC = () => {
               </DropdownMenu.Portal>
             </DropdownMenu.Root>
           </div>
-          
-          <div className="relative">
+
+          {/* To currency dropdown */}
+          <div className="col-span-1">
             <DropdownMenu.Root>
               <DropdownMenu.Trigger asChild>
-                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center">
-                  {toCurrency || 'To'}
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button className="border bg-[#F1F5F9] border-gray-300 rounded-lg px-4 py-2 flex items-center justify-between w-full">
+                  <span className="truncate">{toCurrency || 'To'}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
@@ -403,7 +400,7 @@ const ExchangeHistory: React.FC = () => {
                 <StyledContent 
                   className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
                   sideOffset={5}
-                  align="center"
+                  align="start"
                   forceMount
                 >
                   <div className="py-1">
@@ -442,13 +439,28 @@ const ExchangeHistory: React.FC = () => {
               </DropdownMenu.Portal>
             </DropdownMenu.Root>
           </div>
-          
-          <button 
-            className="border border-gray-300 rounded-lg px-4 py-2"
-            onClick={clearFilters}
-          >
-            Clear
-          </button>
+
+          {/* Hide unfinished toggle and Clear button */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-row sm:flex-col md:flex-row items-center justify-between gap-2">
+            <div className="flex items-center">
+              <span className="mr-2 whitespace-nowrap">Hide unfinished</span>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input 
+                  type="checkbox" 
+                  className="sr-only peer" 
+                  checked={hideUnfinished}
+                  onChange={() => setHideUnfinished(!hideUnfinished)}
+                />
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+              </label>
+            </div>
+            <button 
+              className="border border-gray-300 rounded-lg px-4 py-2 whitespace-nowrap"
+              onClick={clearFilters}
+            >
+              Clear All
+            </button>
+          </div>
         </div>
       </div>
 
