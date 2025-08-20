@@ -192,7 +192,7 @@ const Hero = () => {
               <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
                 <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
-                    <div className="text-[11px] font-[600] text-gray-500 mb-1">You send</div>
+                    <div className="text-[13px] font-[600] text-gray-500 mb-1">You send</div>
                     <div className="flex items-center">
                       <div className="text-black font-semibold">≈ $12,954.89</div>
                     </div>
@@ -284,7 +284,7 @@ const Hero = () => {
               <div className="flex items-center justify-center p-3 sm:p-4 md:p-6 bg-[#F9FAFB] w-full rounded-lg">
                 <div className='flex flex-col sm:flex-row items-center w-full sm:w-[98%] border border-gray-100 rounded-lg justify-between'>
                   <div className="flex w-full sm:w-[65%] p-2 sm:p-3 mx-0 sm:mx-1 items-center rounded-lg justify-between">
-                    <div className="text-[11px] font-[600] text-gray-500 mb-1">You receive</div>
+                    <div className="text-[13px] font-[600] text-gray-500 mb-1">You receive</div>
                     <div className="flex items-center">
                       <div className="text-black font-semibold">≈ $12,954.89</div>
                     </div>

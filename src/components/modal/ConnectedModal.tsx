@@ -67,7 +67,7 @@ const ConnectedModal: React.FC<ConnectedModalProps> = ({
               </motion.p>
               
               {/* Optional: Close button if needed */}
-              {onClose && (
+              {/* {onClose && (
                 <motion.button
                   onClick={onClose}
                   className="py-2 sm:py-3 px-6 sm:px-8 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
@@ -79,7 +79,7 @@ const ConnectedModal: React.FC<ConnectedModalProps> = ({
                 >
                   Close
                 </motion.button>
-              )}
+              )} */}
             </div>
           </motion.div>
         </motion.div>
