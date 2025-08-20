@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+import { BookAddressIcon } from '@/components/icons';
 
 interface WalletAddressInputProps {
   value: string;
@@ -13,16 +15,43 @@ const WalletAddressInput: React.FC<WalletAddressInputProps> = ({
 }) => {
   return (
     <div className="mt-4 sm:mt-6">
-      <h3 className="text-gray-700 font-medium text-sm sm:text-base mb-2 sm:mb-3">Enter a wallet address</h3>
-      <div className="flex items-center">
+      <div className='flex items-center my-5 w-full justify-between'>
+        <h3 className="text-gray-700 font-medium text-sm sm:text-base mb-2 sm:mb-3">Enter a wallet address</h3>
+
+        <div className='flex justify-center items-center'>
+
+
+        <div className='flex border  mx-2 rounded-sm bg-gray-200 items-center'>
+            <Image
+              src="/assests/icons/add.svg"
+              alt="QR Code Scanner"
+              width={25}
+              height={25}
+            />
+      
+
+        
+
+          </div>
+
+          <Image
+            src="/assests/modal/MetaMask.png"
+            alt="QR Code Scanner"
+            width={35}
+            height={35}
+          />
+        </div>
+      </div>
+      <div className="flex items-center border border-gray-200 rounded-lg bg-gray-100 overflow-hidden">
         <div className="flex-grow relative">
           <input
             type="text"
-            className="w-full py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm bg-gray-100 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full py-2.5 sm:py-3 px-3 sm:px-4 text-xs sm:text-sm bg-transparent border-0 focus:outline-none focus:ring-0 placeholder-black"
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)}
           />
+
           {value && (
             <div className="absolute right-0 top-0 h-full flex items-center pr-3">
               <button className="text-gray-400 hover:text-gray-600">
@@ -33,11 +62,20 @@ const WalletAddressInput: React.FC<WalletAddressInputProps> = ({
             </div>
           )}
         </div>
-        <div className="ml-2">
+        <div className=" bg-gray-200 rounded-sm my-2 mx-1 px-2 py-2 flex items-center">
           <button className="text-gray-500 hover:text-gray-700 p-1">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
+            <BookAddressIcon size={10} />
+          </button>
+        </div>
+        <div className="bg-gray-200 rounded-sm mx-1 my-2 px-2 py-2 flex items-center">
+          <button className="text-gray-500  hover:text-gray-700 p-1">
+            <Image
+              src="/assests/icons/qr_code_scanner.png"
+              alt="QR Code Scanner"
+              width={5}
+              height={5}
+              className="h-2.5 w-2.5"
+            />
           </button>
         </div>
       </div>

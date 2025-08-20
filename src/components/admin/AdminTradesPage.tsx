@@ -110,6 +110,7 @@ const AdminTradesPage: React.FC = () => {
           onClick={toggleAddressDisplay}
           className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-900 text-xs sm:text-[13px] text-white rounded-md hover:bg-blue-800 transition-colors flex items-center"
         >
+          <Image src="/assests/icons/visibility.svg" className='mx-1' alt="Export" width={20} height={20} />
           {showFullAddresses ? 'Hide Details' : 'Show Details'}
         </button>
       </div>

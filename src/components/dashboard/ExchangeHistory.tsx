@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import RewardsBanner from './WelcomeBanner';
+import Image from 'next/image';
 interface ExchangeHistoryItem {
   id: string;
   status: 'Pending' | 'Finished';
@@ -70,9 +71,7 @@ const ExchangeHistory: React.FC = () => {
       <div className="flex flex-col mt-8 md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <h2 className="text-2xl font-medium text-gray-800">Exchange History</h2>
         <button className="text-blue-600 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
+        <Image src="/assests/icons/vertical_align_bottom.svg" className='mx-1' alt="Export" width={20} height={20} />
           Export
         </button>
       </div>

@@ -42,17 +42,18 @@ const ExchangePage: React.FC = () => {
     <div className="px-3 sm:px-0">
       <div className="max-w-[95%] sm:max-w-[90%] mx-auto">
         {/* Steps indicator */}
-        <div className='bg-white border border-gray-200 rounded-lg my-3 sm:my-5'>
+        <div className='bg-white  p-5 rounded-lg my-3 sm:my-5'>
           <SwapSteps currentStep={currentStep} />
           
           {/* Security check */}
           <SecurityCheck />
+
         </div>
         
         {/* Exchange details section */}
-        <div className="bg-white rounded-lg p-3 sm:p-6 border border-gray-200 shadow-sm mb-4 sm:mb-6">
-          <h2 className="text-lg sm:text-xl text-center text-black my-4 sm:my-8 font-semibold">Add exchange details</h2>
-          <div className='border border-gray-200 w-full my-3 sm:my-5'></div>
+        <div className="bg-white rounded-lg p-3 sm:p-6   mb-4 sm:mb-6">
+          <h2 className="text-lg sm:text-xl text-center text-black my-4 sm:my-8 font-medium">Add exchange details</h2>
+          <div className='border-b border-gray-200 w-full my-3 sm:my-5'></div>
           
           {/* Exchange Widget */}
           <div className="p-0 sm:p-3 md:p-4">
@@ -119,9 +120,11 @@ const ExchangePage: React.FC = () => {
           </div>
           
           {/* Cashback info */}
-          <div className="mt-3 sm:mt-4 mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 text-center sm:text-left">
+          <div className="mt-3 sm:mt-4 font-semibold mb-3 sm:mb-4 text-xs sm:text-sm text-gray-600 text-center sm:text-left">
             Estimated cashback - <span className="font-medium">{cashback}</span>
           </div>
+
+          <div className='border-b border-gray-200 w-full my-3 sm:my-5'></div>
           
           {/* Wallet address input */}
           <WalletAddressInput 
@@ -129,6 +132,12 @@ const ExchangePage: React.FC = () => {
             onChange={setWalletAddress}
             placeholder="The recipient's Ethereum address"
           />
+          
+      
+   
+          
+          {/* Security information */}
+  
           
           {/* Create exchange button */}
           <div className="mt-4 sm:mt-6">

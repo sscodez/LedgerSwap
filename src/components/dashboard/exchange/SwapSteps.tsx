@@ -19,8 +19,8 @@ const SwapSteps: React.FC<SwapStepsProps> = ({ currentStep }) => {
   ];
 
   return (
-    <div className="mb-6 sm:mb-8 w-full">
-      <h2 className="text-lg sm:text-xl font-semibold text-black my-6 sm:my-8 text-center">How to swap?</h2>
+    <div className="mb-6  p-5 sm:mb-8 w-full">
+      <h2 className="text-lg sm:text-xl font-medium  text-black my-6 sm:my-8 text-center">How to swap?</h2>
       <div className='border-b border-gray-200 my-4 sm:my-5'></div>
       <div className="flex justify-center px-2 sm:px-4">
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between w-full max-w-2xl mx-auto">
