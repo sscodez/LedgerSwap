@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Top Section with Logo and Description */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center mr-3">
@@ -51,18 +51,23 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard" className="text-gray-400 hover:text-white transition-colors">
-                  Dashboard
+                <Link href="/how-it-works" className="text-gray-400 hover:text-white transition-colors">
+                  How It Works
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/exchange" className="text-gray-400 hover:text-white transition-colors">
-                  Exchange
+                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/dashboard/wallet" className="text-gray-400 hover:text-white transition-colors">
-                  Wallet
+                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/reviews" className="text-gray-400 hover:text-white transition-colors">
+                  Reviews
                 </Link>
               </li>
             </ul>
@@ -73,23 +78,60 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
                 <Link href="/faq" className="text-gray-400 hover:text-white transition-colors">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/security" className="text-gray-400 hover:text-white transition-colors">
-                  Security
+                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+                  Blog
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
-                  Blog
+                <Link href="/developer-api" className="text-gray-400 hover:text-white transition-colors">
+                  Developer API
+                </Link>
+              </li>
+              <li>
+                <Link href="/risk-warning" className="text-gray-400 hover:text-white transition-colors">
+                  Risk Warning
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup" className="text-gray-400 hover:text-white transition-colors">
+                  Sign Up
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Programs */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Programs</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/loyalty-program" className="text-gray-400 hover:text-white transition-colors">
+                  Loyalty Program
+                </Link>
+              </li>
+              <li>
+                <Link href="/invite-friends" className="text-gray-400 hover:text-white transition-colors">
+                  Invite Friends
+                </Link>
+              </li>
+              <li>
+                <Link href="/affiliate-terms" className="text-gray-400 hover:text-white transition-colors">
+                  Affiliate Program
+                </Link>
+              </li>
+              <li>
+                <Link href="/ambassador" className="text-gray-400 hover:text-white transition-colors">
+                  Ambassador Program
+                </Link>
+              </li>
+              <li>
+                <Link href="/account" className="text-gray-400 hover:text-white transition-colors">
+                  My Account
                 </Link>
               </li>
             </ul>

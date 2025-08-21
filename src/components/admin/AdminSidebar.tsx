@@ -25,7 +25,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       name: 'Overview',
       href: '/admin',
       icon: (
-        <ViewComfyAltIcon size={20} />
+        <ViewComfyAltIcon  size={20} />
       )
     },
     {

@@ -5,16 +5,23 @@ import FeatureGrid from "../components/feature-grid";
 import TradingPairs from "../components/trading-pairs";
 import WalletConnectionFlow from "../components/wallet-connection-flow-responsive";
 import ExchangeSection from "../components/exchange-section";
+import CustomerBenefits from "../components/customer-benefits";
+import Analytics from "../components/analytics";
+import Currencies from "../components/currencies";
+import Business from "../components/business";
 
 export default function Home() {
   return (
     <div className="">
       <Hero />
       <RewardsBanner />
+      {/* <CustomerBenefits />
+      <Analytics />
+      <Currencies />
+      <Business /> */}
       <TradingPairs />
       <FeatureGrid />
       <WalletConnectionFlow />
-
       <MediaPartners />
       <ExchangeSection />
     </div>
