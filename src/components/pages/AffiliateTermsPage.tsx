@@ -1,35 +1,64 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const AffiliateTermsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] text-white overflow-hidden">
-        {/* Holographic Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        </div>
-        
-        <div className="relative container mx-auto px-4 py-16">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Affiliate Program Terms
-            </h1>
-            <p className="text-xl text-blue-100 mb-8">
-              Join our affiliate program and earn rewards for referring new users to LedgerSwap
-            </p>
-          </motion.div>
-        </div>
-      </div>
+ 
+
+
+       <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
+              <motion.div 
+                className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.4, scale: 1 }}
+                transition={{ duration: 1.2 }}
+                whileHover={{ rotate: 10, scale: 1.05 }}
+              >
+                <Image
+                  src="/assests/landing-page/5.png"
+                  alt="Holographic element"
+                  width={300}
+                  height={300}
+                  priority
+                />
+              </motion.div>
+      
+              <motion.div 
+                className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 0.4, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                whileHover={{ rotate: -10, scale: 1.05 }}
+              >
+                <Image
+                  src="/assests/landing-page/3.png"
+                  alt="Holographic cube"
+                  width={180}
+                  height={180}
+                  priority
+                />
+              </motion.div>
+      
+              <div className="container mx-auto px-4 relative z-10">
+                <motion.div 
+                  className="text-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
+                  Affiliate Program Terms
+                  </h1>
+                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                  Join our affiliate program and earn rewards for referring new users to LedgerSwap
+                  </p>
+                </motion.div>
+              </div>
+            </div>
 
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16">

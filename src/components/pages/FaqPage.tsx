@@ -167,7 +167,7 @@ const FaqPage = () => {
       </div>
 
       {/* FAQ Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 ">
         <div className="max-w-6xl mx-auto">
           {/* Category Tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-12">
@@ -236,36 +236,7 @@ const FaqPage = () => {
             ))}
           </motion.div>
 
-          {/* Contact Support */}
-          <motion.div 
-            className="mt-16 text-center bg-white rounded-lg p-8 shadow-sm"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              Still have questions?
-            </h2>
-            <p className="text-gray-600 mb-6">
-              Our support team is available 24/7 to help you with any questions or concerns.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Contact Support
-              </motion.button>
-              <motion.button
-                className="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Live Chat
-              </motion.button>
-            </div>
-          </motion.div>
+         
         </div>
       </div>
     </div>

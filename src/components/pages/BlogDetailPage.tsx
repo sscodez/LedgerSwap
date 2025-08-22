@@ -522,21 +522,22 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-gray-50 to-blue-50 py-12 md:py-16">
+      <div className="relative  py-12 md:py-16">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div 
-            className="max-w-4xl mx-auto"
+            className="max-w-8xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link 
-              href="/blog"
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-8 font-medium"
-            >
-              ← Back to Blog
-            </Link>
+         
             
+          
+            
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 mb-8 leading-tight">
+              {post.title}
+            </h1>
+
             <div className="flex items-center gap-3 mb-6">
               <span className="bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-full">
                 {post.category.charAt(0).toUpperCase() + post.category.slice(1)}
@@ -544,11 +545,7 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
               <span className="text-gray-600 text-sm">{post.readTime}</span>
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-              {post.title}
-            </h1>
-            
-            <div className="flex items-center gap-6 text-gray-600">
+            {/* <div className="flex items-center gap-6 text-gray-600">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
                   {post.author.charAt(0)}
@@ -564,7 +561,7 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
                   </p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </div>
@@ -576,9 +573,9 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="max-w-5xl mx-auto"
+            className="max-w-8xl mx-auto"
           >
-            <div className="aspect-[16/9] bg-gray-200 rounded-3xl overflow-hidden shadow-2xl">
+            <div className="aspect-[16/9] bg-gray-200 rounded-3xl overflow-hidden ">
               <Image
                 src={post.image}
                 alt={post.title}
@@ -598,13 +595,26 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-4xl mx-auto"
+            className="max-w-8xl mx-auto"
           >
-            <div className="bg-white">
+            <div className="bg-white text-black ">
               <div 
-                className="prose prose-xl max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 prose-p:mb-6 prose-ul:mb-6 prose-ol:mb-6"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                className="prose prose-xl max-w-none prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4 text-justify prose-p:mb-6 prose-ul:mb-6 prose-ol:mb-6"
+                // dangerouslySetInnerHTML={{ __html: post.content }}
               />
+<p className='text-justify'>
+The standard Lorem Ipsum passage, used since the 1500s
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+Section 1.10.32 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+
+1914 translation by H. Rackham
+"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
+
+Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
+"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+</p>
             </div>
           </motion.article>
         </div>
@@ -613,19 +623,19 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
       {/* Share & Actions */}
       <div className="py-8 border-t border-gray-100">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-8xl mx-auto">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <span className="text-gray-600 font-medium">Share this article:</span>
                 <div className="flex items-center gap-3">
-                  <button className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors">
-                    <span className="text-sm">𝕏</span>
+                  <button className="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                <Image src="/assests/social-icons/youtube-fill.png" alt="" width={20} height={20} />
                   </button>
-                  <button className="w-10 h-10 bg-blue-800 text-white rounded-full flex items-center justify-center hover:bg-blue-900 transition-colors">
-                    <span className="text-sm">f</span>
+                  <button className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center hover:bg-black transition-colors">
+                  <Image src="/assests/social-icons/x.png" alt="" width={20} height={20} />
                   </button>
-                  <button className="w-10 h-10 bg-blue-700 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors">
-                    <span className="text-sm">in</span>
+                  <button className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors">
+                  <Image src="/assests/social-icons/linkedin-fill.png" alt="" width={20} height={20} />
                   </button>
                 </div>
               </div>
@@ -711,38 +721,7 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
         </div>
       </div>
 
-      {/* Newsletter CTA */}
-      <div className="py-16 bg-[#001233]">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Stay Updated with Crypto Insights
-            </h2>
-            <p className="text-gray-300 text-lg mb-8">
-              Get the latest cryptocurrency news, trading tips, and market analysis delivered to your inbox.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-colors"
-              >
-                Subscribe
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+   
     </div>
   );
 };

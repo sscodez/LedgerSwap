@@ -165,7 +165,7 @@ const ReviewsPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-              Customer Reviews
+           Reviews
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               See what our users are saying about their LedgerSwap experience
@@ -235,7 +235,7 @@ const ReviewsPage = () => {
               {filteredReviews.map((review, index) => (
                 <motion.div
                   key={review.id}
-                  className="bg-white rounded-lg p-6 shadow-sm border border-gray-200"
+                  className="bg-white rounded-lg p-6  border border-gray-200"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}

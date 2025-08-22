@@ -15,7 +15,7 @@ const Footer = () => {
         {/* Top Section with App Downloads and Language */}
         <div className="flex flex-col lg:flex-row justify-between border-b pb-5 border-gray-300/50 items-start lg:items-center mb-12">
           {/* App Download Buttons */}
-          <div className="flex flex-wrap gap-4 mb-6 lg:mb-0">
+          <div className="flex sm:flex-row flex-col gap-4 mb-6 lg:mb-0">
             {/* App Store */}
             <Link href="/app-store" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
               <div className="w-8 h-8 rounded-sm mr-3 flex items-center justify-center">
@@ -50,8 +50,8 @@ const Footer = () => {
           </div>
 
           {/* Buy & Sell Crypto with Payment Methods and Language */}
-          <div className="flex items-center gap-6">
-            <div className="flex items-center">
+          <div className="flex sm:flex-row flex-col items-center gap-6">
+            <div className="flex  items-center">
               <span className="text-sm font-bold mr-3">Buy & Sell crypto</span>
        
               <div className=" flex items-center justify-center">
@@ -127,17 +127,17 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4">Exchange Pairs</h3>
             <ul className="text-sm space-y-2">
-              <li><Link href="/exchange/eth-to-btc" className="hover:text-blue-300 transition-colors">ETH to BTC</Link></li>
-              <li><Link href="/exchange/btc-to-xmr" className="hover:text-blue-300 transition-colors">BTC to XMR</Link></li>
-              <li><Link href="/exchange/btc-to-eth" className="hover:text-blue-300 transition-colors">BTC to ETH</Link></li>
-              <li><Link href="/exchange/btc-to-trx" className="hover:text-blue-300 transition-colors">BTC to TRX</Link></li>
-              <li><Link href="/exchange/eth-to-sol" className="hover:text-blue-300 transition-colors">ETH to SOL</Link></li>
-              <li><Link href="/exchange/eth-to-bnb" className="hover:text-blue-300 transition-colors">ETH to BNB</Link></li>
-              <li><Link href="/exchange/btc-to-usdt" className="hover:text-blue-300 transition-colors">BTC to USDT</Link></li>
-              <li><Link href="/exchange/sol-to-near" className="hover:text-blue-300 transition-colors">SOL to NEAR</Link></li>
-              <li><Link href="/buy-crypto" className="hover:text-blue-300 transition-colors">Buy Crypto</Link></li>
-              <li><Link href="/sell-crypto" className="hover:text-blue-300 transition-colors">Sell Crypto</Link></li>
-              <li><Link href="/crypto-pairs" className="hover:text-blue-300 transition-colors">Crypto Pairs</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">ETH to BTC</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">BTC to XMR</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">BTC to ETH</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">BTC to TRX</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">ETH to SOL</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">ETH to BNB</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">BTC to USDT</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">SOL to NEAR</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">Buy Crypto</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">Sell Crypto</Link></li>
+              <li><Link href="/exchange" className="hover:text-blue-300 transition-colors">Crypto Pairs</Link></li>
             </ul>
           </div>
 
@@ -145,14 +145,14 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4">Supported Coins</h3>
             <ul className="text-sm space-y-2">
-              <li><Link href="/coins/bitcoin" className="hover:text-blue-300 transition-colors">Bitcoin</Link></li>
-              <li><Link href="/coins/ethereum" className="hover:text-blue-300 transition-colors">Ethereum</Link></li>
-              <li><Link href="/coins/tezos" className="hover:text-blue-300 transition-colors">Tezos</Link></li>
-              <li><Link href="/coins/solana" className="hover:text-blue-300 transition-colors">Solana</Link></li>
-              <li><Link href="/coins/tron" className="hover:text-blue-300 transition-colors">TRON</Link></li>
-              <li><Link href="/coins/tether" className="hover:text-blue-300 transition-colors">Tether (USDT) Swap</Link></li>
-              <li><Link href="/coins/binance-coin" className="hover:text-blue-300 transition-colors">Binance Coin</Link></li>
-              <li><Link href="/coins" className="hover:text-blue-300 transition-colors">All Coins</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Bitcoin</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Ethereum</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Tezos</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Solana</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">TRON</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Tether (USDT) Swap</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">Binance Coin</Link></li>
+              <li><Link href="/supported-chains" className="hover:text-blue-300 transition-colors">All Coins</Link></li>
             </ul>
           </div>
 
@@ -190,8 +190,8 @@ const Footer = () => {
       </div>
     
       {/* Copyright and Social Icons */}
-      <div className={`md:px-8 w-full bg-[#101828] ${isLandingPage ? 'mt-12' : 'mt-6'} flex flex-col md:flex-row items-center justify-between`}>
-          <div className="mb-4 text-sm md:mb-0">
+      <div className={`md:px-8 w-full  bg-[#101828] ${isLandingPage ? 'mt-12' : 'mt-6'} flex flex-col md:flex-row items-center justify-between`}>
+          <div className="mb-4 md:mt-0 mt-4 text-sm md:mb-0">
             <p>© {new Date().getFullYear()} LedgerSwap</p>
           </div>
           

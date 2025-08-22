@@ -37,7 +37,7 @@ const SupportedChainsPage = () => {
       id: 'tezos',
       name: 'Tezos',
       symbol: 'XTZ',
-      icon: '/assests/cryptocurrency/xtz.png',
+      icon: '/assests/cryptocurrency/tezos.png',
       color: 'from-blue-500 to-indigo-600',
       description: 'Self-amending blockchain with formal verification',
       features: ['Self-Governance', 'Formal Verification', 'Smart Contracts', 'Energy Efficient'],
@@ -63,7 +63,7 @@ const SupportedChainsPage = () => {
       id: 'tron',
       name: 'TRON',
       symbol: 'TRX',
-      icon: '/assests/cryptocurrency/trx.png',
+      icon: '/assests/cryptocurrency/tron.png',
       color: 'from-red-400 to-red-600',
       description: 'Decentralized platform for content sharing and entertainment',
       features: ['High TPS', 'DApps', 'Content Sharing', 'Low Cost'],
@@ -89,7 +89,21 @@ const SupportedChainsPage = () => {
       id: 'binance',
       name: 'Binance Coin',
       symbol: 'BNB',
-      icon: '/assests/cryptocurrency/bnb.png',
+      icon: '/assests/cryptocurrency/binance.png',
+      color: 'from-yellow-400 to-yellow-600',
+      description: 'Native token of Binance ecosystem and BSC blockchain',
+      features: ['Exchange Token', 'BSC Network', 'DeFi', 'Trading Fees'],
+      blockTime: '3 seconds',
+      consensus: 'Proof of Staked Authority',
+      totalSupply: '200 Million BNB',
+      website: 'binance.org'
+    }
+,
+    {
+      id: 'arbitrum',
+      name: 'Arbitrum',
+      symbol: 'ARB',
+      icon: '/assests/cryptocurrency/arbiturm.png',
       color: 'from-yellow-400 to-yellow-600',
       description: 'Native token of Binance ecosystem and BSC blockchain',
       features: ['Exchange Token', 'BSC Network', 'DeFi', 'Trading Fees'],
@@ -183,14 +197,14 @@ const SupportedChainsPage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
             {supportedChains.map((chain, index) => (
               <motion.div
                 key={chain.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 p-6"
+                className="group bg-white rounded-2xl  border border-gray-100 hover:shadow-xl transition-all duration-300 p-6"
               >
                 <div className="text-center">
                   <div className="relative inline-block mb-4">
@@ -200,10 +214,10 @@ const SupportedChainsPage = () => {
                       className="w-16 h-16 mx-auto group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{chain.name}</h3>
-                  <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${chain.color}`}>
+                  <h3 className="text-lg font-medium text-gray-900 mb-1">{chain.name}</h3>
+                  {/* <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white bg-gradient-to-r ${chain.color}`}>
                     {chain.symbol}
-                  </div>
+                  </div> */}
                 </div>
               </motion.div>
             ))}

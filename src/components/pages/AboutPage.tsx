@@ -237,50 +237,7 @@ const AboutPage = () => {
         </div>
       </div>
 
-      {/* Company Story */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
-                Our Story
-              </h2>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white rounded-lg p-8 shadow-sm"
-            >
-              <div className="prose prose-lg max-w-none text-gray-600">
-                <p className="mb-6">
-                  Founded in 2023, LedgerSwap was born from a simple idea: cryptocurrency trading 
-                  should be accessible, secure, and straightforward for everyone. Our founders, 
-                  experienced professionals from the fintech and blockchain industries, recognized 
-                  the need for a platform that prioritizes user experience without compromising on security.
-                </p>
-                <p className="mb-6">
-                  Starting with a small team of passionate developers and security experts, we've grown 
-                  into a trusted platform serving hundreds of thousands of users worldwide. Our commitment 
-                  to innovation and user-centric design has made us one of the fastest-growing cryptocurrency 
-                  exchanges in the market.
-                </p>
-                <p>
-                  Today, LedgerSwap continues to evolve, adding new features, supporting more cryptocurrencies, 
-                  and expanding our global reach. We remain dedicated to our core mission: making cryptocurrency 
-                  trading safe, simple, and accessible for everyone, everywhere.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+    
 
       {/* CTA Section */}
       {/* <div className="py-16 bg-blue-600">

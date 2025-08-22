@@ -135,7 +135,7 @@ const BlogPage = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-              LedgerSwap Blog
+              Blogs
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Stay updated with the latest cryptocurrency news, trading tips, and market insights
