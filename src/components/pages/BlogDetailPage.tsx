@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 interface BlogDetailPageProps {
-  postId: string;
+  postId: any;
 }
 
 const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {

@@ -2,11 +2,11 @@ import BlogDetailPage from '@/components/pages/BlogDetailPage';
 
 interface BlogPostPageProps {
   params: {
-    id: string;
+    id: any;
   };
 }
 
-export default function BlogPost({ params }: BlogPostPageProps) {
+export default function BlogPost({ params }: any) {
   return <BlogDetailPage postId={params.id} />;
 }
 
