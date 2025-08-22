@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const AmbassadorPage = () => {
   const [activeTab, setActiveTab] = useState('program');
@@ -60,12 +61,40 @@ const AmbassadorPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative bg-[#001233] text-white overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        </div>
-        
+       
+  <motion.div 
+          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.4, scale: 1 }}
+          transition={{ duration: 1.2 }}
+          whileHover={{ rotate: 10, scale: 1.05 }}
+        >
+          <Image
+            src="/assests/landing-page/5.png"
+            alt="Holographic element"
+            width={300}
+            height={300}
+            priority
+          />
+        </motion.div>
+
+        <motion.div 
+          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 0.4, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          whileHover={{ rotate: -10, scale: 1.05 }}
+        >
+          <Image
+            src="/assests/landing-page/3.png"
+            alt="Holographic cube"
+            width={180}
+            height={180}
+            priority
+          />
+        </motion.div>
+
+
         <div className="relative container mx-auto px-4 py-16">
           <motion.div
             className="text-center max-w-4xl mx-auto"
@@ -88,7 +117,7 @@ const AmbassadorPage = () => {
       <div className="bg-white shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex space-x-8">
-            {['program', 'benefits', 'apply'].map((tab) => (
+            {['program', 'apply'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -123,24 +152,24 @@ const AmbassadorPage = () => {
               </div>
 
               <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="bg-white rounded-lg shadow-lg p-8">
+                <div className="bg-white rounded-lg  p-8">
                   <h3 className="text-xl font-semibold text-gray-900 mb-6">Requirements</h3>
                   <ul className="space-y-3">
                     {requirements.map((req, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1 h-1 bg-black rounded-full mt-2 mr-3 flex-shrink-0"></span>
                         <span className="text-gray-700">{req}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-lg p-8">
+                <div className="bg-white rounded-lg  p-8">
                   <h3 className="text-xl font-semibold text-gray-900 mb-6">Responsibilities</h3>
                   <ul className="space-y-3">
                     {responsibilities.map((resp, index) => (
                       <li key={index} className="flex items-start">
-                        <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="w-1 h-1 bg-black rounded-full mt-2 mr-3 flex-shrink-0"></span>
                         <span className="text-gray-700">{resp}</span>
                       </li>
                     ))}
