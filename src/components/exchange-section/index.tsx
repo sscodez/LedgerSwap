@@ -63,10 +63,10 @@ const ExchangeSection = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="  relative">
       {/* Overlapping Exchange Card */}
-      <div className="absolute left-0 right-0 mx-auto max-w-7xl px-4 z-10" style={{ bottom: '-80px' }}>
-        <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-5 md:p-6">
+      <div className="absolute  left-0 right-0 mx-auto max-w-7xl px-4 z-10" style={{ bottom: '-80px' }}>
+        <div className="bg-white hidden lg:block  rounded-xl  shadow-xl border border-gray-100 p-5 md:p-6">
           <div className="grid grid-cols-1 md:grid-cols-11 gap-4 md:gap-6">
             {/* You Send */}
             <div className="col-span-1 md:col-span-4">

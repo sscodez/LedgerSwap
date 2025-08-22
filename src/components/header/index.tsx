@@ -16,11 +16,11 @@ const Header: React.FC = () => {
 
   // Menu items mapping
   const menuItems = [
-    { href: "#how-it-works", label: "How it works" },
-    { href: "#customer-benefits", label: "Customer Benefits" },
-    { href: "#analytics", label: "Analytics" },
-    { href: "#currencies", label: "Currencies" },
-    { href: "#business", label: "Business" },
+    { href: "#how-it-works", label: "How it works" ,link:"/how-it-works" },
+    { href: "#customer-benefits", label: "Customer Benefits" ,link:"/" },
+    { href: "#analytics", label: "Analytics" ,link:"/reviews" },
+    { href: "#currencies", label: "Currencies" ,link:"/supported-chains" },
+    { href: "#business", label: "Business" ,link:"/business" },
   ];
 
   const toggleMobileMenu = () => {
@@ -96,14 +96,14 @@ const Header: React.FC = () => {
         >
           {menuItems.map((item, index) => (
             <motion.div
-              key={item.href}
+              key={item.link}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
               whileHover={{ scale: 1.05 }}
             >
               <Link
-                href={item.href}
+                href={item.link}
                 className="flex items-center text-xs md:text-sm hover:text-blue-500 transition-colors"
               >
                 {item.label}
@@ -184,12 +184,7 @@ const Header: React.FC = () => {
             </div> }
        
         </motion.div> 
-        
-     
-        
-        
-        
-
+ 
       </div>
 
       {/* Mobile Menu */}
