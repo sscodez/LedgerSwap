@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const InviteFriendsPage = () => {
@@ -12,8 +13,14 @@ const InviteFriendsPage = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const shareOptions = [
-    { name: 'Twitter', icon: '🐦', color: 'bg-blue-400' },
+  const rewards = [
+    { icon: '💰', title: 'You Earn', description: 'Get 25% of trading fees', amount: '$50 per referral' },
+    { icon: '🎁', title: 'Friend Gets', description: 'Bonus trading credits', amount: '$25 bonus' },
+    { icon: '🚀', title: 'Both Win', description: 'Unlock premium features', amount: 'VIP Access' }
+  ];
+
+  const socialPlatforms = [
+    { name: 'Twitter', icon: '🐦', color: 'bg-blue-500' },
     { name: 'Facebook', icon: '📘', color: 'bg-blue-600' },
     { name: 'LinkedIn', icon: '💼', color: 'bg-blue-700' },
     { name: 'WhatsApp', icon: '💬', color: 'bg-green-500' },
@@ -24,29 +31,50 @@ const InviteFriendsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] text-white overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
-        </div>
-        
-        <div className="relative container mx-auto px-4 py-16">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
+      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
+        <motion.div 
+          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.4, scale: 1 }}
+          transition={{ duration: 1.2 }}
+          whileHover={{ rotate: 10, scale: 1.05 }}
+        >
+          <Image
+            src="/assests/landing-page/5.png"
+            alt="Holographic element"
+            width={300}
+            height={300}
+            priority
+          />
+        </motion.div>
+
+        <motion.div 
+          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 0.4, y: 0 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          whileHover={{ rotate: -10, scale: 1.05 }}
+        >
+          <Image
+            src="/assests/landing-page/3.png"
+            alt="Holographic cube"
+            width={180}
+            height={180}
+            priority
+          />
+        </motion.div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            className="text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
               Invite Friends & Earn
             </h1>
-            <p className="text-xl text-blue-100 mb-8">
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
               Share LedgerSwap with friends and earn rewards for every successful referral
             </p>
           </motion.div>
@@ -54,55 +82,42 @@ const InviteFriendsPage = () => {
       </div>
 
       {/* Rewards Section */}
-      <div className="container mx-auto px-4 py-16">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Earn Together</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            When your friends join LedgerSwap using your referral link, both of you get rewarded!
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+      <div className="py-16 bg-white">
+        <div className="container mx-auto px-4">
           <motion.div
-            className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-8"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
           >
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🎁</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-2">You Earn</h3>
-              <div className="text-4xl font-bold mb-2">$50</div>
-              <p className="text-green-100">
-                For each friend who completes their first trade of $1,000+
-              </p>
-            </div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Earn Rewards for Every Referral
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Get rewarded when your friends join and start trading on LedgerSwap
+            </p>
           </motion.div>
 
-          <motion.div
-            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-8"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <div className="text-center">
-              <div className="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">💰</span>
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Your Friend Earns</h3>
-              <div className="text-4xl font-bold mb-2">$25</div>
-              <p className="text-blue-100">
-                Welcome bonus credited after their first successful trade
-              </p>
-            </div>
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {rewards.map((reward, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 text-center hover:shadow-xl transition-shadow"
+              >
+                <div className="text-4xl mb-4">{reward.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {reward.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{reward.description}</p>
+                <div className="text-2xl font-bold text-blue-600">
+                  {reward.amount}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Referral Link Section */}
@@ -155,7 +170,7 @@ const InviteFriendsPage = () => {
             <div className="text-center">
               <p className="text-gray-600 mb-4">Share on social media</p>
               <div className="flex flex-wrap justify-center gap-3">
-                {shareOptions.map((option) => (
+                {/* {shareOptions.map((option) => (
                   <button
                     key={option.name}
                     className={`${option.color} text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center space-x-2`}
@@ -163,74 +178,13 @@ const InviteFriendsPage = () => {
                     <span>{option.icon}</span>
                     <span className="text-sm">{option.name}</span>
                   </button>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* How It Works */}
-        <motion.div
-          className="max-w-4xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          <h3 className="text-2xl font-semibold text-gray-900 mb-8 text-center">How It Works</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                1
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Share Your Link</h4>
-              <p className="text-gray-600">Send your unique referral link to friends via social media, email, or messaging apps.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                2
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Friend Signs Up</h4>
-              <p className="text-gray-600">Your friend creates an account using your referral link and completes verification.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-                3
-              </div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-2">Both Earn Rewards</h4>
-              <p className="text-gray-600">After their first trade of $1,000+, both you and your friend receive bonus rewards.</p>
-            </div>
-          </div>
-        </motion.div>
 
-        {/* Referral Stats */}
-        <motion.div
-          className="max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-        >
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Your Referral Stats</h3>
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">12</div>
-                <p className="text-gray-600">Total Referrals</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600 mb-2">8</div>
-                <p className="text-gray-600">Successful Referrals</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600 mb-2">$400</div>
-                <p className="text-gray-600">Total Earned</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-600 mb-2">$50</div>
-                <p className="text-gray-600">Pending Rewards</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

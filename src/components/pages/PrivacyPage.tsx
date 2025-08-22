@@ -122,60 +122,17 @@ const PrivacyPage = () => {
         </div>
       </div>
 
-      {/* Data Collection Overview */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-              Data We Collect
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We collect only the information necessary to provide secure and compliant services
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {dataTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-50 p-6 rounded-lg"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  {type.category}
-                </h3>
-                <ul className="space-y-2">
-                  {type.items.map((item, itemIndex) => (
-                    <li key={itemIndex} className="text-sm text-gray-600 flex items-center">
-                      <svg className="w-4 h-4 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
+   
 
       {/* Privacy Content */}
       <div className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-sm p-8 md:p-12"
+              className="bg-white rounded-lg  p-8 md:p-12"
             >
               <div className="prose prose-lg max-w-none">
                 <div className="mb-8">
@@ -212,96 +169,9 @@ const PrivacyPage = () => {
         </div>
       </div>
 
-      {/* Your Rights Section */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-                Your Privacy Rights
-              </h2>
-              <p className="text-lg text-gray-600">
-                You have control over your personal information
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: "Access Your Data",
-                  description: "Request a copy of all personal information we have about you",
-                  icon: "👁️"
-                },
-                {
-                  title: "Update Information",
-                  description: "Correct or update your personal information at any time",
-                  icon: "✏️"
-                },
-                {
-                  title: "Delete Your Data",
-                  description: "Request deletion of your personal information (subject to legal requirements)",
-                  icon: "🗑️"
-                },
-                {
-                  title: "Data Portability",
-                  description: "Export your data in a machine-readable format",
-                  icon: "📦"
-                }
-              ].map((right, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gray-50 p-6 rounded-lg"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <div className="text-3xl mb-4">{right.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {right.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    {right.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Contact Section */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-sm p-8 text-center"
-            >
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                Questions About Your Privacy?
-              </h3>
-              <p className="text-gray-600 mb-6">
-                If you have any questions about this Privacy Policy or how we handle your data, 
-                please don't hesitate to contact our privacy team.
-              </p>
-              <div className="bg-gray-50 p-6 rounded-lg">
-                <div className="space-y-2 text-sm">
-                  <p><strong>Privacy Officer:</strong> privacy@ledgerswap.com</p>
-                  <p><strong>Data Protection Officer:</strong> dpo@ledgerswap.com</p>
-                  <p><strong>Address:</strong> 123 Market Street, Suite 100, San Francisco, CA 94105</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+    
     </div>
   );
 };

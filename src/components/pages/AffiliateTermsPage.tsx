@@ -34,12 +34,12 @@ const AffiliateTermsPage = () => {
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16">
         <motion.div
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+          <div className="bg-white rounded-lg  p-8 mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Program Overview</h2>
             <div className="prose prose-blue max-w-none">
               <p className="text-gray-700 mb-4">
@@ -49,7 +49,7 @@ const AffiliateTermsPage = () => {
               
               <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Commission Structure</h3>
               <div className="bg-blue-50 p-6 rounded-lg mb-6">
-                <ul className="space-y-3">
+                <ul className="space-y-3 text-black ">
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
                     <span><strong>Tier 1:</strong> 25% commission on trading fees for first 30 days</span>
@@ -106,20 +106,7 @@ const AffiliateTermsPage = () => {
             </div>
           </div>
 
-          {/* Contact Section */}
-          <div className="bg-blue-600 text-white rounded-lg p-8 text-center">
-            <h3 className="text-2xl font-semibold mb-4">Ready to Join?</h3>
-            <p className="text-blue-100 mb-6">
-              Start earning commissions by referring new users to LedgerSwap today.
-            </p>
-            <motion.button
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Apply Now
-            </motion.button>
-          </div>
+        
         </motion.div>
       </div>
     </div>

@@ -106,12 +106,12 @@ const TermsPage = () => {
       {/* Terms Content */}
       <div className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-lg shadow-sm p-8 md:p-12"
+              className="bg-white rounded-lg  p-8 md:p-12"
             >
               <div className="prose prose-lg max-w-none">
                 <div className="mb-8">
@@ -143,21 +143,6 @@ const TermsPage = () => {
                   ))}
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-gray-200">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                    Contact Information
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    If you have any questions about these Terms of Service, please contact us:
-                  </p>
-                  <div className="bg-gray-50 p-6 rounded-lg">
-                    <div className="space-y-2 text-sm">
-                      <p><strong>Email:</strong> legal@ledgerswap.com</p>
-                      <p><strong>Address:</strong> 123 Market Street, Suite 100, San Francisco, CA 94105</p>
-                      <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </motion.div>
           </div>

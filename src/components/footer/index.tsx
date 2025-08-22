@@ -116,7 +116,7 @@ const Footer = () => {
               <li><Link href="/about" className="text-sm  hover:text-white transition-colors">About</Link></li>
               <li><Link href="/faq" className="text-sm hover:text-white transition-colors">FAQ</Link></li>
               <li><Link href="/how-it-works" className="text-sm  hover:text-white transition-colors">How it Works</Link></li>
-              <li><Link href="/contacts" className="text-sm  hover:text-white transition-colors">Contacts</Link></li>
+              <li><Link href="/contact" className="text-sm  hover:text-white transition-colors">Contacts</Link></li>
               <li><Link href="/blog" className="text-sm   hover:text-white transition-colors">Blog</Link></li>
               <li><Link href="/mobile-app" className="text-sm  hover:text-white transition-colors">Mobile App</Link></li>
               <li><Link href="/reviews" className="text-sm  hover:text-white transition-colors">Reviews</Link></li>
@@ -160,8 +160,8 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4">Partnership</h3>
             <ul className="text-sm space-y-2">
-              <li><Link href="/development-api" className="hover:text-blue-300 transition-colors">Development API</Link></li>
-              <li><Link href="/affiliate-program" className="hover:text-blue-300 transition-colors">Affiliate Program</Link></li>
+              <li><Link href="/developer-api" className="hover:text-blue-300 transition-colors">Development API</Link></li>
+              <li><Link href="/affiliate-terms" className="hover:text-blue-300 transition-colors">Affiliate Program</Link></li>
               <li><Link href="/ambassador" className="hover:text-blue-300 transition-colors">Ambassador</Link></li>
             </ul>
 
@@ -172,10 +172,10 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4">Legal Documents</h3>
             <ul className="text-sm space-y-2">
-              <li><Link href="/terms-of-service" className="hover:text-blue-300 transition-colors">Terms of Service</Link></li>
-              <li><Link href="/privacy-policy" className="hover:text-blue-300 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-blue-300 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="hover:text-blue-300 transition-colors">Privacy Policy</Link></li>
               <li><Link href="/affiliate-terms" className="hover:text-blue-300 transition-colors">Affiliate Terms</Link></li>
-              <li><Link href="/general-risk-warning" className="hover:text-blue-300 transition-colors">General Risk Warning</Link></li>
+              <li><Link href="/risk-warning" className="hover:text-blue-300 transition-colors">General Risk Warning</Link></li>
             </ul>
 
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4 mt-8">Customer Benefits</h3>

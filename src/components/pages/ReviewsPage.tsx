@@ -199,58 +199,7 @@ const ReviewsPage = () => {
       </div>
 
       {/* Rating Distribution */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-semibold text-gray-900 mb-4">
-                Rating Breakdown
-              </h2>
-              <p className="text-lg text-gray-600">
-                Here's how our customers rate their experience
-              </p>
-            </motion.div>
-
-            <div className="bg-white rounded-lg p-8 shadow-sm">
-              <div className="space-y-4">
-                {ratingDistribution.map((rating, index) => (
-                  <motion.div
-                    key={rating.stars}
-                    className="flex items-center gap-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                  >
-                    <div className="flex items-center gap-1 w-20">
-                      <span className="text-sm font-medium">{rating.stars}</span>
-                      <svg className="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    </div>
-                    <div className="flex-1 bg-gray-200 rounded-full h-3">
-                      <div 
-                        className="bg-blue-600 h-3 rounded-full transition-all duration-1000"
-                        style={{ width: `${rating.percentage}%` }}
-                      />
-                    </div>
-                    <div className="text-sm text-gray-600 w-16">
-                      {rating.percentage}%
-                    </div>
-                    <div className="text-sm text-gray-500 w-20">
-                      ({rating.count.toLocaleString()})
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Filter Buttons */}
       <div className="py-8 bg-white">
@@ -339,74 +288,6 @@ const ReviewsPage = () => {
         </div>
       </div>
 
-      {/* Write Review CTA */}
-      <div className="py-16 bg-blue-600">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-              Share Your Experience
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Help other users by sharing your LedgerSwap experience. Your feedback helps us improve our platform.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Write a Review
-              </motion.button>
-              <motion.button
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Support
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Trust Badges */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-8">
-              Trusted by Users Worldwide
-            </h3>
-            <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-              <div className="text-center">
-                <div className="text-3xl mb-2">🔒</div>
-                <p className="text-sm font-medium">Bank-Level Security</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">✅</div>
-                <p className="text-sm font-medium">100% Verified Reviews</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">🌍</div>
-                <p className="text-sm font-medium">Global Community</p>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl mb-2">🎧</div>
-                <p className="text-sm font-medium">24/7 Support</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
     </div>
   );
 };

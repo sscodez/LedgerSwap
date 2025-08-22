@@ -22,11 +22,7 @@ const NotFound = () => {
             transition={{ duration: 1, delay: 0.2 }}
           >
             <div className="text-8xl md:text-9xl font-bold text-blue-600 mb-4">404</div>
-            <div className="w-32 h-32 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-6">
-              <svg className="w-16 h-16 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.007-5.824-2.448M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
+         
           </motion.div>
 
           {/* Error Message */}

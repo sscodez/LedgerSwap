@@ -100,7 +100,7 @@ const LoginPage = () => {
                 height={40}
                 className="mr-3"
               />
-              <h1 className="text-2xl font-bold text-white">LedgerSwap</h1>
+              {/* <h1 className="text-2xl font-bold text-white">LedgerSwap</h1> */}
             </div>
             <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
               Welcome Back
@@ -117,7 +117,7 @@ const LoginPage = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="text-gray-700 space-y-6">
               {/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">

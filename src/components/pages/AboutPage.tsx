@@ -2,6 +2,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { FaEarthAsia } from "react-icons/fa6";
+import { FaLock } from "react-icons/fa";
+import { BsLightningChargeFill } from "react-icons/bs";
+import { FaHandshakeSimple } from "react-icons/fa6";
+
+
 
 const AboutPage = () => {
   const teamMembers = [
@@ -33,22 +39,22 @@ const AboutPage = () => {
 
   const values = [
     {
-      icon: "🔒",
+      icon: <FaLock fill='#001233' />,
       title: "Security First",
       description: "Your assets and data are protected with industry-leading security measures"
     },
     {
-      icon: "🌍",
+      icon: <FaEarthAsia fill='#001233' />,
       title: "Global Access",
       description: "Available worldwide with support for multiple currencies and languages"
     },
     {
-      icon: "⚡",
+      icon: <BsLightningChargeFill fill='#001233' />,
       title: "Lightning Fast",
       description: "Quick transactions and instant confirmations for seamless trading"
     },
     {
-      icon: "🤝",
+      icon: <FaHandshakeSimple fill='#001233'/>,
       title: "Trusted Platform",
       description: "Transparent operations with full regulatory compliance"
     }
@@ -277,7 +283,7 @@ const AboutPage = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-16 bg-blue-600">
+      {/* <div className="py-16 bg-blue-600">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,7 +306,7 @@ const AboutPage = () => {
             </motion.button>
           </motion.div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

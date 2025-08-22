@@ -26,7 +26,7 @@ const BlogPage = () => {
       date: "2024-01-15",
       readTime: "5 min read",
       featured: true,
-      image: "/assests/blog/crypto-volatility.jpg"
+      image: "/assests/blogs/1.png"
     },
     {
       id: 2,
@@ -37,7 +37,7 @@ const BlogPage = () => {
       date: "2024-01-12",
       readTime: "7 min read",
       featured: true,
-      image: "/assests/blog/security-tips.jpg"
+      image: "/assests/blogs/2.png"
     },
     {
       id: 3,
@@ -48,7 +48,7 @@ const BlogPage = () => {
       date: "2024-01-10",
       readTime: "8 min read",
       featured: false,
-      image: "/assests/blog/btc-vs-eth.jpg"
+      image: "/assests/blogs/3.png"
     },
     {
       id: 4,
@@ -59,7 +59,7 @@ const BlogPage = () => {
       date: "2024-01-08",
       readTime: "6 min read",
       featured: false,
-      image: "/assests/blog/market-trends.jpg"
+      image: "/assests/blogs/4.png"
     },
     {
       id: 5,
@@ -70,7 +70,7 @@ const BlogPage = () => {
       date: "2024-01-05",
       readTime: "4 min read",
       featured: false,
-      image: "/assests/blog/dca-strategy.jpg"
+      image: "/assests/blogs/5.png"
     },
     {
       id: 6,
@@ -81,7 +81,7 @@ const BlogPage = () => {
       date: "2024-01-03",
       readTime: "3 min read",
       featured: false,
-      image: "/assests/blog/new-pairs.jpg"
+      image: "/assests/blogs/6.png"
     }
   ];
 
@@ -166,10 +166,13 @@ const BlogPage = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="aspect-video bg-gray-200 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                      <span className="text-white text-lg font-medium">Featured Article</span>
-                    </div>
+                  <div className="aspect-video bg-gray-200 relative overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
@@ -249,10 +252,13 @@ const BlogPage = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className="aspect-video bg-gray-200 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
-                      <span className="text-white text-sm">Article Image</span>
-                    </div>
+                  <div className="aspect-video bg-gray-200 relative overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
@@ -290,41 +296,7 @@ const BlogPage = () => {
         </div>
       </div>
 
-      {/* Newsletter Signup */}
-      <div className="py-16 bg-blue-600">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-3xl font-semibold text-white mb-4">
-              Stay Updated
-            </h2>
-            <p className="text-blue-100 mb-8">
-              Subscribe to our newsletter and never miss important crypto news and trading insights.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg border-none outline-none"
-              />
-              <motion.button
-                className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Subscribe
-              </motion.button>
-            </div>
-            <p className="text-blue-200 text-sm mt-4">
-              No spam, unsubscribe at any time.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+     
     </div>
   );
 };

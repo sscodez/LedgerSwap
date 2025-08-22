@@ -3,6 +3,13 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
+import { FaGlobe, FaMobile } from "react-icons/fa6";
+import { GiKeyLock } from "react-icons/gi";
+import { ImHeadphones } from "react-icons/im";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { BsLightningChargeFill } from 'react-icons/bs';
+
+
 const HowItWorksPage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -55,32 +62,32 @@ const HowItWorksPage = () => {
 
   const features = [
     {
-      icon: "⚡",
+      icon: <BsLightningChargeFill fill='#001233' />,
       title: "Lightning Fast",
       description: "Execute trades in milliseconds with our high-performance matching engine"
     },
     {
-      icon: "🔐",
+      icon: <GiKeyLock fill='#001233'/>,
       title: "Bank-Level Security",
       description: "Your funds are protected with institutional-grade security measures"
     },
     {
-      icon: "📱",
+      icon: <FaMobile fill='#001233' />,
       title: "Mobile Ready",
       description: "Trade on the go with our responsive web platform and mobile app"
     },
     {
-      icon: "🌍",
+      icon: <FaGlobe fill='#001233'/>,
       title: "Global Access",
       description: "Available worldwide with support for multiple currencies and languages"
     },
     {
-      icon: "💰",
+      icon: <RiMoneyDollarCircleFill fill='#001233' />,
       title: "Low Fees",
       description: "Competitive trading fees starting at just 0.05% per transaction"
     },
     {
-      icon: "🎧",
+      icon: <ImHeadphones fill='#001233' />,
       title: "24/7 Support",
       description: "Get help anytime with our round-the-clock customer support team"
     }
@@ -216,73 +223,12 @@ const HowItWorksPage = () => {
               </div>
             </motion.div>
 
-            {/* Progress Bar */}
-            <div className="mt-8">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-sm text-gray-600">Progress</span>
-                <span className="text-sm text-gray-600">
-                  {Math.round(((activeStep + 1) / steps.length) * 100)}%
-                </span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                  style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-                />
-              </div>
-            </div>
+        
           </div>
         </div>
       </div>
 
-      {/* Trading Types */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-              Trading Options
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Choose from multiple trading options designed to meet your needs
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {tradingTypes.map((type, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-50 p-6 rounded-lg text-center"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                  {type.title}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {type.description}
-                </p>
-                <ul className="space-y-2">
-                  {type.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-sm text-gray-700 flex items-center justify-center">
-                      <svg className="w-4 h-4 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
+  
 
       {/* Features Grid */}
       <div className="py-16">
@@ -324,121 +270,8 @@ const HowItWorksPage = () => {
         </div>
       </div>
 
-      {/* Security Section */}
-      <div className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
-                Your Security is Our Priority
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                We use industry-leading security measures to protect your funds and personal information
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div className="text-left">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Technical Security</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      256-bit SSL encryption
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Cold storage for 95% of funds
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Multi-signature wallets
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Regular security audits
-                    </li>
-                  </ul>
-                </div>
-                <div className="text-left">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4">Account Protection</h3>
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Two-factor authentication
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      Email & SMS alerts
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      IP whitelisting
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      24/7 monitoring
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </div>
+     
 
-      {/* CTA Section */}
-      <div className="py-16 bg-blue-600">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join thousands of users who trust LedgerSwap for their cryptocurrency trading needs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Create Account
-              </motion.button>
-              <motion.button
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                View Demo
-              </motion.button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
     </div>
   );
 };

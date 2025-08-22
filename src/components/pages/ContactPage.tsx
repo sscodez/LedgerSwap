@@ -180,18 +180,19 @@ const ContactPage = () => {
       {/* Contact Form */}
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Form */}
+          <div className="flex justify-center">
+            <div className="max-w-5xl w-full">
+              {/* Enhanced Form */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
-              >
+                className="w-full"
+              >  
                 <h2 className="text-3xl font-semibold text-gray-900 mb-6">
                   Send us a Message
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 text-gray-700">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -288,78 +289,7 @@ const ContactPage = () => {
                 </form>
               </motion.div>
 
-              {/* Contact Info */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="space-y-8"
-              >
-                <div>
-                  <h3 className="text-2xl font-semibold text-gray-900 mb-6">
-                    Our Offices
-                  </h3>
-                  <div className="space-y-6">
-                    {offices.map((office, index) => (
-                      <div key={index} className="border-l-4 border-blue-600 pl-4">
-                        <h4 className="font-semibold text-gray-900 mb-1">
-                          {office.city}
-                        </h4>
-                        <p className="text-gray-600 text-sm mb-1">
-                          {office.address}
-                        </p>
-                        <p className="text-gray-600 text-sm mb-1">
-                          {office.country}
-                        </p>
-                        <p className="text-blue-600 text-sm font-medium">
-                          {office.timezone}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">
-                    Emergency Support
-                  </h4>
-                  <p className="text-gray-600 text-sm mb-4">
-                    For urgent security issues or account emergencies, contact us immediately:
-                  </p>
-                  <div className="space-y-2">
-                    <p className="text-sm">
-                      <span className="font-medium">Emergency Line:</span> +1 (555) 911-HELP
-                    </p>
-                    <p className="text-sm">
-                      <span className="font-medium">Security Email:</span> security@ledgerswap.com
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-blue-50 p-6 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-4">
-                    Response Times
-                  </h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>General Inquiries:</span>
-                      <span className="font-medium">2-4 hours</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Technical Issues:</span>
-                      <span className="font-medium">1-2 hours</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Security Concerns:</span>
-                      <span className="font-medium">15-30 minutes</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Emergency:</span>
-                      <span className="font-medium text-red-600">Immediate</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+         
             </div>
           </div>
         </div>

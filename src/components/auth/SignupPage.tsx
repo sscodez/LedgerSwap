@@ -32,7 +32,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="relative bg-[#001233] min-h-screen py-10 md:py-16 lg:py-20 overflow-hidden">
+    <div className="relative bg-[#001233] text-gray-300 min-h-screen py-10 md:py-16 lg:py-20 overflow-hidden">
       {/* Holographic Elements */}
       <motion.div 
         className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] opacity-60 hidden sm:block"
@@ -97,13 +97,13 @@ const SignupPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex items-center justify-center mb-6">
-              <Image
+              {/* <Image
                 src="/assests/icon.png"
                 alt="LedgerSwap Logo"
                 width={40}
                 height={40}
                 className="mr-3"
-              />
+              /> */}
               <h1 className="text-2xl font-bold text-white">LedgerSwap</h1>
             </div>
             <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
@@ -121,7 +121,7 @@ const SignupPage = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className=" text-gray-700 space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
