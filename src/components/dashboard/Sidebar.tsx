@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
   };
 
   return (
-    <aside className="w-64 h-screen mb-5 flex flex-col bg-white rounded-lg">
+    <aside className="w-64 min-h-screen mb-5 flex flex-col bg-white rounded-lg">
       {/* Mobile close button */}
       {onCloseMobile && (
         <div className="flex justify-end p-4 lg:hidden">

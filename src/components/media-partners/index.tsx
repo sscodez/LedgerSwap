@@ -94,7 +94,7 @@ const MediaPartners = () => {
                       return (
                         <div
                           key={p.id}
-                          className="bg-white rounded-2xl border     border-gray-200 px-4 pt-6 pb-24 "
+                          className="bg-white rounded-2xl border     border-gray-200 px-4 pt-6 pb-20 "
                         >
                           <div className="flex justify-start mb-4">
                             <Image

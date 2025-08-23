@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import UsdtSwitchBanner from '../dashboard/UsdtSwitchBanner';
-import { RepeatIcon, ViewComfyAltIcon } from '../icons';
+import { RepeatIcon, ViewComfyAltIcon, PokerChipIcon, SettingsIcon, WarningIcon, AccountCircle2Icon, AttachMoneyIcon, SwapVerticalCircleIcon } from '../icons';
 import Image from 'next/image';
 
 interface AdminSidebarProps {
@@ -32,51 +32,43 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       name: 'Fees',
       href: '/admin/fees',
       icon: (
-        <Image src='/assests/icons/attach_money.png' alt='settings' width={20} height= {20} />
+        <AttachMoneyIcon size={20} />
       )
     },
     {
       name: 'Trades',
       href: '/admin/trades',
       icon: (
-        <Image src='/assests/icons/swap_vertical_circle.png' alt='settings' width={20} height= {20} />
+        <SwapVerticalCircleIcon size={20} />
       )
     },
-    // {
-    //   name: 'Tokens',
-    //   href: '/admin/token-management',
-    //   icon: (
-    //     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
-    //       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-    //     </svg>
-    //   )
-    // },
+
     {
       name: 'Tokens',
       href: '/admin/token-chain',
       icon: (
-        <Image src='/assests/icons/poker_chip.svg' alt='settings' width={20} height= {20} />
+        <PokerChipIcon size={20} />
       )
     },
     {
       name: 'Dispute',
       href: '/admin/dispute',
       icon: (
-        <Image src='/assests/icons/warning.svg' alt='settings' width={20} height= {20} />
+        <WarningIcon size={20} />
       )
     },
     {
       name: 'User',
       href: '/admin/flagged-users',
       icon: (
-        <Image src='/assests/icons/account_circle 2.svg' alt='settings' width={20} height= {20} />
+        <AccountCircle2Icon size={20} />
       )
     },
     {
       name: 'Settings',
       href: '/admin/settings',
       icon: (
-        <Image src='/assests/icons/settings.svg' alt='settings' width={20} height= {20} />
+        <SettingsIcon size={20} />
       )
     },
   ];
@@ -123,9 +115,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
                     isActive 
                       ? ' text-blue-700' 
                       : 'text-gray-700 hover:bg-gray-100'
-                  }`}
+                  }`
+                
+                }
                 >
-                  <span className={`mr-2 bg-gray-50 rounded-lg p-2 sm:mr-3 ${isActive ? 'text-blue-700' : 'text-gray-500'}`}>
+                  <span className={`mr-2  rounded-lg p-2 sm:mr-3 ${isActive ? 'text-white bg-blue-600 ' : 'text-gray-500 bg-gray-50'}`}>
                     {item.icon}
                   </span>
                   {item.name}

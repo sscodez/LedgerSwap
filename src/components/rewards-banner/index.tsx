@@ -51,7 +51,7 @@ const RewardsBanner = () => {
               Grab your welcome reward!
             </motion.div>
             <motion.h3 
-              className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-white mb-1 sm:mb-2 leading-tight"
+              className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-white mb-1 sm:mb-2 leading-tight"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
@@ -60,7 +60,7 @@ const RewardsBanner = () => {
               Sign up to earn 0.4% USDT
             </motion.h3>
             <motion.h3 
-              className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight"
+              className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-white mb-4 sm:mb-6 leading-tight"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}

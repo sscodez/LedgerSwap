@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AddressFilters from './AddressFilters';
 import AddressList from './AddressList';
-import Link from 'next/link';
+import AddWalletAddressModal from '../../modal/AddWalletAddressModal';
 import type { CryptoSymbol } from '../../../components/icons/crypto/CryptoIcon';
 import Image from 'next/image';
 
@@ -48,6 +48,7 @@ const mockAddresses: Address[] = [
 const AddressesPage: React.FC = () => {
   const [addresses, setAddresses] = useState(mockAddresses);
   const [filteredAddresses, setFilteredAddresses] = useState(mockAddresses);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState({
     coin: '',
     network: '',
@@ -78,7 +79,47 @@ const AddressesPage: React.FC = () => {
   };
 
   const applyFilters = (filters: { coin: string; network: string; search: string }) => {
-    let filtered = [...addresses];
+    applyFiltersToAddresses(addresses, filters);
+  };
+
+  const handleClearFilters = () => {
+    setActiveFilters({ coin: '', network: '', search: '' });
+    setFilteredAddresses(addresses);
+  };
+
+  const handleAddAddress = (data: { coin: string; address: string; label: string }) => {
+    // Map coin IDs to the format expected by Address interface
+    const coinMap: Record<string, { name: string; symbol: string; iconType: CryptoSymbol; tag: string; network: string }> = {
+      'eth': { name: 'Ethereum', symbol: 'ETH', iconType: 'eth', tag: 'ETH', network: 'Ethereum' },
+      'sol': { name: 'Solana', symbol: 'SOL', iconType: 'sol', tag: 'SOL', network: 'Solana' },
+      'usdt': { name: 'Tether', symbol: 'USDT', iconType: 'usdt', tag: 'TRX', network: 'Tron' }
+    };
+
+    const coinInfo = coinMap[data.coin] || coinMap['eth'];
+    
+    const newAddress: Address = {
+      id: Date.now().toString(),
+      coin: {
+        name: coinInfo.name,
+        symbol: coinInfo.symbol,
+        iconType: coinInfo.iconType,
+        tag: coinInfo.tag
+      },
+      network: coinInfo.network,
+      label: data.label,
+      address: data.address
+    };
+
+    const updatedAddresses = [...addresses, newAddress];
+    setAddresses(updatedAddresses);
+    
+    // Apply current filters to include the new address if it matches
+    applyFiltersToAddresses(updatedAddresses, activeFilters);
+    setIsModalOpen(false);
+  };
+
+  const applyFiltersToAddresses = (addressList: Address[], filters: { coin: string; network: string; search: string }) => {
+    let filtered = [...addressList];
     
     if (filters.coin) {
       filtered = filtered.filter(addr => addr.coin.symbol === filters.coin);
@@ -99,22 +140,17 @@ const AddressesPage: React.FC = () => {
     setFilteredAddresses(filtered);
   };
 
-  const handleClearFilters = () => {
-    setActiveFilters({ coin: '', network: '', search: '' });
-    setFilteredAddresses(addresses);
-  };
-
   return (
     <div className="px-4 sm:px-6 md:px-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
         <h1 className="text-xl sm:text-2xl text-[#021735] font-medium">My Addresses</h1>
-        <Link 
-          href="/dashboard/addresses/new"
+        <button 
+          onClick={() => setIsModalOpen(true)}
           className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-full sm:w-auto justify-center sm:justify-start"
         >
          <Image src="/assests/icons/contact_page.png" alt="Add" width={10} height={14}  />
           Add a new address
-        </Link>
+        </button>
       </div>
       
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -128,6 +164,12 @@ const AddressesPage: React.FC = () => {
           <AddressList addresses={filteredAddresses} />
         </div>
       </div>
+      
+      <AddWalletAddressModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={handleAddAddress}
+      />
     </div>
   );
 };
