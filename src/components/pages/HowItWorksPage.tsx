@@ -8,6 +8,7 @@ import { GiKeyLock } from "react-icons/gi";
 import { ImHeadphones } from "react-icons/im";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { BsLightningChargeFill } from 'react-icons/bs';
+import Banner from '../banner';
 
 
 const HowItWorksPage = () => {
@@ -114,55 +115,8 @@ const HowItWorksPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-        <motion.div 
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
-
-        <motion.div 
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-              How It Works
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Start trading cryptocurrencies in 4 simple steps. It's easier than you think.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+    
+      <Banner title="How It Works" description="Start trading cryptocurrencies in 4 simple steps. It's easier than you think." />
 
       {/* Steps Section */}
       <div className="py-16">
@@ -240,7 +194,7 @@ const HowItWorksPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-              Why Choose LedgerSwap?
+              Why Choose InterledgerSwap?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               We've built our platform with your needs in mind

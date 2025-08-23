@@ -11,7 +11,7 @@ const Footer = () => {
   const isLandingPage = pathname === '/';
   return (
     <footer className="bg-[#001233] text-white">
-      <div className={`container mx-auto px-4 ${isLandingPage ? 'pt-32 pb-12' : 'py-12'}`}>
+      <div className={`container mx-auto px-4 ${isLandingPage ? 'md:pt-32 py-12 md:pb-12' : 'py-12'}`}>
         {/* Top Section with App Downloads and Language */}
         <div className="flex flex-col lg:flex-row justify-between border-b pb-5 border-gray-300/50 items-start lg:items-center mb-12">
           {/* App Download Buttons */}
@@ -60,8 +60,8 @@ const Footer = () => {
             </div>
             
             <DropdownMenu.Root>
-              <DropdownMenu.Trigger asChild>
-                <button className="flex bg-white/10 py-2 px-5 rounded-lg items-center hover:bg-white/20 transition-colors outline-none">
+              <DropdownMenu.Trigger className='w-full md:w-auto' asChild>
+                <button className="flex bg-white/10 py-2 h-10  justify-between  px-5 items-center rounded-lg  md:items-center hover:bg-white/20 transition-colors outline-none">
                   <span className="text-sm mr-2">{selectedLanguage}</span>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -181,7 +181,7 @@ const Footer = () => {
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4 mt-8">Customer Benefits</h3>
             <ul className="text-sm space-y-2">
               <li><Link href="/loyalty-program" className="hover:text-blue-300 transition-colors">Loyalty Program</Link></li>
-              <li><Link href="/platinum-users" className="hover:text-blue-300 transition-colors">Platinum Users</Link></li>
+              <li><Link href="/platinum" className="hover:text-blue-300 transition-colors">Platinum Users</Link></li>
               <li><Link href="/invite-friends" className="hover:text-blue-300 transition-colors">Invite Friends</Link></li>
             </ul>
           </div>
@@ -192,7 +192,7 @@ const Footer = () => {
       {/* Copyright and Social Icons */}
       <div className={`md:px-8 w-full  bg-[#101828] ${isLandingPage ? 'mt-12' : 'mt-6'} flex flex-col md:flex-row items-center justify-between`}>
           <div className="mb-4 md:mt-0 mt-4 text-sm md:mb-0">
-            <p>© {new Date().getFullYear()} LedgerSwap</p>
+            <p>© {new Date().getFullYear()} InterledgerSwap</p>
           </div>
           
           <div className="flex items-center justify-center p-4 space-x-4">

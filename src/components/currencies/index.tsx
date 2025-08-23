@@ -173,7 +173,7 @@ const Currencies = () => {
                 <div className="text-4xl mb-2">🚀</div>
                 <div className="text-xl font-semibold mb-2">Start Trading Today</div>
                 <p className="text-blue-100 text-sm mb-4">
-                  Join thousands of traders already using LedgerSwap
+                  Join thousands of traders already using InterledgerSwap
                 </p>
                 <motion.button
                   className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"

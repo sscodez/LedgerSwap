@@ -77,12 +77,11 @@ const WalletConnectionFlow: React.FC = () => {
 
   return (
     <section className="py-8 sm:py-12 md:py-20 bg-[#001233] relative overflow-hidden">
-      {/* Background decoration */}
     
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <h2 className="text-xl sm:text-2xl md:text-3xl text-center sm:text-left font-[600] text-white mb-4 sm:mb-6">
-            Easy wallet <span className="text-blue-400">connection flow</span>
+          <h2 className="text-3xl sm:text-2xl md:text-4xl text-center sm:text-left font-semibold text-white mb-4 sm:mb-6">
+            Easy wallet <span className="text-blue-600">connection flow</span>
           </h2>
         </div>
 
@@ -125,13 +124,13 @@ const WalletConnectionFlow: React.FC = () => {
         onClose={handleCloseModal}
         onSignIn={handleSignIn}
         address={walletAddress}
-        message="Please sign this message to connect to LedgerSwap"
+        message="Please sign this message to connect to InterledgerSwap"
       />
       
       <ConnectedModal
         isOpen={showConnected}
         onClose={handleCloseModal}
-        message="Successfully connected to LedgerSwap"
+        message="Successfully connected to InterledgerSwap"
       />
     </section>
   );

@@ -6,6 +6,7 @@ import { FaEarthAsia } from "react-icons/fa6";
 import { FaLock } from "react-icons/fa";
 import { BsLightningChargeFill } from "react-icons/bs";
 import { FaHandshakeSimple } from "react-icons/fa6";
+import Banner from '../banner';
 
 
 
@@ -69,57 +70,9 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-        <motion.div 
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
+    
 
-        <motion.div 
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6">
-              About LedgerSwap
-            </h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
-              We're building the future of cryptocurrency trading with a focus on security, 
-              simplicity, and user experience. Join millions who trust LedgerSwap for their digital asset needs.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+      <Banner title="About" description="We're building the future of cryptocurrency trading with a focus on security" />
 
       {/* Stats Section */}
       <div className="py-16 bg-white">
@@ -236,34 +189,6 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-
-    
-
-      {/* CTA Section */}
-      {/* <div className="py-16 bg-blue-600">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-6">
-              Ready to Start Trading?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join our community of traders and start your cryptocurrency journey today.
-            </p>
-            <motion.button
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started Now
-            </motion.button>
-          </motion.div>
-        </div>
-      </div> */}
     </div>
   );
 };

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import Banner from '../banner';
 
 const FaqPage = () => {
   const [activeCategory, setActiveCategory] = useState('general');
@@ -18,8 +19,8 @@ const FaqPage = () => {
   const faqs = {
     general: [
       {
-        question: "What is LedgerSwap?",
-        answer: "LedgerSwap is a secure cryptocurrency marketplace that allows you to exchange, buy, and sell digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
+        question: "What is InterledgerSwap?",
+        answer: "InterledgerSwap is a secure cryptocurrency marketplace that allows you to exchange, buy, and sell digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
       },
       {
         question: "How do I get started?",
@@ -30,8 +31,8 @@ const FaqPage = () => {
         answer: "We support major cryptocurrencies including Bitcoin (BTC), Ethereum (ETH), Solana (SOL), USDT, USDC, and many more. Our list is constantly expanding based on user demand."
       },
       {
-        question: "Is LedgerSwap available worldwide?",
-        answer: "LedgerSwap is available in most countries worldwide. However, due to regulatory requirements, some regions may have restrictions. Please check our terms of service for specific country availability."
+        question: "Is InterledgerSwap available worldwide?",
+        answer: "InterledgerSwap is available in most countries worldwide. However, due to regulatory requirements, some regions may have restrictions. Please check our terms of service for specific country availability."
       }
     ],
     trading: [
@@ -81,7 +82,7 @@ const FaqPage = () => {
       },
       {
         question: "How are network fees calculated?",
-        answer: "Network fees are determined by the respective blockchain networks and vary based on network congestion. These fees go directly to miners/validators and are not collected by LedgerSwap."
+        answer: "Network fees are determined by the respective blockchain networks and vary based on network congestion. These fees go directly to miners/validators and are not collected by InterledgerSwap."
       },
       {
         question: "Do you offer fee discounts?",
@@ -115,56 +116,8 @@ const FaqPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-        {/* Holographic Elements */}
-        <motion.div 
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
-
-        <motion.div 
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Find answers to common questions about LedgerSwap
-            </p>
-          </motion.div>
-        </div>
-      </div>
+    
+      <Banner title="Frequently Asked Questions" description="Find answers to common questions about InterledgerSwap" />
 
       {/* FAQ Content */}
       <div className="container mx-auto px-4 py-12 ">

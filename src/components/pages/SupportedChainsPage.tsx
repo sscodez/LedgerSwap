@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Banner from '../banner';
 
 const SupportedChainsPage = () => {
   const [selectedChain, setSelectedChain] = useState<string | null>(null);
@@ -124,59 +125,8 @@ const SupportedChainsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-        <motion.div
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
-
-        <motion.div
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Supported
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                Blockchains
-              </span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
-
-              Experience the future of multi-chain DeFi trading.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+  
+      <Banner title="Supported" secondtitle="Blockchains" description="Experience the future of multi-chain DeFi trading." />
 
 
       {/* Supported Chains Grid */}

@@ -97,14 +97,14 @@ const SignupPage = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <div className="flex items-center justify-center mb-6">
-              {/* <Image
+              <Image
                 src="/assests/icon.png"
-                alt="LedgerSwap Logo"
+                alt="InterledgerSwap Logo"
                 width={40}
                 height={40}
                 className="mr-3"
-              /> */}
-              <h1 className="text-2xl font-bold text-white">LedgerSwap</h1>
+              />
+              {/* <h1 className="text-2xl font-bold text-white">InterledgerSwap</h1> */}
             </div>
             <h2 className="text-3xl md:text-4xl font-semibold text-white mb-2">
               Create Your Account

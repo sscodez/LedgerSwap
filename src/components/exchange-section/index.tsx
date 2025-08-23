@@ -87,7 +87,7 @@ const ExchangeSection = () => {
                       <button className="flex items-center outline-none">
                         <div className="flex items-center">
                           <Image src={sendCurrency.icon} alt={sendCurrency.fullName} width={20} height={20} className="mr-1" />
-                          <span className="font-medium mr-1 text-sm">{sendCurrency.name}</span>
+                          <span className="font-medium mr-1 text-black text-sm">{sendCurrency.name}</span>
                           <span className="text-black text-[10px] px-1.5 py-0.5 rounded-full" style={{ backgroundColor: sendCurrency.color }}>{sendCurrency.name}</span>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -136,6 +136,7 @@ const ExchangeSection = () => {
                     className="text-black font-semibold text-base md:text-lg bg-transparent outline-none text-right w-full"
                     placeholder="0.00"
                   />
+                  
                 </div>
                 <div className="bg-[#F3F4F6] p-2 flex items-center justify-between h-full">
                   <DropdownMenu.Root>
@@ -143,7 +144,7 @@ const ExchangeSection = () => {
                       <button className="flex items-center outline-none">
                         <div className="flex items-center">
                           <Image src={receiveCurrency.icon} alt={receiveCurrency.fullName} width={20} height={20} className="mr-1" />
-                          <span className="font-medium mr-1 text-sm">{receiveCurrency.name}</span>
+                          <span className="font-medium mr-1 text-black text-sm">{receiveCurrency.name}</span>
                           <span className="text-white text-[10px] px-1.5 py-0.5 rounded-full" style={{ backgroundColor: receiveCurrency.color }}>{receiveCurrency.name}</span>
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

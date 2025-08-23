@@ -10,7 +10,7 @@ const UsdtSwitchBanner: React.FC = () => {
       </h3>
       
       <p className="text-xs sm:text-sm text-center mb-3 sm:mb-4">
-        Unlock special deals with LedgerSwap — powered by the world&apos;s leading stablecoin.
+        Unlock special deals with InterledgerSwap — powered by the world&apos;s leading stablecoin.
       </p>
       
       <Link 

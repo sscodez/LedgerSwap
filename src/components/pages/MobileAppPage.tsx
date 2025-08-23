@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Banner from '../banner';
 
 const MobileAppPage = () => {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -67,55 +68,7 @@ const MobileAppPage = () => {
     <div className="min-h-screen bg-gray-50">
 
 
-        <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-              <motion.div 
-                className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 0.4, scale: 1 }}
-                transition={{ duration: 1.2 }}
-                whileHover={{ rotate: 10, scale: 1.05 }}
-              >
-                <Image
-                  src="/assests/landing-page/5.png"
-                  alt="Holographic element"
-                  width={300}
-                  height={300}
-                  priority
-                />
-              </motion.div>
-      
-              <motion.div 
-                className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-                initial={{ opacity: 0, y: -50 }}
-                animate={{ opacity: 0.4, y: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-                whileHover={{ rotate: -10, scale: 1.05 }}
-              >
-                <Image
-                  src="/assests/landing-page/3.png"
-                  alt="Holographic cube"
-                  width={180}
-                  height={180}
-                  priority
-                />
-              </motion.div>
-      
-              <div className="container mx-auto px-4 relative z-10">
-                <motion.div 
-                  className="text-center"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                >
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-                 Mobile App
-                  </h1>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                    See what our users are saying about their LedgerSwap experience
-                  </p>
-                </motion.div>
-              </div>
-            </div>
+    <Banner title="Mobile App" description="See what our users are saying about their InterledgerSwap experience" />
       {/* Hero Section */}
       <div className="relative bg-white py-20 md:py-32 overflow-hidden">
         {/* Background Elements */}
@@ -130,8 +83,8 @@ const MobileAppPage = () => {
               transition={{ duration: 0.8 }}
               className="text-white"
             >
-              <h1 className="text-4xl text-black md:text-6xl font-medium mb-6">
-               Ledger Swap App
+              <h1 className="md:text-4xl text-center lg:text-left text-2xl text-black md:text-6xl font-medium mb-6">
+               Interledger Swap App
           
               </h1>
               <p className="text-[16px] hidden lg:block text-gray-700 mb-8 leading-relaxed">
@@ -215,7 +168,7 @@ const MobileAppPage = () => {
                       {/* App Content */}
                       <div className="flex-1 px-4 pb-4">
                         <div className="text-center mb-6">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-2">LedgerSwap</h3>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">InterledgerSwap</h3>
                           <p className="text-gray-600">Your Portfolio</p>
                         </div>
                         

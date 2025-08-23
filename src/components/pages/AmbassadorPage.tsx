@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Banner from '../banner';
 
 const AmbassadorPage = () => {
   const [activeTab, setActiveTab] = useState('program');
@@ -44,74 +45,24 @@ const AmbassadorPage = () => {
     'Strong understanding of cryptocurrency and trading',
     'Excellent communication skills',
     'Proven track record in community building',
-    'Alignment with LedgerSwap values and mission',
+    'Alignment with InterledgerSwap values and mission',
     'Ability to commit 10+ hours per week'
   ];
 
   const responsibilities = [
-    'Create engaging content about LedgerSwap',
+    'Create engaging content about InterledgerSwap',
     'Host community events and AMAs',
     'Provide feedback on new features',
     'Moderate community discussions',
-    'Represent LedgerSwap at industry events',
+    'Represent InterledgerSwap at industry events',
     'Mentor new community members'
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] text-white overflow-hidden">
-       
-  <motion.div 
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
-
-        <motion.div 
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-
-        <div className="relative container mx-auto px-4 py-16">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-         
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Ambassador Program
-            </h1>
-            <p className="text-xl text-blue-100 mb-8">
-              Join our elite team of crypto advocates and help shape the future of decentralized trading
-            </p>
-          </motion.div>
-        </div>
-      </div>
+  
+      <Banner title="Ambassador Program" description="Join our elite team of crypto advocates and help shape the future of decentralized trading." />
 
       {/* Navigation Tabs */}
       <div className="bg-white shadow-sm">
@@ -121,11 +72,10 @@ const AmbassadorPage = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`py-4 px-2 border-b-2 font-medium text-sm capitalize transition-colors ${
-                  activeTab === tab
+                className={`py-4 px-2 border-b-2 font-medium text-sm capitalize transition-colors ${activeTab === tab
                     ? 'border-blue-600 text-blue-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
-                }`}
+                  }`}
               >
                 {tab}
               </button>
@@ -146,7 +96,7 @@ const AmbassadorPage = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">What is the Ambassador Program?</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  Our Ambassador Program is designed for passionate crypto enthusiasts who want to represent LedgerSwap 
+                  Our Ambassador Program is designed for passionate crypto enthusiasts who want to represent InterledgerSwap
                   and help grow our community while earning competitive compensation.
                 </p>
               </div>
@@ -177,7 +127,7 @@ const AmbassadorPage = () => {
                 </div>
               </div>
 
-          
+
             </div>
           </motion.div>
         )}
@@ -308,7 +258,7 @@ const AmbassadorPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Why do you want to be a LedgerSwap Ambassador?</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Why do you want to be a InterledgerSwap Ambassador?</label>
                     <textarea
                       rows={4}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

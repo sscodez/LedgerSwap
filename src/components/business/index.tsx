@@ -163,7 +163,7 @@ const Business = () => {
                 <div>
                   <h3 className="text-2xl font-bold mb-4">Ready to Scale Your Business?</h3>
                   <p className="text-blue-100 mb-6">
-                    Join leading institutions who trust LedgerSwap for their cryptocurrency trading needs. 
+                    Join leading institutions who trust InterledgerSwap for their cryptocurrency trading needs. 
                     Get dedicated support and custom solutions tailored to your business.
                   </p>
                   <motion.button

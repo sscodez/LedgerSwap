@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Banner from '../banner';
 
 const DeveloperApiPage = () => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -45,58 +46,10 @@ const DeveloperApiPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] text-white overflow-hidden">
-  
+     
 
-       <motion.div 
-              className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 0.4, scale: 1 }}
-              transition={{ duration: 1.2 }}
-              whileHover={{ rotate: 10, scale: 1.05 }}
-            >
-              <Image
-                src="/assests/landing-page/5.png"
-                alt="Holographic element"
-                width={300}
-                height={300}
-                priority
-              />
-            </motion.div>
-    
-            <motion.div 
-              className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 0.4, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              whileHover={{ rotate: -10, scale: 1.05 }}
-            >
-              <Image
-                src="/assests/landing-page/3.png"
-                alt="Holographic cube"
-                width={180}
-                height={180}
-                priority
-              />
-            </motion.div>
-        
-        <div className="relative container mx-auto px-4 py-16">
-          <motion.div
-            className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-          
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Developer API
-            </h1>
-            <p className="text-xl text-blue-100 mb-8">
-              Build powerful trading applications with our comprehensive REST API
-            </p>
-          </motion.div>
-        </div>
-      </div>
+      <Banner title="Developer API" description="Build powerful trading applications with our comprehensive REST API" />
+
 
       {/* Navigation Tabs */}
       <div className="bg-white">
@@ -131,7 +84,7 @@ const DeveloperApiPage = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">API Overview</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  LedgerSwap API provides programmatic access to trading functionality, market data, and account management.
+                  InterledgerSwap API provides programmatic access to trading functionality, market data, and account management.
                 </p>
               </div>
 
@@ -213,7 +166,7 @@ const DeveloperApiPage = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">Official SDKs</h2>
                 <p className="text-gray-600">
-                  Use our official SDKs to integrate LedgerSwap API into your applications
+                  Use our official SDKs to integrate InterledgerSwap API into your applications
                 </p>
               </div>
 
@@ -247,8 +200,8 @@ const DeveloperApiPage = () => {
                     <h4 className="font-semibold text-gray-900 mb-2">JavaScript/Node.js</h4>
                     <div className="bg-gray-900 rounded-lg p-4">
                       <code className="text-green-400 text-sm">
-                        <div>const LedgerSwap = require('ledgerswap-api');</div>
-                        <div>const client = new LedgerSwap('YOUR_API_KEY');</div>
+                        <div>const InterledgerSwap = require('ledgerswap-api');</div>
+                        <div>const client = new InterledgerSwap('YOUR_API_KEY');</div>
                         <div>const markets = await client.getMarkets();</div>
                       </code>
                     </div>

@@ -5,7 +5,7 @@ export default function MobileApp() {
 }
 
 export const metadata = {
-  title: 'Mobile App - LedgerSwap',
-  description: 'Download the LedgerSwap mobile app for iOS and Android. Trade crypto on the go with our secure, fast, and user-friendly mobile trading platform.',
-  keywords: 'mobile app, crypto trading, iOS, Android, LedgerSwap app, mobile trading',
+  title: 'Mobile App - InterledgerSwap',
+  description: 'Download the InterledgerSwap mobile app for iOS and Android. Trade crypto on the go with our secure, fast, and user-friendly mobile trading platform.',
+  keywords: 'mobile app, crypto trading, iOS, Android, InterledgerSwap app, mobile trading',
 };

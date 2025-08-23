@@ -148,23 +148,17 @@ const PlatinumUserPage = () => {
               <span>👑</span>
               <span>PREMIUM MEMBERSHIP</span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
+            <h1 className="text-6xl  md:text-5xl lg:text-6xl font-semibold text-white mb-4">
               Platinum
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-white">
+              <span className="block   text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-white">
                 Elite Trading
               </span>
             </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+            <p className="text-[12px] md:text-[16px] text-gray-300 max-w-2xl mx-auto mb-8">
               Unlock exclusive features, zero fees, and VIP treatment with our premium membership tiers
             </p>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-shadow"
-            >
-              Upgrade to Platinum
-            </motion.button>
+         
           </motion.div>
         </div>
       </div>
@@ -228,9 +222,9 @@ const PlatinumUserPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 hover:shadow-xl transition-shadow"
+                className="bg-white rounded-2xl  border border-gray-100 p-8 hover:shadow-xl transition-shadow"
               >
-                <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-2xl flex items-center justify-center text-2xl mb-6`}>
+                <div className={`w-20 h-20  flex items-center justify-center text-4xl mb-6`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
@@ -344,7 +338,7 @@ const PlatinumUserPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-lg p-8"
+                className="bg-white rounded-2xl  p-8"
               >
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
@@ -369,45 +363,7 @@ const PlatinumUserPage = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Ready to Go Platinum?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Join the elite tier of traders and unlock exclusive benefits, zero fees, and VIP treatment
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                Start Free Trial
-              </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-              >
-                Compare Plans
-              </motion.button>
-            </div>
-
-            <div className="mt-8 text-blue-200 text-sm">
-              <p>30-day money-back guarantee • Cancel anytime • No hidden fees</p>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+   
     </div>
   );
 };

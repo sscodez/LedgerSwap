@@ -11,6 +11,6 @@ export default function BlogPost({ params }: any) {
 }
 
 export const metadata = {
-  title: 'Blog Post - LedgerSwap',
-  description: 'Read the latest cryptocurrency news, trading tips, and market insights from LedgerSwap experts.',
+  title: 'Blog Post - InterledgerSwap',
+  description: 'Read the latest cryptocurrency news, trading tips, and market insights from InterledgerSwap experts.',
 };

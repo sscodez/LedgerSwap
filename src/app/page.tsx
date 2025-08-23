@@ -12,7 +12,7 @@ import Business from "../components/business";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="bg-[#001233]">
       <Hero />
       <RewardsBanner />
       {/* <CustomerBenefits />

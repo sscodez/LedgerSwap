@@ -16,11 +16,11 @@ const Header: React.FC = () => {
 
   // Menu items mapping
   const menuItems = [
-    { href: "#how-it-works", label: "How it works" ,link:"/how-it-works" },
-    { href: "#customer-benefits", label: "Customer Benefits" ,link:"/" },
-    { href: "#analytics", label: "Analytics" ,link:"/reviews" },
-    { href: "#currencies", label: "Currencies" ,link:"/supported-chains" },
-    { href: "#business", label: "Business" ,link:"/business" },
+    { href: "how-it-works", label: "How it works" ,link:"/how-it-works" },
+    { href: "customer-benefits", label: "Customer Benefits" ,link:"/platinum" },
+    { href: "analytics", label: "Analytics" ,link:"/reviews" },
+    { href: "currencies", label: "Currencies" ,link:"/supported-chains" },
+    { href: "business", label: "Business" ,link:"/loyalty-program" },
   ];
 
   const toggleMobileMenu = () => {
@@ -44,14 +44,14 @@ const Header: React.FC = () => {
         >
           <Image
             src="/assests/icon.png"
-            alt="LedgerSwap Logo"
+            alt="InterledgerSwap Logo"
             width={28}
             height={28}
             className="mr-2"
           />
           <div className="flex flex-col">
             <Link href="/" className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap">
-              LedgerSwap
+              InterledgerSwap
             </Link>
             {isAdmin && (
               <motion.span 

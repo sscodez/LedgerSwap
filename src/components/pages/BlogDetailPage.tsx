@@ -67,7 +67,7 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
         <h2>1. Use Hardware Wallets for Long-Term Storage</h2>
         <p>Hardware wallets are physical devices that store your private keys offline, making them immune to online attacks. Popular options include:</p>
         <ul>
-          <li>Ledger Nano S/X</li>
+          <li>Interledger Nano S/X</li>
           <li>Trezor Model T</li>
           <li>KeepKey</li>
         </ul>
@@ -396,18 +396,18 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
     },
     {
       id: 6,
-      title: "LedgerSwap Announces New Trading Pairs",
+      title: "InterledgerSwap Announces New Trading Pairs",
       excerpt: "We're excited to announce support for 10 new cryptocurrency trading pairs on our platform.",
       category: "news",
-      author: "LedgerSwap Team",
+      author: "InterledgerSwap Team",
       date: "2024-01-03",
       readTime: "3 min read",
       image: "/assests/blogs/6.png",
       content: `
-        <p>We're thrilled to announce the addition of 10 new cryptocurrency trading pairs to the LedgerSwap platform, expanding our offerings and providing our users with more trading opportunities.</p>
+        <p>We're thrilled to announce the addition of 10 new cryptocurrency trading pairs to the InterledgerSwap platform, expanding our offerings and providing our users with more trading opportunities.</p>
         
         <h2>New Trading Pairs</h2>
-        <p>The following trading pairs are now available on LedgerSwap:</p>
+        <p>The following trading pairs are now available on InterledgerSwap:</p>
         
         <ul>
           <li><strong>AVAX/USDT</strong> - Avalanche</li>
@@ -489,17 +489,17 @@ const BlogDetailPage = ({ postId }: BlogDetailPageProps) => {
         <p>Ready to explore these new trading opportunities? Here's how to get started:</p>
         
         <ol>
-          <li>Log into your LedgerSwap account</li>
+          <li>Log into your InterledgerSwap account</li>
           <li>Navigate to the trading interface</li>
           <li>Select your preferred new trading pair</li>
           <li>Start trading with zero fees this week!</li>
         </ol>
         
-        <p>Don't have an account yet? <a href="/signup">Sign up now</a> and join thousands of traders who trust LedgerSwap for their cryptocurrency trading needs.</p>
+        <p>Don't have an account yet? <a href="/signup">Sign up now</a> and join thousands of traders who trust InterledgerSwap for their cryptocurrency trading needs.</p>
         
         <p>Thank you for your continued support, and happy trading!</p>
         
-        <p><em>- The LedgerSwap Team</em></p>
+        <p><em>- The InterledgerSwap Team</em></p>
       `
     }
   ];

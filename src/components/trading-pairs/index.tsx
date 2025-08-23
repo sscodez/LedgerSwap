@@ -281,14 +281,14 @@ const TradingPairs = () => {
         viewport={{ once: true }}
       >
         <motion.h2 
-          className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10"
+          className="text-3xl text-center md:text-left sm:text-4xl font-semibold mb-6 sm:mb-10"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           <span className="text-white">Top pairs on </span>
-          <span className="text-blue-500">LedgerSwap</span>
+          <span className="text-blue-500">InterledgerSwap</span>
         </motion.h2>
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
@@ -299,7 +299,7 @@ const TradingPairs = () => {
         >
           <div>
             <motion.h3 
-              className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6"
+              className="text-lg text-center md:text-left sm:text-xl font-semibold text-white mb-4 sm:mb-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -322,7 +322,7 @@ const TradingPairs = () => {
           
           <div className="mt-6 md:mt-0">
             <motion.h3 
-              className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-6"
+              className="text-lg text-center md:text-left sm:text-xl font-semibold text-white mb-4 sm:mb-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}

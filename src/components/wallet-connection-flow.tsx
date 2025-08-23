@@ -165,13 +165,13 @@ const WalletConnectionFlow: React.FC = () => {
         onClose={handleCloseModal}
         onSignIn={handleSignIn}
         address={walletAddress}
-        message="Please sign this message to connect to LedgerSwap"
+        message="Please sign this message to connect to InterledgerSwap"
       />
       
       <ConnectedModal
         isOpen={showConnected}
         onClose={handleCloseModal}
-        message="Successfully connected to LedgerSwap"
+        message="Successfully connected to InterledgerSwap"
       />
     </motion.section>
   );

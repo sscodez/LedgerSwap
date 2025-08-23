@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import Banner from '../banner';
 
 const ReviewsPage = () => {
   const [selectedRating, setSelectedRating] = useState('all');
@@ -13,7 +14,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-15",
       title: "Excellent platform for beginners",
-      content: "LedgerSwap made my first crypto trading experience incredibly smooth. The interface is intuitive and the customer support is top-notch. I've been using it for 6 months now and couldn't be happier.",
+      content: "InterledgerSwap made my first crypto trading experience incredibly smooth. The interface is intuitive and the customer support is top-notch. I've been using it for 6 months now and couldn't be happier.",
       verified: true,
       location: "United States"
     },
@@ -23,7 +24,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-12",
       title: "Fast and secure transactions",
-      content: "I've tried several crypto exchanges, but LedgerSwap stands out for its speed and security. Transactions are processed almost instantly, and I feel confident about the safety of my funds.",
+      content: "I've tried several crypto exchanges, but InterledgerSwap stands out for its speed and security. Transactions are processed almost instantly, and I feel confident about the safety of my funds.",
       verified: true,
       location: "Spain"
     },
@@ -63,7 +64,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-03",
       title: "Perfect for crypto newcomers",
-      content: "As someone new to cryptocurrency, LedgerSwap's educational resources and simple interface made learning easy. The step-by-step guides are incredibly helpful.",
+      content: "As someone new to cryptocurrency, InterledgerSwap's educational resources and simple interface made learning easy. The step-by-step guides are incredibly helpful.",
       verified: true,
       location: "Australia"
     },
@@ -73,7 +74,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-01",
       title: "Reliable and trustworthy",
-      content: "Been using LedgerSwap for over a year now. Never had any security issues or downtime problems. The platform just works, which is exactly what you want from a crypto exchange.",
+      content: "Been using InterledgerSwap for over a year now. Never had any security issues or downtime problems. The platform just works, which is exactly what you want from a crypto exchange.",
       verified: true,
       location: "Germany"
     },
@@ -124,55 +125,9 @@ const ReviewsPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative bg-[#001233] py-16 md:py-24 overflow-hidden">
-        <motion.div 
-          className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.4, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          whileHover={{ rotate: 10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/5.png"
-            alt="Holographic element"
-            width={300}
-            height={300}
-            priority
-          />
-        </motion.div>
+    
+      <Banner title="Reviews" description="See what our users are saying about their InterledgerSwap experience" />
 
-        <motion.div 
-          className="absolute top-[10%] right-[5%] w-[80px] h-[80px] md:w-[120px] md:h-[120px] opacity-40 hidden sm:block"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.4, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          whileHover={{ rotate: -10, scale: 1.05 }}
-        >
-          <Image
-            src="/assests/landing-page/3.png"
-            alt="Holographic cube"
-            width={180}
-            height={180}
-            priority
-          />
-        </motion.div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-           Reviews
-            </h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              See what our users are saying about their LedgerSwap experience
-            </p>
-          </motion.div>
-        </div>
-      </div>
 
       {/* Stats Section */}
       <div className="py-16 bg-white">

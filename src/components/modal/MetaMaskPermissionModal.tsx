@@ -59,7 +59,7 @@ const MetaMaskPermissionModal: React.FC<MetaMaskPermissionModalProps> = ({
           
           {/* Website Logo */}
           <div className="w-10 h-10 sm:w-12 sm:h-12">
-            <Image src="/assests/modal/walletconnect.png" alt="LedgerSwap" width={48} height={48}/>
+            <Image src="/assests/modal/walletconnect.png" alt="InterledgerSwap" width={48} height={48}/>
           </div>
         </motion.div>
         

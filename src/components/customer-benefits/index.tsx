@@ -53,7 +53,7 @@ const CustomerBenefits = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Why Choose LedgerSwap?
+            Why Choose InterledgerSwap?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Experience the next generation of cryptocurrency trading with unmatched security, 
@@ -102,7 +102,7 @@ const CustomerBenefits = () => {
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Ready to Experience the Difference?</h3>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              Join thousands of traders who trust LedgerSwap for their cryptocurrency trading needs.
+              Join thousands of traders who trust InterledgerSwap for their cryptocurrency trading needs.
             </p>
             <motion.button
               className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
