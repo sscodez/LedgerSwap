@@ -264,13 +264,25 @@ const PlatinumUserPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className={`relative bg-white rounded-2xl shadow-lg border-2 p-8 ${
-                  tier.popular ? 'border-blue-500 scale-105' : 'border-gray-200'
+                  selectedTier === tier.id 
+                    ? 'border-blue-500 scale-105 ring-2 ring-blue-200' 
+                    : tier.popular 
+                    ? 'border-blue-500 scale-105' 
+                    : 'border-gray-200'
                 } hover:shadow-xl transition-all`}
               >
-                {tier.popular && (
+                {tier.popular && selectedTier !== tier.id && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
                       Most Popular
+                    </span>
+                  </div>
+                )}
+                
+                {selectedTier === tier.id && (
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                    <span className="bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                      ✓ Selected
                     </span>
                   </div>
                 )}
@@ -300,13 +312,16 @@ const PlatinumUserPage = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => setSelectedTier(tier.id)}
                   className={`w-full py-3 rounded-xl font-semibold transition-colors ${
-                    tier.popular
+                    selectedTier === tier.id
+                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                      : tier.popular
                       ? 'bg-blue-600 hover:bg-blue-700 text-white'
                       : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                   }`}
                 >
-                  Choose {tier.name}
+                  {selectedTier === tier.id ? `Selected: ${tier.name}` : `Choose ${tier.name}`}
                 </motion.button>
               </motion.div>
             ))}

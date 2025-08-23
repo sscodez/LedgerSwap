@@ -79,33 +79,33 @@ const MediaPartners = () => {
         <br />
 
         {/* Featured Partners Slider */}
-        <div className="mb-12 md:mb-16 relative my-8 max-w-5xl mx-auto">
-          <div className="overflow-hidden">
+        <div className="mb-12 md:mb-16 relative my-8 max-w-8xl mx-auto">
+          <div className="overflow-hidden mb-8">
             <div className="flex">
               {featuredPartners.map((partner, index) => (
                 <div
                   key={partner.id}
                   className={`w-full transition-opacity duration-500 ${index === activeSlide ? 'block' : 'hidden'}`}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1  md:grid-cols-3 gap-10">
                     {featuredPartners.map((p, i) => {
                       // Calculate relative index for carousel effect
                       const relativeIndex = (i - activeSlide + featuredPartners.length) % featuredPartners.length;
                       return (
                         <div
                           key={p.id}
-                          className="bg-white rounded-lg border border-gray-200 p-6 "
+                          className="bg-white rounded-2xl border     border-gray-200 px-4 pt-6 pb-24 "
                         >
-                          <div className="flex justify-center mb-4">
+                          <div className="flex justify-start mb-4">
                             <Image
                               src={p.logo}
                               alt={p.name}
-                              width={150}
+                              width={120}
                               height={40}
                               className="h-8 object-contain"
                             />
                           </div>
-                          <p className="text-gray-700 text-center text-sm">{p.description}</p>
+                          <p className="text-gray-700 text-left text-[13px]">{p.description}</p>
                         </div>
                       );
                     })}
