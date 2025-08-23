@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Modal from './Modal';
-import { Ethereum } from '../table/table';
-import Image from 'next/image';
 
 interface CoinOption {
   id: string;
@@ -61,8 +59,19 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
       symbol: 'ETH',
       tag: 'ETH',
       icon: (
-    //  {()=> <Ethereum />}
-    <Image src='/assests/cryptocurrency/eth.png' alt='eth' width={20} height= {20} />
+        <svg viewBox="0 0 32 32" className="w-5 h-5 mr-2">
+          <g fill="none" fillRule="evenodd">
+            <circle cx="16" cy="16" r="16" fill="#627EEA"/>
+            <g fill="#FFF" fillRule="nonzero">
+              <path fillOpacity=".602" d="M16.498 4v8.87l7.497 3.35z"/>
+              <path d="M16.498 4L9 16.22l7.498-3.35z"/>
+              <path fillOpacity=".602" d="M16.498 21.968v6.027L24 17.616z"/>
+              <path d="M16.498 27.995v-6.028L9 17.616z"/>
+              <path fillOpacity=".2" d="M16.498 20.573l7.497-4.353-7.497-3.348z"/>
+              <path fillOpacity=".602" d="M9 16.22l7.498 4.353v-7.701z"/>
+            </g>
+          </g>
+        </svg>
       )
     },
     {
@@ -71,7 +80,18 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
       symbol: 'SOL',
       tag: 'SOL',
       icon: (
-        <Image src='/assests/cryptocurrency/sol.png' alt='eth' width={20} height= {20} />
+        <svg viewBox="0 0 32 32" className="w-5 h-5 mr-2">
+          <g fill="none">
+            <circle cx="16" cy="16" r="16" fill="#000"/>
+            <path d="M20.7419 11.0479L18.3019 13.4879L23.8019 18.9879L20.7419 22.0479H11.2619L8.20193 18.9879L13.7019 13.4879L11.2619 11.0479H20.7419ZM8.20193 11.0479L6.20193 13.0479L8.20193 15.0479L10.2019 13.0479L8.20193 11.0479ZM23.8019 11.0479L21.8019 13.0479L23.8019 15.0479L25.8019 13.0479L23.8019 11.0479Z" fill="url(#solana_linear)"/>
+          </g>
+          <defs>
+            <linearGradient id="solana_linear" x1="6.20193" y1="11.0479" x2="25.8019" y2="22.0479" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#9945FF"/>
+              <stop offset="1" stopColor="#14F195"/>
+            </linearGradient>
+          </defs>
+        </svg>
       )
     },
     {
@@ -80,7 +100,12 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
       symbol: 'USDT',
       tag: 'TRX',
       icon: (
-        <Image src='/assests/cryptocurrency/usdt.png' alt='eth' width={20} height= {20} />
+        <svg viewBox="0 0 32 32" className="w-5 h-5 mr-2">
+          <g fill="none" fillRule="evenodd">
+            <circle cx="16" cy="16" r="16" fill="#26A17B"/>
+            <path fill="#FFF" d="M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117"/>
+          </g>
+        </svg>
       )
     }
   ];

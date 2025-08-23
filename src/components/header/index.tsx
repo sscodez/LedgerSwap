@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import ConnectWalletButton from "@/components/connect-wallet-button";
 import { motion, AnimatePresence } from "framer-motion";
+import { RepeatIcon } from "../icons";
+import ConnectWalletButton from "@/components/connect-wallet-button";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
@@ -151,8 +152,8 @@ const Header: React.FC = () => {
             <Link
               href="/signup"
               className={`px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${isAdminOrDashboard
-                  ? "bg-black text-white hover:bg-gray-800"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
+                ? "bg-black text-white hover:bg-gray-800"
+                : "bg-blue-600 text-white hover:bg-blue-700"
                 }`}
             >
               Get an Account
@@ -160,12 +161,26 @@ const Header: React.FC = () => {
           </motion.div>
 
             :
-            <div className="  flex flex-col space-y-3">
+            <div className="flex flex-row items-center space-x-3">
+
+              {isAdmin && (
+                <button
+                  onClick={() => window.location.reload()}
+                  className={`flex items-center justify-center px-4 py-2 rounded-md text-sm text-black transition-colors ${isAdminOrDashboard
+                    ? "bg-[#F1F5F9] text-black hover:bg-gray-200"
+                    : "bg-[#F1F5F9] text-white hover:bg-blue-700"
+                    }`}
+                >
+                  <Image src="/assests/icons/cached.svg" width={16} height={16} alt="Refresh" className="mr-2" />
+                  Refresh
+                </button>
+              )}
+
               <Link
                 href="/account"
                 className={`flex items-center justify-center px-4 py-2 rounded-md text-sm text-black transition-colors ${isAdminOrDashboard
-                    ? "bg-[#F1F5F9] text-white hover:bg-gray-200"
-                    : "bg-[#F1F5F9] text-white hover:bg-blue-700"
+                  ? "bg-[#F1F5F9] text-white hover:bg-gray-200"
+                  : "bg-[#F1F5F9] text-white hover:bg-blue-700"
                   }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -178,6 +193,10 @@ const Header: React.FC = () => {
                 />
                 <p className="text-black">My Account</p>
               </Link>
+
+
+
+
             </div>}
 
         </motion.div>
@@ -230,11 +249,24 @@ const Header: React.FC = () => {
                   Log in
                 </Link>
 
+
+                {isAdmin && (
+                  <button
+                    onClick={() => window.location.reload()}
+                    className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${isAdminOrDashboard
+                      ? "bg-white text-black hover:bg-gray-800"
+                      : "bg-blue-600 text-white hover:bg-blue-700"
+                      }`}
+                  >
+                    Refresh
+                  </button>
+                )}
+
                 <Link
                   href={!isAdminOrDashboard ? "/signup" : "/account"}
                   className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${isAdminOrDashboard
-                      ? "bg-white text-black hover:bg-gray-800"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
+                    ? "bg-white text-black hover:bg-gray-800"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
                     }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -243,18 +275,7 @@ const Header: React.FC = () => {
 
 
 
-                {isAdmin && (
-  <button
-    onClick={() => window.location.reload()}
-    className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${
-      isAdminOrDashboard
-        ? "bg-white text-black hover:bg-gray-800"
-        : "bg-blue-600 text-white hover:bg-blue-700"
-    }`}
-  >
-    Refresh
-  </button>
-)}
+
 
                 {/* <div className="py-2">
                   <ConnectWalletButton />
