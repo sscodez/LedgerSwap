@@ -167,7 +167,7 @@ const Header: React.FC = () => {
                 href="/account"
                 className={`flex items-center justify-center px-4 py-2 rounded-md text-sm text-black transition-colors ${
                   isAdminOrDashboard
-                    ? "bg-[#F1F5F9] text-white hover:bg-gray-800"
+                    ? "bg-[#F1F5F9] text-white hover:bg-gray-200"
                     : "bg-[#F1F5F9] text-white hover:bg-blue-700"
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
