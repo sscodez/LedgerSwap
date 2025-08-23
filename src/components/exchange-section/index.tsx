@@ -90,7 +90,7 @@ const ExchangeSection = () => {
                           <span className="font-medium mr-1 text-black text-sm">{sendCurrency.name}</span>
                           <span className="text-black text-[10px] px-1.5 py-0.5 rounded-full" style={{ backgroundColor: sendCurrency.color }}>{sendCurrency.name}</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-black ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
@@ -105,7 +105,7 @@ const ExchangeSection = () => {
                           >
                             <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
                             <span className="font-medium text-black mr-2">{crypto.name}</span>
-                            <span className="text-black text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ backgroundColor: crypto.color }}>{crypto.fullName}</span>
+                            <span className="text-white text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ backgroundColor: crypto.color }}>{crypto.fullName}</span>
                           </DropdownMenu.Item>
                         ))}
                       </DropdownMenu.Content>
@@ -147,7 +147,7 @@ const ExchangeSection = () => {
                           <span className="font-medium mr-1 text-black text-sm">{receiveCurrency.name}</span>
                           <span className="text-white text-[10px] px-1.5 py-0.5 rounded-full" style={{ backgroundColor: receiveCurrency.color }}>{receiveCurrency.name}</span>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
@@ -162,7 +162,7 @@ const ExchangeSection = () => {
                           >
                             <Image src={crypto.icon} alt={crypto.fullName} width={20} height={20} className="mr-2" />
                             <span className="font-medium text-black mr-2">{crypto.name}</span>
-                            <span className="text-black text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ backgroundColor: crypto.color }}>{crypto.fullName}</span>
+                            <span className="text-white text-[10px] px-1.5 py-0.5 rounded-full ml-auto" style={{ backgroundColor: crypto.color }}>{crypto.fullName}</span>
                           </DropdownMenu.Item>
                         ))}
                       </DropdownMenu.Content>
