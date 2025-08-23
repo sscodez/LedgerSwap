@@ -6,6 +6,8 @@ import MetaMaskPermissionModal from './modal/MetaMaskPermissionModal';
 import MetaMaskUnlockModal from './modal/MetaMaskUnlockModal';
 import SignatureRequestModal from './modal/SignatureRequestModal';
 import ConnectedModal from './modal/ConnectedModal';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const WalletConnectionFlow: React.FC = () => {
   const [showWalletConnect, setShowWalletConnect] = useState(false);
@@ -78,6 +80,24 @@ const WalletConnectionFlow: React.FC = () => {
   return (
     <section className="py-8 sm:py-12 md:py-20 bg-[#001233] relative overflow-hidden">
     
+    <motion.div
+        className="absolute bottom-[0%] left-[0%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px]  hidden sm:block"
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2 }}
+        whileHover={{ rotate: 10, scale: 1.05 }}
+      >
+        <Image
+          src="/assests/landing-page/2.png"
+          alt="Holographic element"
+          width={300}
+          height={300}
+          priority
+        />
+      </motion.div>
+
+
+
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="text-center mb-8 sm:mb-12 md:mb-16">
           <h2 className="text-3xl sm:text-2xl md:text-4xl text-center sm:text-left font-semibold text-white mb-4 sm:mb-6">

@@ -272,7 +272,25 @@ const TradingPairs = () => {
   };
 
   return (
-    <section className="bg-[#001233] py-8 sm:py-12 md:py-16">
+    <section className="bg-[#001233] relative py-8 sm:py-12 md:py-16">
+
+  <motion.div
+        className="absolute bottom-[0%] right-[0%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px]  hidden sm:block"
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2 }}
+        whileHover={{ rotate: 10, scale: 1.05 }}
+      >
+        <Image
+          src="/assests/landing-page/4.png"
+          alt="Holographic element"
+          width={300}
+          height={300}
+          priority
+        />
+      </motion.div>
+
+
       <motion.div 
         className="container mx-auto px-4"
         initial={{ opacity: 0 }}

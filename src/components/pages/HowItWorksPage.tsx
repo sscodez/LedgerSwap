@@ -134,8 +134,8 @@ const HowItWorksPage = () => {
                       : 'bg-white text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  <span className="mr-2 text-lg">{step.icon}</span>
-                  <span className="hidden sm:inline">Step {index + 1}</span>
+                  {/* <span className="mr-2 text-lg">{step.icon}</span> */}
+                  <span className=" md:text-lg text-sm sm:inline">Step {index + 1}</span>
                 </button>
               ))}
             </div>

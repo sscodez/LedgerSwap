@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import Portal from '../ui/Portal';
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('exchange');
@@ -23,21 +22,15 @@ const Hero = () => {
   // Handle input changes
   const handleSendAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSendAmount(e.target.valueAsNumber);
-    // In a real app, you might want to calculate the receive amount based on exchange rates
-    // setReceiveAmount(e.target.value);
+
   };
 
   const handleReceiveAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setReceiveAmount(e.target.valueAsNumber);
-    // In a real app, you might want to calculate the send amount based on exchange rates
-    // setSendAmount(e.target.value);
+  
   };
 
-    const handleNumericInput = (value: string, setter: React.Dispatch<React.SetStateAction<string>>) => {
-      if (value === '' || /^\d*\.?\d*$/.test(value)) {
-        setter(value);
-      }
-    };
+  
 
   return (
     <div className="relative bg-[#001233] py-10 md:py-16 lg:py-20 overflow-hidden">
@@ -45,7 +38,7 @@ const Hero = () => {
       <motion.div
         className="absolute top-[10%] left-[5%] w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] opacity-80 hidden sm:block"
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 0.8, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2 }}
         whileHover={{ rotate: 10, scale: 1.05 }}
       >
