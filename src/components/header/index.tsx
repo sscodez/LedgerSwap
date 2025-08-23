@@ -36,7 +36,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-2 sm:px-4 py-3 sm:py-5 flex items-center justify-between max-w-full relative">
         {/* Logo */}
         <motion.div
-          className="flex items-center"
+          className={`flex items-center ${isAdmin ? "items-start" : "items-center"}`}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
