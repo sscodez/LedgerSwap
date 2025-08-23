@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -25,6 +27,9 @@ const LoginPage = () => {
     e.preventDefault();
     // Handle login logic here
     console.log('Login form submitted:', formData);
+    
+    // Navigate to dashboard after successful login
+    router.push('/dashboard');
   };
 
   return (

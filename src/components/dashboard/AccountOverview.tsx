@@ -26,7 +26,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, icon }) => {
 const AccountOverview: React.FC = () => {
   return (
     <div className="w-full mb-6 sm:mb-8">
-      <h2 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4 text-gray-800">Overview</h2>
+      <h2 className="text-2xl sm:text-xl font-medium mb-3 sm:mb-4 text-gray-800">Overview</h2>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-lg">
         {/* Account Balance */}
