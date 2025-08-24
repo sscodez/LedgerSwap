@@ -9,14 +9,21 @@ interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon }) => {
   return (
-    <div className="rounded-lg p-3 sm:p-4">
-      <div className="mb-1 sm:mb-2 text-xs sm:text-sm text-gray-500 font-semibold truncate">{title}</div>
-      <div className="flex items-center">
-        <div className="mr-2 bg-gray-200 rounded-sm p-1.5 sm:p-2">
-          {icon}
+    <div className="bg-gray-50 md:bg-transparent rounded-lg p-4 md:p-3 border md:border-0 border-gray-200">
+      <div className="mb-2 md:mb-1 text-sm md:text-xs text-gray-500 font-semibold">{title}</div>
+      <div className="flex items-center justify-between md:justify-start">
+        <div className="flex items-center">
+          <div className="mr-3 md:mr-2 bg-gray-200 rounded-sm p-2 md:p-1.5">
+            {icon}
+          </div>
+          <div>
+            <p className="text-lg md:text-sm font-semibold md:font-medium text-black">{value}</p>
+          </div>
         </div>
-        <div>
-          <p className="text-sm sm:text-base md:text-lg text-black font-medium">{value}</p>
+        <div className="md:hidden">
+          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
         </div>
       </div>
     </div>
@@ -28,7 +35,7 @@ const AccountOverview: React.FC = () => {
     <div className="w-full mb-6 sm:mb-8">
       <h2 className="text-2xl sm:text-xl font-medium mb-3 sm:mb-4 text-gray-800">Overview</h2>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-3 md:bg-white md:p-6 md:rounded-lg">
         {/* Account Balance */}
         <StatCard 
           title="Account balance" 

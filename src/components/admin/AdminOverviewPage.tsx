@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import { BitcoinBadge, EthereumBadge, RightArrow, SolanaBadge, TronBadge, USDTBadge } from '../table/table';
 import { BsArrowRight } from "react-icons/bs";
+import CopyButton from '../shared/CopyButton';
 
 const AdminOverviewPage: React.FC = () => {
   // Filter states
@@ -310,8 +311,8 @@ const AdminOverviewPage: React.FC = () => {
                         <td className="py-2 sm:py-3 font-semibold px-3 sm:px-4 whitespace-nowrap text-gray-700 text-xs sm:text-sm">
                           <div className="flex items-center">
                             <span className="truncate max-w-[80px]  sm:max-w-[120px]">{swap.address}</span>
-                            <div className=" w-5 h-5 flex items-center justify-center bg-gray-200 mx-2 rounded-sm ">
-                            <Image className='mx-1  cursor-pointer' src="/assests/icons/file_copy.svg" alt="copy" width={15} height={15} />
+                            <div className="w-5 h-5 flex items-center justify-center bg-gray-200 mx-2 rounded-sm">
+                              <CopyButton textToCopy={swap.address} size={15} />
                             </div>
                           </div>
                         </td>

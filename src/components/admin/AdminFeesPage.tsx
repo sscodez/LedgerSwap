@@ -15,16 +15,24 @@ const AdminFeesPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row justify-between text-black items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
         <h1 className="text-xl sm:text-2xl font-medium">Platform Fee Configuration</h1>
         <div className="flex items-center space-x-2">
-          <button 
-            className="flex items-center px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm  rounded-md hover:bg-gray-50"
-            aria-label="Guides"
-          >
-           <Image src='/assests/icons/book_ribbon.svg' className='mx-2' alt='guide' width={20} height= {20} />
-            Guides
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </button>
+          <div className="relative  group">
+            <button 
+              className="flex items-center px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded-md hover:bg-gray-50"
+              aria-label="Guides"
+            >
+             <Image src='/assests/icons/book_ribbon.svg' className='mx-2' alt='guide' width={20} height= {20} />
+              Guides
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
+            
+            {/* Tooltip */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+              Access platform fee 
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-gray-900"></div>
+            </div>
+          </div>
         </div>
       </div>
       

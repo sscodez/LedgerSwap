@@ -22,7 +22,7 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
   }>({});
   return (
     <div className="flex flex-col sm:flex-row flex-wrap gap-2 mb-4 sm:mb-6">
-      <div className="flex flex-nowrap overflow-x-auto pb-2 sm:pb-0 gap-2 w-full sm:w-auto">
+      <div className="flex flex-nowrap  bg-gray-200 rounded-xl overflow-x-auto  sm:pb-0 gap-2 w-full sm:w-auto">
         {/* Time period filters */}
         <button 
           className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-gray-700 hover:bg-gray-100 text-xs sm:text-sm whitespace-nowrap"

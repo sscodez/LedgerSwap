@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image';
 import React, { useState } from 'react';
+import CopyButton from '../shared/CopyButton';
 
 interface FlaggedUser {
   id: string;
@@ -43,7 +44,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
       </div>
       
       {/* Desktop Table View (hidden on small screens) */}
-      <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hidden md:block p-4">
+      <div className="bg-white rounded-lg  overflow-hidden hidden md:block p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 table-auto">
             <thead className="p-2 sm:p-3 text-black text-xs sm:text-[13px]">
@@ -73,9 +74,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
                       <span className="text-xs sm:text-sm font-medium text-gray-900 mr-2">
                         {formatWalletAddress(user.walletAddress)}
                       </span>
-                      <button className="text-gray-400 hover:text-gray-600">
-                       <Image src="/assests/icons/file_copy.svg" alt="copy" width={15} height={15} />
-                      </button>
+                      <CopyButton textToCopy={user.walletAddress} size={15} />
                     </div>
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
@@ -117,11 +116,9 @@ const AdminFlaggedUsersPage: React.FC = () => {
                 <span className="text-sm font-medium text-gray-900 mr-2">
                   {formatWalletAddress(user.walletAddress)}
                 </span>
-                <button className="text-gray-400 hover:text-gray-600">
-                  <Image src="/assests/icons/file_copy.svg" alt="copy" width={15} height={15} />
-                </button>
+                <CopyButton textToCopy={user.walletAddress} size={15} />
               </div>
-              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
+              <span className="text-xs  text-yellow-800 px-2 py-1 rounded-full">
                 Flagged
               </span>
             </div>

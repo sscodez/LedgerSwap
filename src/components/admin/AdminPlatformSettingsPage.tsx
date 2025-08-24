@@ -8,14 +8,14 @@ const AdminPlatformSettingsPage: React.FC = () => {
   const [feeStructure, setFeeStructure] = useState('standard');
 
   return (
-    <div className="relative text-black w-full px-3 sm:px-4 md:px-6">
+    <div className="relative text-black font-inter w-full px-3 sm:px-4 md:px-6">
       <div className="flex justify-between items-center mb-4 sm:mb-6">
         <h1 className="text-xl sm:text-2xl font-medium">Platform Settings</h1>
       </div>
       
       <div className="grid grid-cols-1 gap-4 sm:gap-6">
         {/* General Settings */}
-        <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+        <div className="bg-white rounded-lg p-4 sm:p-6 ">
           <h2 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">General Settings</h2>
           
           <div className="space-y-3 sm:space-y-4">
@@ -48,7 +48,7 @@ const AdminPlatformSettingsPage: React.FC = () => {
             </div>
             
             {/* Notification Settings */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 border-b border-black/10 gap-2 sm:gap-0">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between py-3 font-inter border-black/10 gap-2 sm:gap-0">
               <div className="mb-2 sm:mb-0">
                 <h3 className="text-sm sm:text-base font-medium">Notification Settings</h3>
                 <p className="text-xs sm:text-sm text-gray-500">Alerts for platform events</p>

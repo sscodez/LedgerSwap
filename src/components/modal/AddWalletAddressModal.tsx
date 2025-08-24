@@ -125,7 +125,7 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <motion.div 
-        className=" rounded-lg w-full max-w-[90%] sm:max-w-lg p-4 sm:p-6 "
+        className="bg-white rounded-lg w-full max-w-[95%] sm:max-w-md md:max-w-lg p-4 sm:p-6 mx-auto"
         initial="hidden"
         animate="visible"
         exit="hidden"
@@ -159,23 +159,23 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
             <label htmlFor="coinSelect" className="block  text-gray-700 font-medium mb-2 text-sm sm:text-base">
               Select a coin
             </label>
-            <div className="relative" style={{ zIndex: 100 }}>
+            <div className="relative">
               <motion.button
                 type="button"
                 id="coinSelect"
-                className="w-full text-left px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg bg-white flex items-center justify-between text-sm sm:text-base"
+                className="w-full text-left px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded-lg bg-white flex items-center justify-between text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 whileHover={{ backgroundColor: "#f9fafb" }}
                 whileTap={{ scale: 0.98 }}
               >
-                <div className="flex items-center">
+                <div className="flex items-center min-w-0 flex-1">
                   {selectedCoinOption.icon}
-                  <div className="flex flex-wrap sm:flex-nowrap items-center">
-                    <span className="font-bold mr-1 sm:mr-2">{selectedCoinOption.symbol}</span>
-                    <span className="bg-blue-100 text-blue-600 px-1 sm:px-2 rounded-md text-xs font-medium">
+                  <div className="flex items-center min-w-0">
+                    <span className="font-bold mr-2">{selectedCoinOption.symbol}</span>
+                    <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-xs font-medium mr-2">
                       {selectedCoinOption.tag}
                     </span>
-                    <span className="text-gray-500 ml-1 sm:ml-2 text-xs sm:text-sm">{selectedCoinOption.name}</span>
+                    <span className="text-gray-500 text-sm truncate">{selectedCoinOption.name}</span>
                   </div>
                 </div>
                 <motion.svg
@@ -198,18 +198,17 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
               <AnimatePresence>
                 {dropdownOpen && (
                   <motion.div 
-                    className="absolute z-[9999] left-0 right-0 top-full mt-1 rounded-md   overflow-visible"
+                    className="absolute z-50 left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ type: "spring", stiffness: 300, damping: 24 }}
-                    style={{ maxHeight: '250px', overflowY: 'auto' }}
                   >
-                    <ul className="max-h-60 rounded-md py-1 text-sm sm:text-base overflow-auto focus:outline-none">
+                    <ul className="max-h-60 rounded-md py-1 text-sm overflow-auto focus:outline-none">
                       {coinOptions.map((coin) => (
                         <motion.li
                           key={coin.id}
-                          className="text-gray-900 my-2 hover:bg-gray-100 cursor-pointer select-none relative py-1 sm:py-2 pl-2 sm:pl-3 pr-6 sm:pr-9"
+                          className="text-gray-900 hover:bg-gray-100 cursor-pointer select-none relative py-2 px-3"
                           onClick={() => {
                             setSelectedCoin(coin.id);
                             setDropdownOpen(false);
@@ -217,14 +216,14 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
                           whileHover={{ backgroundColor: "#f3f4f6" }}
                           whileTap={{ backgroundColor: "#e5e7eb" }}
                         >
-                          <div className="flex mr-2 items-center">
+                          <div className="flex items-center">
                             {coin.icon}
-                            <div className="flex flex-wrap sm:flex-nowrap items-center">
-                              <span className="font-bold mr-1 sm:mr-2">{coin.symbol}</span>
-                              <span className="bg-blue-100 text-blue-600 px-1 sm:px-2 rounded-md text-xs font-medium">
+                            <div className="flex items-center min-w-0">
+                              <span className="font-bold mr-2">{coin.symbol}</span>
+                              <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded-md text-xs font-medium mr-2">
                                 {coin.tag}
                               </span>
-                              <span className="text-gray-500 ml-1 sm:ml-2 text-xs sm:text-sm">{coin.name}</span>
+                              <span className="text-gray-500 text-sm truncate">{coin.name}</span>
                             </div>
                           </div>
                         </motion.li>
@@ -247,7 +246,7 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
               type="text"
               id="walletAddress"
               placeholder="Wallet address"
-              className="w-full p-3 sm:p-3 0 rounded-lg text-black border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+              className="w-full p-3 rounded-lg text-black border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               value={walletAddress}
               onChange={(e) => setWalletAddress(e.target.value)}
               required
@@ -266,7 +265,7 @@ const AddWalletAddressModal: React.FC<AddWalletAddressModalProps> = ({
               type="text"
               id="label"
               placeholder="Label"
-              className="w-full p-3 sm:p-3 text-black rounded-lg border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
+              className="w-full p-3 text-black rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base"
               value={label}
               onChange={(e) => setLabel(e.target.value)}
               required

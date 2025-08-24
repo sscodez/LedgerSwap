@@ -66,9 +66,9 @@ const AdminTokenChainManagementPage: React.FC = () => {
       <div className="bg-white rounded-lg  overflow-hidden hidden md:block p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
-            <thead className="text-[13px]">
+            <thead className="text-sm">
               <tr>
-                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left text-xs font-medium text-gray-500">
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left  font-medium text-gray-500">
                   Token
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
