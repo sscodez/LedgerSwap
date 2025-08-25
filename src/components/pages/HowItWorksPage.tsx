@@ -15,17 +15,17 @@ const HowItWorksPage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
-    {
-      title: "Create Your Account",
-      description: "Sign up in minutes with just your email address. Verify your identity to unlock full trading features.",
-      icon: "👤",
-      details: [
-        "Quick email verification",
-        "Secure password setup",
-        "Optional 2FA for extra security",
-        "Complete KYC for higher limits"
-      ]
-    },
+    // {
+    //   title: "Create Your Account",
+    //   description: "Sign up in minutes with just your email address. Verify your identity to unlock full trading features.",
+    //   icon: "👤",
+    //   details: [
+    //     "Quick email verification",
+    //     "Secure password setup",
+    //     "Optional 2FA for extra security",
+    //     "Complete KYC for higher limits"
+    //   ]
+    // },
     {
       title: "Fund Your Account",
       description: "Add funds using bank transfer, credit card, or deposit cryptocurrencies from your existing wallet.",
