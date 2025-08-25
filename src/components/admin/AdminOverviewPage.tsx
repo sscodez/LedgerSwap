@@ -179,7 +179,7 @@ const AdminOverviewPage: React.FC = () => {
                   onChange={(e) => setFromFilter(e.target.value)}
                 >
                   <option value="all">From</option>
-                  <option value="all">All</option>
+                  {/* <option value="all">All</option> */}
                   <option value="ETH"> ETH</option>
                   <option value="BTC">BTC</option>
                   <option value="SOL">SOL</option>
@@ -203,7 +203,7 @@ const AdminOverviewPage: React.FC = () => {
                     To
                   </option>
 
-                  <option value="all">All</option>
+                  <option value="all">To</option>
                   <option value="ETH">ETH</option>
                   <option value="BTC">BTC</option>
                   <option value="SOL">SOL</option>
