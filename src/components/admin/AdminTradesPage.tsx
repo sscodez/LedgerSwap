@@ -107,8 +107,8 @@ const AdminTradesPage: React.FC = () => {
 
   return (
     <div className="relative overflow-auto">
-      <div className="flex flex-col sm:flex-row  justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
-        <h1 className="text-xl sm:text-2xl font-medium text-black">Trade Activity Monitor</h1>
+      <div className="flex flex-row  sm:flex-row  justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
+        <h1 className="text-lg ml-2 sm:ml-0 sm:text-2xl font-medium text-black">Trade Activity Monitor</h1>
         <button 
           onClick={toggleAddressDisplay}
           className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#021735] text-xs sm:text-[13px] text-white rounded-md  transition-colors flex items-center"

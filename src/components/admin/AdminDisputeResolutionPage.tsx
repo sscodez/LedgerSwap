@@ -24,7 +24,7 @@ const AdminDisputeResolutionPage: React.FC = () => {
     <div className="relative">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl text-black font-inter font-medium">Dispute Resolution Center</h1>
+          <h1 className="text-lg sm:text-2xl text-black ml-2 sm:ml-0 font-inter font-medium">Dispute Resolution Center</h1>
         </div>
       </div>
 
