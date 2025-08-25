@@ -249,7 +249,7 @@ const ExchangeHistory: React.FC = () => {
 
   return (
 
-    <div className=' w-[80%] exsm:w-[90%] xsm:w-full overflow-auto   '>
+    <div className=' w-[80%] lg:w-[95%]  exsm:w-[90%] xsm:w-full overflow-auto   '>
       <RewardsBanner />
       <div className="flex flex-row mt-8 md:flex-row justify-between  items-start md:items-center gap-4 mb-6">
         <h2 className="text-2xl font-medium text-gray-800">Exchange History</h2>
