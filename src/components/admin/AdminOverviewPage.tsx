@@ -18,29 +18,29 @@ const AdminOverviewPage: React.FC = () => {
     {
       id: 1,
       address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>0.750 </p> <EthereumBadge/><BsArrowRight/> <p>1400000</p> <TronBadge/></div>,
+      amount: <div className="flex items-center space-x-2 text-xs"><p>0.750 </p> <EthereumBadge /><BsArrowRight /> <p>1400000</p> <TronBadge /></div>,
       coin: '',
       fromCoin: 'ETH',
       toCoin: 'BTC',
-      network:<div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>,
+      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>,
       status: 'Pending',
       time: '2 min ago'
     },
     {
       id: 2,
       address: '0xa2234s...k4487343s7',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>5340 </p> <SolanaBadge/><BsArrowRight/> <p>1200</p> <TronBadge/></div>,
+      amount: <div className="flex items-center space-x-2 text-xs"><p>5340 </p> <SolanaBadge /><BsArrowRight /> <p>1200</p> <TronBadge /></div>,
       coin: '',
       fromCoin: 'SOL',
       toCoin: 'USDT',
-      network:<div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/sol.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Solana</p></div>,
+      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/sol.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Solana</p></div>,
       status: 'Finished',
       time: '5 min ago'
     },
     {
       id: 3,
       address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>3850 </p> <USDTBadge/><BsArrowRight/> <p>56200</p> <SolanaBadge/></div>,
+      amount: <div className="flex items-center space-x-2 text-xs"><p>3850 </p> <USDTBadge /><BsArrowRight /> <p>56200</p> <SolanaBadge /></div>,
       coin: '',
       fromCoin: "USDT",
       toCoin: '',
@@ -51,7 +51,7 @@ const AdminOverviewPage: React.FC = () => {
     {
       id: 4,
       address: '0xb5678t...j9012345t2',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>5045 </p> <BitcoinBadge/><BsArrowRight/> <p>26700</p> <TronBadge/></div>,
+      amount: <div className="flex items-center space-x-2 text-xs"><p>5045 </p> <BitcoinBadge /><BsArrowRight /> <p>26700</p> <TronBadge /></div>,
       coin: '',
       fromCoin: "USDT",
       toCoin: 'ETh',
@@ -62,7 +62,7 @@ const AdminOverviewPage: React.FC = () => {
     {
       id: 5,
       address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>750 </p> <EthereumBadge/><BsArrowRight/> <p>1200</p> <BitcoinBadge/></div>,
+      amount: <div className="flex items-center space-x-2 text-xs"><p>750 </p> <EthereumBadge /><BsArrowRight /> <p>1200</p> <BitcoinBadge /></div>,
       coin: '',
       fromCoin: 'ETH',
       toCoin: 'SOL',
@@ -133,7 +133,7 @@ const AdminOverviewPage: React.FC = () => {
   return (
     <div className="relative">
       <div className="flex justify-between items-center mb-4 sm:mb-6">
-        <h1 className="text-xl sm:text-2xl text-black font-medium">Overview</h1>
+        <h1 className="text-xl ml-2 sm:ml-0 sm:text-2xl text-black font-medium">Overview</h1>
       </div>
 
       {/* Metrics Cards Grid */}
@@ -159,7 +159,7 @@ const AdminOverviewPage: React.FC = () => {
       </div>
 
 
-      <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4 font-inter text-black font-medium tracking-tight">Recent Swaps</h1>
+      <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4 font-inter text-black ml-2 sm:ml-0 font-medium tracking-tight">Recent Swaps</h1>
 
       {/* Main content grid */}
       <div className="grid grid-cols-1 xl:grid-cols-1 gap-6">
@@ -170,25 +170,6 @@ const AdminOverviewPage: React.FC = () => {
             {/* Filter controls */}
             <div className="flex  text-black flex-wrap gap-3 mb-4">
               {/* Network filter */}
-          
-
-              {/* Status filter */}
-              {/* <div className="relative">
-                <select
-                  className="appearance-none bg-[#F8FAFC] border border-gray-200 rounded-lg py-2 px-3 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  value={statusFilter}
-                  onChange={(e) => setStatusFilter(e.target.value)}
-                >
-                  <option value="all">All Status</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Finished">Finished</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </div>
-              </div> */}
 
               {/* From filter */}
               <div className="relative">
@@ -197,7 +178,7 @@ const AdminOverviewPage: React.FC = () => {
                   value={fromFilter}
                   onChange={(e) => setFromFilter(e.target.value)}
                 >
-                   <option value="all">From</option>
+                  <option value="all">From</option>
                   <option value="all">All</option>
                   <option value="ETH"> ETH</option>
                   <option value="BTC">BTC</option>
@@ -255,7 +236,7 @@ const AdminOverviewPage: React.FC = () => {
 
               {/* Search input */}
               <div className="relative flex-grow max-w-md">
-         
+
                 <input
                   type="text"
                   placeholder="Search Address or Lable"
@@ -264,12 +245,12 @@ const AdminOverviewPage: React.FC = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
 
-<div className="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 pointer-events-none">
+                <div className="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 pointer-events-none">
                   <svg className="w-4 h-4  text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                   </svg>
                 </div>
-             
+
               </div>
 
               {/* Clear filters button */}
