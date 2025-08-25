@@ -106,8 +106,8 @@ const AdminTradesPage: React.FC = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
+    <div className="relative overflow-auto">
+      <div className="flex flex-col sm:flex-row  justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
         <h1 className="text-xl sm:text-2xl font-medium text-black">Trade Activity Monitor</h1>
         <button 
           onClick={toggleAddressDisplay}
@@ -120,7 +120,7 @@ const AdminTradesPage: React.FC = () => {
       </div>
 
       {/* Desktop view - Table */}
-      <div className="hidden md:block bg-white rounded-lg p-4 overflow-hidden">
+      <div className=" bg-white rounded-lg p-4 overflow-x-auto">
         <div className="overflow-x-auto ">
           <table className="min-w-full divide-y divide-gray-200 table-auto text-left">
             <thead className="text-xs sm:text-[13px]">
@@ -152,7 +152,7 @@ const AdminTradesPage: React.FC = () => {
                     </div>
                   </td>
                   <td className="px-4 sm:px-6 py-3 whitespace-nowrap text-xs sm:text-sm text-gray-500">
-                    <div className="flex items-center flex-wrap gap-1 sm:gap-0">
+                    <div className="flex items-center  gap-1 sm:gap-0">
                       <span className="mr-1 sm:mr-2">{swap.amount}</span>
                       <span className="inline-flex items-center px-1.5 sm:px-2.5 py-0.5 rounded-full text-xs font-medium  text-blue-800">
                         {swap.fromCurrency}
@@ -188,57 +188,7 @@ const AdminTradesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile view - Cards */}
-      <div className="md:hidden space-y-4">
-        {mockSwapData.map((swap) => (
-          <div key={swap.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center">
-                <span className="text-xs font-medium text-gray-900 mr-1 truncate max-w-[150px]">
-                  {formatWalletAddress(swap.walletAddress)}
-                </span>
-                <CopyButton textToCopy={swap.walletAddress} size={15} />
-              </div>
-              <span className={`px-2 py-1 text-xs leading-4 font-semibold rounded-full 
-                ${swap.status === 'Pending' ? ' text-yellow-800' : ''}
-                ${swap.status === 'Finished' ? ' text-green-800' : ''}
-                ${swap.status === 'Failed' ? ' text-red-800' : ''}
-              `}>
-                {swap.status}
-              </span>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-3 text-xs">
-              <div>
-                <p className="text-gray-500 mb-1">Swap details</p>
-                <div className="flex items-center text-black flex-wrap gap-1">
-                  <span>{swap.amount}</span>
-                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium  text-blue-800">
-                    {swap.fromCurrency}
-                  </span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mx-1 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                  <span>{swap.toAmount}</span>
-                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium  text-red-800">
-                    {swap.toCurrency}
-                  </span>
-                </div>
-              </div>
-              
-              <div>
-                <p className="text-gray-500 mb-1">Network</p>
-                <NetworkIcon network={swap.network} />
-              </div>
-              
-              <div className="col-span-2 flex justify-between items-center pt-2 border-t border-gray-100">
-                <p className="text-gray-500">Time</p>
-                <p className="text-gray-700">{swap.time}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+   
     </div>
   );
 };

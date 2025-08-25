@@ -141,7 +141,7 @@ const AddressesPage: React.FC = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6 md:px-8">
+    <div className="px-4 overflow-auto  sm:px-6 md:px-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
         <h1 className="text-xl sm:text-2xl text-[#021735] font-medium">My Addresses</h1>
         <button 

@@ -81,7 +81,7 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
   return (
     <>
       {/* Table view for tablet and desktop */}
-      <div className="hidden md:block overflow-x-auto">
+      <div className=" my-2 overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
             <tr className="border-b border-black/20">
@@ -129,47 +129,7 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
         </table>
       </div>
 
-      {/* Mobile card view */}
-      <div className="md:hidden space-y-3">
-        {addresses.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-100">
-            <div className="flex items-center justify-between mb-2 sm:mb-3">
-              <div className="flex items-center">
-                <CoinIcon type={item.coin.iconType} tag={item.coin.tag} label={item.coin.symbol} />
-              </div>
-              <div className="text-[11px] sm:text-[13px] text-gray-700 font-medium">
-                {item.label}
-              </div>
-            </div>
-            
-            <div className="space-y-2 sm:space-y-3">
-              <div>
-                <div className="text-gray-500 text-[11px] sm:text-[13px] mb-0.5 sm:mb-1">Network</div>
-                <div className="flex items-center">
-                  <NetworkIcon network={item.network} />
-                  <span className='text-black/90 text-[11px] sm:text-[13px]'>{item.network}</span>
-                </div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 text-[11px] sm:text-[13px] mb-0.5 sm:mb-1">Address</div>
-                <div className="flex items-center">
-                  <span className="text-gray-700 font-mono text-[10px] sm:text-[13px] truncate block max-w-[75%] sm:max-w-[80%]">
-                    {item.address}
-                  </span>
-                  <button
-                    onClick={() => copyAddress(item.address)}
-                    className="ml-2 text-blue-600 hover:text-blue-800"
-                    aria-label="Copy address"
-                  >
-                    <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+ 
     </>
   );
 };

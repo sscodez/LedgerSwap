@@ -15,10 +15,6 @@ export default function Home() {
     <div className="bg-[#001233]">
       <Hero />
       <RewardsBanner />
-      {/* <CustomerBenefits />
-      <Analytics />
-      <Currencies />
-      <Business /> */}
       <TradingPairs />
       <FeatureGrid />
       <WalletConnectionFlow />

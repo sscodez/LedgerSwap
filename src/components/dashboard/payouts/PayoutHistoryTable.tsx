@@ -25,7 +25,7 @@ const PayoutHistoryTable: React.FC<PayoutHistoryTableProps> = ({ payouts }) => {
   return (
     <>
       {/* Table view for tablet and desktop */}
-      <div className="hidden md:block overflow-x-auto">
+      <div className=" overflow-x-auto">
         <table className="min-w-full bg-white">
           <thead>
             <tr className="border-b border-black/20">
@@ -95,50 +95,7 @@ const PayoutHistoryTable: React.FC<PayoutHistoryTableProps> = ({ payouts }) => {
       </div>
 
       {/* Mobile card view */}
-      <div className="md:hidden space-y-3 sm:space-y-4">
-        {payouts.map((payout:any) => (
-          <div key={payout.id} className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-100">
-            <div className="flex justify-between items-center mb-3 sm:mb-4">
-              <div className="text-[14px] sm:text-[15px] font-medium">{payout.amount}</div>
-              <span className={`px-2 py-0.5 sm:py-1 rounded-md text-[10px] sm:text-xs font-medium ${
-                payout.status === 'Pending' 
-                  ? 'bg-blue-100 text-blue-800' 
-                  : 'bg-green-100 text-green-800'
-              }`}>
-                {payout.status}
-              </span>
-            </div>
-            
-            <div className="space-y-2 sm:space-y-3 text-[12px] sm:text-[13px]">
-              <div>
-                <div className="text-gray-500 mb-0.5 sm:mb-1">Date</div>
-                <div className="font-medium">{payout.date}, {payout.time}</div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 mb-0.5 sm:mb-1">Payout address</div>
-                <div className="flex items-center">
-                  <span className="font-mono text-gray-700 truncate block max-w-[75%] sm:max-w-[80%] text-[11px] sm:text-[12px]">
-                    {payout.address}
-                  </span>
-                  <button 
-                    onClick={() => copyAddress(payout.address)}
-                    className="ml-1 sm:ml-2 text-blue-600 hover:text-blue-800"
-                    aria-label="Copy address"
-                  >
-                    <Image src="/assests/icons/file_copy.svg" alt="Copy" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </button>
-                </div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 mb-0.5 sm:mb-1">Platform Fee</div>
-                <div className="font-medium">{payout.fee}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+
     </>
   );
 };

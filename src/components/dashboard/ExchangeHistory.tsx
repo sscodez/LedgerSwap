@@ -92,27 +92,27 @@ const ExchangeHistory: React.FC = () => {
   const [selectedStatus, setSelectedStatus] = useState('');
   const [fromCurrency, setFromCurrency] = useState('');
   const [toCurrency, setToCurrency] = useState('');
-  
+
   // Apply filters whenever filter values change
   useEffect(() => {
     applyFilters();
   }, [hideUnfinished, searchTerm, activeFilter, selectedStatus, fromCurrency, toCurrency, startDate, endDate]);
-  
+
   // Filter function
   const applyFilters = () => {
     let result = [...mockData];
-    
+
     // Filter by status
     if (selectedStatus) {
       result = result.filter(item => item.status === selectedStatus);
     }
-    
+
     // Filter by period
     if (activeFilter !== 'All') {
       const today = new Date();
       let periodStartDate: Date;
-      
-      switch(activeFilter) {
+
+      switch (activeFilter) {
         case 'Month':
           periodStartDate = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
           break;
@@ -125,62 +125,62 @@ const ExchangeHistory: React.FC = () => {
         default:
           periodStartDate = new Date(0); // Beginning of time
       }
-      
+
       result = result.filter(item => {
         const itemDate = parseExchangeDate(item.date, item.time);
         return itemDate >= periodStartDate;
       });
     }
-    
+
     // Filter by custom date range
     if (startDate || endDate) {
       result = result.filter(item => {
         const itemDate = parseExchangeDate(item.date, item.time);
         const start = startDate ? new Date(startDate) : new Date(0);
         const end = endDate ? new Date(endDate) : new Date(8640000000000000); // Max date
-        
+
         return itemDate >= start && itemDate <= end;
       });
     }
-    
+
     // Filter by hide unfinished
     if (hideUnfinished) {
       result = result.filter(item => item.status === 'Finished');
     }
-    
+
     // Filter by search term
     if (searchTerm) {
-      result = result.filter(item => 
+      result = result.filter(item =>
         item.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.fromCurrency.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.toCurrency.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
+
     // Filter by from currency
     if (fromCurrency) {
       result = result.filter(item => item.fromCurrency === fromCurrency);
     }
-    
+
     // Filter by to currency
     if (toCurrency) {
       result = result.filter(item => item.toCurrency === toCurrency);
     }
-    
+
     setFilteredData(result);
   };
-  
+
   // Helper function to parse date strings
   const parseExchangeDate = (dateStr: string, timeStr: string): Date => {
     // Example format: "15 Aug 2025" and "10:05"
     const [day, month, year] = dateStr.split(' ');
     const [hour, minute] = timeStr.split(':');
-    
-    const monthMap: {[key: string]: number} = {
+
+    const monthMap: { [key: string]: number } = {
       'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
       'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
     };
-    
+
     return new Date(
       parseInt(year),
       monthMap[month],
@@ -189,7 +189,7 @@ const ExchangeHistory: React.FC = () => {
       parseInt(minute)
     );
   };
-  
+
   // Clear all filters
   const clearFilters = () => {
     setActiveFilter('All');
@@ -247,410 +247,362 @@ const ExchangeHistory: React.FC = () => {
 
   return (
 
-    <>
-     <RewardsBanner />
-      <div className="flex flex-col mt-8 md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+    <div className=' w-[80%] exsm:w-[90%] xsm:w-full overflow-auto   '>
+      <RewardsBanner />
+      <div className="flex flex-col mt-8 md:flex-row justify-between  items-start md:items-center gap-4 mb-6">
         <h2 className="text-2xl font-medium text-gray-800">Exchange History</h2>
-        <button 
+        <button
           onClick={exportToCSV}
           className="text-blue-600 hover:text-blue-700 flex items-center transition-colors"
         >
-        <Image src="/assests/icons/vertical_align_bottom.svg" className='mx-1' alt="Export" width={20} height={20} />
+          <Image src="/assests/icons/vertical_align_bottom.svg" className='mx-1' alt="Export" width={20} height={20} />
           Export
         </button>
       </div>
-   
-    <div className="bg-white rounded-lg p-6 shadow-sm">
-    
 
-      {/* Filters */}
-      <div className="text-black text-[13px] rounded-lg p-2 md:p-4 mb-6">
-        {/* Filter sections - reorganized for better mobile layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-2 mb-4">
-          {/* Time period filter - full width on mobile */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-4 lg:col-span-3">
-            <div className="flex justify-between text-[#62748E] items-center overflow-x-auto bg-[#F1F5F9] p-1 rounded-lg w-full">
-              <button 
-                className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'All' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-                onClick={() => setActiveFilter('All')}
-              >
-                All
-              </button>
-              <button 
-                className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Month' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-                onClick={() => setActiveFilter('Month')}
-              >
-                Month
-              </button>
-              <button 
-                className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Week' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-                onClick={() => setActiveFilter('Week')}
-              >
-                Week
-              </button>
-              <button 
-                className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Yesterday' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
-                onClick={() => setActiveFilter('Yesterday')}
-              >
-                Yesterday
-              </button>
+      <div className="bg-white   rounded-lg  ">
+
+
+        {/* Filters */}
+        <div className="text-black text-[13px]  flex rounded-lg p-2 w-full  md:p-4 mb-6">
+          {/* Filter sections - reorganized for better mobile layout */}
+          <div className="grid grid-cols-2 exsm:grid-cols-3 xsm:grid-cols-4   sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-9 gap-2 mb-4">
+            {/* Time period filter - full width on mobile */}
+            <div className="col-span-2 exsm:col-span-2 xsm:col-span-4 sm:col-span-3 md:col-span-3 lg:col-span-3">
+              <div className="flex justify-between text-[#62748E] items-center  bg-[#F1F5F9] p-1 rounded-lg w-full">
+                <button
+                  className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'All' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                  onClick={() => setActiveFilter('All')}
+                >
+                  All
+                </button>
+                <button
+                  className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Month' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                  onClick={() => setActiveFilter('Month')}
+                >
+                  Month
+                </button>
+                <button
+                  className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Week' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                  onClick={() => setActiveFilter('Week')}
+                >
+                  Week
+                </button>
+                <button
+                  className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'Yesterday' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
+                  onClick={() => setActiveFilter('Yesterday')}
+                >
+                  Yesterday
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Search field - full width on mobile */}
-        
+            {/* Search field - full width on mobile */}
 
 
-    
 
-          {/* Date range filters - stack on mobile */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-2    lg:col-span-3">
-          
-              <div className="flex flex-col px-2 justify-center  sm:flex-row items-start sm:items-center ">
-                <span className="text-gray-500 mb-1 sm:mb-0 sm:mr-2">Date:</span>
-                <input 
-                  type="date" 
-                  className="  px-3 py-3 bg-[#F1F5F9] rounded-lg w-full" 
+
+
+            {/* Date range filters - stack on mobile */}
+            <div className="col-span-2 xsm:col-span-2  sm:col-span-3 md:col-span-2    lg:col-span-3">
+
+              <div className="flex flex-row items-center px-2 justify-center  sm:flex-row  sm:items-center ">
+                <span className="text-gray-500 mb-1 mr-2 sm:mb-0 sm:mr-2">Date:</span>
+                <input
+                  type="date"
+                  className="  px-3 py-3 bg-[#F1F5F9] rounded-lg w-full"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                 />
               </div>
-         
-            
-          </div>
 
-          {/* Status dropdown */}
-          <div className="col-span-1">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger asChild>
-                <button className=" bg-[#F1F5F9] rounded-lg text-[#62748E] px-4 py-3 flex items-center justify-between w-full">
-                  <span className="truncate">{selectedStatus || 'Status'}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Portal>
-                <StyledContent 
-                  className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
-                  sideOffset={5}
-                  align="start"
-                  forceMount
-                >
-                  <div className="py-1">
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setSelectedStatus('Pending')}
-                    >
-                      <span>Pending</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setSelectedStatus('Finished')}
-                    >
-                      <span>Finished</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setSelectedStatus('')}
-                    >
-                      <span>All</span>
-                    </DropdownMenu.Item>
-                  </div>
-                </StyledContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Root>
-          </div>
 
-          <div className="col-span-1 sm:col-span-2  rounded-lg bg-[#F1F5F9] md:col-span-1 lg:col-span-2 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
-            <div className="flex w-full justify-center py-3 md:py-0 items-center">
-              <span className="mr-2  text-[#62748E]  whitespace-nowrap">Hide unfinished</span>
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  className="sr-only peer" 
-                  checked={hideUnfinished}
-                  onChange={() => setHideUnfinished(!hideUnfinished)}
-                />
-                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-              </label>
             </div>
-       
-          </div>
-  
 
+            {/* Status dropdown */}
+            <div className=" xsm:col-span-2 col-span-1">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className=" bg-[#F1F5F9] rounded-lg text-[#62748E] px-4 py-3 flex items-center justify-between w-full">
+                    <span className="truncate">{selectedStatus || 'Status'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Portal>
+                  <StyledContent
+                    className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]"
+                    sideOffset={5}
+                    align="start"
+                    forceMount
+                  >
+                    <div className="py-1">
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setSelectedStatus('Pending')}
+                      >
+                        <span>Pending</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setSelectedStatus('Finished')}
+                      >
+                        <span>Finished</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setSelectedStatus('')}
+                      >
+                        <span>All</span>
+                      </DropdownMenu.Item>
+                    </div>
+                  </StyledContent>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
+            </div>
 
-          <div className="col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-4">
-            <div className="relative w-full">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+            <div className="col-span-1  xsm:col-span-1  sm:col-span-2 rounded-lg bg-[#F1F5F9] md:col-span-2 lg:col-span-2 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
+              <div className="flex  w-full overflow-hidden justify-between px-3 py-3 md:py-0 items-center">
+                <span className="mr-2  text-[#62748E]    md:text-xs  lg:tex-sm xl:text-sm  whitespace-nowrap">Hide unfinished</span>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={hideUnfinished}
+                    onChange={() => setHideUnfinished(!hideUnfinished)}
+                  />
+                  <div className=" w-8   xl:w-11  h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                </label>
               </div>
-              <input 
-                type="text" 
-                className=" py-3 bg-[#F1F5F9]  text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5" 
-                placeholder="Search by ID or currency" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+
             </div>
-          </div>
 
 
- 
 
-          {/* From currency dropdown */}
-          <div className="col-span-1">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger asChild>
-                <button className=" bg-[#F1F5F9] rounded-lg text-[#90A1B9] px-4 py-3 flex items-center justify-between w-full">
-                  <span className="truncate">{fromCurrency || 'From'}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Portal>
-                <StyledContent 
-                  className="bg-white  rounded-lg shadow-xl min-w-[150px] z-[999999]" 
-                  sideOffset={5}
-                  align="start"
-                  forceMount
-                >
-                  <div className="py-1">
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setFromCurrency('USDT')}
-                    >
-                      <span>USDT</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setFromCurrency('ETH')}
-                    >
-                      <span>ETH</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setFromCurrency('BTC')}
-                    >
-                      <span>BTC</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setFromCurrency('')}
-                    >
-                      <span>All</span>
-                    </DropdownMenu.Item>
-                  </div>
-                </StyledContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Root>
-          </div>
-
-          {/* To currency dropdown */}
-          <div className="col-span-1">
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger asChild>
-                <button className=" bg-[#F1F5F9] rounded-lg px-4 text-[#90A1B9] py-3 flex items-center justify-between w-full">
-                  <span className="truncate  ">{toCurrency || 'To'}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Portal>
-                <StyledContent 
-                  className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]" 
-                  sideOffset={5}
-                  align="start"
-                  forceMount
-                >
-                  <div className="py-1">
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setToCurrency('USDT')}
-                    >
-                      <span>USDT</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setToCurrency('ETH')}
-                    >
-                      <span>ETH</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setToCurrency('BTC')}
-                    >
-                      <span>BTC</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setToCurrency('USDC')}
-                    >
-                      <span>USDC</span>
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item 
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
-                      onClick={() => setToCurrency('')}
-                    >
-                      <span>All</span>
-                    </DropdownMenu.Item>
-                  </div>
-                </StyledContent>
-              </DropdownMenu.Portal>
-            </DropdownMenu.Root>
-          </div>
-
-          {/* Hide unfinished toggle and Clear button */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
-          
-            <button 
-              className=" bg-[#F1F5F9] rounded-xl px-4 py-3 border border-gray-700 whitespace-nowrap"
-              onClick={clearFilters}
-            >
-              Clear 
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Table for tablet and desktop */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full">
-          <thead>
-            <tr className="border-b border-gray-200">
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">Exchange ID</th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">Status</th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">
-                <div className="flex items-center">
-                  Date
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+            <div className="col-span-2 xsm:col-span-3   sm:col-span-2 md:col-span-4 lg:col-span-4">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </div>
-              </th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">From</th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">To</th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">Platform Fees</th>
-              <th className="py-3 px-4 text-left text-sm font-medium text-gray-500">Cashback</th>
-            </tr>
-          </thead>
-          <tbody className='text-[13px]'>
-            {filteredData.map((item) => (
-              <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50">
-                <td className="py-4 px-4 text-[13px] text-blue-600 hover:underline cursor-pointer">
-                  {item.id}
-                </td>
-                <td className="py-4 text-[13px] px-4">
-                  <span className={`px-2 py-1 rounded-md font-medium ${
-                    item.status === 'Pending' 
-                      ? 'bg-blue-100 text-blue-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {item.status}
-                  </span>
-                </td>
-                <td className="py-4 px-4 text-gray-600">
-                  <div>
-                    {item.date}
-                  </div>
-                  <div className="text-[13px] text-gray-500">
-                    {item.time}
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="flex items-center">
-                    <div className="text-gray-900">
-                      {item.fromCurrency}
-                    </div>
-                    <div className="text-gray-500 ml-2">
-                      {item.fromAmount}
-                    </div>
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="flex items-center">
-                    <div className="text-gray-900">
-                      {item.toCurrency}
-                    </div>
-                    <div className="text-gray-500 ml-2">
-                      {item.toAmount}
-                    </div>
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="text-[13px] text-gray-500">
-                    {item.fee}
-                  </div>
-                  <div className="text-[13px] text-gray-900">
-                    {item.feePercentage}
-                  </div>
-                </td>
-                <td className="py-4 px-4">
-                  <div className="text-[13px] text-gray-900">
-                    USDT
-                  </div>
-                  <div className="text-[13px] text-gray-500">
-                    {item.cashback}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Mobile card view */}
-      <div className="md:hidden text-black space-y-4">
-        {filteredData.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-sm p-4 border border-gray-100">
-            <div className="flex justify-between items-start mb-3">
-              <div className="text-[13px] text-blue-600 hover:underline cursor-pointer truncate max-w-[70%]">
-                {item.id}
+                <input
+                  type="text"
+                  className=" py-3 bg-[#F1F5F9]  text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5"
+                  placeholder="Search by ID or currency"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
-              <span className={`px-2 py-1 rounded-md text-xs font-medium ${
-                item.status === 'Pending' 
-                  ? 'bg-blue-100 text-blue-800' 
-                  : 'bg-green-100 text-green-800'
-              }`}>
-                {item.status}
-              </span>
             </div>
-            
-            <div className="grid grid-cols-2 gap-3 text-[13px]">
-              <div>
-                <div className="text-gray-500 mb-1">Date</div>
-                <div className="font-medium">{item.date}, {item.time}</div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 mb-1">From</div>
-                <div className="font-medium">{item.fromCurrency} {item.fromAmount}</div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 mb-1">To</div>
-                <div className="font-medium">{item.toCurrency} {item.toAmount}</div>
-              </div>
-              
-              <div>
-                <div className="text-gray-500 mb-1">Platform Fee</div>
-                <div className="font-medium">{item.feePercentage}</div>
-              </div>
-              
-              <div className="col-span-2">
-                <div className="text-gray-500 mb-1">Cashback</div>
-                <div className="font-medium">USDT {item.cashback}</div>
-              </div>
+
+
+
+
+            {/* From currency dropdown */}
+            <div className="col-span-1">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className=" bg-[#F1F5F9] rounded-lg text-[#90A1B9] px-4 py-3 flex items-center justify-between w-full">
+                    <span className="truncate">{fromCurrency || 'From'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Portal>
+                  <StyledContent
+                    className="bg-white  rounded-lg shadow-xl min-w-[150px] z-[999999]"
+                    sideOffset={5}
+                    align="start"
+                    forceMount
+                  >
+                    <div className="py-1">
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setFromCurrency('USDT')}
+                      >
+                        <span>USDT</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setFromCurrency('ETH')}
+                      >
+                        <span>ETH</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setFromCurrency('BTC')}
+                      >
+                        <span>BTC</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setFromCurrency('')}
+                      >
+                        <span>All</span>
+                      </DropdownMenu.Item>
+                    </div>
+                  </StyledContent>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
+            </div>
+
+            {/* To currency dropdown */}
+            <div className="col-span-1">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className=" bg-[#F1F5F9] rounded-lg px-4 text-[#90A1B9] py-3 flex items-center justify-between w-full">
+                    <span className="truncate  ">{toCurrency || 'To'}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Portal>
+                  <StyledContent
+                    className="bg-white rounded-lg shadow-xl min-w-[150px] z-[999999]"
+                    sideOffset={5}
+                    align="start"
+                    forceMount
+                  >
+                    <div className="py-1">
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setToCurrency('USDT')}
+                      >
+                        <span>USDT</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setToCurrency('ETH')}
+                      >
+                        <span>ETH</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setToCurrency('BTC')}
+                      >
+                        <span>BTC</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setToCurrency('USDC')}
+                      >
+                        <span>USDC</span>
+                      </DropdownMenu.Item>
+                      <DropdownMenu.Item
+                        className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                        onClick={() => setToCurrency('')}
+                      >
+                        <span>All</span>
+                      </DropdownMenu.Item>
+                    </div>
+                  </StyledContent>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
+            </div>
+
+            {/* Hide unfinished toggle and Clear button */}
+            <div className="col-span-1 sm:col-span-2 md:col-span-1 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
+
+              <button
+                className=" bg-[#F1F5F9] rounded-xl px-4 py-3 border border-gray-700 whitespace-nowrap"
+                onClick={clearFilters}
+              >
+                Clear
+              </button>
             </div>
           </div>
-        ))}
+        </div>
+
+        
+
+        {/* Responsive Table */}
+        <div className=' overflow-x-auto'>
+     
+          <table className="w-full " >
+            <thead>
+              <tr className="border-b border-gray-200">
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">Exchange ID</th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">Status</th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">
+                  <div className="flex items-center">
+                    Date
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 md:h-4 md:w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">From</th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">To</th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">Fees</th>
+                <th className="py-2 md:py-3 px-2 md:px-4 text-left text-[10px] md:text-sm font-medium text-gray-500">Cashback</th>
+              </tr>
+            </thead>
+            <tbody className='text-[10px] md:text-[13px]'>
+              {filteredData.map((item) => (
+                <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50">
+                  <td className="py-2 md:py-4 px-2 md:px-4 text-[10px] md:text-[13px] text-blue-600 hover:underline cursor-pointer">
+                    <span className="truncate block max-w-[80px] md:max-w-none">{item.id}</span>
+                  </td>
+                  <td className="py-2 md:py-4 text-[10px] md:text-[13px] px-2 md:px-4">
+                    <span className={`px-1 md:px-2 py-0.5 md:py-1 rounded-md font-medium text-[8px] md:text-xs ${item.status === 'Pending'
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-green-100 text-green-800'
+                      }`}>
+                      {item.status}
+                    </span>
+                  </td>
+                  <td className="py-2 md:py-4 px-2 md:px-4 text-gray-600">
+                    <div className="text-[10px] md:text-[13px]">
+                      {item.date}
+                    </div>
+                    <div className="text-[8px] md:text-[13px] text-gray-500">
+                      {item.time}
+                    </div>
+                  </td>
+                  <td className="py-2 md:py-4 px-2 md:px-4">
+                    <div className="text-[10px] md:text-[13px] text-gray-900 font-medium">
+                      {item.fromCurrency}
+                    </div>
+                    <div className="text-[8px] md:text-[11px] text-gray-500 truncate max-w-[60px] md:max-w-none">
+                      {item.fromAmount}
+                    </div>
+                  </td>
+                  <td className="py-2 md:py-4 px-2 md:px-4">
+                    <div className="text-[10px] md:text-[13px] text-gray-900 font-medium">
+                      {item.toCurrency}
+                    </div>
+                    <div className="text-[8px] md:text-[11px] text-gray-500 truncate max-w-[60px] md:max-w-none">
+                      {item.toAmount}
+                    </div>
+                  </td>
+                  <td className="py-2 md:py-4 px-2 md:px-4">
+                    <div className="text-[8px] md:text-[13px] text-gray-500">
+                      {item.fee}
+                    </div>
+                    <div className="text-[10px] md:text-[13px] text-gray-900 font-medium">
+                      {item.feePercentage}
+                    </div>
+                  </td>
+                  <td className="py-2 md:py-4 px-2 md:px-4">
+                    <div className="text-[10px] md:text-[13px] text-gray-900 font-medium">
+                      USDT
+                    </div>
+                    <div className="text-[8px] md:text-[11px] text-gray-500">
+                      {item.cashback}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+       
+          </div>
       </div>
     </div>
-    </>
   );
 };
 

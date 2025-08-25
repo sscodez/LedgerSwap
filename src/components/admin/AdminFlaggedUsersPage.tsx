@@ -35,7 +35,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
   };
 
   return (
-    <div className="relative text-black px-1 sm:px-0">
+    <div className="relative text-black px-1 overflow-auto sm:px-0">
       <div className="flex justify-between items-center mb-4 sm:mb-6">
         <div>
           <h1 className="text-xl sm:text-2xl font-medium">Flagged Users</h1>
@@ -44,7 +44,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
       </div>
       
       {/* Desktop Table View (hidden on small screens) */}
-      <div className="bg-white rounded-lg  overflow-hidden hidden md:block p-4">
+      <div className="bg-white rounded-lg  overflow-x-auto  p-4">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 table-auto">
             <thead className="p-2 sm:p-3 text-black text-xs sm:text-[13px]">
@@ -108,53 +108,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
       </div>
 
       {/* Mobile Card View (visible only on small screens) */}
-      <div className="md:hidden space-y-4">
-        {users.map((user) => (
-          <div key={user.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
-            <div className="flex justify-between items-start mb-3">
-              <div className="flex items-center">
-                <span className="text-sm font-medium text-gray-900 mr-2">
-                  {formatWalletAddress(user.walletAddress)}
-                </span>
-                <CopyButton textToCopy={user.walletAddress} size={15} />
-              </div>
-              <span className="text-xs  text-yellow-800 px-2 py-1 rounded-full">
-                Flagged
-              </span>
-            </div>
-            
-            <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
-              <div>
-                <p className="text-gray-500">Reason</p>
-                <p className="font-medium">{user.reason}</p>
-              </div>
-              <div>
-                <p className="text-gray-500">Total Swaps</p>
-                <p className="font-medium">{user.totalSwaps}</p>
-              </div>
-              <div>
-                <p className="text-gray-500">Flagged Date</p>
-                <p className="font-medium">{user.flaggedDate}</p>
-              </div>
-            </div>
-            
-            <div className="flex space-x-2">
-              <button 
-                onClick={() => handleReview(user)}
-                className="flex-1 text-center text-blue-600 text-xs bg-blue-100 py-2 rounded-md hover:text-blue-900"
-              >
-                Review
-              </button>
-              <button 
-                onClick={() => handleClearFlag(user.id)}
-                className="flex-1 text-center text-green-600 text-xs bg-green-100 rounded-md py-2 hover:text-green-900"
-              >
-                Clear Flag
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+  
 
       {/* Review Modal */}
       {selectedUser && (

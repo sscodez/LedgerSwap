@@ -131,7 +131,7 @@ const PayoutsPage: React.FC = () => {
   };
 
   return (
-    <div className="px-3 sm:px-4 md:px-6">
+    <div className="px-3 overflow-auto sm:px-4 md:px-6">
       <RewardsBanner />
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-6 sm:mt-8 mb-4 sm:mb-6 gap-2">
         <h1 className="text-xl sm:text-2xl text-black font-medium">Payouts</h1>
