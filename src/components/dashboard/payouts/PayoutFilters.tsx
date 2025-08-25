@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { MdDateRange } from 'react-icons/md';
 
 export interface DateRange {
   startDate: string;
@@ -69,12 +70,10 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
       <div className="relative w-auto   ">
         <div className="flex items-center bg-[#F1F5F9] rounded-lg   justify-between px-4  py-3   text-gray-700  text-sm sm:text-sm">
           <span className="whitespace-nowrap">Date:</span>
-          <div className="ml-2 flex   items-center">
-
-
+          <div className="ml-2 flex   items-center relative">
             <input
               type="date"
-              className=" sm:w-28  bg-[#F1F5F9] outline-none text-gray-600 text-xs sm:text-sm"
+              className=" sm:w-28  bg-[#F1F5F9] outline-none text-gray-600 text-xs sm:text-sm pr-6"
               placeholder="30.10.25"
               onChange={(e) => {
                 const endDate = e.target.value;
@@ -87,11 +86,7 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
                 });
               }}
             />
-            {/* <button className="ml-1 sm:ml-2 text-gray-500 hover:text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </button> */}
+            <MdDateRange className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 pointer-events-none" />
           </div>
         </div>
       </div>

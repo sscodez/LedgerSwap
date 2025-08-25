@@ -57,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
   };
 
   return (
-    <aside className="w-64 min-h-screen mb-5 flex flex-col bg-white rounded-lg">
+    <aside className="w-64 min-h-screen mb-5 flex flex-col  bg-white rounded-lg">
       {/* Mobile close button */}
       {onCloseMobile && (
         <div className="flex justify-end p-4 lg:hidden">
@@ -124,7 +124,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
       </div>
 
       {/* USDT Switch Banner */}
-      <div className='px-4 mb-4'>
+      <div className="px-3 sm:px-4 mt-3 sm:mt-4 hidden md:block">
         <UsdtSwitchBanner />
       </div>
 

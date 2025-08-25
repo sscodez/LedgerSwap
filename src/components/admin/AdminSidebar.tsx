@@ -74,11 +74,11 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
   ];
 
   return (
-    <>
-      {/* Sidebar content */}
+    
+     
       <aside 
         id="admin-sidebar"
-        className="h-full w-64 bg-white rounded-lg lg:shadow-none">
+      className="w-64 min-h-screen overflow-auto mb-5 flex flex-col bg-white rounded-lg">
       {/* Logo Area */}
     
 
@@ -131,20 +131,20 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       </nav>
 
       {/* Admin Actions */}
-      <div className="px-3 sm:px-4 mt-4 sm:mt-6">
+      <div className="px-4 mt-2 mb-4">
         <Link 
           href="/dashboard/exchange" 
-          onClick={handleNavClick} /* Close sidebar when navigating to exchange */
-          className="flex bg-[#125FF0] justify-center items-center w-full p-1.5 sm:p-2 text-gray-500 hover:text-gray-800 rounded-md transition-colors"
+          onClick={handleNavClick}
+          className="flex bg-[#125FF0] justify-center items-center w-full p-2 text-gray-500 hover:text-gray-800 rounded-md transition-colors"
         >
-          <span className='text-white text-xs sm:text-sm font-semibold'>New Exchange</span>
-          <div className="flex ml-1.5 sm:ml-2 items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-lg mr-2 sm:mr-3 text-white">
-            <RepeatIcon size={14} color="white" />
+          <span className='text-white font-semibold'>New Exchange</span>
+          <div className="flex ml-2 items-center justify-center w-8 h-8 rounded-lg mr-3 text-white">
+            <RepeatIcon size={16} color="white" />
           </div>
         </Link>
       </div>
 
-      <div className="px-3 sm:px-4 mt-3 sm:mt-4">
+      <div className="px-3 sm:px-4 mt-3 sm:mt-4 hidden md:block">
         <UsdtSwitchBanner />
       </div>
 
@@ -159,7 +159,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
         </div>
       </div>
     </aside>
-    </>
+  
   );
 };
 
