@@ -2,43 +2,46 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { BsLightningChargeFill, BsGem, BsShieldLock, BsGift } from 'react-icons/bs';
+import { FaCrown, FaBullseye } from 'react-icons/fa';
+import { RiVipCrownFill } from 'react-icons/ri';
 
 const PlatinumUserPage = () => {
   const [selectedTier, setSelectedTier] = useState('platinum');
 
   const platinumFeatures = [
     {
-      icon: '⚡',
+      icon: <BsLightningChargeFill size={32} className="text-blue-600" />,
       title: 'Priority Trading',
       description: 'Execute trades with zero slippage and instant settlement',
       color: 'from-blue-500 to-purple-600'
     },
     {
-      icon: '💎',
+      icon: <BsGem size={32} className="text-purple-600" />,
       title: 'Exclusive Assets',
       description: 'Access to pre-launch tokens and exclusive investment opportunities',
       color: 'from-purple-500 to-pink-600'
     },
     {
-      icon: '🎯',
+      icon: <FaBullseye size={32} className="text-green-600" />,
       title: 'Advanced Analytics',
       description: 'Professional trading tools and real-time market insights',
       color: 'from-green-500 to-teal-600'
     },
     {
-      icon: '🔒',
+      icon: <BsShieldLock size={32} className="text-orange-600" />,
       title: 'Enhanced Security',
       description: 'Multi-signature wallets and insurance coverage up to $1M',
       color: 'from-orange-500 to-red-600'
     },
     {
-      icon: '👑',
+      icon: <RiVipCrownFill size={32} className="text-yellow-600" />,
       title: 'VIP Support',
       description: '24/7 dedicated account manager and priority customer service',
       color: 'from-yellow-500 to-orange-600'
     },
     {
-      icon: '🎁',
+      icon: <BsGift size={32} className="text-indigo-600" />,
       title: 'Exclusive Rewards',
       description: 'Higher staking rewards, airdrops, and bonus incentives',
       color: 'from-indigo-500 to-purple-600'
@@ -145,7 +148,7 @@ const PlatinumUserPage = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <span>👑</span>
+              <FaCrown size={16} />
               <span>PREMIUM MEMBERSHIP</span>
             </div>
             <h1 className="text-6xl  md:text-5xl lg:text-6xl font-semibold text-white mb-4">
@@ -224,7 +227,7 @@ const PlatinumUserPage = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="bg-white rounded-2xl  border border-gray-100 p-8 hover:shadow-xl transition-shadow"
               >
-                <div className={`w-20 h-20  flex items-center justify-center text-4xl mb-6`}>
+                <div className={`w-20 h-20 flex items-center justify-center mb-6`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">

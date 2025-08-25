@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-import { FaGlobe, FaMobile } from "react-icons/fa6";
+import { FaGlobe, FaMobile, FaLink, FaExchangeAlt } from "react-icons/fa";
 import { GiKeyLock } from "react-icons/gi";
 import { ImHeadphones } from "react-icons/im";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
@@ -15,48 +15,37 @@ const HowItWorksPage = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
-    // {
-    //   title: "Create Your Account",
-    //   description: "Sign up in minutes with just your email address. Verify your identity to unlock full trading features.",
-    //   icon: "👤",
-    //   details: [
-    //     "Quick email verification",
-    //     "Secure password setup",
-    //     "Optional 2FA for extra security",
-    //     "Complete KYC for higher limits"
-    //   ]
-    // },
     {
-      title: "Fund Your Account",
-      description: "Add funds using bank transfer, credit card, or deposit cryptocurrencies from your existing wallet.",
-      icon: "💳",
+      title: "Connect Your Wallet",
+      description: "Simply connect your crypto wallet - no account creation or KYC required. Trade as a guest instantly.",
+      icon: <FaLink size={48} fill="#001233" />,
       details: [
-        "Multiple payment methods",
-        "Instant credit card deposits",
-        "Bank transfers (1-3 days)",
-        "Crypto deposits from any wallet"
+        "No KYC verification needed",
+        "Connect any Web3 wallet",
+        "Trade as guest or create optional account",
+        "Complete anonymity maintained"
       ]
     },
     {
-      title: "Start Trading",
-      description: "Use our intuitive exchange interface to buy, sell, or swap cryptocurrencies at competitive rates.",
-      icon: "💱",
+      title: "Select Your Swap",
+      description: "Choose the cryptocurrencies you want to swap. We support unique tokens from multiple blockchains globally.",
+      icon: <FaExchangeAlt size={48} fill="#001233" />,
       details: [
-        "Real-time market prices",
-        "Advanced trading tools",
-        "Instant order execution",
-        "Low fees starting at 0.05%"
+        "Wide range of unique tokens",
+        "Multi-blockchain support",
+        "Real-time exchange rates",
+        "Global token availability"
       ]
     },
     {
-      title: "Secure Your Assets",
-      description: "Withdraw to your personal wallet or keep funds secure in our platform with industry-leading security.",
-      icon: "🔒",
+      title: "Execute Swap Instantly",
+      description: "Your swap is executed automatically through our fully decentralized protocol. Fast, secure, and anonymous.",
+      icon: <BsLightningChargeFill size={48} fill="#001233" />,
       details: [
-        "Cold storage protection",
-        "Multi-signature security",
-        "Insurance coverage",
-        "24/7 monitoring"
+        "Fully automated DeFi swap",
+        "No funds held by platform",
+        "Lightning-fast execution",
+        "Complete decentralization"
       ]
     }
   ];
@@ -65,32 +54,27 @@ const HowItWorksPage = () => {
     {
       icon: <BsLightningChargeFill fill='#001233' />,
       title: "Lightning Fast",
-      description: "Execute trades in milliseconds with our high-performance matching engine"
+      description: "Execute swaps instantly with our automated DeFi protocol - no waiting, no delays"
     },
     {
       icon: <GiKeyLock fill='#001233'/>,
-      title: "Bank-Level Security",
-      description: "Your funds are protected with institutional-grade security measures"
+      title: "100% Anonymous",
+      description: "No KYC, no personal data collection. Trade completely anonymously without centralized oversight"
     },
     {
       icon: <FaMobile fill='#001233' />,
-      title: "Mobile Ready",
-      description: "Trade on the go with our responsive web platform and mobile app"
+      title: "Fully Decentralized",
+      description: "We don't hold your funds. Everything runs on-chain through smart contracts"
     },
     {
       icon: <FaGlobe fill='#001233'/>,
       title: "Global Access",
-      description: "Available worldwide with support for multiple currencies and languages"
-    },
-    {
-      icon: <RiMoneyDollarCircleFill fill='#001233' />,
-      title: "Low Fees",
-      description: "Competitive trading fees starting at just 0.05% per transaction"
+      description: "Available worldwide without relying on centralized banks or traditional financial systems"
     },
     {
       icon: <ImHeadphones fill='#001233' />,
-      title: "24/7 Support",
-      description: "Get help anytime with our round-the-clock customer support team"
+      title: "Unique Tokens",
+      description: "Access rare and unique tokens from multiple blockchains that aren't available elsewhere"
     }
   ];
 
@@ -116,7 +100,7 @@ const HowItWorksPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
     
-      <Banner title="How It Works" description="Start trading cryptocurrencies in 4 simple steps. It's easier than you think." />
+      <Banner title="How It Works" description="Experience truly decentralized crypto swapping in 3 simple steps. No KYC, no centralized control." />
 
       {/* Steps Section */}
       <div className="py-16">
@@ -150,7 +134,7 @@ const HowItWorksPage = () => {
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <div className="text-6xl mb-6">{steps[activeStep].icon}</div>
+                  <div className="mb-6">{steps[activeStep].icon}</div>
                   <h2 className="text-3xl font-semibold text-gray-900 mb-4">
                     {steps[activeStep].title}
                   </h2>
@@ -169,7 +153,7 @@ const HowItWorksPage = () => {
                   </ul>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-8 text-center">
-                  <div className="text-8xl mb-4">{steps[activeStep].icon}</div>
+                  <div className="mb-4 flex justify-center">{steps[activeStep].icon}</div>
                   <p className="text-gray-600">
                     Step {activeStep + 1} of {steps.length}
                   </p>
@@ -194,10 +178,10 @@ const HowItWorksPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
-              Why Choose InterledgerSwap?
+              Why Choose LedgerSwap?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We've built our platform with your needs in mind
+              Trade anonymous, fast, and secured with unique tokens globally without centralized banks
             </p>
           </motion.div>
 

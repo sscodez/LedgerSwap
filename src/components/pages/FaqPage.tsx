@@ -20,7 +20,7 @@ const FaqPage = () => {
     general: [
       {
         question: "What is InterledgerSwap?",
-        answer: "InterledgerSwap is a secure cryptocurrency marketplace that allows you to exchange, buy, and sell digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
+        answer: "InterledgerSwap is a secure cryptocurrency marketplace that allows you to swap digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
       },
       {
         question: "How do I get started?",
@@ -134,7 +134,7 @@ const FaqPage = () => {
                     : 'bg-white text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <span className="mr-2">{category.icon}</span>
+                {/* <span className="mr-2">{category.icon}</span> */}
                 {category.label}
               </button>
             ))}
