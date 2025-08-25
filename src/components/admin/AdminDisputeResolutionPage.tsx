@@ -41,7 +41,7 @@ const AdminDisputeResolutionPage: React.FC = () => {
           </div>
           <div className="ml-3">
             <h3 className="text-sm font-medium text-black">Fiat Dispute Coordination</h3>
-            <div className="mt-2 text-sm text-[#90A1B9]">
+            <div className="mt-2 text-xs sm:text-sm text-[#90A1B9]">
               <p>For disputes involving fiat transactions, coordinate resolution through off-platform communication channels. No personal data is stored on-platform.</p>
             </div>
           </div>

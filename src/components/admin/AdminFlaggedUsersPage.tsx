@@ -39,7 +39,7 @@ const AdminFlaggedUsersPage: React.FC = () => {
       <div className="flex justify-between ml-2 sm:ml-0 items-center mb-4 sm:mb-6">
         <div>
           <h1 className="text-lg 0 sm:text-2xl font-medium">Flagged Users</h1>
-          <p className="text-gray-500 text-sm mt-1">Users flagged for suspicious behavior (wallet addresses only)</p>
+          <p className="text-gray-500 text-xs sm:text-sm mt-1">Users flagged for suspicious behavior (wallet addresses only)</p>
         </div>
       </div>
       

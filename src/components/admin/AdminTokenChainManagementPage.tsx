@@ -54,19 +54,19 @@ const AdminTokenChainManagementPage: React.FC = () => {
   };
 
   return (
-    <div className="relative text-black px-1 sm:px-0">
+    <div className="relative w-auto  overflow-x-auto text-black px-1 sm:px-0">
       <div className="flex justify-between items-center mb-4 sm:mb-6">
         <div>
           <h1 className="text-xl sm:text-2xl font-medium">Token & Chain Management</h1>
-          <p className="text-gray-500 text-sm mt-1">Enable or disable specific tokens and blockchains</p>
+          <p className="text-gray-500  text-xs sm:text-sm mt-1">Enable or disable specific tokens and blockchains</p>
         </div>
       </div>
       
       {/* Desktop Table View (hidden on small screens) */}
-      <div className="bg-white rounded-lg  overflow-hidden hidden md:block p-4">
+      <div className="bg-white rounded-lg  overflow-x-auto p-4">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="text-sm">
+          <table className="min-w-full divide-y text-xs sm:text-sm  overflow-x-auto  divide-gray-200">
+            <thead className="">
               <tr>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left  font-medium text-gray-500">
                   Token
@@ -91,13 +91,13 @@ const AdminTokenChainManagementPage: React.FC = () => {
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <TokenIcon type={token.icon} />
-                      <span className="text-sm font-medium text-gray-900">{token.name}</span>
+                      <span className=" font-medium text-gray-900">{token.name}</span>
                     </div>
                   </td>
-                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap  text-gray-500">
                     {token.symbol}
                   </td>
-                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-gray-500">
                     {token.volume24h}
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
@@ -128,7 +128,7 @@ const AdminTokenChainManagementPage: React.FC = () => {
       </div>
 
       {/* Mobile Card View (visible only on small screens) */}
-      <div className="md:hidden space-y-4">
+      {/* <div className="md:hidden space-y-4">
         {tokens.map((token) => (
           <div key={token.id} className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm">
             <div className="flex justify-between items-center mb-3">
@@ -169,7 +169,7 @@ const AdminTokenChainManagementPage: React.FC = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
