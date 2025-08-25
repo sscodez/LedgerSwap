@@ -4,7 +4,6 @@ import RewardsBanner from './WelcomeBanner';
 import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { BsLightningChargeFill } from 'react-icons/bs';
-import { MdDateRange } from 'react-icons/md';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -310,15 +309,12 @@ const ExchangeHistory: React.FC = () => {
 
               <div className="flex flex-row items-center px-2 justify-center  sm:flex-row  sm:items-center ">
                 <span className="text-gray-500 mb-1 mr-2 sm:mb-0 sm:mr-2">Date:</span>
-                <div className="relative w-full">
-                  <input
-                    type="date"
-                    className="  px-3 py-3 bg-[#F1F5F9] rounded-lg w-full pr-10"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                  />
-                  <MdDateRange className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 pointer-events-none" />
-                </div>
+                <input
+                  type="date"
+                  className="  px-3 py-3 bg-[#F1F5F9] rounded-lg w-full"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
               </div>
 
 

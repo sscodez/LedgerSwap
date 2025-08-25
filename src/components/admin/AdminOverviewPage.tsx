@@ -22,7 +22,7 @@ const AdminOverviewPage: React.FC = () => {
       coin: '',
       fromCoin: 'ETH',
       toCoin: 'BTC',
-      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>,
+     network: <div className=' flex items-center '><div className='h-8 w-8  flex items-center justify-center bg-gray-200 rounded-md'> <Image className='my-5 mx-5' src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>, 
       status: 'Pending',
       time: '2 min ago'
     },
@@ -54,8 +54,8 @@ const AdminOverviewPage: React.FC = () => {
       amount: <div className="flex items-center space-x-2 text-xs"><p>5045 </p> <BitcoinBadge /><BsArrowRight /> <p>26700</p> <TronBadge /></div>,
       coin: '',
       fromCoin: "USDT",
-      toCoin: 'ETh',
-      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>,
+      toCoin: 'ETH',
+      network: <div className=' flex items-center '><div className='h-8 w-8  flex items-center justify-center bg-gray-200 rounded-md'> <Image className='my-5 mx-5' src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>, 
       status: 'Pending',
       time: '15 min ago'
     },

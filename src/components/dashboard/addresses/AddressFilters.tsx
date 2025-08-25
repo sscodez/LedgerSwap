@@ -53,7 +53,7 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+    <div className="flex flex-col text-[#62748E]  sm:flex-row flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
       <div className="flex flex-nowrap overflow-x-auto gap-2 sm:gap-3 w-full sm:w-auto pb-2 sm:pb-0">
         {/* Coin dropdown */}
         <div className="relative flex-shrink-0">
@@ -62,7 +62,7 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
               <button 
                 className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between outline-none"
               >
-                <span>{selectedCoin || 'Coin'}</span>
+                <span className='text-[#62748E]'>{selectedCoin || 'Coin'}</span>
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 
@@ -107,7 +107,7 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
               <button 
                 className="flex items-center px-3 sm:px-4 py-2 sm:py-2.5 rounded-md bg-gray-100 text-gray-700 text-xs sm:text-sm min-w-20 sm:min-w-28 justify-between outline-none"
               >
-                <span>{selectedNetwork || 'Network'}</span>
+                <span className='text-[#62748E]'>{selectedNetwork || 'Network'}</span>
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" 

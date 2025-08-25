@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { MdDateRange } from 'react-icons/md';
 
 export interface DateRange {
   startDate: string;
@@ -69,11 +68,11 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
       {/* Date range picker */}
       <div className="relative w-auto   ">
         <div className="flex items-center bg-[#F1F5F9] rounded-lg   justify-between px-4  py-3   text-gray-700  text-sm sm:text-sm">
-          <span className="whitespace-nowrap">Date:</span>
-          <div className="ml-2 flex   items-center relative">
+          <span className="text-[#62748E] whitespace-nowrap">Date:</span>
+          <div className="ml-2 flex   items-center">
             <input
               type="date"
-              className=" sm:w-28  bg-[#F1F5F9] outline-none text-gray-600 text-xs sm:text-sm pr-6"
+              className=" sm:w-28  bg-[#F1F5F9] text-[#62748E] outline-none text-gray-600 text-xs sm:text-sm"
               placeholder="30.10.25"
               onChange={(e) => {
                 const endDate = e.target.value;
@@ -86,7 +85,6 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
                 });
               }}
             />
-            <MdDateRange className="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4 pointer-events-none" />
           </div>
         </div>
       </div>
@@ -103,9 +101,9 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
         <DropdownMenu.Root>
           <DropdownMenu.Trigger asChild>
             <button
-              className="flex items-center bg-[#F1F5F9] px-3 sm:px-4 justify-between   py-3 rounded-md text-gray-700  text-xs sm:text-sm min-w-[80px] sm:min-w-28"
+              className="flex items-center text-[#62748E] bg-[#F1F5F9] px-3 sm:px-4 justify-between   py-3 rounded-md   text-xs sm:text-sm min-w-[80px] sm:min-w-28"
             >
-              <span>Status</span>
+              <span className="text-[#62748E]">Status</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>

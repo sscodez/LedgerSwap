@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 import CopyButton from '@/components/shared/CopyButton';
+import { BsInfoCircle } from "react-icons/bs";
+
 interface WithdrawalSectionProps {
   balance: {
     amount: number;
@@ -69,10 +71,8 @@ const WithdrawalSection: React.FC<WithdrawalSectionProps> = ({
               </div>
             </div>
           </div>
-          <div className='flex rounded-full border-gray-200 border-2 px-2 py-1 text-xs sm:text-sm max-w-full'>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1 sm:mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <div className='flex rounded-full items-center border-gray-200 border-2 px-2 py-1 text-xs sm:text-sm max-w-full'>
+            <BsInfoCircle className='mr-1'/>
             <span>Minimum withdrawal is {minWithdrawal} {balance.currency}</span>
           </div>
         </div>
