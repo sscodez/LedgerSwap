@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-
+import CopyButton  from '@/components/shared/CopyButton';
 interface PayoutHistoryItem {
   id: string;
   amount: string;
@@ -71,13 +71,14 @@ const PayoutHistoryTable: React.FC<PayoutHistoryTableProps> = ({ payouts }) => {
                     <span className="text-gray-700 font-mono truncate max-w-[150px] md:max-w-[200px]">
                       {payout.address}
                     </span>
-                    <button 
+                    {/* <button 
                       onClick={() => copyAddress(payout.address)}
                       className="ml-1 md:ml-2 text-blue-600 hover:text-blue-800"
                       aria-label="Copy address"
                     >
                     <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={14} height={14} className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    </button>
+                    </button> */}
+                    <CopyButton textToCopy={payout.address} />
                   </div>
                 </td>
                 <td className="py-3 md:py-4 px-4 md:px-6 whitespace-nowrap">

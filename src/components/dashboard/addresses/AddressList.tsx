@@ -2,6 +2,7 @@ import React from 'react';
 import { CryptoIcon, Icon } from '../../../components/icons';
 import type { CryptoSymbol } from '../../../components/icons/crypto/CryptoIcon';
 import Image from 'next/image';
+import CopyButton from '@/components/shared/CopyButton';
 
 interface Address {
   id: string;
@@ -114,13 +115,7 @@ const AddressList: React.FC<AddressListProps> = ({ addresses }) => {
                 <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap text-[12px] sm:text-[13px]">
                   <div className="flex items-center">
                     <span className="text-gray-700 font-mono truncate max-w-[150px] sm:max-w-[200px]">{item.address}</span>
-                    <button
-                      onClick={() => copyAddress(item.address)}
-                      className="ml-2 text-blue-600 hover:text-blue-800"
-                      aria-label="Copy address"
-                    >
-                      <Image src={"/assests/icons/file_copy.svg"} alt="Copy" width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    </button>
+                   <CopyButton textToCopy={item.address} />
                   </div>
                 </td>
               </tr>

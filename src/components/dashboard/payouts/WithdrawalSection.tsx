@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-
+import CopyButton from '@/components/shared/CopyButton';
 interface WithdrawalSectionProps {
   balance: {
     amount: number;
@@ -43,13 +43,8 @@ const WithdrawalSection: React.FC<WithdrawalSectionProps> = ({
         <div className="font-mono text-gray-700 truncate mr-2 sm:mr-4 text-xs sm:text-sm">
           {address}
         </div>
-        <button 
-          onClick={copyAddress} 
-          className="text-blue-600 hover:text-blue-800 flex-shrink-0"
-          aria-label="Copy address"
-        >
-         <Image src="/assests/icons/file_copy.svg" alt='Copy' width={14} height={14} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-        </button>
+    
+        <CopyButton textToCopy={address} />
       </div>
       
       {/* Support link */}

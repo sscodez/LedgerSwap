@@ -64,17 +64,17 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
             </div>
           </div>
 
-      <div className="flex flex-wrap justify-center items-center   w-full sm:w-auto  sm:justify-start">
+
         {/* Date range picker */}
-        <div className="relative w-full   sm:w-auto">
-          <div className="flex items-center bg-[#F1F5F9] rounded-lg   justify-center sm:px-4  sm:py-2 py-3 mx-5 text-gray-700  text-xs sm:text-sm">
+        <div className="relative w-auto   ">
+          <div className="flex items-center bg-[#F1F5F9] rounded-lg   justify-between px-4  py-3   text-gray-700  text-sm sm:text-sm">
             <span className="whitespace-nowrap">Date:</span>
             <div className="ml-2 flex   items-center">
          
              
               <input 
                 type="date" 
-                className="w-[70px] sm:w-28  bg-[#F1F5F9] outline-none text-gray-600 text-xs sm:text-sm"
+                className=" sm:w-28  bg-[#F1F5F9] outline-none text-gray-600 text-xs sm:text-sm"
                 placeholder="30.10.25"
                 onChange={(e) => {
                   const endDate = e.target.value;
@@ -96,12 +96,19 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
           </div>
         </div>
 
-        {/* Status dropdown */}
-        <div className="relative  ">
+     
+
+     
+
+
+
+
+           {/* Status dropdown */}
+           <div className="relative   ">
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>
               <button 
-                className="flex items-center bg-[#F1F5F9] px-3 sm:px-4 justify-between sm:py-2  py-3 rounded-md text-gray-700  text-xs sm:text-sm min-w-[80px] sm:min-w-28"
+                className="flex items-center bg-[#F1F5F9] px-3 sm:px-4 justify-between   py-3 rounded-md text-gray-700  text-xs sm:text-sm min-w-[80px] sm:min-w-28"
               >
                 <span>Status</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 sm:h-4 sm:w-4 ml-1 sm:ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -141,16 +148,15 @@ const PayoutFilters: React.FC<PayoutFiltersProps> = ({
           </DropdownMenu.Root>
         </div>
 
-        {/* Clear button */}
-        <div className='mx-10'>
+
+      <div className=''>
         <button
           onClick={onClearFilters}
-          className="px-4 sm:px-5 py-3 sm:py-2 mx-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 text-xs sm:text-sm ml-auto sm:ml-0"
+          className="px-4 sm:px-5 py-3  mx-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 text-xs sm:text-sm ml-auto sm:ml-0"
         >
           Clear
         </button>
         </div>
-      </div>
 
       {/* Export button */}
       {/* <button
