@@ -111,7 +111,7 @@ const AdminTradesPage: React.FC = () => {
         <h1 className="text-xl sm:text-2xl font-medium text-black">Trade Activity Monitor</h1>
         <button 
           onClick={toggleAddressDisplay}
-          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-900 text-xs sm:text-[13px] text-white rounded-md hover:bg-blue-800 transition-colors flex items-center"
+          className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#021735] text-xs sm:text-[13px] text-white rounded-md  transition-colors flex items-center"
         >
     
           {showFullAddresses ? <FaEyeSlash size={20} className='mx-2'/> : <FaEye size={20} className='mx-1'/>}
