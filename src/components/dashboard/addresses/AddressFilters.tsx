@@ -146,12 +146,7 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
         </div>
 
         {/* Clear button */}
-        <button
-          onClick={handleClear}
-          className="px-3 sm:px-5 py-2 sm:py-2.5 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 text-xs sm:text-sm flex-shrink-0"
-        >
-          Clear
-        </button>
+ 
       </div>
 
       {/* Search input */}
@@ -179,6 +174,13 @@ const AddressFilters: React.FC<AddressFiltersProps> = ({
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>
+      <button
+          onClick={handleClear}
+          className="px-3 sm:px-5 py-2 sm:py-2.5 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 text-xs sm:text-sm flex-shrink-0"
+        >
+          Clear
+        </button>
+        
     </div>
   );
 };
