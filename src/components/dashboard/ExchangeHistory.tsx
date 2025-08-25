@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import RewardsBanner from './WelcomeBanner';
 import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import * as Switch from '@radix-ui/react-switch';
 import { BsLightningChargeFill } from 'react-icons/bs';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -267,9 +268,9 @@ const ExchangeHistory: React.FC = () => {
         {/* Filters */}
         <div className="text-black text-[13px]  flex rounded-lg p-2 w-full  md:p-4 mb-6">
           {/* Filter sections - reorganized for better mobile layout */}
-          <div className="grid grid-cols-2 exsm:grid-cols-3 xsm:grid-cols-4   sm:grid-cols-6 md:grid-cols-6 lg:grid-cols-9 gap-2 mb-4">
+          <div className="grid grid-cols-2 exsm:grid-cols-3 xsm:grid-cols-4   sm:grid-cols-6 md:grid-cols-6 xl:grid-cols-9 gap-2 mb-4">
             {/* Time period filter - full width on mobile */}
-            <div className="col-span-2 exsm:col-span-2 xsm:col-span-4 sm:col-span-3 md:col-span-3 lg:col-span-3">
+            <div className="col-span-2 exsm:col-span-2 xsm:col-span-4 sm:col-span-3 md:col-span-3 xl:col-span-4">
               <div className="flex justify-between text-[#62748E] items-center  bg-[#F1F5F9] p-1 rounded-lg w-full">
                 <button
                   className={`px-3 py-2 rounded-lg whitespace-nowrap ${activeFilter === 'All' ? 'bg-white shadow-sm' : 'bg-transparent'}`}
@@ -305,7 +306,7 @@ const ExchangeHistory: React.FC = () => {
 
 
             {/* Date range filters - stack on mobile */}
-            <div className="col-span-2 xsm:col-span-2  sm:col-span-3 md:col-span-2    lg:col-span-3">
+            <div className="col-span-2 xsm:col-span-2  sm:col-span-3 md:col-span-2    xl:col-span-3">
 
               <div className="flex flex-row items-center px-2 justify-center  sm:flex-row  sm:items-center ">
                 <span className="text-gray-500 mb-1 mr-2 sm:mb-0 sm:mr-2">Date:</span>
@@ -363,25 +364,26 @@ const ExchangeHistory: React.FC = () => {
               </DropdownMenu.Root>
             </div>
 
-            <div className="col-span-1  xsm:col-span-1  sm:col-span-2 rounded-lg bg-[#F1F5F9] md:col-span-2 lg:col-span-2 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
-              <div className="flex  w-full overflow-hidden justify-between px-3 py-3 md:py-0 items-center">
-                <span className="mr-2  text-[#62748E]    md:text-xs  lg:tex-sm xl:text-sm  whitespace-nowrap">Hide unfinished</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer"
-                    checked={hideUnfinished}
-                    onChange={() => setHideUnfinished(!hideUnfinished)}
-                  />
-                  <div className=" w-8   xl:w-11  h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <div className="col-span-1  xsm:col-span-1  sm:col-span-2 rounded-lg bg-[#F1F5F9] md:col-span-2 xl:col-span-2 flex flex-row sm:flex-col md:flex-row items-center justify-between ">
+              <div className="flex  w-full overflow-hidden justify-between px-2 py-2 sm:px-3 sm:py-3 md:py-0 items-center">
+                <label htmlFor="hide-unfinished" className="mr-1 sm:mr-2  text-[#62748E] text-xs md:text-xs  lg:tex-sm xl:text-sm  whitespace-nowrap cursor-pointer">
+                  Hide unfinished
                 </label>
+                <Switch.Root
+                  id="hide-unfinished"
+                  checked={hideUnfinished}
+                  onCheckedChange={setHideUnfinished}
+                  className="w-9 h-5 sm:w-11 sm:h-5 bg-gray-200 rounded-full relative data-[state=checked]:bg-blue-600 outline-none cursor-pointer transition-colors flex-shrink-0"
+                >
+                  <Switch.Thumb className="block w-4 h-4 bg-white rounded-full transition-transform duration-100 translate-x-0.5 will-change-transform data-[state=checked]:translate-x-[18px] sm:data-[state=checked]:translate-x-[26px] shadow-sm" />
+                </Switch.Root>
               </div>
 
             </div>
 
 
 
-            <div className="col-span-2 xsm:col-span-3   sm:col-span-2 md:col-span-4 lg:col-span-4">
+            <div className="col-span-2 xsm:col-span-3   sm:col-span-2 md:col-span-4 xl:col-span-4">
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
