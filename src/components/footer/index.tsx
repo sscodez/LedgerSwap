@@ -17,7 +17,7 @@ const Footer = () => {
           {/* App Download Buttons */}
           <div className="flex sm:flex-row flex-col gap-4 mb-6 lg:mb-0">
             {/* App Store */}
-            <Link href="/app-store" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
+            <Link href="" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
               <div className="w-8 h-8 rounded-sm mr-3 flex items-center justify-center">
               <Image src='/assests/social-icons/apple.png' alt='play-store' width={50} height= {50} />
               </div>
@@ -27,7 +27,7 @@ const Footer = () => {
               </div>
             </Link>
             {/* Google Play */}
-            <Link href="/play-store" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
+            <Link href="" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
               <div className="w-8 h-8 mr-3 flex items-center justify-center">
              <Image src='/assests/social-icons/googleplay.png' alt='play-store' width={50} height= {50} />
               </div>
@@ -38,7 +38,7 @@ const Footer = () => {
             </Link>
 
             {/* Android APK */}
-            <Link href="/android-apk" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
+            <Link href="" className="flex items-center bg-white/5 rounded-lg px-4 py-3 hover:bg-gray-800 transition-colors">
               <div className="w-8 h-8 mr-3 flex items-center justify-center">
               <Image src='/assests/social-icons/android.png' alt='play-store' width={50} height= {50}/>
               </div>
