@@ -12,8 +12,8 @@ const AdminFeesPage: React.FC = () => {
 
   return (
     <div className="text-black relative">
-      <div className="flex flex-col sm:flex-row justify-between text-black items-start sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
-        <h1 className="text-xl sm:text-2xl font-medium">Platform Fee Configuration</h1>
+      <div className="flex flex-row sm:flex-row  justify-between text-black items-center sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-0">
+        <h1 className="text-md sm:text-2xl font-medium">Platform Fee Configuration</h1>
         <div className="flex items-center space-x-2">
           <div className="relative  group">
             <button 

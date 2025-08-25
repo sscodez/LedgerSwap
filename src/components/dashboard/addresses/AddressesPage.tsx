@@ -5,7 +5,7 @@ import AddressList from './AddressList';
 import AddWalletAddressModal from '../../modal/AddWalletAddressModal';
 import type { CryptoSymbol } from '../../../components/icons/crypto/CryptoIcon';
 import Image from 'next/image';
-
+import CopyButton from '@/components/shared/CopyButton';
 // Define the Address interface here to match the one in AddressList.tsx
 interface Address {
   id: string;
@@ -142,11 +142,11 @@ const AddressesPage: React.FC = () => {
 
   return (
     <div className="px-4 overflow-auto  sm:px-6 md:px-8">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
+      <div className="flex flex-row sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-4 sm:mb-6">
         <h1 className="text-xl sm:text-2xl text-[#021735] font-medium">My Addresses</h1>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-full sm:w-auto justify-center sm:justify-start"
+          className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 text-blue-600 rounded-md hover:bg-blue-50 transition-colors text-xs sm:text-sm w-auto sm:w-auto justify-center sm:justify-start"
         >
          <Image src="/assests/icons/contact_page.png" alt="Add" width={10} height={14}  />
           Add a new address
