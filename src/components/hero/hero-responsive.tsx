@@ -64,7 +64,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
         >
           <motion.h1
-            className="text-[40px] md:text-6xl font-semibold md:font-medium text-white mb-4"
+            className="text-[40px] md:text-6xl font-medium md:font-medium text-white mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
