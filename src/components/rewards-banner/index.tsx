@@ -35,14 +35,14 @@ const RewardsBanner = () => {
 
           {/* Content */}
           <motion.div 
-            className="mx-auto py-4 sm:py-6 flex flex-col items-center justify-center text-center w-full z-10 px-3 sm:px-4"
+            className="mx-auto py-4 sm:py-6 flex flex-col items-center justify-center text-center w-full z-0 px-3 sm:px-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
             <motion.div 
-              className="text-xs sm:text-sm md:text-base text-white/90 mb-2 sm:mb-3 font-medium"
+              className="text-xs sm:text-sm md:text-base text-white/90 mb-2 sm:mb-3 -z-0 font-medium"
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}

@@ -14,6 +14,7 @@ export default function Home() {
   return (
     <div className="bg-[#001233]">
       <Hero />
+     
       <RewardsBanner />
       <TradingPairs />
       <FeatureGrid />

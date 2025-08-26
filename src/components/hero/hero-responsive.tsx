@@ -56,7 +56,7 @@ const Hero = () => {
         />
       </motion.div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-1 sm:px-4 relative z-10">
         <motion.div
           className="max-w-4xl mx-auto text-center mb-8 md:mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -82,7 +82,7 @@ const Hero = () => {
         </motion.div>
 
         <motion.div
-          className="max-w-2xl mx-auto bg-white shadow-xl overflow-hidden"
+          className="w-full max-w-2xl mx-auto bg-white shadow-xl overflow-hidden"
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
