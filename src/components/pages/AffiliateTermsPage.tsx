@@ -25,7 +25,7 @@ const AffiliateTermsPage = () => {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Program Overview</h2>
             <div className="prose prose-blue max-w-none">
               <p className="text-gray-700 mb-4">
-                The InterledgerSwap Affiliate Program allows you to earn commissions by referring new users to our platform.
+                The LedgerSwap Affiliate Program allows you to earn commissions by referring new users to our platform.
                 By participating in this program, you agree to the following terms and conditions.
               </p>
 
@@ -49,7 +49,7 @@ const AffiliateTermsPage = () => {
 
               <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Eligibility Requirements</h3>
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
-                <li>Must be a verified InterledgerSwap user in good standing</li>
+                <li>Must be a verified LedgerSwap user in good standing</li>
                 <li>Minimum account age of 30 days</li>
                 <li>Completed at least 5 successful trades</li>
                 <li>No history of policy violations or suspicious activity</li>
@@ -59,7 +59,7 @@ const AffiliateTermsPage = () => {
               <ul className="list-disc pl-6 space-y-2 text-gray-700">
                 <li>Self-referrals or creating fake accounts</li>
                 <li>Spam marketing or unsolicited communications</li>
-                <li>Misleading or false advertising about InterledgerSwap</li>
+                <li>Misleading or false advertising about LedgerSwap</li>
                 <li>Trademark or copyright infringement</li>
                 <li>Promoting illegal activities or services</li>
               </ul>
@@ -76,7 +76,7 @@ const AffiliateTermsPage = () => {
 
               <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-4">Termination</h3>
               <p className="text-gray-700 mb-4">
-                InterledgerSwap reserves the right to terminate affiliate accounts for violations of these terms,
+                LedgerSwap reserves the right to terminate affiliate accounts for violations of these terms,
                 suspicious activity, or at our sole discretion. Upon termination, unpaid commissions may be forfeited.
               </p>
 

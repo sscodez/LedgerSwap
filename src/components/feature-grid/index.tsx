@@ -43,7 +43,7 @@ const FeatureGrid = () => {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                InterledgerSwap provides cryptocurrency exchange
+                LedgerSwap provides cryptocurrency exchange
               </motion.p>
               <motion.p
                 className="text-gray-300 text-xs sm:text-sm"

@@ -19,8 +19,8 @@ const FaqPage = () => {
   const faqs = {
     general: [
       {
-        question: "What is InterledgerSwap?",
-        answer: "InterledgerSwap is a secure cryptocurrency marketplace that allows you to swap digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
+        question: "What is LedgerSwap?",
+        answer: "LedgerSwap is a secure cryptocurrency marketplace that allows you to swap digital assets with ease. We provide a user-friendly platform for both beginners and experienced traders."
       },
       {
         question: "How do I get started?",
@@ -31,8 +31,8 @@ const FaqPage = () => {
         answer: "We support major cryptocurrencies including Bitcoin (BTC), Ethereum (ETH), Solana (SOL), USDT, USDC, and many more. Our list is constantly expanding based on user demand."
       },
       {
-        question: "Is InterledgerSwap available worldwide?",
-        answer: "InterledgerSwap is available in most countries worldwide. However, due to regulatory requirements, some regions may have restrictions. Please check our terms of service for specific country availability."
+        question: "Is LedgerSwap available worldwide?",
+        answer: "LedgerSwap is available in most countries worldwide. However, due to regulatory requirements, some regions may have restrictions. Please check our terms of service for specific country availability."
       }
     ],
     trading: [
@@ -82,7 +82,7 @@ const FaqPage = () => {
       },
       {
         question: "How are network fees calculated?",
-        answer: "Network fees are determined by the respective blockchain networks and vary based on network congestion. These fees go directly to miners/validators and are not collected by InterledgerSwap."
+        answer: "Network fees are determined by the respective blockchain networks and vary based on network congestion. These fees go directly to miners/validators and are not collected by LedgerSwap."
       },
       {
         question: "Do you offer fee discounts?",
@@ -117,7 +117,7 @@ const FaqPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
     
-      <Banner title="Frequently Asked Questions" description="Find answers to common questions about InterledgerSwap" />
+      <Banner title="Frequently Asked Questions" description="Find answers to common questions about LedgerSwap" />
 
       {/* FAQ Content */}
       <div className="container mx-auto px-4 py-12 ">

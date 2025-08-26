@@ -44,14 +44,14 @@ const Header: React.FC = () => {
         >
           <Image
             src="/assests/icon.png"
-            alt="InterledgerSwap Logo"
+            alt="LedgerSwap Logo"
             width={28}
             height={28}
             className="mr-2"
           />
           <div className="flex flex-col">
             <Link href="/" className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap">
-              InterledgerSwap
+              LedgerSwap
             </Link>
             {isAdmin && (
               <motion.span

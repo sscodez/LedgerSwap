@@ -97,7 +97,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ onCloseMobile }) => {
       </div>
 
       <div className="px-4 py-2 mt-5 lg:hidden">
-        <span className="text-xl font-bold text-blue-600">InterledgerSwap</span>
+        <span className="text-xl font-bold text-blue-600">LedgerSwap</span>
       </div>
 
       {/* Navigation */}

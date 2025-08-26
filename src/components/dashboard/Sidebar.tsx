@@ -75,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onCloseMobile }) => {
 
       {/* Logo for mobile */}
       <div className="px-4 py-2 mb-4 lg:hidden">
-        <span className="text-xl font-bold text-blue-600">InterledgerSwap</span>
+        <span className="text-xl font-bold text-blue-600">LedgerSwap</span>
       </div>
 
       {/* Navigation */}

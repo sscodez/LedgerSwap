@@ -19,7 +19,7 @@ const SignatureRequestModal: React.FC<SignatureRequestModalProps> = ({
   address,
   amount = '5.215423',
   currency = 'ETH',
-  message = 'Please sign this message to connect to InterledgerSwap'
+  message = 'Please sign this message to connect to LedgerSwap'
 }) => {
   // Using AnimatePresence for exit animations
 
@@ -75,7 +75,7 @@ const SignatureRequestModal: React.FC<SignatureRequestModalProps> = ({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
               >
-                InterledgerSwap
+                LedgerSwap
               </motion.p>
               
               {/* Wallet info */}

@@ -13,7 +13,7 @@ const FeatureGrid = () => {
               <h5 className="text-blue-400 text-xs sm:text-sm mb-2 sm:mb-4">Privacy</h5>
               <h3 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">Sign-up is not required</h3>
               <p className="text-gray-300 text-xs sm:text-sm">
-                InterledgerSwap provides cryptocurrency exchange 
+                LedgerSwap provides cryptocurrency exchange 
               </p>
               <p className="text-gray-300 text-xs sm:text-sm">without registration.</p>
             </div>

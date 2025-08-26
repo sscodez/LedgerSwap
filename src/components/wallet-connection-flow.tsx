@@ -165,13 +165,13 @@
 //         onClose={handleCloseModal}
 //         onSignIn={handleSignIn}
 //         address={walletAddress}
-//         message="Please sign this message to connect to InterledgerSwap"
+//         message="Please sign this message to connect to LedgerSwap"
 //       />
       
 //       <ConnectedModal
 //         isOpen={showConnected}
 //         onClose={handleCloseModal}
-//         message="Successfully connected to InterledgerSwap"
+//         message="Successfully connected to LedgerSwap"
 //       />
 //     </motion.section>
 //   );

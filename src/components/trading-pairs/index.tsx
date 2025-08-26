@@ -306,7 +306,7 @@ const TradingPairs = () => {
           viewport={{ once: true }}
         >
           <span className="text-white">Top pairs on </span>
-          <span className="text-blue-500">InterledgerSwap</span>
+          <span className="text-blue-500">LedgerSwap</span>
         </motion.h2>
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"

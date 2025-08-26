@@ -39,7 +39,7 @@ const LoyaltyProgramPage = () => {
       {/* Hero Section */}
       
 
-      <Banner title=" Loyalty Program" description="Unlock exclusive benefits and rewards as you trade more on InterledgerSwap" />
+      <Banner title=" Loyalty Program" description="Unlock exclusive benefits and rewards as you trade more on LedgerSwap" />
 
       {/* Navigation Tabs */}
       <div className="bg-white shadow-sm">

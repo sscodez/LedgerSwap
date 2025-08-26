@@ -68,7 +68,7 @@ const MobileAppPage = () => {
     <div className="min-h-screen bg-gray-50">
 
 
-    <Banner title="Mobile App" description="See what our users are saying about their InterledgerSwap experience" />
+    <Banner title="Mobile App" description="See what our users are saying about their LedgerSwap experience" />
       {/* Hero Section */}
       <div className="relative bg-white py-20 md:py-32 overflow-hidden">
         {/* Background Elements */}
@@ -168,7 +168,7 @@ const MobileAppPage = () => {
                       {/* App Content */}
                       <div className="flex-1 px-4 pb-4">
                         <div className="text-center mb-6">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-2">InterledgerSwap</h3>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">LedgerSwap</h3>
                           <p className="text-gray-600">Your Portfolio</p>
                         </div>
                         

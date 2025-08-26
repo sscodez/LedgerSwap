@@ -84,7 +84,7 @@ const DeveloperApiPage = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">API Overview</h2>
                 <p className="text-gray-600 max-w-2xl mx-auto">
-                  InterledgerSwap API provides programmatic access to trading functionality, market data, and account management.
+                  LedgerSwap API provides programmatic access to trading functionality, market data, and account management.
                 </p>
               </div>
 
@@ -166,7 +166,7 @@ const DeveloperApiPage = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">Official SDKs</h2>
                 <p className="text-gray-600">
-                  Use our official SDKs to integrate InterledgerSwap API into your applications
+                  Use our official SDKs to integrate LedgerSwap API into your applications
                 </p>
               </div>
 
@@ -200,8 +200,8 @@ const DeveloperApiPage = () => {
                     <h4 className="font-semibold text-gray-900 mb-2">JavaScript/Node.js</h4>
                     <div className="bg-gray-900 rounded-lg p-4">
                       <code className="text-green-400 text-sm">
-                        <div>const InterledgerSwap = require('ledgerswap-api');</div>
-                        <div>const client = new InterledgerSwap('YOUR_API_KEY');</div>
+                        <div>const LedgerSwap = require('ledgerswap-api');</div>
+                        <div>const client = new LedgerSwap('YOUR_API_KEY');</div>
                         <div>const markets = await client.getMarkets();</div>
                       </code>
                     </div>

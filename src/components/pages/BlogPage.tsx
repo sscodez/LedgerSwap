@@ -75,10 +75,10 @@ const BlogPage = () => {
     },
     {
       id: 6,
-      title: "InterledgerSwap Announces New Trading Pairs",
+      title: "LedgerSwap Announces New Trading Pairs",
       excerpt: "We're excited to announce support for 10 new cryptocurrency trading pairs on our platform.",
       category: "news",
-      author: "InterledgerSwap Team",
+      author: "LedgerSwap Team",
       date: "2024-01-03",
       readTime: "3 min read",
       featured: false,

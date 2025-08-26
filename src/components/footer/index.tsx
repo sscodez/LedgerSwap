@@ -192,7 +192,7 @@ const Footer = () => {
       {/* Copyright and Social Icons */}
       <div className={`md:px-8 w-full  bg-[#101828] ${isLandingPage ? 'mt-12' : 'mt-6'} flex flex-col md:flex-row items-center justify-between`}>
           <div className="mb-4 md:mt-0 mt-4 text-sm md:mb-0">
-            <p>© {new Date().getFullYear()} InterledgerSwap</p>
+            <p>© {new Date().getFullYear()} LedgerSwap</p>
           </div>
           
           <div className="flex items-center justify-center p-4 space-x-4">

@@ -267,7 +267,7 @@
 //       <div className="container mx-auto px-4">
 //         <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10">
 //           <span className="text-white">Top pairs on </span>
-//           <span className="text-blue-500">InterledgerSwap</span>
+//           <span className="text-blue-500">LedgerSwap</span>
 //         </h2>
 //         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
 //           <div>

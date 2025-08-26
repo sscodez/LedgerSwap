@@ -38,7 +38,7 @@ const InviteFriendsPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
    
-      <Banner title="Invite Friends & Earn" description="Share InterledgerSwap with friends and earn rewards for every successful referral" />
+      <Banner title="Invite Friends & Earn" description="Share LedgerSwap with friends and earn rewards for every successful referral" />
 
       {/* Rewards Section */}
       <div className="py-16 ">
@@ -53,7 +53,7 @@ const InviteFriendsPage = () => {
               Earn Rewards for Every Referral
             </h2>
             <p className=" text-gray-600 max-w-2xl mx-auto">
-              Get rewarded when your friends join and start trading on InterledgerSwap
+              Get rewarded when your friends join and start trading on LedgerSwap
             </p>
           </motion.div>
 

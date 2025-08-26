@@ -12,7 +12,7 @@ const DashboardHeader: React.FC = () => {
         <div className="flex items-center space-x-4">
           {/* Logo */}
           <Link href="/" className="mr-8">
-            <span className="text-xl font-bold text-blue-600">InterledgerSwap</span>
+            <span className="text-xl font-bold text-blue-600">LedgerSwap</span>
           </Link>
           
           {/* Navigation */}

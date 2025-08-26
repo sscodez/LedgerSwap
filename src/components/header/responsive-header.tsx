@@ -37,14 +37,14 @@
 //         <div className="flex items-center">
 //           <Image
 //             src="/assests/icon.png"
-//             alt="InterledgerSwap Logo"
+//             alt="LedgerSwap Logo"
 //             width={28}
 //             height={28}
 //             className="mr-2"
 //           />
 //           <div className="flex flex-col">
 //             <Link href="/" className="text-base sm:text-lg lg:text-xl font-bold whitespace-nowrap">
-//               InterledgerSwap
+//               LedgerSwap
 //             </Link>
 //             {isAdmin && (
 //               <span className="mt-1 self-end bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">

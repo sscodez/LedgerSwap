@@ -10,7 +10,7 @@ interface ConnectedModalProps {
 const ConnectedModal: React.FC<ConnectedModalProps> = ({
   isOpen,
   onClose,
-  message = 'Successfully connected to InterledgerSwap'
+  message = 'Successfully connected to LedgerSwap'
 }) => {
   // Using AnimatePresence for exit animations
 

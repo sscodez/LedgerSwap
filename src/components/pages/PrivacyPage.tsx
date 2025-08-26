@@ -91,7 +91,7 @@ const PrivacyPage = () => {
                     Our Commitment to Your Privacy
                   </h2>
                   <p className="text-gray-600 leading-relaxed">
-                    At InterledgerSwap, we are committed to protecting your privacy and ensuring the 
+                    At LedgerSwap, we are committed to protecting your privacy and ensuring the 
                     security of your personal information. This Privacy Policy explains how we 
                     collect, use, and safeguard your data when you use our cryptocurrency trading platform.
                   </p>

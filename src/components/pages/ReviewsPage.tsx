@@ -14,7 +14,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-15",
       title: "Excellent platform for beginners",
-      content: "InterledgerSwap made my first crypto trading experience incredibly smooth. The interface is intuitive and the customer support is top-notch. I've been using it for 6 months now and couldn't be happier.",
+      content: "LedgerSwap made my first crypto trading experience incredibly smooth. The interface is intuitive and the customer support is top-notch. I've been using it for 6 months now and couldn't be happier.",
       verified: true,
       location: "United States"
     },
@@ -24,7 +24,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-12",
       title: "Fast and secure transactions",
-      content: "I've tried several crypto exchanges, but InterledgerSwap stands out for its speed and security. Transactions are processed almost instantly, and I feel confident about the safety of my funds.",
+      content: "I've tried several crypto exchanges, but LedgerSwap stands out for its speed and security. Transactions are processed almost instantly, and I feel confident about the safety of my funds.",
       verified: true,
       location: "Spain"
     },
@@ -64,7 +64,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-03",
       title: "Perfect for crypto newcomers",
-      content: "As someone new to cryptocurrency, InterledgerSwap's educational resources and simple interface made learning easy. The step-by-step guides are incredibly helpful.",
+      content: "As someone new to cryptocurrency, LedgerSwap's educational resources and simple interface made learning easy. The step-by-step guides are incredibly helpful.",
       verified: true,
       location: "Australia"
     },
@@ -74,7 +74,7 @@ const ReviewsPage = () => {
       rating: 5,
       date: "2024-01-01",
       title: "Reliable and trustworthy",
-      content: "Been using InterledgerSwap for over a year now. Never had any security issues or downtime problems. The platform just works, which is exactly what you want from a crypto exchange.",
+      content: "Been using LedgerSwap for over a year now. Never had any security issues or downtime problems. The platform just works, which is exactly what you want from a crypto exchange.",
       verified: true,
       location: "Germany"
     },
@@ -126,7 +126,7 @@ const ReviewsPage = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
     
-      <Banner title="Reviews" description="See what our users are saying about their InterledgerSwap experience" />
+      <Banner title="Reviews" description="See what our users are saying about their LedgerSwap experience" />
 
 
       {/* Stats Section */}
