@@ -57,6 +57,30 @@ const currencies = {
     name: 'USD Coin',
     tag: 'USDC',
     iconUrl: '/assests/cryptocurrency/usdc.png'
+  },
+  xrp: {
+    symbol: 'XRP',
+    name: 'Ripple',
+    tag: 'XRP',
+    iconUrl: '/assests/cryptocurrency/xrp.png'
+  },
+  xlm: {
+    symbol: 'XLM',
+    name: 'Stellar',
+    tag: 'XLM',
+    iconUrl: '/assests/cryptocurrency/xlm.png'
+  },
+  xdc: {
+    symbol: 'XDC',
+    name: 'XinFin',
+    tag: 'XDC',
+    iconUrl: '/assests/cryptocurrency/xdc.png'
+  },
+  miota: {
+    symbol: 'MIOTA',
+    name: 'IOTA',
+    tag: 'MIOTA',
+    iconUrl: '/assests/cryptocurrency/miota.png'
   }
 };
 
@@ -159,6 +183,34 @@ const ExchangePage: React.FC = () => {
                               <Image src="/assests/cryptocurrency/usdc.png" alt="USD Coin" width={20} height={20} className="w-5 h-5 mr-2" />
                               <span>USDC</span>
                             </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.xrp)}
+                            >
+                              <Image src="/assests/cryptocurrency/xrp.png" alt="Ripple" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XRP</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.xlm)}
+                            >
+                              <Image src="/assests/cryptocurrency/xlm.png" alt="Stellar" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XLM</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.xdc)}
+                            >
+                              <Image src="/assests/cryptocurrency/xdc.png" alt="XinFin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XDC</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setFromCurrency(currencies.miota)}
+                            >
+                              <Image src="/assests/cryptocurrency/miota.png" alt="IOTA" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>MIOTA</span>
+                            </DropdownMenu.Item>
                           </div>
                         </StyledContent>
                       </DropdownMenu.Portal>
@@ -242,6 +294,34 @@ const ExchangePage: React.FC = () => {
                             >
                               <Image src="/assests/cryptocurrency/usdc.png" alt="USD Coin" width={20} height={20} className="w-5 h-5 mr-2" />
                               <span>USDC</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.xrp)}
+                            >
+                              <Image src="/assests/cryptocurrency/xrp.png" alt="Ripple" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XRP</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.xlm)}
+                            >
+                              <Image src="/assests/cryptocurrency/xlm.png" alt="Stellar" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XLM</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.xdc)}
+                            >
+                              <Image src="/assests/cryptocurrency/xdc.png" alt="XinFin" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>XDC</span>
+                            </DropdownMenu.Item>
+                            <DropdownMenu.Item 
+                              className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 outline-none cursor-pointer"
+                              onClick={() => setToCurrency(currencies.miota)}
+                            >
+                              <Image src="/assests/cryptocurrency/miota.png" alt="IOTA" width={20} height={20} className="w-5 h-5 mr-2" />
+                              <span>MIOTA</span>
                             </DropdownMenu.Item>
                           </div>
                         </StyledContent>

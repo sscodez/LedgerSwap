@@ -45,6 +45,13 @@ const MobileBottomNav: React.FC = () => {
         <PokerChipIcon size={20} />
       )
     },
+     {
+        name: 'Dispute',
+        href: '/admin/dispute',
+        icon: (
+          <WarningIcon size={20} />
+        )
+      },
     {
       name: 'Settings',
       href: '/admin/settings',

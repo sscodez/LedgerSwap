@@ -60,7 +60,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       <div className="w-full lg:col-start-2 lg:col-end-3 grid grid-rows-[auto_1fr] ">
         {/* Mobile header with menu button */}
         <header className="lg:hidden p-4 sticky top-0 z-10">
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <button 
               onClick={toggleSidebar}
               className="p-2 rounded-md bg-black hover:bg-gray-300"
@@ -70,7 +70,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-          </div>
+          </div> */}
         </header>
         
         {/* Main Content - Added padding bottom on mobile for the bottom navigation */}
