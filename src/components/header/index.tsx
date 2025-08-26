@@ -221,13 +221,13 @@ const Header: React.FC = () => {
             >
               {menuItems.map((item, index) => (
                 <motion.div
-                  key={item.href}
+                  key={item.link}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2, delay: 0.1 + index * 0.05 }}
                 >
                   <Link
-                    href={item.href}
+                    href={item.link}
                     className="block text-sm py-2 hover:text-blue-500 transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
