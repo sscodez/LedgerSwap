@@ -170,6 +170,7 @@ const WithdrawalSection: React.FC<WithdrawalSectionProps> = ({
       </div>
 
       {/* Network Dropdown */}
+      <p className='font-medium text-black text-sm sm:text-base my-4'>Network</p>
       <div className="relative w-full mb-4 sm:mb-6">
         <button
           onClick={() => {
