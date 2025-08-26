@@ -28,7 +28,7 @@ const FaqPage = () => {
       },
       {
         question: "Which cryptocurrencies do you support?",
-        answer: "We support major cryptocurrencies including Bitcoin (BTC), Ethereum (ETH), Solana (SOL), USDT, USDC, and many more. Our list is constantly expanding based on user demand."
+        answer: "We support major cryptocurrencies including Bitcoin (BTC) Ripple (XRP) Stellar, (XLM), XinFin (XDC), IOTA (MIOTA) Ethereum (ETH), Solana (SOL), USDT, USDC, and many more. Our list is constantly expanding based on user demand."
       },
       {
         question: "Is LedgerSwap available worldwide?",

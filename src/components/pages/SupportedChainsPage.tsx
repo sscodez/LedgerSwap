@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Banner from '../banner';
+import ExchangeWidget from '../exchange/ExchangeWidget';
 
 const SupportedChainsPage = () => {
   const [selectedChain, setSelectedChain] = useState<string | null>(null);
@@ -20,6 +21,58 @@ const SupportedChainsPage = () => {
       consensus: 'Proof of Work',
       totalSupply: '21 Million BTC',
       website: 'bitcoin.org'
+    },
+    {
+      id: 'ripple',
+      name: 'Ripple',
+      symbol: 'XRP',
+      icon: '/assests/cryptocurrency/xrp.png',
+      color: 'from-blue-400 to-blue-600',
+      description: 'Digital payment protocol for fast and low-cost international transfers',
+      features: ['Fast Transactions', 'Low Fees', 'Cross-Border Payments', 'Enterprise Solutions'],
+      blockTime: '3-5 seconds',
+      consensus: 'XRP Ledger Consensus Protocol',
+      totalSupply: '100 Billion XRP',
+      website: 'ripple.com'
+    },
+    {
+      id: 'stellar',
+      name: 'Stellar',
+      symbol: 'XLM',
+      icon: '/assests/cryptocurrency/xlm.png',
+      color: 'from-blue-300 to-blue-500',
+      description: 'Open network for storing and moving money with focus on financial inclusion',
+      features: ['Cross-Border Payments', 'Low Fees', 'Fast Transactions', 'Financial Inclusion'],
+      blockTime: '3-5 seconds',
+      consensus: 'Stellar Consensus Protocol',
+      totalSupply: '50 Billion XLM',
+      website: 'stellar.org'
+    },
+    {
+      id: 'xinfin',
+      name: 'XinFin',
+      symbol: 'XDC',
+      icon: '/assests/cryptocurrency/xdc.png',
+      color: 'from-green-400 to-green-600',
+      description: 'Enterprise-ready hybrid blockchain for global trade and finance',
+      features: ['Hybrid Blockchain', 'Trade Finance', 'Enterprise Solutions', 'Interoperability'],
+      blockTime: '2 seconds',
+      consensus: 'XinFin Delegated Proof of Stake',
+      totalSupply: '37.5 Billion XDC',
+      website: 'xinfin.org'
+    },
+    {
+      id: 'iota',
+      name: 'IOTA',
+      symbol: 'MIOTA',
+      icon: '/assests/cryptocurrency/miota.png',
+      color: 'from-purple-400 to-purple-600',
+      description: 'Distributed ledger for the Internet of Things with feeless transactions',
+      features: ['Feeless Transactions', 'IoT Ready', 'Scalable', 'Data Integrity'],
+      blockTime: 'N/A (DAG-based)',
+      consensus: 'Tangle (DAG)',
+      totalSupply: '2.77 Billion MIOTA',
+      website: 'iota.org'
     },
     {
       id: 'ethereum',
@@ -116,7 +169,7 @@ const SupportedChainsPage = () => {
   ];
 
   const stats = [
-    { number: '7+', label: 'Supported Chains' },
+    { number: '12+', label: 'Supported Chains' },
     { number: '50+', label: 'Trading Pairs' },
     { number: '99.9%', label: 'Uptime' },
     { number: '24/7', label: 'Support' }
@@ -176,7 +229,6 @@ const SupportedChainsPage = () => {
       </div>
 
       {/* Cross-Chain Features */}
-
 
 
     </div>

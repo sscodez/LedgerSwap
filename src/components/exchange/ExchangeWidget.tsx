@@ -32,9 +32,9 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
     // States
     const [sendCurrency, setSendCurrency] = useState<Currency>(
         initialSendCurrency || {
-            name: 'ETH',
-            fullName: 'Ethereum',
-            icon: '/assests/cryptocurrency/eth.png',
+            name: 'XRP',
+            fullName: 'Ripple',
+            icon: '/assests/cryptocurrency/xrp.png',
             color: '#74D4FF'
         }
     );
@@ -64,8 +64,13 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
         { name: 'ETH', fullName: 'Ethereum', icon: '/assests/cryptocurrency/eth.png', color: '#74D4FF' },
         { name: 'USDT', fullName: 'Tether', icon: '/assests/cryptocurrency/usdt.png', color: '#26A17B' },
         { name: 'USDC', fullName: 'USD Coin', icon: '/assests/cryptocurrency/usdc.png', color: '#2775CA' },
-        // { name: 'XRP', fullName: 'Ripple', icon: '/assests/cryptocurrency/xrp.png', color: '#23292F' },
+        { name: 'XRP', fullName: 'Ripple', icon: '/assests/cryptocurrency/xrp.png', color: '#23292F' },
         { name: 'SOL', fullName: 'Solana', icon: '/assests/cryptocurrency/sol.png', color: '#9945FF' },
+        { name: 'XLM', fullName: 'Stellar', icon: '/assests/cryptocurrency/xlm.png', color: '#08B5E5' },
+        { name: 'XDC', fullName: 'XinFin', icon: '/assests/cryptocurrency/xdc.png', color: '#25458B' },
+        { name: 'MIOTA', fullName: 'IOTA', icon: '/assests/cryptocurrency/miota.png', color: '#242424' },
+        { name: 'LTC', fullName: 'Litecoin', icon: '/assests/cryptocurrency/ltc.png', color: '#345D9D' },
+        { name: 'XMR', fullName: 'Monero', icon: '/assests/cryptocurrency/xmr.png', color: '#FF6600' },
     ];
 
     // Event handlers

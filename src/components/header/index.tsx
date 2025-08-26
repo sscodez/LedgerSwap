@@ -21,6 +21,7 @@ const Header: React.FC = () => {
     // { href: "customer-benefits", label: "Customer Benefits", link: "/platinum" },
     { href: "analytics", label: "Analytics", link: "/reviews" },
     { href: "currencies", label: "Currencies", link: "/supported-chains" },
+    // { href: "roadmap", label: "Roadmap", link: "/roadmap" },
     // { href: "business", label: "Business", link: "/loyalty-program" },
   ];
 

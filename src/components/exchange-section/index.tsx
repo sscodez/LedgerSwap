@@ -45,8 +45,12 @@ const ExchangeSection = () => {
   });
 
   const cryptocurrencies = [
-    { name: 'ETH', fullName: 'Ethereum', icon: '/assests/cryptocurrency/eth.png', color: '#74D4FF' },
     { name: 'BTC', fullName: 'Bitcoin', icon: '/assests/cryptocurrency/btc.png', color: '#FF8904' },
+    { name: 'ETH', fullName: 'Ethereum', icon: '/assests/cryptocurrency/eth.png', color: '#74D4FF' },
+    { name: 'XRP', fullName: 'Ripple', icon: '/assests/cryptocurrency/xrp.png', color: '#23292F' },
+    { name: 'XLM', fullName: 'Stellar', icon: '/assests/cryptocurrency/xlm.png', color: '#08B5E5' },
+    { name: 'XDC', fullName: 'XinFin', icon: '/assests/cryptocurrency/xdc.png', color: '#25458B' },
+    { name: 'MIOTA', fullName: 'IOTA', icon: '/assests/cryptocurrency/miota.png', color: '#242424' },
     { name: 'USDT', fullName: 'Tether', icon: '/assests/cryptocurrency/usdt.png', color: '#26A17B' },
     { name: 'SOL', fullName: 'Solana', icon: '/assests/cryptocurrency/sol.png', color: '#9945FF' }
   ];

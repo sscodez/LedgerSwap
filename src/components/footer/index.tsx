@@ -114,6 +114,7 @@ const Footer = () => {
             <h3 className="text-sm font-poppins font-medium text-gray-400 mb-4">Company & Team</h3>
             <ul className="space-y-2">
               <li><Link href="/about" className="text-sm  hover:text-white transition-colors">About</Link></li>
+              <li><Link href="/roadmap" className="text-sm  hover:text-white transition-colors">Roadmap</Link></li>
               <li><Link href="/faq" className="text-sm hover:text-white transition-colors">FAQ</Link></li>
               <li><Link href="/how-it-works" className="text-sm  hover:text-white transition-colors">How it Works</Link></li>
               <li><Link href="/contact" className="text-sm  hover:text-white transition-colors">Contacts</Link></li>

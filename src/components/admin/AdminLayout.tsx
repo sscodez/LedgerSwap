@@ -2,6 +2,7 @@
 import React, { ReactNode, useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import AdminSidebar from './AdminSidebar';
+import MobileBottomNav from './MobileBottomNav';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -46,7 +47,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         />
       )}
       
-      {/* Sidebar */}
+      {/* Sidebar - Only visible on desktop or when toggled on mobile */}
       <div 
         className={`fixed top-0 left-0 z-30 h-full w-64 transition-transform duration-300 ease-in-out lg:relative lg:z-auto
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -72,12 +73,15 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
           </div>
         </header>
         
-        {/* Main Content */}
-        <main className="p-2 sm:p-4 md:p-6 max-w-6xl mx-auto w-full overflow-x-hidden ">
+        {/* Main Content - Added padding bottom on mobile for the bottom navigation */}
+        <main className="p-2 sm:p-4 md:p-6 pb-20 lg:pb-6 max-w-6xl mx-auto w-full overflow-x-hidden ">
           <div className="grid gap-2 sm:gap-4 md:gap-6">
             {children}
           </div>
         </main>
+        
+        {/* Mobile Bottom Navigation - Only visible on mobile */}
+        {isMobile && <MobileBottomNav />}
       </div>
     </div>
   );
