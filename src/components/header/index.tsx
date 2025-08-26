@@ -18,10 +18,10 @@ const Header: React.FC = () => {
   // Menu items mapping
   const menuItems = [
     { href: "how-it-works", label: "How it works", link: "/how-it-works" },
-    { href: "customer-benefits", label: "Customer Benefits", link: "/platinum" },
+    // { href: "customer-benefits", label: "Customer Benefits", link: "/platinum" },
     { href: "analytics", label: "Analytics", link: "/reviews" },
     { href: "currencies", label: "Currencies", link: "/supported-chains" },
-    { href: "business", label: "Business", link: "/loyalty-program" },
+    // { href: "business", label: "Business", link: "/loyalty-program" },
   ];
 
   const toggleMobileMenu = () => {
