@@ -48,7 +48,8 @@ const RewardsBanner = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              Grab your welcome reward!
+             Privacy + DeFi emphasis
+
             </motion.div>
             <motion.h3 
               className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-white mb-1 sm:mb-2 leading-tight"
@@ -57,7 +58,8 @@ const RewardsBanner = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
               viewport={{ once: true }}
             >
-              Sign up to earn 0.4% USDT
+            Start Trading Privately
+
             </motion.h3>
             <motion.h3 
               className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-semibold text-white mb-4 sm:mb-6 leading-tight"
@@ -66,7 +68,7 @@ const RewardsBanner = () => {
               transition={{ duration: 0.5, delay: 0.6 }}
               viewport={{ once: true }}
             >
-              cashback on your first swap
+           Get 0.4% back instantly on your first wallet-to-wallet swap
             </motion.h3>
             <motion.button 
               className="group transition-all duration-300 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg flex items-center font-semibold text-sm sm:text-base"
@@ -77,7 +79,7 @@ const RewardsBanner = () => {
               transition={{ duration: 0.3, delay: 0.7 }}
               viewport={{ once: true }}
             >
-              Claim Rewards
+            Swap & Earn
               <motion.span 
                 className="inline-flex ml-2 text-lg"
                 animate={{ x: [0, 5, 0] }}
