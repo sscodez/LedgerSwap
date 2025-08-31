@@ -162,7 +162,7 @@ const Footer = () => {
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4">Partnership</h3>
             <ul className="text-sm space-y-2">
               <li><Link href="/developer-api" className="hover:text-blue-300 transition-colors">Development API</Link></li>
-              <li><Link href="/affiliate-terms" className="hover:text-blue-300 transition-colors">Affiliate Program</Link></li>
+              {/* <li><Link href="/affiliate-terms" className="hover:text-blue-300 transition-colors">Affiliate Program</Link></li> */}
               <li><Link href="/ambassador" className="hover:text-blue-300 transition-colors">Ambassador</Link></li>
             </ul>
 
@@ -182,8 +182,8 @@ const Footer = () => {
             <h3 className="text-sm font-poppins text-gray-400 font-semibold mb-4 mt-8">Customer Benefits</h3>
             <ul className="text-sm space-y-2">
               <li><Link href="/loyalty-program" className="hover:text-blue-300 transition-colors">Loyalty Program</Link></li>
-              <li><Link href="/platinum" className="hover:text-blue-300 transition-colors">Platinum Users</Link></li>
-              <li><Link href="/invite-friends" className="hover:text-blue-300 transition-colors">Invite Friends</Link></li>
+              {/* <li><Link href="/platinum" className="hover:text-blue-300 transition-colors">Platinum Users</Link></li>
+              <li><Link href="/invite-friends" className="hover:text-blue-300 transition-colors">Invite Friends</Link></li> */}
             </ul>
           </div>
         </div>
