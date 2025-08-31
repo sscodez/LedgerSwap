@@ -44,11 +44,11 @@ const Banner = ({title, description, secondtitle}: {title: string, description: 
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 className="text-6xl  md:text-5xl lg:text-6xl font-semibold text-white mb-4">
-       {title}
-      {secondtitle && <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                {secondtitle}
-              </span>}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-4 px-2">
+          {title}
+          {secondtitle && <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+            {secondtitle}
+          </span>}
         </h1>
         <p className="text-[12px] md:text-[16px] text-gray-300 max-w-2xl mx-auto">
           {description}
