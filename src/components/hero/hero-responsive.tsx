@@ -69,7 +69,7 @@ const Hero = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-           Privacy First , Multi-Chain Ready 
+           Privacy First Multi-Chain Ready 
           </motion.h1>
           <motion.p
             className="text-[14px] font-[700] text-gray-300"

@@ -309,15 +309,15 @@ const TradingPairs = () => {
           <span className="text-blue-500">LedgerSwap</span>
         </motion.h2>
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
+          className="flex mx-auto justify-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div>
+          <div className="w-full md:w-4/5 lg:w-3/5">
             <motion.h3 
-              className="text-lg text-center md:text-left sm:text-xl font-semibold text-white mb-4 sm:mb-6"
+              className="text-lg text-center sm:text-xl font-semibold text-white mb-4 sm:mb-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -338,7 +338,7 @@ const TradingPairs = () => {
             </div>
           </div>
           
-          <div className="mt-6 md:mt-0">
+          {/* <div className="mt-6 md:mt-0">
             <motion.h3 
               className="text-lg text-center md:text-left sm:text-xl font-semibold text-white mb-4 sm:mb-6"
               initial={{ opacity: 0, x: -20 }}
@@ -359,7 +359,7 @@ const TradingPairs = () => {
                 />
               ))}
             </div>
-          </div>
+          </div> */}
         </motion.div>
       </motion.div>
     </section>
