@@ -163,7 +163,7 @@ const FeatureGrid = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                Endless choices
+              Trade the essentials that matter
               </motion.h5>
               <motion.h3
                 className="text-white text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2"
@@ -172,7 +172,7 @@ const FeatureGrid = () => {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                1500 cryptocurrencies
+                Cryptocurrencies
               </motion.h3>
               <motion.p
                 className="text-gray-300 text-xs sm:text-sm"
@@ -181,7 +181,7 @@ const FeatureGrid = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                Over a hundred crypto and fiat options available
+           A carefully chosen set of trusted cryptocurrencies
               </motion.p>
               <motion.p
                 className="text-gray-300 text-xs sm:text-sm"
@@ -190,7 +190,7 @@ const FeatureGrid = () => {
                 transition={{ delay: 0.6, duration: 0.5 }}
                 viewport={{ once: true }}
               >
-                for instant exchange.
+              available for instant swaps fast, secure,no KYC
               </motion.p>
             </div>
             <motion.div
