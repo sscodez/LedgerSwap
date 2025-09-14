@@ -1,11 +1,13 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import AddressFilters from './AddressFilters';
 import AddressList from './AddressList';
 import AddWalletAddressModal from '../../modal/AddWalletAddressModal';
 import type { CryptoSymbol } from '../../../components/icons/crypto/CryptoIcon';
 import Image from 'next/image';
 import CopyButton from '@/components/shared/CopyButton';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { addAddress, fetchAddresses } from '@/store/addressesSlice';
 // Define the Address interface here to match the one in AddressList.tsx
 interface Address {
   id: string;
@@ -20,40 +22,45 @@ interface Address {
   address: string;
 }
 
-// Mock data for demonstration
-const mockAddresses: Address[] = [
-  {
-    id: '1',
-    coin: { name: 'Ethereum', symbol: 'ETH', iconType: 'eth', tag: 'ETH' },
-    network: 'Ethereum',
-    label: 'John',
-    address: '0xa2234sadjk4487343s9'
-  },
-  {
-    id: '2',
-    coin: { name: 'Solana', symbol: 'SOL', iconType: 'sol', tag: 'SOL' },
-    network: 'Solana',
-    label: 'Monika',
-    address: '0xa2234sadjk4487343s7'
-  },
-  {
-    id: '3',
-    coin: { name: 'Tether', symbol: 'USDT', iconType: 'usdt', tag: 'TRX' },
-    network: 'Tron',
-    label: 'Alex',
-    address: '0xa2234sadjk4487343s9'
-  }
-];
-
 const AddressesPage: React.FC = () => {
-  const [addresses, setAddresses] = useState(mockAddresses);
-  const [filteredAddresses, setFilteredAddresses] = useState(mockAddresses);
+  const dispatch = useAppDispatch();
+  const { items, loading, creating } = useAppSelector((s) => s.addresses);
+  // Map API items to UI Address[]
+  const addresses = useMemo<Address[]>(() => {
+    const coinMapFromApi: Record<string, { name: string; symbol: string; iconType: CryptoSymbol; tag: string; network: string }> = {
+      'eth': { name: 'Ethereum', symbol: 'ETH', iconType: 'eth', tag: 'ETH', network: 'Ethereum' },
+      'sol': { name: 'Solana', symbol: 'SOL', iconType: 'sol', tag: 'SOL', network: 'Solana' },
+      'usdt': { name: 'Tether', symbol: 'USDT', iconType: 'usdt', tag: 'TRX', network: 'Tron' },
+    };
+    return (items || []).map((it) => {
+      const key = (it.coin || '').toString().toLowerCase();
+      const from = coinMapFromApi[key] || coinMapFromApi['eth'];
+      return {
+        id: it._id,
+        coin: { name: from.name, symbol: from.symbol, iconType: from.iconType, tag: from.tag },
+        network: it.network || from.network,
+        label: it.label || '',
+        address: it.address,
+      } as Address;
+    });
+  }, [items]);
+
+  const [filteredAddresses, setFilteredAddresses] = useState<Address[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState({
     coin: '',
     network: '',
     search: ''
   });
+
+  useEffect(() => {
+    dispatch(fetchAddresses());
+  }, []);
+
+  useEffect(() => {
+    // initialize filtered with all on load
+    setFilteredAddresses(addresses);
+  }, [addresses]);
 
   const handleSearch = (query: string) => {
     setActiveFilters({ ...activeFilters, search: query });
@@ -97,24 +104,13 @@ const AddressesPage: React.FC = () => {
 
     const coinInfo = coinMap[data.coin] || coinMap['eth'];
     
-    const newAddress: Address = {
-      id: Date.now().toString(),
-      coin: {
-        name: coinInfo.name,
-        symbol: coinInfo.symbol,
-        iconType: coinInfo.iconType,
-        tag: coinInfo.tag
-      },
-      network: coinInfo.network,
+    // Call API to create address, store slice will refresh list
+    dispatch(addAddress({
+      address: data.address,
       label: data.label,
-      address: data.address
-    };
-
-    const updatedAddresses = [...addresses, newAddress];
-    setAddresses(updatedAddresses);
-    
-    // Apply current filters to include the new address if it matches
-    applyFiltersToAddresses(updatedAddresses, activeFilters);
+      coin: data.coin, // store coin key like 'eth' | 'sol' | 'usdt'
+      network: coinInfo.network,
+    }));
     setIsModalOpen(false);
   };
 

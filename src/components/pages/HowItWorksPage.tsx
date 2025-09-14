@@ -18,7 +18,7 @@ const HowItWorksPage = () => {
     {
       title: "Connect Your Wallet",
       description: "Simply connect your crypto wallet - no account creation or KYC required. Trade as a guest instantly.",
-      icon: <FaLink size={48} fill="#001233" />,
+      icon: <FaLink size={48} fill="#00E5FF" />,
       details: [
         "No KYC verification needed",
         "Connect any Web3 wallet",
@@ -29,7 +29,7 @@ const HowItWorksPage = () => {
     {
       title: "Select Your Swap",
       description: "Choose the cryptocurrencies you want to swap. We support unique tokens from multiple blockchains globally.",
-      icon: <FaExchangeAlt size={48} fill="#001233" />,
+      icon: <FaExchangeAlt size={48} fill="#00E5FF" />,
       details: [
         "Wide range of unique tokens",
         "Multi-blockchain support",
@@ -40,7 +40,7 @@ const HowItWorksPage = () => {
     {
       title: "Execute Swap Instantly",
       description: "Your swap is executed automatically through our fully decentralized protocol. Fast, secure, and anonymous.",
-      icon: <BsLightningChargeFill size={48} fill="#001233" />,
+      icon: <BsLightningChargeFill size={48} fill="#00E5FF" />,
       details: [
         "Fully automated DeFi swap",
         "No funds held by platform",
@@ -52,27 +52,27 @@ const HowItWorksPage = () => {
 
   const features = [
     {
-      icon: <BsLightningChargeFill fill='#001233' />,
+      icon: <BsLightningChargeFill fill='#00E5FF' />,
       title: "Lightning Fast",
       description: "Execute swaps instantly with our automated DeFi protocol - no waiting, no delays"
     },
     {
-      icon: <GiKeyLock fill='#001233'/>,
+      icon: <GiKeyLock fill='#00E5FF'/>,
       title: "100% Anonymous",
       description: "No KYC, no personal data collection. Trade completely anonymously without centralized oversight"
     },
     {
-      icon: <FaMobile fill='#001233' />,
+      icon: <FaMobile fill='#00E5FF' />,
       title: "Fully Decentralized",
       description: "We don't hold your funds. Everything runs on-chain through smart contracts"
     },
     {
-      icon: <FaGlobe fill='#001233'/>,
+      icon: <FaGlobe fill='#00E5FF'/>,
       title: "Global Access",
       description: "Available worldwide without relying on centralized banks or traditional financial systems"
     },
     {
-      icon: <ImHeadphones fill='#001233' />,
+      icon: <ImHeadphones fill='#00E5FF' />,
       title: "Unique Tokens",
       description: "Access rare and unique tokens from multiple blockchains that aren't available elsewhere"
     }
@@ -97,7 +97,7 @@ const HowItWorksPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Hero Section */}
     
       <Banner title="How It Works" description="Experience truly decentralized crypto swapping in 3 simple steps. No KYC, no centralized control." />
@@ -114,8 +114,8 @@ const HowItWorksPage = () => {
                   onClick={() => setActiveStep(index)}
                   className={`flex items-center px-6 py-3 rounded-lg font-medium transition-colors ${
                     activeStep === index
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100'
+                      ? 'bg-[#0A1931] text-white border-b-2 border-[#00E5FF]'
+                      : 'bg-[#0A1931] text-white/80 hover:text-white'
                   }`}
                 >
                   {/* <span className="mr-2 text-lg">{step.icon}</span> */}
@@ -130,21 +130,21 @@ const HowItWorksPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-lg shadow-sm p-8 md:p-12"
+              className="bg-[#1F1F1F] rounded-lg shadow-sm p-8 md:p-12"
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                   <div className="mb-6">{steps[activeStep].icon}</div>
-                  <h2 className="text-3xl font-semibold text-gray-900 mb-4">
+                  <h2 className="text-3xl font-semibold text-white mb-4">
                     {steps[activeStep].title}
                   </h2>
-                  <p className="text-lg text-gray-600 mb-6">
+                  <p className="text-lg text-[#B0B0B0] mb-6">
                     {steps[activeStep].description}
                   </p>
                   <ul className="space-y-3">
                     {steps[activeStep].details.map((detail, index) => (
-                      <li key={index} className="flex items-center text-gray-700">
-                        <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <li key={index} className="flex items-center text-[#B0B0B0]">
+                        <svg className="w-5 h-5 text-[#00E5FF] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         {detail}
@@ -152,9 +152,9 @@ const HowItWorksPage = () => {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-gray-100 rounded-lg p-8 text-center">
+                <div className="bg-[#121212] rounded-lg p-8 text-center">
                   <div className="mb-4 flex justify-center">{steps[activeStep].icon}</div>
-                  <p className="text-gray-600">
+                  <p className="text-[#B0B0B0]">
                     Step {activeStep + 1} of {steps.length}
                   </p>
                 </div>
@@ -177,10 +177,10 @@ const HowItWorksPage = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">
               Why Choose LedgerSwap?
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-[#B0B0B0] max-w-2xl mx-auto">
               Trade anonymous, fast, and secured with unique tokens globally without centralized banks
             </p>
           </motion.div>
@@ -189,17 +189,17 @@ const HowItWorksPage = () => {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+                className="bg-[#1F1F1F] p-6 rounded-lg shadow-sm border border-transparent"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ scale: 1.02 }}
               >
                 <div className="text-3xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-white mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-[#B0B0B0]">
                   {feature.description}
                 </p>
               </motion.div>

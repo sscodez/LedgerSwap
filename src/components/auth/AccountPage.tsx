@@ -1,18 +1,25 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { signOut } from '@/store/authSlice';
+import { useRouter } from 'next/navigation';
+import { fetchUserProfile, saveUserProfile } from '@/store/usersSlice';
 
 const AccountPage = () => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { profile, loading, saving } = useAppSelector((s) => s.users);
   const [activeTab, setActiveTab] = useState('profile');
   const [profileData, setProfileData] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    country: 'United States',
-    dateJoined: '2024-01-15'
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    country: '',
+    dateJoined: ''
   });
 
   const [securityData, setSecurityData] = useState({
@@ -20,6 +27,28 @@ const AccountPage = () => {
     emailNotifications: true,
     smsNotifications: false
   });
+
+  // Load profile on mount
+  useEffect(() => {
+    if (!profile) {
+      dispatch(fetchUserProfile());
+    }
+  }, []);
+
+  // When profile changes, populate local form state
+  useEffect(() => {
+    if (profile) {
+      const [first, ...rest] = (profile.name || '').split(' ').filter(Boolean);
+      setProfileData({
+        firstName: first || '',
+        lastName: rest.join(' ') || '',
+        email: profile.email || '',
+        phone: profile.phone || '',
+        country: profile.country || '',
+        dateJoined: '',
+      });
+    }
+  }, [profile]);
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -37,14 +66,40 @@ const AccountPage = () => {
     }));
   };
 
-  const handleSaveProfile = (e: React.FormEvent) => {
+  const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Profile saved:', profileData);
+    const fullName = [profileData.firstName, profileData.lastName].filter(Boolean).join(' ');
+    await dispatch(
+      saveUserProfile({
+        name: fullName,
+        phone: profileData.phone,
+        country: profileData.country,
+      })
+    );
   };
 
   const handleSaveSecurity = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Security settings saved:', securityData);
+  };
+
+  const handleLogout = () => {
+    try {
+      // Clear Redux auth state
+      dispatch(signOut());
+      // Clear client-side token storage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('token');
+      }
+      // Expire cookie
+      if (typeof document !== 'undefined') {
+        const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+        const secure = isHttps ? '; Secure' : '';
+        document.cookie = `token=; Max-Age=0; Path=/; SameSite=Lax${secure}`;
+      }
+      // Redirect to landing
+      router.push('/');
+    } catch {}
   };
 
   const StatCard = ({ title, value, icon, bgColor = "bg-gray-100" }: {
@@ -80,14 +135,25 @@ const AccountPage = () => {
             <div className="flex items-center mb-4">
               <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mr-4">
                 <span className="text-white text-xl font-bold">
-                  {profileData.firstName.charAt(0)}{profileData.lastName.charAt(0)}
+                  {(profileData.firstName || '').charAt(0)}{(profileData.lastName || '').charAt(0)}
                 </span>
               </div>
-              <div>
+              <div className="flex-1">
                 <h1 className="text-3xl font-bold text-gray-900">
                   {profileData.firstName} {profileData.lastName}
                 </h1>
-                <p className="text-gray-600">Member since {new Date(profileData.dateJoined).toLocaleDateString()}</p>
+                {!!profileData.dateJoined && (
+                  <p className="text-gray-600">Member since {new Date(profileData.dateJoined).toLocaleDateString()}</p>
+                )}
+              </div>
+              <div className="ml-auto">
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="px-4 py-2 rounded-lg border border-gray-300 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  Log out
+                </button>
               </div>
             </div>
           </div>
@@ -188,6 +254,7 @@ const AccountPage = () => {
                         value={profileData.email}
                         onChange={handleProfileChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none"
+                        readOnly
                       />
                     </div>
 
@@ -216,6 +283,7 @@ const AccountPage = () => {
                         onChange={handleProfileChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none"
                       >
+                        <option value="">Select country</option>
                         <option value="United States">United States</option>
                         <option value="Canada">Canada</option>
                         <option value="United Kingdom">United Kingdom</option>
@@ -229,11 +297,12 @@ const AccountPage = () => {
                     <div className="flex justify-end">
                       <motion.button
                         type="submit"
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-70"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
+                        disabled={saving}
                       >
-                        Save Changes
+                        {saving ? 'Saving…' : 'Save Changes'}
                       </motion.button>
                     </div>
                   </form>

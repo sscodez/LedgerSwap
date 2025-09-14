@@ -1,24 +1,19 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react';
-
-interface Dispute {
-  id: string;
-  title: string;
-  description: string;
-  status: 'Open' | 'In Progress' | 'Resolved' | 'Closed';
-  priority: 'Low' | 'Medium' | 'High';
-  createdDate: string;
-  assignedTo?: string;
-}
-
-const mockDisputes: Dispute[] = [
-  // Currently no active disputes - empty state
-];
+import React, { useEffect, useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminDisputes, updateAdminDisputeStatus } from '@/store/adminDisputesSlice';
 
 const AdminDisputeResolutionPage: React.FC = () => {
-  const [disputes] = useState<Dispute[]>(mockDisputes);
+  const dispatch = useAppDispatch();
+  const { items, loading, processing } = useAppSelector((s) => s.adminDisputes);
   const [showCreateModal, setShowCreateModal] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchAdminDisputes());
+  }, []);
+
+  const disputes = useMemo(() => items, [items]);
 
   return (
     <div className="relative">
@@ -32,7 +27,9 @@ const AdminDisputeResolutionPage: React.FC = () => {
   
 
       {/* Empty State */}
-      {disputes.length === 0 ? (
+      {loading ? (
+        <div className="bg-white rounded-lg border border-gray-200 px-3 h-[40vh] py-6 flex items-center justify-center text-sm text-gray-500">Loading disputes…</div>
+      ) : disputes.length === 0 ? (
         <div className="bg-white rounded-lg  border border-gray-200 px-3 h-[60vh] py-6 ">
         <div className="bg-blue-50   rounded-lg p-4 mb-6">
         <div className="flex items-start">
@@ -52,15 +49,6 @@ const AdminDisputeResolutionPage: React.FC = () => {
             <Image src='/assests/icons/warning.svg' alt='guide' width={50} height= {50} />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">No active disputes at this time</h3>
-            {/* <p className="text-gray-500 mb-6 max-w-sm">
-              When disputes are reported, they will appear here for review and resolution.
-            </p>
-            <button 
-              onClick={() => setShowCreateModal(true)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-            >
-              Create Test Dispute
-            </button> */}
           </div>
         </div>
       ) : (
@@ -91,42 +79,43 @@ const AdminDisputeResolutionPage: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {disputes.map((dispute) => (
-                  <tr key={dispute.id} className="hover:bg-gray-50">
+                {disputes.map((dispute: any) => (
+                  <tr key={dispute._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      #{dispute.id}
+                      #{dispute._id}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      {dispute.title}
+                      {dispute.title || '—'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        ${dispute.status === 'Open' ? 'bg-red-100 text-red-800' : ''}
-                        ${dispute.status === 'In Progress' ? 'bg-yellow-100 text-yellow-800' : ''}
-                        ${dispute.status === 'Resolved' ? 'bg-green-100 text-green-800' : ''}
-                        ${dispute.status === 'Closed' ? 'bg-gray-100 text-gray-800' : ''}
+                        ${dispute.status === 'open' ? 'bg-red-100 text-red-800' : ''}
+                        ${dispute.status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' : ''}
+                        ${dispute.status === 'resolved' ? 'bg-green-100 text-green-800' : ''}
+                        ${dispute.status === 'closed' ? 'bg-gray-100 text-gray-800' : ''}
                       `}>
                         {dispute.status}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                        ${dispute.priority === 'High' ? 'bg-red-100 text-red-800' : ''}
-                        ${dispute.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' : ''}
-                        ${dispute.priority === 'Low' ? 'bg-green-100 text-green-800' : ''}
+                        ${dispute.priority === 'high' ? 'bg-red-100 text-red-800' : ''}
+                        ${dispute.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' : ''}
+                        ${dispute.priority === 'low' ? 'bg-green-100 text-green-800' : ''}
                       `}>
                         {dispute.priority}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {dispute.createdDate}
+                      {dispute.createdAt ? new Date(dispute.createdAt).toLocaleString() : '—'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <button className="text-blue-600 hover:text-blue-900 mr-3">
-                        View
-                      </button>
-                      <button className="text-green-600 hover:text-green-900">
-                        Resolve
+                      <button 
+                        disabled={processing}
+                        onClick={() => dispatch(updateAdminDisputeStatus({ id: dispute._id, status: 'resolved' }))}
+                        className="text-green-600 hover:text-green-900 disabled:opacity-70"
+                      >
+                        Mark Resolved
                       </button>
                     </td>
                   </tr>

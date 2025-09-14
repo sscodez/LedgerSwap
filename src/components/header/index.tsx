@@ -6,10 +6,15 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { RepeatIcon } from "../icons";
 import ConnectWalletButton from "@/components/connect-wallet-button";
+import { useAppSelector } from "@/store";
+import ConnectButton from "../connectButton";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { token, user } = useAppSelector((s) => s.auth);
+  const hasCookie = typeof document !== 'undefined' && document.cookie.includes('token=');
+  const isLoggedIn = !!token || hasCookie;
 
   const isAdmin = pathname.startsWith("/admin");
   const isDashboard = pathname.startsWith("/dashboard");
@@ -137,34 +142,28 @@ const Header: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-
-          {!isAdminOrDashboard && <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="/login" className="px-2 md:px-3 py-1 text-xs md:text-sm hover:underline">
-              Log in
-            </Link>
-          </motion.div>}
-
-
-
-
-
-
-
-          {!isAdminOrDashboard ? <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              href="/signup"
-              className={`px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${isAdminOrDashboard
-                ? "bg-black text-white hover:bg-gray-800"
-                : "bg-blue-600 text-white hover:bg-blue-700"
-                }`}
-            >
-              Get an Account
-            </Link>
-          </motion.div>
-
-            :
+          {!isLoggedIn && !isAdminOrDashboard && (
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link href="/login" className="px-2 md:px-3 py-1 text-xs md:text-sm hover:underline">
+                Log in
+              </Link>
+            </motion.div>
+          )}
+    {/* <appkit-button /> */}
+          {!isLoggedIn ? (
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                href="/signup"
+                className={`px-3 md:px-4 py-1 md:py-2 rounded-md text-xs md:text-sm transition-colors ${isAdminOrDashboard
+                  ? "bg-black text-white hover:bg-gray-800"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
+                  }`}
+              >
+                Get an Account
+              </Link>
+            </motion.div>
+          ) : (
             <div className="flex flex-row items-center space-x-3">
-
               {isAdmin && (
                 <button
                   onClick={() => window.location.reload()}
@@ -177,7 +176,6 @@ const Header: React.FC = () => {
                   Refresh
                 </button>
               )}
-
               <Link
                 href="/account"
                 className={`flex items-center justify-center px-4 py-2 rounded-md text-sm text-black transition-colors ${isAdminOrDashboard
@@ -195,11 +193,8 @@ const Header: React.FC = () => {
                 />
                 <p className="text-black">My Account</p>
               </Link>
-
-
-
-
-            </div>}
+            </div>
+          )}
 
         </motion.div>
 
@@ -243,21 +238,22 @@ const Header: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.3 }}
               >
-                <Link
-                  href="/login"
-                  className="block text-sm py-2 hover:text-blue-500"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Log in
-                </Link>
+                {!isLoggedIn && (
+                  <Link
+                    href="/login"
+                    className="block text-sm py-2 hover:text-blue-500"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Log in
+                  </Link>
+                )}
 
-
-                {isAdmin && (
+                {isLoggedIn && isAdmin && (
                   <button
                     onClick={() => window.location.reload()}
                     className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${isAdminOrDashboard
                       ? "bg-white text-black hover:bg-gray-800"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
+                      : "bg-blue-600 text-white "
                       }`}
                   >
                     Refresh
@@ -265,23 +261,20 @@ const Header: React.FC = () => {
                 )}
 
                 <Link
-                  href={!isAdminOrDashboard ? "/signup" : "/account"}
+                  href={!isLoggedIn ? "/signup" : "/account"}
                   className={`px-4 py-2 rounded-md text-sm text-center transition-colors ${isAdminOrDashboard
                     ? "bg-white text-black hover:bg-gray-800"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
+                    : "bg-blue-600 text-white "
                     }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  {!isAdminOrDashboard ? 'Get an Account' : ' My Account'}
+                  {!isLoggedIn ? 'Get an Account' : ' My Account'}
                 </Link>
-
-
-
-
 
                 {/* <div className="py-2">
                   <ConnectWalletButton />
                 </div> */}
+                {/* <ConnectButton /> */}
               </motion.div>
             </motion.div>
           </motion.div>

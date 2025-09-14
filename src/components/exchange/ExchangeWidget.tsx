@@ -4,6 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { FaLock, FaLockOpen } from "react-icons/fa6";
 import { TbExchange } from "react-icons/tb";
+import { useRouter, usePathname } from 'next/navigation';
+import { useAppDispatch } from '@/store';
+import { setExchangeState, setCurrentExchangeId } from '@/store/exchangeSlice';
+import { createExchangeHistory } from '@/services/exchangeHistory';
 
 // Define currency type
 export interface Currency {
@@ -20,6 +24,7 @@ interface ExchangeWidgetProps {
     initialSendAmount?: string;
     initialReceiveAmount?: string;
     onExchange?: () => void;
+    navigateOnExchange?: boolean; // if true, push to /exchange with Redux state
 }
 
 const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
@@ -28,7 +33,12 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
     initialSendAmount = '0.1',
     initialReceiveAmount = '0.0039987',
     onExchange = () => { },
+    navigateOnExchange = true,
 }) => {
+    const router = useRouter();
+    const pathname = usePathname();
+    const dispatch = useAppDispatch();
+    const [submitting, setSubmitting] = useState(false);
     // States
     const [sendCurrency, setSendCurrency] = useState<Currency>(
         initialSendCurrency || {
@@ -53,6 +63,10 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
     const [sendDropdown, setSendDropdown] = useState(false);
     const [receiveDropdown, setReceiveDropdown] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isMobile, setIsMobile] = useState(false);
+    // Live pricing state
+    const [pricesUsd, setPricesUsd] = useState<Record<string, number>>({});
+    const [pricesError, setPricesError] = useState<string | null>(null);
     
     // Refs for click outside handling
     const sendDropdownRef = useRef<HTMLDivElement>(null);
@@ -73,6 +87,31 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
         { name: 'XMR', fullName: 'Monero', icon: '/assests/cryptocurrency/xmr.png', color: '#FF6600' },
     ];
 
+    // Map our symbols to CoinGecko IDs
+    const coinGeckoIds: Record<string, string> = {
+        BTC: 'bitcoin',
+        ETH: 'ethereum',
+        USDT: 'tether',
+        USDC: 'usd-coin',
+        XRP: 'ripple',
+        SOL: 'solana',
+        XLM: 'stellar',
+        XDC: 'xdce-crowd-sale',
+        MIOTA: 'iota',
+        LTC: 'litecoin',
+        XMR: 'monero',
+    };
+
+    const allIdsCsv = Object.values(coinGeckoIds).join(',');
+
+    // Helper to get USD price by our currency symbol
+    const getUsdPrice = (symbol: string): number | null => {
+        const id = coinGeckoIds[symbol as keyof typeof coinGeckoIds];
+        if (!id) return null;
+        const v = pricesUsd[id];
+        return typeof v === 'number' ? v : null;
+    };
+
     // Event handlers
     const handleSendAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // Allow only number input, no text
@@ -84,10 +123,19 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
                 setReceiveAmount('');
                 setSendUsdValue('');
             } else {
-                // In a real app, we would calculate the receive amount based on exchange rates
-                // For now, we'll just simulate a calculation
-                setReceiveAmount((parseFloat(value || '0') * 0.039987).toFixed(7));
-                setSendUsdValue(`≈$${(parseFloat(value || '0') * 4591.1).toFixed(2)}`);
+                const amount = parseFloat(value || '0');
+                const pSend = getUsdPrice(sendCurrency.name);
+                const pRecv = getUsdPrice(receiveCurrency.name);
+                if (pSend && pRecv && amount >= 0) {
+                    const usd = amount * pSend;
+                    const recv = pRecv > 0 ? usd / pRecv : 0;
+                    setReceiveAmount(Number.isFinite(recv) ? recv.toFixed(7) : '');
+                    setSendUsdValue(`≈$${usd.toFixed(2)}`);
+                } else {
+                    // Fallback if prices not loaded yet
+                    setReceiveAmount('');
+                    setSendUsdValue('');
+                }
             }
         }
     };
@@ -102,10 +150,18 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
                 setSendAmount('');
                 setSendUsdValue('');
             } else {
-                // In a real app, we would calculate the send amount based on exchange rates
-                // For now, we'll just simulate a calculation
-                setSendAmount((parseFloat(value || '0') / 0.039987).toFixed(7));
-                setSendUsdValue(`≈$${(parseFloat(value || '0') / 0.039987 * 4591.1).toFixed(2)}`);
+                const amountRecv = parseFloat(value || '0');
+                const pSend = getUsdPrice(sendCurrency.name);
+                const pRecv = getUsdPrice(receiveCurrency.name);
+                if (pSend && pRecv && amountRecv >= 0) {
+                    const usd = amountRecv * pRecv;
+                    const sendAmt = pSend > 0 ? usd / pSend : 0;
+                    setSendAmount(Number.isFinite(sendAmt) ? sendAmt.toFixed(7) : '');
+                    setSendUsdValue(`≈$${usd.toFixed(2)}`);
+                } else {
+                    setSendAmount('');
+                    setSendUsdValue('');
+                }
             }
         }
 
@@ -178,6 +234,10 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
                 setSendDropdown(false);
                 setReceiveDropdown(false);
             }
+            // Track mobile state
+            if (typeof window !== 'undefined') {
+                setIsMobile(window.innerWidth < 640);
+            }
         };
         
         window.addEventListener('resize', handleResize);
@@ -185,6 +245,102 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
             window.removeEventListener('resize', handleResize);
         };
     }, [sendDropdown, receiveDropdown]);
+
+    // Initialize mobile state on mount
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setIsMobile(window.innerWidth < 640);
+        }
+    }, []);
+
+    // Fetch live USD prices from CoinGecko on mount
+    useEffect(() => {
+        const abort = new AbortController();
+        async function fetchPrices() {
+            try {
+                setPricesError(null);
+                const url = `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(allIdsCsv)}&vs_currencies=usd`;
+                const res = await fetch(url, { signal: abort.signal, cache: 'no-store' });
+                if (!res.ok) throw new Error(`Failed to fetch prices: ${res.status}`);
+                const json = await res.json();
+                // Flatten to id -> usd number
+                const flat: Record<string, number> = {};
+                Object.entries(json || {}).forEach(([id, obj]) => {
+                    const usd = (obj as any)?.usd;
+                    if (typeof usd === 'number') flat[id] = usd;
+                });
+                setPricesUsd(flat);
+            } catch (e: any) {
+                if (e?.name !== 'AbortError') setPricesError(e?.message || 'Failed to load prices');
+            }
+        }
+        fetchPrices();
+        return () => abort.abort();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    // Recompute amounts when prices or selected currencies change
+    useEffect(() => {
+        if (!sendAmount) return;
+        const amount = parseFloat(sendAmount);
+        const pSend = getUsdPrice(sendCurrency.name);
+        const pRecv = getUsdPrice(receiveCurrency.name);
+        if (pSend && pRecv && Number.isFinite(amount)) {
+            const usd = amount * pSend;
+            const recv = pRecv > 0 ? usd / pRecv : 0;
+            setReceiveAmount(Number.isFinite(recv) ? recv.toFixed(7) : '');
+            setSendUsdValue(`≈$${usd.toFixed(2)}`);
+        }
+    }, [pricesUsd, sendCurrency, receiveCurrency]);
+
+    const handleExchangeClick = async () => {
+        // Persist current state to Redux
+        try {
+            dispatch(
+                setExchangeState({
+                    sendCurrency,
+                    receiveCurrency,
+                    sendAmount,
+                    receiveAmount,
+                })
+            );
+        } catch {}
+        // Create exchange on backend to get an ID
+        try {
+            setSubmitting(true);
+            const generateId = () => `EX-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+            const payload = {
+                exchangeId: generateId(),
+                status: 'pending',
+                from: {
+                    currency: sendCurrency.name,
+                    amount: parseFloat(sendAmount || '0'),
+                },
+                to: {
+                    currency: receiveCurrency.name,
+                    amount: parseFloat(receiveAmount || '0'),
+                },
+                fees: 0,
+                cashback: 0,
+            } as any;
+            const created = await createExchangeHistory(payload);
+            if (created?._id) {
+                dispatch(setCurrentExchangeId(created._id));
+            }
+        } catch (e) {
+            // Non-fatal: proceed to navigation even if creation failed
+            console.warn('Failed to create exchange record, continuing navigation', e);
+        } finally {
+            setSubmitting(false);
+        }
+
+        // Optionally navigate to dashboard/exchange (avoid navigating if already there)
+        if (navigateOnExchange && pathname !== '/dashboard/exchange') {
+            router.push('/dashboard/exchange');
+        }
+        // Fire external callback
+        onExchange?.();
+    };
 
     return (
         <div className="w-full p-3 py-4 sm:py-6 sm:p-4 md:py-6 md:p-6 bg-white rounded-sm sm:rounded-2xl relative">
@@ -368,16 +524,25 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
                 <AnimatePresence>
                     {receiveDropdown && (
                         <motion.div 
-                            className="fixed mt-2 bg-[#F3F4F6] text-black rounded-lg min-w-[200px] z-[99999999] shadow-xl"
+                            className="fixed bg-[#F3F4F6] text-black rounded-lg min-w-[200px] z-[99999999] shadow-xl"
                             style={{ 
-                                width: receiveDropdownRef.current?.offsetWidth + 'px', 
-                                top: (receiveDropdownRef.current?.getBoundingClientRect().bottom || 0) + 'px', 
+                                width: (receiveDropdownRef.current?.offsetWidth || 0) + 'px', 
                                 left: (receiveDropdownRef.current?.getBoundingClientRect().left || 0) + 'px',
-                                position: 'fixed'
+                                position: 'fixed',
+                                ...(isMobile
+                                    ? {
+                                        // Position above the trigger on mobile
+                                        bottom: ((typeof window !== 'undefined' ? window.innerHeight : 0) - (receiveDropdownRef.current?.getBoundingClientRect().top || 0)) + 'px'
+                                      }
+                                    : {
+                                        // Position below the trigger on larger screens
+                                        top: (receiveDropdownRef.current?.getBoundingClientRect().bottom || 0) + 'px'
+                                      }
+                                )
                             }}
-                            initial={{ opacity: 0, y: -20 }}
+                            initial={{ opacity: 0, y: isMobile ? 20 : -20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
+                            exit={{ opacity: 0, y: isMobile ? 20 : -20 }}
                             transition={{ duration: 0.3 }}
                         >
                             {/* Search input */}
@@ -435,15 +600,16 @@ const ExchangeWidget: React.FC<ExchangeWidgetProps> = ({
 
             {/* Exchange Button */}
             <motion.button
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors"
+                className="w-full cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg transition-colors"
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, delay: 0.8 }}
-                onClick={onExchange}
+                onClick={handleExchangeClick}
+                disabled={submitting}
             >
-                Exchange
+                {submitting ? 'Processing…' : 'Exchange'}
             </motion.button>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useAppKit } from "@reown/appkit/react";
 
 interface MetaMaskUnlockModalProps {
   isOpen: boolean;

@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from './Modal';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { useAppKit } from "@reown/appkit/react";
 
 interface WalletConnectModalProps {
   isOpen: boolean;
@@ -15,6 +16,7 @@ const WalletConnectModal: React.FC<WalletConnectModalProps> = ({
   onConnect,
 }) => {
   // Animation variants for staggered children animations
+  const { open, close } = useAppKit();
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -66,7 +68,7 @@ const WalletConnectModal: React.FC<WalletConnectModalProps> = ({
         >
           {/* MetaMask */}
           <motion.button
-            onClick={() => onConnect('metamask')}
+            onClick={() => {open({view:'Account'});}}
             className="w-full flex items-center justify-between p-3 sm:p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
             variants={itemVariants}
             whileHover={{ scale: 1.02, boxShadow: '0 4px 8px rgba(0,0,0,0.05)' }}

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -19,6 +19,15 @@ const SignupPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Client-side guard: if already authenticated, redirect away from signup
+  useEffect(() => {
+    const hasLocal = typeof window !== 'undefined' && !!localStorage.getItem('token');
+    const hasCookie = typeof document !== 'undefined' && document.cookie.includes('token=');
+    if (hasLocal || hasCookie) {
+      router.replace('/dashboard');
+    }
+  }, [router]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;

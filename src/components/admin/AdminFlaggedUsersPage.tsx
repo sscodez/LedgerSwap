@@ -1,38 +1,20 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import CopyButton from '../shared/CopyButton';
-
-interface FlaggedUser {
-  id: string;
-  walletAddress: string;
-  reason: string;
-  totalSwaps: number;
-  flaggedDate: string;
-}
-
-const mockFlaggedUsers: FlaggedUser[] = [
-  { id: '1', walletAddress: '0x9834****44873496l', reason: 'High frequency trading', totalSwaps: 247, flaggedDate: '2025-09-12' },
-  { id: '2', walletAddress: '0xa2234****44873436', reason: 'High frequency trading', totalSwaps: 89, flaggedDate: '2025-08-12' },
-  { id: '3', walletAddress: '0xa9824****44873236', reason: 'Unusual pattern detected', totalSwaps: 28, flaggedDate: '2025-01-18' },
-];
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminFlaggedAddresses } from '@/store/adminFlaggedAddressesSlice';
 
 const AdminFlaggedUsersPage: React.FC = () => {
-  const [users, setUsers] = useState(mockFlaggedUsers);
-  const [selectedUser, setSelectedUser] = useState<FlaggedUser | null>(null);
+  const dispatch = useAppDispatch();
+  const { data, loading } = useAppSelector((s) => s.adminFlagged);
+  const [selectedItem, setSelectedItem] = useState<any | null>(null);
 
-  const handleReview = (user: FlaggedUser) => {
-    setSelectedUser(user);
-  };
+  useEffect(() => {
+    dispatch(fetchAdminFlaggedAddresses({ page: 1, limit: 20 }));
+  }, []);
 
-  const handleClearFlag = (userId: string) => {
-    setUsers(users.filter(user => user.id !== userId));
-    setSelectedUser(null);
-  };
-
-  const formatWalletAddress = (address: string) => {
-    return address;
-  };
+  const items = useMemo(() => data?.items || [], [data]);
 
   return (
     <div className="relative text-black px-1 overflow-auto sm:px-0">
@@ -53,10 +35,13 @@ const AdminFlaggedUsersPage: React.FC = () => {
                   Wallet address
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
-                  Reason
+                  Coin
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
-                  Total swaps
+                  Network
+                </th>
+                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
+                  Reason
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Flagged date
@@ -67,37 +52,40 @@ const AdminFlaggedUsersPage: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50">
+              {loading && (
+                <tr>
+                  <td colSpan={6} className="px-4 py-3 text-xs text-gray-500">Loading…</td>
+                </tr>
+              )}
+              {!loading && items.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="px-4 py-3 text-xs text-gray-500">No flagged addresses</td>
+                </tr>
+              )}
+              {!loading && items.map((row: any) => (
+                <tr key={row._id} className="hover:bg-gray-50">
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <span className="text-xs sm:text-sm font-medium text-gray-900 mr-2">
-                        {formatWalletAddress(user.walletAddress)}
+                        {row.address}
                       </span>
-                      <CopyButton textToCopy={user.walletAddress} size={15} />
+                      <CopyButton textToCopy={row.address} size={15} />
                     </div>
                   </td>
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">{row.coin || '—'}</td>
+                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">{row.network || '—'}</td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
-                    {user.reason}
+                    {row.flaggedReason || '—'}
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
-                    {user.totalSwaps}
-                  </td>
-                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500">
-                    {user.flaggedDate}
+                    {row.flaggedAt ? new Date(row.flaggedAt).toLocaleString() : '—'}
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm font-medium">
                     <button 
-                      onClick={() => handleReview(user)}
+                      onClick={() => setSelectedItem(row)}
                       className="text-blue-600 text-xs bg-blue-100 p-1 rounded-md hover:text-blue-900 mr-3"
                     >
                       Review
-                    </button>
-                    <button 
-                      onClick={() => handleClearFlag(user.id)}
-                      className="text-green-600 text-xs bg-green-100 rounded-md p-1 hover:text-green-900"
-                    >
-                      Clear Flag
                     </button>
                   </td>
                 </tr>
@@ -111,13 +99,13 @@ const AdminFlaggedUsersPage: React.FC = () => {
   
 
       {/* Review Modal */}
-      {selectedUser && (
+      {selectedItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 sm:p-0">
-          <div className="bg-white rounded-lg p-4 sm:p-6 max-w-lg w-full mx-auto">
+          <div className="bg-white rounded-lg p-4 sm:p-6 max-w-lg w-full">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">Review Flagged User</h2>
               <button 
-                onClick={() => setSelectedUser(null)}
+                onClick={() => setSelectedItem(null)}
                 className="text-gray-500 hover:text-gray-700"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -130,14 +118,14 @@ const AdminFlaggedUsersPage: React.FC = () => {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Wallet Address</label>
                 <div className="p-2 bg-gray-50 rounded-md text-sm font-mono">
-                  {selectedUser.walletAddress}
+                  {selectedItem.address}
                 </div>
               </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Flag Reason</label>
                 <div className="p-2 bg-gray-50 rounded-md text-sm">
-                  {selectedUser.reason}
+                  {selectedItem.flaggedReason || '—'}
                 </div>
               </div>
               
@@ -145,13 +133,13 @@ const AdminFlaggedUsersPage: React.FC = () => {
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Total Swaps</label>
                   <div className="p-2 bg-gray-50 rounded-md text-sm">
-                    {selectedUser.totalSwaps}
+                    —
                   </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Flagged Date</label>
                   <div className="p-2 bg-gray-50 rounded-md text-sm">
-                    {selectedUser.flaggedDate}
+                    {selectedItem.flaggedAt ? new Date(selectedItem.flaggedAt).toLocaleString() : '—'}
                   </div>
                 </div>
               </div>
@@ -169,15 +157,9 @@ const AdminFlaggedUsersPage: React.FC = () => {
             <div className="mt-6 flex flex-wrap sm:flex-nowrap justify-end gap-2 sm:space-x-3">
               <button 
                 className="px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50"
-                onClick={() => setSelectedUser(null)}
+                onClick={() => setSelectedItem(null)}
               >
                 Close
-              </button>
-              <button 
-                onClick={() => handleClearFlag(selectedUser.id)}
-                className="px-3 sm:px-4 py-1.5 sm:py-2 bg-green-600 text-sm text-white rounded-md hover:bg-green-700"
-              >
-                Clear Flag
               </button>
               <button className="px-3 sm:px-4 py-1.5 sm:py-2 bg-red-600 text-sm text-white rounded-md hover:bg-red-700">
                 Escalate

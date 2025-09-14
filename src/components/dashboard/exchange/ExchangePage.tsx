@@ -1,6 +1,6 @@
 
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SwapSteps from './SwapSteps';
 import SecurityCheck from './SecurityCheck';
 import CurrencyInput from './CurrencyInput';
@@ -10,6 +10,9 @@ import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAppSelector } from '@/store';
+import { createExchange } from '@/services/exchanges';
+import { useRouter } from 'next/navigation';
 
 // Animation for dropdown menu
 const slideDownAndFade = keyframes`
@@ -85,17 +88,72 @@ const currencies = {
 };
 
 const ExchangePage: React.FC = () => {
+  const exchange = useAppSelector(s => s.exchange);
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(2);
   const [fromCurrency, setFromCurrency] = useState(currencies.eth);
   const [toCurrency, setToCurrency] = useState(currencies.btc);
   const [fromAmount, setFromAmount] = useState('0.1');
   const [toAmount, setToAmount] = useState('≈ $12,954.89');
   const [walletAddress, setWalletAddress] = useState('');
+  const [addressError, setAddressError] = useState<string | null>(null);
   const [cashback, setCashback] = useState('4.78 USDT');
 
-  const handleCreateExchange = () => {
-    // Logic to create exchange would go here
-    setCurrentStep(3);
+  // On mount, prefill from Redux exchange slice if coming from landing/hero widget
+  useEffect(() => {
+    if (!exchange) return;
+    const sc = exchange.sendCurrency;
+    const rc = exchange.receiveCurrency;
+    const sa = exchange.sendAmount;
+    const ra = exchange.receiveAmount;
+
+    if (sc) {
+      const key = sc.name?.toLowerCase?.();
+      const found = (key && (currencies as any)[key]) || null;
+      if (found) setFromCurrency(found);
+    }
+    if (rc) {
+      const key = rc.name?.toLowerCase?.();
+      const found = (key && (currencies as any)[key]) || null;
+      if (found) setToCurrency(found);
+    }
+    if (typeof sa === 'string' && sa !== '') setFromAmount(sa);
+    if (typeof ra === 'string' && ra !== '') setToAmount(ra);
+  }, [exchange]);
+
+  const handleCreateExchange = async () => {
+    // Basic recipient address validation
+    if (!walletAddress || walletAddress.trim().length < 6) {
+      setAddressError('Please enter a valid recipient wallet address.');
+      return;
+    }
+    try {
+      setSubmitting(true);
+      setAddressError(null);
+      const payload = {
+        fromCurrency: fromCurrency.symbol,
+        toCurrency: toCurrency.symbol,
+        sendAmount: parseFloat(fromAmount || '0'),
+        receiveAmount: parseFloat((toAmount || '0').toString().replace(/[^0-9.]/g, '')),
+        fees: 0,
+        cashback: 0,
+        walletAddress: walletAddress.trim(),
+        status: 'pending' as const,
+      };
+      const res = await createExchange(payload);
+      const id = res.exchangeId;
+      // Optional: set step to indicate progress
+      setCurrentStep(3);
+      if (id) {
+        router.push(`/dashboard/exchange/${id}`);
+        return;
+      }
+    } catch (e) {
+      console.warn('Failed to create exchange', e);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -106,12 +164,19 @@ const ExchangePage: React.FC = () => {
           <SwapSteps currentStep={currentStep} />
           
           {/* Security check */}
-          <SecurityCheck />
+          {!submitting && <SecurityCheck />}
 
         </div>
         
         {/* Exchange details section */}
         <div className="bg-white rounded-lg p-3 sm:p-6   mb-4 sm:mb-6">
+          {submitting ? (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="inline-block h-10 w-10 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent" />
+              <p className="mt-4 text-sm text-gray-600">Creating your exchange…</p>
+            </div>
+          ) : (
+          <>
           <h2 className="text-lg sm:text-xl text-center text-black my-4 sm:my-8 font-medium">Add exchange details</h2>
           <div className='border-b border-gray-200 w-full my-3 sm:my-5'></div>
           
@@ -346,6 +411,9 @@ const ExchangePage: React.FC = () => {
             onChange={setWalletAddress}
             placeholder="The recipient's Ethereum address"
           />
+          {addressError && (
+            <p className="mt-2 text-xs text-red-600">{addressError}</p>
+          )}
           
       
    
@@ -357,9 +425,10 @@ const ExchangePage: React.FC = () => {
           <div className="mt-4 sm:mt-6">
             <button 
               onClick={handleCreateExchange}
-              className="w-full py-2.5 sm:py-3 px-3 sm:px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm sm:text-base font-medium rounded-lg transition-colors"
+              disabled={submitting || !walletAddress || walletAddress.trim().length < 6}
+              className={`w-full py-2.5 sm:py-3 px-3 sm:px-4 text-white text-sm sm:text-base font-medium rounded-lg transition-colors ${submitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
             >
-              Create an exchange
+              {submitting ? 'Creating…' : 'Create an exchange'}
             </button>
             
             <div className="text-center text-[10px] sm:text-xs text-gray-500 my-4 sm:my-5">
@@ -369,6 +438,8 @@ const ExchangePage: React.FC = () => {
               <a href="#" className="text-blue-600 hover:underline">Terms of Service</a>.
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>

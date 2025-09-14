@@ -1,11 +1,27 @@
 'use client'
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { BitcoinBadge, EthereumBadge, RightArrow, SolanaBadge, TronBadge, USDTBadge } from '../table/table';
 import { BsArrowRight } from "react-icons/bs";
 import CopyButton from '../shared/CopyButton';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminMetrics } from '@/store/adminMetricsSlice';
 
 const AdminOverviewPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { metrics, loading } = useAppSelector((s) => s.adminMetrics);
+
+  type SwapRow = {
+    id: string | number;
+    address: string;
+    amount: React.ReactNode;
+    fromCoin: string;
+    toCoin: string;
+    network: React.ReactNode;
+    status: string;
+    time: string;
+  };
+
   // Filter states
   const [networkFilter, setNetworkFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -13,67 +29,40 @@ const AdminOverviewPage: React.FC = () => {
   const [toFilter, setToFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Mock swap data
-  const swapData = [
-    {
-      id: 1,
-      address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>0.750 </p> <EthereumBadge /><BsArrowRight /> <p>1400000</p> <TronBadge /></div>,
-      coin: '',
-      fromCoin: 'ETH',
-      toCoin: 'BTC',
-     network: <div className=' flex items-center '><div className='h-8 w-8  flex items-center justify-center bg-gray-200 rounded-md'> <Image className='my-5 mx-5' src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>, 
-      status: 'Pending',
-      time: '2 min ago'
-    },
-    {
-      id: 2,
-      address: '0xa2234s...k4487343s7',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>5340 </p> <SolanaBadge /><BsArrowRight /> <p>1200</p> <TronBadge /></div>,
-      coin: '',
-      fromCoin: 'SOL',
-      toCoin: 'USDT',
-      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/sol.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Solana</p></div>,
-      status: 'Finished',
-      time: '5 min ago'
-    },
-    {
-      id: 3,
-      address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>3850 </p> <USDTBadge /><BsArrowRight /> <p>56200</p> <SolanaBadge /></div>,
-      coin: '',
-      fromCoin: "USDT",
-      toCoin: '',
-      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/tron.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Tron</p></div>,
-      status: 'Finished',
-      time: '12 min ago'
-    },
-    {
-      id: 4,
-      address: '0xb5678t...j9012345t2',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>5045 </p> <BitcoinBadge /><BsArrowRight /> <p>26700</p> <TronBadge /></div>,
-      coin: '',
-      fromCoin: "USDT",
-      toCoin: 'ETH',
-      network: <div className=' flex items-center '><div className='h-8 w-8  flex items-center justify-center bg-gray-200 rounded-md'> <Image className='my-5 mx-5' src='/assests/cryptocurrency/eth.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-sm text-gray-500'>Ethereum</p></div>, 
-      status: 'Pending',
-      time: '15 min ago'
-    },
-    {
-      id: 5,
-      address: '0xa2234s...k4487343s9',
-      amount: <div className="flex items-center space-x-2 text-xs"><p>750 </p> <EthereumBadge /><BsArrowRight /> <p>1200</p> <BitcoinBadge /></div>,
-      coin: '',
-      fromCoin: 'ETH',
-      toCoin: 'SOL',
-      network: <div className=' flex items-center '><div className='px-1 py-1 bg-gray-200 rounded-md'> <Image src='/assests/cryptocurrency/sol.png' alt='ethereum' width={20} height={20} /></div><p className=' ml-2 text-xs text-gray-500'>Solana</p></div>,
-      status: 'Finished',
-      time: '30 min ago'
-    }
-  ];
+  // Load real metrics
+  useEffect(() => {
+    dispatch(fetchAdminMetrics());
+  }, []);
+
+  // Derive recent swaps from metrics if available (fallback to empty)
+  const recentSwaps: SwapRow[] = useMemo(() => {
+    // recentSwaps from API are latest 10 ExchangeHistory docs; keep a simple projection
+    const items = (metrics as any)?.recentSwaps || [];
+    return items.map((it: any, idx: number) => ({
+      id: it._id || idx,
+      address: it.walletAddress || '—',
+      amount: (
+        <div className="flex items-center space-x-2 text-xs">
+          <p>{it.from?.amount ?? '—'}</p> <EthereumBadge /><BsArrowRight /> <p>{it.to?.amount ?? '—'}</p> <TronBadge />
+        </div>
+      ),
+      fromCoin: it.from?.symbol || '—',
+      toCoin: it.to?.symbol || '—',
+      network: (
+        <div className=' flex items-center '>
+          <div className='px-1 py-1 bg-gray-200 rounded-md'>
+            <Image src='/assests/cryptocurrency/sol.png' alt='network' width={20} height={20} />
+          </div>
+          <p className=' ml-2 text-sm text-gray-500'>{it.network || '—'}</p>
+        </div>
+      ),
+      status: it.status || '—',
+      time: new Date(it.createdAt || Date.now()).toLocaleString(),
+    }));
+  }, [metrics]);
 
   // Filtered data based on filters
-  const filteredSwaps = swapData.filter(swap => {
+  const filteredSwaps = recentSwaps.filter((swap: SwapRow) => {
     // Apply network filter
     // if (networkFilter !== 'all' && swap.network !== networkFilter) return false;
 
@@ -92,41 +81,35 @@ const AdminOverviewPage: React.FC = () => {
     return true;
   });
 
-  const metrics = [
-    {
-      title: "Total Swaps Today",
-      value: "1,247",
-      change: "+12.3%",
-      iconBg: "bg-blue-100",
-      iconColor: "text-blue-600",
-      svgPath: (<Image src='/assests/icons/iconWithbg.png' alt='settings' width={30} height={30} />),
-    },
-    {
-      title: "Volume (24h)",
-      value: "$4.2M",
-      change: "+8.7%",
-      iconBg: "bg-teal-100",
-      iconColor: "text-teal-600",
-      svgPath: (<Image src='/assests/icons/iconWithbg 2.png' alt='settings' width={30} height={30} />),
-
-    },
-    {
-      title: "Active Users",
-      value: "892",
-      change: "+5.2%",
-      iconBg: "bg-indigo-100",
-      iconColor: "text-indigo-600",
-      svgPath: (<Image src='/assests/icons/iconWithbg 3.png' alt='settings' width={30} height={30} />),
-    },
-    {
-      title: "Platform Fees",
-      value: "$21,450",
-      change: "+15.4%",
-      iconBg: "bg-purple-100",
-      iconColor: "text-purple-600",
-      svgPath: (<Image src='/assests/icons/iconWithbg 4.png' alt='settings' width={30} height={30} />),
-    },
-  ];
+  const cards = useMemo(() => {
+    const totals = (metrics as any)?.totals || {};
+    return [
+      {
+        title: 'Total Swaps Today',
+        value: String(totals.totalSwapsToday ?? '—'),
+        change: '',
+        svgPath: (<Image src='/assests/icons/iconWithbg.png' alt='settings' width={30} height={30} />),
+      },
+      {
+        title: 'Volume (24h)',
+        value: String(totals.volume24h ?? '—'),
+        change: '',
+        svgPath: (<Image src='/assests/icons/iconWithbg 2.png' alt='settings' width={30} height={30} />),
+      },
+      {
+        title: 'Active Users',
+        value: String(totals.activeUsers24h ?? '—'),
+        change: '',
+        svgPath: (<Image src='/assests/icons/iconWithbg 3.png' alt='settings' width={30} height={30} />),
+      },
+      {
+        title: 'Platform Fees (24h)',
+        value: String(totals.fees24h ?? '—'),
+        change: '',
+        svgPath: (<Image src='/assests/icons/iconWithbg 4.png' alt='settings' width={30} height={30} />),
+      },
+    ];
+  }, [metrics]);
 
 
 
@@ -138,7 +121,7 @@ const AdminOverviewPage: React.FC = () => {
 
       {/* Metrics Cards Grid */}
       <div className="grid grid-cols-1 bg-white rounded-lg p-3 sm:p-5 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6 overflow-hidden">
-        {metrics.map((metric, index) => (
+        {cards.map((metric, index: number) => (
           <div
             key={index}
             className="bg-[#F8FAFC] p-4 sm:p-6 rounded-lg text-[13px] text-black"
@@ -153,7 +136,9 @@ const AdminOverviewPage: React.FC = () => {
               </div>
               <span className="text-xl sm:text-2xl ml-2 font-semibold">{metric.value}</span>
             </div>
-            <span className="text-xs font-semibold mt-2 text-green-800 block">{metric.change}</span>
+            {!!metric.change && (
+              <span className="text-xs font-semibold mt-2 text-green-800 block">{metric.change}</span>
+            )}
           </div>
         ))}
       </div>
@@ -166,6 +151,9 @@ const AdminOverviewPage: React.FC = () => {
         {/* Recent Activity - spans 2 columns on xl */}
         <div className="col-span-2">
           <div className="bg-white rounded-lg p-3 sm:p-6 mb-4 sm:mb-6">
+            {loading && (
+              <div className="text-sm text-gray-500 mb-3">Loading recent swaps…</div>
+            )}
 
             {/* Filter controls */}
             <div className="flex  text-black flex-wrap gap-3 mb-4">

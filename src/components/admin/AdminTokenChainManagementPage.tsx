@@ -1,6 +1,8 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminChains, setAdminChainEnabled } from '@/store/managementSlice';
 
 interface TokenChain {
   id: string;
@@ -11,22 +13,15 @@ interface TokenChain {
   icon: string;
 }
 
-const mockTokenChains: TokenChain[] = [
-  { id: '1', name: 'Ethereum', symbol: 'Ethereum', volume24h: '$2.3M', status: 'Inactive', icon: 'ethereum' },
-  { id: '2', name: 'Polygon', symbol: 'Solana', volume24h: '$1.8M', status: 'Active', icon: 'solana' },
-  { id: '3', name: 'Binance Coin', symbol: 'Tron', volume24h: '$945K', status: 'Active', icon: 'tron' },
-];
-
 const AdminTokenChainManagementPage: React.FC = () => {
-  const [tokens, setTokens] = useState(mockTokenChains);
+  const dispatch = useAppDispatch();
+  const { chains, loadingChains } = useAppSelector((s) => s.management);
 
-  const toggleTokenStatus = (id: string) => {
-    setTokens(tokens.map(token => 
-      token.id === id 
-        ? { ...token, status: token.status === 'Active' ? 'Inactive' : 'Active' }
-        : token
-    ));
-  };
+  useEffect(() => {
+    dispatch(fetchAdminChains());
+  }, []);
+
+  const items = useMemo(() => chains, [chains]);
 
   const TokenIcon: React.FC<{ type: string }> = ({ type }) => {
     switch (type) {
@@ -69,13 +64,10 @@ const AdminTokenChainManagementPage: React.FC = () => {
             <thead className="">
               <tr>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left  font-medium text-gray-500">
-                  Token
+                  Token/Chain
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
-                  Symbol
-                </th>
-                <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
-                  24h volume
+                  Key
                 </th>
                 <th scope="col" className="px-4 sm:px-8 py-3 sm:py-4 text-left font-medium text-gray-500">
                   Status
@@ -86,38 +78,37 @@ const AdminTokenChainManagementPage: React.FC = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {tokens.map((token) => (
-                <tr key={token.id} className="hover:bg-gray-50">
+              {loadingChains && (
+                <tr>
+                  <td colSpan={4} className="px-4 py-3 text-xs text-gray-500">Loading chains…</td>
+                </tr>
+              )}
+              {!loadingChains && items.map((chain: any) => (
+                <tr key={chain.key} className="hover:bg-gray-50">
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <TokenIcon type={token.icon} />
-                      <span className=" font-medium text-gray-900">{token.name}</span>
+                      <div className="w-6 h-6 mr-3">
+                        <Image src="/assests/cryptocurrency/eth.png" alt="icon" width={20} height={20} />
+                      </div>
+                      <span className=" font-medium text-gray-900">{chain.name || chain.key}</span>
                     </div>
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap  text-gray-500">
-                    {token.symbol}
-                  </td>
-                  <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-gray-500">
-                    {token.volume24h}
+                    {chain.key}
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap">
                     <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${token.status === 'Active' ? ' text-blue-600' : ' text-red-600'}
+                      ${chain.enabled ? ' text-blue-600' : ' text-red-600'}
                     `}>
-                      {token.status}
+                      {chain.enabled ? 'Active' : 'Inactive'}
                     </span>
                   </td>
                   <td className="px-4 sm:px-8 py-3 sm:py-4 whitespace-nowrap text-sm font-medium">
-                    <button 
-                      onClick={() => toggleTokenStatus(token.id)}
-                      className={`px-4 py-1 rounded-md text-xs font-medium transition-colors
-                        ${token.status === 'Active' 
-                          ? 'bg-red-100 text-red-700 hover:bg-red-200' 
-                          : 'bg-blue-600 text-white hover:bg-blue-700'
-                        }
-                      `}
+                    <button
+                      onClick={() => dispatch(setAdminChainEnabled({ key: chain.key, enabled: !chain.enabled }))}
+                      className={`px-4 py-1 rounded-md text-xs font-medium transition-colors ${chain.enabled ? 'bg-red-100 text-red-700 hover:bg-red-200' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
                     >
-                      {token.status === 'Active' ? 'Disable' : 'Enable'}
+                      {chain.enabled ? 'Disable' : 'Enable'}
                     </button>
                   </td>
                 </tr>

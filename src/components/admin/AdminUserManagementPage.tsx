@@ -1,42 +1,29 @@
 'use client'
-import React, { useState } from 'react';
-
-const mockUsers = [
-  { id: '1', username: 'john_doe', email: 'john@example.com', status: 'Active', kycStatus: 'Verified', lastLogin: '2023-10-15', role: 'User' },
-  { id: '2', username: 'jane_smith', email: 'jane@example.com', status: 'Active', kycStatus: 'Verified', lastLogin: '2023-10-14', role: 'User' },
-  { id: '3', username: 'robert_johnson', email: 'robert@example.com', status: 'Active', kycStatus: 'Pending', lastLogin: '2023-10-10', role: 'User' },
-  { id: '4', username: 'susan_williams', email: 'susan@example.com', status: 'Inactive', kycStatus: 'Not Started', lastLogin: '2023-09-28', role: 'User' },
-  { id: '5', username: 'michael_brown', email: 'michael@example.com', status: 'Active', kycStatus: 'Verified', lastLogin: '2023-10-12', role: 'Admin' },
-  { id: '6', username: 'lisa_davis', email: 'lisa@example.com', status: 'Suspended', kycStatus: 'Failed', lastLogin: '2023-09-15', role: 'User' },
-  { id: '7', username: 'david_miller', email: 'david@example.com', status: 'Active', kycStatus: 'Verified', lastLogin: '2023-10-13', role: 'User' },
-  { id: '8', username: 'emily_wilson', email: 'emily@example.com', status: 'Active', kycStatus: 'Pending', lastLogin: '2023-10-11', role: 'User' },
-];
-
-interface User {
-  id: string;
-  username: string;
-  email: string;
-  status: string;
-  kycStatus: string;
-  lastLogin: string;
-  role: string;
-}
+import React, { useEffect, useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminUsers, updateAdminUserRole } from '@/store/adminUsersSlice';
 
 const AdminUserManagementPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { items, loading, updating } = useAppSelector((s) => s.adminUsers);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  
-  const filteredUsers = mockUsers.filter(user => 
-    user.username.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    user.email.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  
+  const [selectedUser, setSelectedUser] = useState<any | null>(null);
+
+  useEffect(() => {
+    dispatch(fetchAdminUsers());
+  }, []);
+
+  const filteredUsers = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    return items.filter((u: any) =>
+      u.name?.toLowerCase().includes(q) || u.email?.toLowerCase().includes(q)
+    );
+  }, [items, searchQuery]);
+
   return (
     <div className="relative">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-3 sm:gap-4">
         <h1 className="text-xl sm:text-2xl font-semibold">User Management</h1>
-        
-        {/* Search and Actions */}
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <div className="relative flex-grow sm:flex-grow-0">
             <input
@@ -52,96 +39,49 @@ const AdminUserManagementPage: React.FC = () => {
               </svg>
             </div>
           </div>
-          <button className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm">
-            Add User
-          </button>
+          <span className="text-xs text-gray-500 self-center">{loading ? 'Loading…' : `${filteredUsers.length} users`}</span>
         </div>
       </div>
 
-      {/* User Stats Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-200">
           <h3 className="text-xs sm:text-sm text-gray-500 font-medium">Total Users</h3>
-          <p className="text-lg sm:text-2xl font-semibold">8,245</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-200">
-          <h3 className="text-xs sm:text-sm text-gray-500 font-medium">Active Users</h3>
-          <p className="text-lg sm:text-2xl font-semibold">7,589</p>
-          <p className="text-xs text-green-600">+12% this month</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-200">
-          <h3 className="text-xs sm:text-sm text-gray-500 font-medium">KYC Verified</h3>
-          <p className="text-lg sm:text-2xl font-semibold">6,120</p>
-          <p className="text-xs text-gray-500">74.2% of users</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 border border-gray-200">
-          <h3 className="text-xs sm:text-sm text-gray-500 font-medium">New Users (24h)</h3>
-          <p className="text-lg sm:text-2xl font-semibold">87</p>
+          <p className="text-lg sm:text-2xl font-semibold">{items.length}</p>
         </div>
       </div>
-      
-      {/* Users Table */}
+
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 text-left">
             <thead className="bg-gray-50">
               <tr>
                 <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">KYC Status</th>
-                <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Last Login</th>
                 <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">Role</th>
                 <th scope="col" className="px-3 sm:px-6 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredUsers.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-50">
+              {filteredUsers.map((user: any) => (
+                <tr key={user._id} className="hover:bg-gray-50">
                   <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-sm sm:text-base">
-                        {user.username.charAt(0).toUpperCase()}
+                        {user.name?.charAt(0)?.toUpperCase()}
                       </div>
                       <div className="ml-2 sm:ml-4">
-                        <div className="text-xs sm:text-sm font-medium text-gray-900 truncate max-w-[100px] sm:max-w-full">{user.username}</div>
+                        <div className="text-xs sm:text-sm font-medium text-gray-900 truncate max-w-[100px] sm:max-w-full">{user.name}</div>
                         <div className="text-xs sm:text-sm text-gray-500 truncate max-w-[100px] sm:max-w-full">{user.email}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
-                    <span className={`px-1.5 sm:px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${user.status === 'Active' ? 'bg-green-100 text-green-800' : ''}
-                      ${user.status === 'Inactive' ? 'bg-gray-100 text-gray-800' : ''}
-                      ${user.status === 'Suspended' ? 'bg-red-100 text-red-800' : ''}
-                    `}>
-                      {user.status}
-                    </span>
-                  </td>
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap hidden md:table-cell">
-                    <span className={`px-1.5 sm:px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full 
-                      ${user.kycStatus === 'Verified' ? 'bg-green-100 text-green-800' : ''}
-                      ${user.kycStatus === 'Pending' ? 'bg-yellow-100 text-yellow-800' : ''}
-                      ${user.kycStatus === 'Failed' ? 'bg-red-100 text-red-800' : ''}
-                      ${user.kycStatus === 'Not Started' ? 'bg-gray-100 text-gray-800' : ''}
-                    `}>
-                      {user.kycStatus}
-                    </span>
-                  </td>
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500 hidden sm:table-cell">
-                    {user.lastLogin}
-                  </td>
-                  <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500 hidden sm:table-cell">
-                    {user.role}
-                  </td>
+                  <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-xs sm:text-sm text-gray-500 hidden sm:table-cell">{user.role}</td>
                   <td className="px-3 sm:px-6 py-3 sm:py-4 whitespace-nowrap text-right text-xs sm:text-sm font-medium">
-                    <button 
-                      onClick={() => setSelectedUser(user)} 
-                      className="text-blue-600 hover:text-blue-900 mr-2 sm:mr-3"
+                    <button
+                      onClick={() => dispatch(updateAdminUserRole({ id: user._id, role: user.role === 'admin' ? 'user' : 'admin' }))}
+                      disabled={updating}
+                      className="text-blue-600 hover:text-blue-900 mr-2 sm:mr-3 disabled:opacity-70"
                     >
-                      Details
-                    </button>
-                    <button className="text-gray-600 hover:text-gray-900">
-                      Edit
+                      Make {user.role === 'admin' ? 'User' : 'Admin'}
                     </button>
                   </td>
                 </tr>
@@ -149,64 +89,14 @@ const AdminUserManagementPage: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="bg-white px-3 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-          <div className="flex-1 flex justify-between sm:hidden">
-            <button className="relative inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-              Previous
-            </button>
-            <button className="ml-2 relative inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-              Next
-            </button>
-          </div>
-          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm text-gray-700">
-                Showing <span className="font-medium">1</span> to <span className="font-medium">8</span> of{' '}
-                <span className="font-medium">8,245</span> results
-              </p>
-            </div>
-            <div>
-              <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                <button className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                  <span className="sr-only">Previous</span>
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                </button>
-                <button aria-current="page" className="z-10 bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                  1
-                </button>
-                <button className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                  2
-                </button>
-                <button className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium">
-                  3
-                </button>
-                <span className="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-                  ...
-                </span>
-                <button className="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
-                  10
-                </button>
-                <button className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                  <span className="sr-only">Next</span>
-                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </nav>
-            </div>
-          </div>
-        </div>
       </div>
-      
-      {/* User Details Modal (simplified for now) */}
+
       {selectedUser && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg p-4 sm:p-6 max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">User Details</h2>
-              <button 
+              <button
                 onClick={() => setSelectedUser(null)}
                 className="text-gray-500 hover:text-gray-700"
               >
@@ -218,56 +108,33 @@ const AdminUserManagementPage: React.FC = () => {
             <div className="space-y-4">
               <div className="flex items-center">
                 <div className="w-16 h-16 sm:w-24 sm:h-24 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-2xl sm:text-4xl">
-                  {selectedUser.username.charAt(0).toUpperCase()}
+                  {selectedUser.name?.charAt(0)?.toUpperCase()}
                 </div>
                 <div className="ml-3 sm:ml-6">
-                  <h3 className="text-lg font-medium">{selectedUser.username}</h3>
+                  <h3 className="text-lg font-medium">{selectedUser.name}</h3>
                   <p className="text-gray-500">{selectedUser.email}</p>
-                  <div className="mt-1">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full 
-                      ${selectedUser.status === 'Active' ? 'bg-green-100 text-green-800' : ''}
-                      ${selectedUser.status === 'Inactive' ? 'bg-gray-100 text-gray-800' : ''}
-                      ${selectedUser.status === 'Suspended' ? 'bg-red-100 text-red-800' : ''}
-                    `}>
-                      {selectedUser.status}
-                    </span>
-                  </div>
                 </div>
               </div>
-              
+
               <div className="border-t pt-4">
                 <dl className="grid grid-cols-1 gap-x-3 gap-y-2 sm:gap-x-4 sm:gap-y-3 sm:grid-cols-2">
                   <div>
                     <dt className="text-sm text-gray-500">User ID</dt>
-                    <dd className="text-sm font-medium">{selectedUser.id}</dd>
+                    <dd className="text-sm font-medium">{selectedUser._id}</dd>
                   </div>
                   <div>
                     <dt className="text-sm text-gray-500">Role</dt>
                     <dd className="text-sm font-medium">{selectedUser.role}</dd>
                   </div>
-                  <div>
-                    <dt className="text-sm text-gray-500">KYC Status</dt>
-                    <dd className="text-sm font-medium">{selectedUser.kycStatus}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-500">Last Login</dt>
-                    <dd className="text-sm font-medium">{selectedUser.lastLogin}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-500">Account Created</dt>
-                    <dd className="text-sm font-medium">2023-08-10</dd>
-                  </div>
-                  <div>
-                    <dt className="text-sm text-gray-500">2FA Enabled</dt>
-                    <dd className="text-sm font-medium">Yes</dd>
-                  </div>
                 </dl>
               </div>
-              
+
               <div className="border-t pt-4 flex flex-wrap justify-end gap-2">
-                <button className="px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-xs sm:text-sm">
-                  Reset Password
-                </button>
+                {selectedUser.role === 'admin' && (
+                  <button className="px-3 sm:px-4 py-1.5 sm:py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 text-xs sm:text-sm">
+                    Reset Password
+                  </button>
+                )}
                 {selectedUser.status === 'Active' ? (
                   <button className="px-3 sm:px-4 py-1.5 sm:py-2 bg-yellow-100 text-yellow-700 rounded-md hover:bg-yellow-200 text-xs sm:text-sm">
                     Suspend Account

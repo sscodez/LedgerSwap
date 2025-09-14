@@ -94,7 +94,7 @@ const Hero = () => {
             initialReceiveCurrency={{ name: 'BTC', fullName: 'Bitcoin', icon: '/assests/cryptocurrency/btc.png', color: '#FF8904' }}
             initialSendAmount="0.1"
             initialReceiveAmount="0.0039987"
-            onExchange={() => console.log('Exchange initiated')}
+            navigateOnExchange={true}
           />
         </motion.div>
       </div>

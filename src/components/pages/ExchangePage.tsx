@@ -7,8 +7,10 @@ import { FaTableCells } from "react-icons/fa6";
 import { IoGridSharp } from "react-icons/io5";
 import Banner from '../banner';
 import ExchangeWidget from '../exchange/ExchangeWidget';
+import { useAppSelector } from '@/store';
 
 const ExchangePage = () => {
+  const exchange = useAppSelector(state => state.exchange);
   const [selectedPair, setSelectedPair] = useState('ETH/BTC');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
@@ -130,20 +132,20 @@ const ExchangePage = () => {
 
             {/* Exchange Widget */}
             <ExchangeWidget 
-              initialSendCurrency={{ 
+              initialSendCurrency={exchange.sendCurrency || { 
                 name: 'ETH', 
                 fullName: 'Ethereum', 
                 icon: '/assests/cryptocurrency/eth.png', 
                 color: '#74D4FF' 
               }}
-              initialReceiveCurrency={{ 
+              initialReceiveCurrency={exchange.receiveCurrency || { 
                 name: 'BTC', 
                 fullName: 'Bitcoin', 
                 icon: '/assests/cryptocurrency/btc.png', 
                 color: '#FF8904' 
               }}
-              initialSendAmount="12954.89"
-              initialReceiveAmount="0.5"
+              initialSendAmount={exchange.sendAmount || '12954.89'}
+              initialReceiveAmount={exchange.receiveAmount || '0.5'}
               onExchange={() => console.log('Exchange initiated')}
             />
           </motion.div>

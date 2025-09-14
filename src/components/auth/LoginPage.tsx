@@ -1,13 +1,18 @@
-'use client'
-import React, { useState } from 'react';
+ 'use client'
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { signIn } from '@/services/auth';
+import { useAppDispatch } from '@/store';
+import { signInSuccess } from '@/store/authSlice';
 
 const LoginPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,6 +20,17 @@ const LoginPage = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3002';
+
+  function setCookie(name: string, value: string, days = 7) {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+    const secure = isHttps ? '; Secure' : '';
+    document.cookie = `${name}=${encodeURIComponent(value)}; Expires=${expires}; Path=/; SameSite=Lax${secure}`;
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -24,13 +40,30 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log('Login form submitted:', formData);
-    
-    // Navigate to dashboard after successful login
-    router.push('/dashboard');
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await signIn({ email: formData.email, password: formData.password });
+      // Persist token for API client (localStorage) and middleware (cookie)
+      localStorage.setItem('token', res.token);
+      setCookie('token', res.token, formData.rememberMe ? 30 : 1);
+      // Update Redux store
+      dispatch(
+        signInSuccess({
+          token: res.token,
+          user: { _id: res._id, name: res.name, email: res.email, role: (res as any).role },
+        })
+      );
+      const returnUrl = searchParams.get('returnUrl');
+      router.push(returnUrl || '/dashboard');
+    } catch (err: any) {
+      const message = err?.response?.data?.message || 'Sign in failed';
+      setError(message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -191,30 +224,33 @@ const LoginPage = () => {
                 </Link>
               </div>
 
-              {/* Submit Button */}
-              <motion.button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Sign In
-              </motion.button>
+              {/* Error message */}
+              {error && (
+                <div role="alert" className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md p-3">
+                  {error}
+                </div>
+              )}
 
-              {/* Divider */}
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">Or continue with</span>
-                </div>
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full mt-3 inline-flex justify-center items-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {submitting ? 'Signing in…' : 'Sign in'}
+              </button>
+
+              {/* <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div> */}
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
 
               {/* Social Login Buttons */}
               <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
+                <a
+                  href={`${API_BASE}/api/auth/google`}
                   className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -224,16 +260,16 @@ const LoginPage = () => {
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                   </svg>
                   Google
-                </button>
-                <button
-                  type="button"
+                </a>
+                <a
+                  href={`${API_BASE}/api/auth/facebook`}
                   className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                   Facebook
-                </button>
+                </a>
               </div>
             </form>
 

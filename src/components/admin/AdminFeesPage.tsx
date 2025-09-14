@@ -1,13 +1,40 @@
 'use client'
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchAdminSettings, updateAdminSettings } from '@/store/adminSettingsSlice';
+import { fetchAdminFeeRevenue } from '@/store/adminMetricsSlice';
 
 const AdminFeesPage: React.FC = () => {
-  const [feePercentage, setFeePercentage] = useState('0.5');
+  const dispatch = useAppDispatch();
+  const { data: settings, saving } = useAppSelector((s) => s.adminSettings);
+  const { feeRevenue } = useAppSelector((s) => s.adminMetrics);
 
-  const handleSave = () => {
-    // Here would be the logic to save the fee percentage
-    console.log('Saving fee percentage:', feePercentage);
+  const [feePercentage, setFeePercentage] = useState('0');
+
+  useEffect(() => {
+    dispatch(fetchAdminSettings());
+    dispatch(fetchAdminFeeRevenue(30));
+  }, []);
+
+  useEffect(() => {
+    if (typeof settings?.swapFeePercent === 'number') {
+      setFeePercentage(String(settings.swapFeePercent));
+    }
+  }, [settings?.swapFeePercent]);
+
+  const totalRevenue = useMemo(() => {
+    if (!feeRevenue?.items) return 0;
+    return feeRevenue.items.reduce((sum, d) => sum + (d.totalFees || 0), 0);
+  }, [feeRevenue]);
+
+  const handleSave = async () => {
+    const parsed = parseFloat(feePercentage);
+    if (isNaN(parsed) || parsed < 0 || parsed > 100) {
+      alert('Please enter a valid fee between 0 and 100');
+      return;
+    }
+    await dispatch(updateAdminSettings({ swapFeePercent: parsed }));
   };
 
   return (
@@ -46,20 +73,21 @@ const AdminFeesPage: React.FC = () => {
             onChange={(e) => setFeePercentage(e.target.value)}
           />
           <button 
-            className="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center"
+            className="w-full sm:w-auto px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center disabled:opacity-70 disabled:cursor-not-allowed"
             onClick={handleSave}
+            disabled={saving}
           >
            <Image src='/assests/icons/save.png' className='mr-2' alt='guide' width={20} height= {20} />
-            Save
+            {saving ? 'Saving…' : 'Save'}
           </button>
         </div>
 
         <div className="rounded-lg mt-4 sm:mt-5 p-4 sm:p-6 bg-gray-50">
         <h2 className="text-base sm:text-lg font-medium mb-3 sm:mb-4">Fee Revenue (Last 30 Days)</h2>
         <div className="mb-1 sm:mb-2">
-          <span className="text-2xl sm:text-3xl font-semibold text-blue-600">$142,850</span>
+          <span className="text-2xl sm:text-3xl font-semibold text-blue-600">{totalRevenue}</span>
         </div>
-        <p className="text-xs sm:text-sm text-gray-500">From 28,570 transactions</p>
+        <p className="text-xs sm:text-sm text-gray-500">Last updated: {feeRevenue?.since ? new Date(feeRevenue.since).toLocaleDateString() : '—'}</p>
       </div>
 
       </div>

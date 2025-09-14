@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import RewardsBanner from './WelcomeBanner';
 import Image from 'next/image';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -7,6 +7,8 @@ import * as Switch from '@radix-ui/react-switch';
 import { BsLightningChargeFill } from 'react-icons/bs';
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchExchangeHistory } from '@/store/exchangeHistorySlice';
 
 // Animation for dropdown menu
 const slideDownAndFade = keyframes`
@@ -28,7 +30,7 @@ const StyledContent = styled(DropdownMenu.Content)`
   animation-name: ${slideDownAndFade};
   will-change: transform, opacity;
 `;
-interface ExchangeHistoryItem {
+interface ExchangeHistoryItemUI {
   id: string;
   status: 'Pending' | 'Finished';
   date: string;
@@ -42,58 +44,61 @@ interface ExchangeHistoryItem {
   cashback: string;
 }
 
-const mockData: ExchangeHistoryItem[] = [
-  {
-    id: '0xa9824sadjk4487823a9',
-    status: 'Pending',
-    date: '15 Aug 2025',
-    time: '10:05',
-    fromCurrency: 'USDT',
-    fromAmount: '3000.00',
-    toCurrency: 'ETH',
-    toAmount: '1.15005369',
-    fee: 'Fee',
-    feePercentage: '0.5%',
-    cashback: '100.00'
-  },
-  {
-    id: '0xb7234sadjk4487349s5',
-    status: 'Finished',
-    date: '14 Fav 2025',
-    time: '10:05',
-    fromCurrency: 'USDT',
-    fromAmount: '3000.00',
-    toCurrency: 'BTC',
-    toAmount: '1.15005369',
-    fee: 'Fee',
-    feePercentage: '0.5%',
-    cashback: '100.00'
-  },
-  {
-    id: '0xa2232sadjk4487343e2',
-    status: 'Finished',
-    date: '1 Jan 2025',
-    time: '10:05',
-    fromCurrency: 'USDT',
-    fromAmount: '3000.00',
-    toCurrency: 'USDC',
-    toAmount: '1.15005369',
-    fee: 'Fee',
-    feePercentage: '0.5%',
-    cashback: '100.00'
-  }
-];
+// Simple helpers to format API items to UI fields
+const formatDate = (iso?: string) => {
+  if (!iso) return { date: '—', time: '' };
+  const d = new Date(iso);
+  const date = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+  return { date, time };
+};
 
 const ExchangeHistory: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { items, loading } = useAppSelector((s) => s.exchangeHistory);
+  const mapped: ExchangeHistoryItemUI[] = useMemo(() => {
+    return (items || []).map((it: any) => {
+      const { date, time } = formatDate(it.createdAt);
+      const fromSymbol = it.from?.symbol || it.from?.currency || '—';
+      const toSymbol = it.to?.symbol || it.to?.currency || '—';
+      const fromAmount = it.from?.amount != null ? String(it.from.amount) : '0.00';
+      const toAmount = it.to?.amount != null ? String(it.to.amount) : '0.00';
+      const st = (it.status || 'pending').toLowerCase();
+      const statusLabel: 'Pending' | 'Finished' = st === 'finished' || st === 'completed' ? 'Finished' : 'Pending';
+      return {
+        id: it._id || '—',
+        status: statusLabel,
+        date,
+        time,
+        fromCurrency: fromSymbol,
+        fromAmount,
+        toCurrency: toSymbol,
+        toAmount,
+        fee: 'Fee',
+        feePercentage: '0.5%',
+        cashback: '0.00',
+      };
+    });
+  }, [items]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [hideUnfinished, setHideUnfinished] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
-  const [filteredData, setFilteredData] = useState(mockData);
+  const [filteredData, setFilteredData] = useState<ExchangeHistoryItemUI[]>([]);
   const [selectedStatus, setSelectedStatus] = useState('');
   const [fromCurrency, setFromCurrency] = useState('');
   const [toCurrency, setToCurrency] = useState('');
+
+  // Load from API on mount
+  useEffect(() => {
+    dispatch(fetchExchangeHistory());
+  }, []);
+
+  // Sync local filtered data when API items change
+  useEffect(() => {
+    setFilteredData(mapped);
+  }, [mapped]);
 
   // Apply filters whenever filter values change
   useEffect(() => {
@@ -102,7 +107,7 @@ const ExchangeHistory: React.FC = () => {
 
   // Filter function
   const applyFilters = () => {
-    let result = [...mockData];
+    let result = [...mapped];
 
     // Filter by status
     if (selectedStatus) {

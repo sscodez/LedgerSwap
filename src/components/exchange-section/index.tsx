@@ -1,7 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useAppDispatch } from '@/store';
+import { setExchangeState } from '@/store/exchangeSlice';
 
 // Animation styles for dropdowns
 const dropdownAnimation = {
@@ -27,6 +30,8 @@ if (typeof document !== 'undefined') {
 }
 
 const ExchangeSection = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const [sendAmount, setSendAmount] = useState('12954.89');
   const [receiveAmount, setReceiveAmount] = useState('12954.89');
   
@@ -62,8 +67,17 @@ const ExchangeSection = () => {
   };
 
   const handleExchange = () => {
-    // Exchange functionality would be implemented here
-    console.log('Exchange initiated');
+    // Save the current swap state to Redux so Exchange page can prefill
+    dispatch(
+      setExchangeState({
+        sendCurrency,
+        receiveCurrency,
+        sendAmount,
+        receiveAmount,
+      })
+    );
+    // Navigate to the Exchange page; middleware will enforce login via redirect
+    router.push('/exchange');
   };
 
   return (

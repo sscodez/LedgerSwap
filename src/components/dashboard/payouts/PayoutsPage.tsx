@@ -1,43 +1,43 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import WithdrawalSection from './WithdrawalSection';
 import PayoutFilters, { DateRange } from './PayoutFilters';
 import PayoutHistoryTable from './PayoutHistoryTable';
 import RewardsBanner from '../WelcomeBanner';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { fetchPayouts } from '@/store/payoutsSlice';
 
-// Mock data for demonstration
-const mockPayoutHistory = [
-  {
-    id: '1',
-    amount: '200.00 USDT',
-    date: '1 Aug 2025',
-    time: '10:05',
-    status: 'Pending',
-    address: '0xa2234sadjk4487343s9',
-    fee: '0.5%'
-  },
-  {
-    id: '2',
-    amount: '200.00 USDT',
-    date: '5 Jun 2025',
-    time: '01:45',
-    status: 'Finished',
-    address: '0xa2234sadjk4487343s7',
-    fee: '0.5%'
-  },
-  {
-    id: '3',
-    amount: '200.00 USDT',
-    date: '30 Jan 2025',
-    time: '02:00',
-    status: 'Finished',
-    address: '0xa2234sadjk4487343s9',
-    fee: '0.5%'
-  }
-];
+// Helper to format date/time
+const formatDate = (iso?: string) => {
+  if (!iso) return { date: '—', time: '' };
+  const d = new Date(iso);
+  const date = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+  return { date, time };
+};
 
 const PayoutsPage: React.FC = () => {
-  const [payouts, setPayouts] = useState(mockPayoutHistory);
+  const dispatch = useAppDispatch();
+  const { items, loading } = useAppSelector((s) => s.payouts);
+  // Map API items to the UI shape expected by PayoutHistoryTable
+  const mapped = useMemo(() => {
+    return (items || []).map((p) => {
+      const { date, time } = formatDate(p.createdAt);
+      const status = (p.status || 'pending').toLowerCase();
+      const statusLabel = status === 'finished' || status === 'completed' ? 'Finished' : status === 'pending' ? 'Pending' : (status.charAt(0).toUpperCase() + status.slice(1));
+      return {
+        id: p._id,
+        amount: `${Number(p.amount ?? 0).toFixed(2)} USDT`,
+        date,
+        time,
+        status: statusLabel,
+        address: p.address,
+        fee: '0.5%',
+      };
+    });
+  }, [items]);
+
+  const [payouts, setPayouts] = useState(mapped);
   interface Filters {
     period: string;
     status: string;
@@ -50,12 +50,22 @@ const PayoutsPage: React.FC = () => {
     dateRange: null
   });
 
+  // Load payouts on mount
+  useEffect(() => {
+    dispatch(fetchPayouts());
+  }, []);
+
+  // Keep local filtered state in sync when API items change
+  useEffect(() => {
+    setPayouts(mapped);
+  }, [mapped]);
+
   const handleFilterChange = (filter: { type: string; value: string | any }) => {
     const newFilters = { ...activeFilters, [filter.type]: filter.value };
     setActiveFilters(newFilters);
     
     // Apply filters to the data
-    let filteredPayouts = [...mockPayoutHistory];
+    let filteredPayouts = [...mapped];
     
     // Filter by status
     if (newFilters.status) {
@@ -127,7 +137,7 @@ const PayoutsPage: React.FC = () => {
       status: '',
       dateRange: null
     });
-    setPayouts(mockPayoutHistory); // Reset to original data
+    setPayouts(mapped); // Reset to latest data
   };
 
   return (
